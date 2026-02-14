@@ -1,0 +1,27 @@
+{"plugins": [],
+ "package": "typescript-lean",
+ "options": {"autoImplicit": false},
+ "name": "TSLean.Parser.Parser",
+ "isModule": false,
+ "importArts":
+ {"TSLean.Scanner.Scanner":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Scanner/Scanner.olean"],
+  "TSLean.Scanner.Keywords":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Scanner/Keywords.olean"],
+  "TSLean.Scanner.CharCodes":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Scanner/CharCodes.olean"],
+  "TSLean.Parser.ParserContext":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Parser/ParserContext.olean"],
+  "TSLean.Diagnostics.Category":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Diagnostics/Category.olean"],
+  "TSLean.Core.TextRange":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Core/TextRange.olean"],
+  "TSLean.Ast.SyntaxKind":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Ast/SyntaxKind.olean"],
+  "TSLean.Ast.NodeData":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Ast/NodeData.olean"],
+  "TSLean.Ast.Flags":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Ast/Flags.olean"],
+  "TSLean.Ast.Ast":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Ast/Ast.olean"]},
+ "dynlibs": []}

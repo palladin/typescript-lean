@@ -1,0 +1,13 @@
+{"plugins": [],
+ "package": "typescript-lean",
+ "options": {"autoImplicit": false},
+ "name": "TSLean.Ast.Symbol",
+ "isModule": false,
+ "importArts":
+ {"TSLean.Core.TextRange":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Core/TextRange.olean"],
+  "TSLean.Ast.NodeData":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Ast/NodeData.olean"],
+  "TSLean.Ast.Flags":
+  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Ast/Flags.olean"]},
+ "dynlibs": []}

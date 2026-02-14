@@ -1,0 +1,28 @@
+{"synthetic": false,
+ "schemaVersion": "2025-09-10",
+ "outputs":
+ {"o": ["b8c5c718154218a5.olean"],
+  "i": "58c4e23775f538f6.ilean",
+  "c": "2d68d35206299ff4.c"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean /Users/nick.palladinos/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean /Users/nick.palladinos/Projects/typescript-lean/TSLean/TSLean/Scanner/CharCodes.lean -o /Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Scanner/CharCodes.olean -i /Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Scanner/CharCodes.ilean -c /Users/nick.palladinos/Projects/typescript-lean/.lake/build/ir/TSLean/Scanner/CharCodes.c --setup /Users/nick.palladinos/Projects/typescript-lean/.lake/build/ir/TSLean/Scanner/CharCodes.setup.json --json",
+   "level": "trace"}],
+ "inputs":
+ [["TSLean.Scanner.CharCodes:deps",
+   [["deps",
+     [["«typescript-lean»/TSLean:extraDep",
+       [["@«typescript-lean»:extraDep", "00000000000006bb"]]],
+      ["imports", "00000000000006bb"]]],
+    ["libs",
+     [["import dynlibs", "00000000000006bb"],
+      ["package external libraries", "00000000000006bb"],
+      ["module dynlibs", "00000000000006bb"],
+      ["module plugins", "00000000000006bb"]]]]],
+  ["Lean 4.27.0, commit db93fe1608548721853390a10cd40580fe7d22ae",
+   "9a2be90fd35343e5"],
+  ["/Users/nick.palladinos/Projects/typescript-lean/TSLean/TSLean/Scanner/CharCodes.lean",
+   "e3eaeffe8b507f65"],
+  ["options", [["-DautoImplicit=false", "4a85acb881fd49d0"]]],
+  ["Module.leanArgs: #[]", "00000000000006bb"]],
+ "depHash": "4bff32332548bceb"}

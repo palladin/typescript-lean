@@ -1,0 +1,33 @@
+{"synthetic": false,
+ "schemaVersion": "2025-09-10",
+ "outputs":
+ {"o": ["0f945b9b4a392837.olean"],
+  "i": "068a24dca2372fd4.ilean",
+  "c": "2e02ccaa222e3a32.c"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean /Users/nick.palladinos/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean /Users/nick.palladinos/Projects/typescript-lean/TSLean/TSLean/Ast/NodeData.lean -o /Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Ast/NodeData.olean -i /Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Ast/NodeData.ilean -c /Users/nick.palladinos/Projects/typescript-lean/.lake/build/ir/TSLean/Ast/NodeData.c --setup /Users/nick.palladinos/Projects/typescript-lean/.lake/build/ir/TSLean/Ast/NodeData.setup.json --json",
+   "level": "trace"}],
+ "inputs":
+ [["TSLean.Ast.NodeData:deps",
+   [["deps",
+     [["«typescript-lean»/TSLean:extraDep",
+       [["@«typescript-lean»:extraDep", "00000000000006bb"]]],
+      ["imports",
+       [["TSLean.Core.TextRange transitive imports (legacy)",
+         "00000000000006bb"],
+        ["TSLean.Core.TextRange:importAllArts", "30e7b83e0896c8c2"],
+        ["TSLean.Ast.Flags transitive imports (legacy)", "00000000000006bb"],
+        ["TSLean.Ast.Flags:importAllArts", "50a9f4b47bc71600"]]]]],
+    ["libs",
+     [["import dynlibs", "00000000000006bb"],
+      ["package external libraries", "00000000000006bb"],
+      ["module dynlibs", "00000000000006bb"],
+      ["module plugins", "00000000000006bb"]]]]],
+  ["Lean 4.27.0, commit db93fe1608548721853390a10cd40580fe7d22ae",
+   "9a2be90fd35343e5"],
+  ["/Users/nick.palladinos/Projects/typescript-lean/TSLean/TSLean/Ast/NodeData.lean",
+   "03fdc0855e0cd3cf"],
+  ["options", [["-DautoImplicit=false", "4a85acb881fd49d0"]]],
+  ["Module.leanArgs: #[]", "00000000000006bb"]],
+ "depHash": "417ebf2987830640"}
