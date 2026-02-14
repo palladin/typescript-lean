@@ -45,7 +45,7 @@
         ["TSLean.Parser.ParserContext:importAllArts", "3aa1178134d5cee0"],
         ["TSLean.Parser.Parser transitive imports (legacy)",
          "c5f658314c06aaf2"],
-        ["TSLean.Parser.Parser:importAllArts", "963790de8552c9ef"]]]]],
+        ["TSLean.Parser.Parser:importAllArts", "709e5778f5602edc"]]]]],
     ["libs",
      [["import dynlibs", "00000000000006bb"],
       ["package external libraries", "00000000000006bb"],
@@ -57,4 +57,4 @@
    "c7e6bfdfafc85117"],
   ["options", [["-DautoImplicit=false", "4a85acb881fd49d0"]]],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "d7ab656155535092"}
+ "depHash": "5e9823551aa87af6"}

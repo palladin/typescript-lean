@@ -1,0 +1,33 @@
+{"synthetic": false,
+ "schemaVersion": "2025-09-10",
+ "outputs":
+ {"o": ["6bd2ba079f25e2c4.olean"],
+  "i": "dd14fcccb685952b.ilean",
+  "c": "016ee0aaa928588f.c"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean /Users/nick.palladinos/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean /Users/nick.palladinos/Projects/typescript-lean/TSLean/TestParserMain.lean -o /Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TestParserMain.olean -i /Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TestParserMain.ilean -c /Users/nick.palladinos/Projects/typescript-lean/.lake/build/ir/TestParserMain.c --setup /Users/nick.palladinos/Projects/typescript-lean/.lake/build/ir/TestParserMain.setup.json --json",
+   "level": "trace"}],
+ "inputs":
+ [["TestParserMain:deps",
+   [["deps",
+     [["«typescript-lean»/test_parser:extraDep",
+       [["@«typescript-lean»:extraDep", "00000000000006bb"]]],
+      ["imports",
+       [["TSLean transitive imports (legacy)", "47202c0ea793463e"],
+        ["TSLean:importAllArts", "c520f7f028979692"],
+        ["TSLean.Parser.Parser transitive imports (legacy)",
+         "c5f658314c06aaf2"],
+        ["TSLean.Parser.Parser:importAllArts", "709e5778f5602edc"]]]]],
+    ["libs",
+     [["import dynlibs", "00000000000006bb"],
+      ["package external libraries", "00000000000006bb"],
+      ["module dynlibs", "00000000000006bb"],
+      ["module plugins", "00000000000006bb"]]]]],
+  ["Lean 4.27.0, commit db93fe1608548721853390a10cd40580fe7d22ae",
+   "9a2be90fd35343e5"],
+  ["/Users/nick.palladinos/Projects/typescript-lean/TSLean/TestParserMain.lean",
+   "9d694e3598087fc9"],
+  ["options", [["-DautoImplicit=false", "4a85acb881fd49d0"]]],
+  ["Module.leanArgs: #[]", "00000000000006bb"]],
+ "depHash": "6f7444fc92ab74b4"}

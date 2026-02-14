@@ -1,0 +1,18 @@
+{"synthetic": false,
+ "schemaVersion": "2025-09-10",
+ "outputs": "580588a97b1fd01b.o",
+ "log":
+ [{"message":
+   ".> /Users/nick.palladinos/.elan/toolchains/leanprover--lean4---v4.27.0/bin/clang -c -o /Users/nick.palladinos/Projects/typescript-lean/.lake/build/ir/TSLean/Ast/SyntaxKind.c.o.export /Users/nick.palladinos/Projects/typescript-lean/.lake/build/ir/TSLean/Ast/SyntaxKind.c -I /Users/nick.palladinos/.elan/toolchains/leanprover--lean4---v4.27.0/include -fstack-clash-protection -fwrapv -fvisibility=hidden -Wno-unused-command-line-argument --sysroot /Users/nick.palladinos/.elan/toolchains/leanprover--lean4---v4.27.0 -nostdinc -isystem /Users/nick.palladinos/.elan/toolchains/leanprover--lean4---v4.27.0/include/clang -O3 -DNDEBUG -DLEAN_EXPORTING",
+   "level": "trace"}],
+ "inputs":
+ [["TSLean.Ast.SyntaxKind:c",
+   [["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/ir/TSLean/Ast/SyntaxKind.c",
+     "4885dc0ec31e4585"],
+    ["Lean 4.27.0, commit db93fe1608548721853390a10cd40580fe7d22ae",
+     "9a2be90fd35343e5"]]],
+  ["Lean 4.27.0, commit db93fe1608548721853390a10cd40580fe7d22ae",
+   "9a2be90fd35343e5"],
+  ["traceArgs: #[-O3, -DNDEBUG, -DLEAN_EXPORTING]", "c1efb66122fb2b9a"],
+  ["arm64-apple-darwin24.6.0", "77c16133d139df5a"]],
+ "depHash": "1da289019fff60ad"}

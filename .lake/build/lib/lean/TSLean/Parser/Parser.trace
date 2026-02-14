@@ -1,9 +1,9 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["a3775141a1b8607c.olean"],
-  "i": "1d30b2ce7ada8f20.ilean",
-  "c": "41ae26cc277b1920.c"},
+ {"o": ["24d8021dcba5d4fc.olean"],
+  "i": "ccdb394f4c92cf5f.ilean",
+  "c": "8244a20381e855a7.c"},
  "log":
  [{"message":
    ".> LEAN_PATH=/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean /Users/nick.palladinos/.elan/toolchains/leanprover--lean4---v4.27.0/bin/lean /Users/nick.palladinos/Projects/typescript-lean/TSLean/TSLean/Parser/Parser.lean -o /Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Parser/Parser.olean -i /Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Parser/Parser.ilean -c /Users/nick.palladinos/Projects/typescript-lean/.lake/build/ir/TSLean/Parser/Parser.c --setup /Users/nick.palladinos/Projects/typescript-lean/.lake/build/ir/TSLean/Parser/Parser.setup.json --json",
@@ -40,7 +40,7 @@
   ["Lean 4.27.0, commit db93fe1608548721853390a10cd40580fe7d22ae",
    "9a2be90fd35343e5"],
   ["/Users/nick.palladinos/Projects/typescript-lean/TSLean/TSLean/Parser/Parser.lean",
-   "8e5a4141d4c60d58"],
+   "0a99230326464eb2"],
   ["options", [["-DautoImplicit=false", "4a85acb881fd49d0"]]],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "affbfa1198b3eb7a"}
+ "depHash": "b2bccb1efb8a1c77"}

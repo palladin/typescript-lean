@@ -15,3 +15,7 @@ lean_lib TSLean where
 lean_exe tslean where
   srcDir := "TSLean"
   root := `Main
+
+lean_exe test_parser where
+  srcDir := "TSLean"
+  root := `TestParserMain
