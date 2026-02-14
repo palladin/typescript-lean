@@ -192,6 +192,7 @@ def main (args : List String) : IO UInt32 := do
   let tsTestBase : System.FilePath := "testdata/TypeScript/tests"
   let scannerTests := tsTestBase / "cases" / "conformance" / "scanner"
   let parserTests := tsTestBase / "cases" / "conformance" / "parser"
+  let compilerTests := tsTestBase / "cases" / "compiler"
   let refBaselineDir := tsTestBase / "baselines" / "reference"
 
   unless ← scannerTests.pathExists do
@@ -209,8 +210,10 @@ def main (args : List String) : IO UInt32 := do
     for arg in filterArg do
       if arg == "scanner" then dirs := dirs.push scannerTests
       else if arg == "parser" then dirs := dirs.push parserTests
+      else if arg == "compiler" then dirs := dirs.push compilerTests
+      else if arg == "all" then dirs := dirs ++ #[scannerTests, parserTests, compilerTests]
       else if !arg.startsWith "--" then
-        dirs := dirs.push (tsTestBase / "cases" / "conformance" / arg)
+        dirs := dirs.push (tsTestBase / "cases" / arg)
     pure dirs
 
   let mut allFiles : Array System.FilePath := #[]
@@ -243,10 +246,17 @@ def main (args : List String) : IO UInt32 := do
 
   for file in allFiles do
     testIdx := testIdx + 1
-    let content ← IO.FS.readFile file
     let testName := testNameFromPath file
     IO.print s!"\r  [{testIdx}/{total}] {testName}                              "
     (← IO.getStdout).flush
+    let contentResult ← try
+      pure (some (← IO.FS.readFile file))
+    catch _ =>
+      pure none
+    let some content := contentResult | do
+      -- Skip non-UTF-8 files
+      if verbose then IO.println s!"\n  SKIP   {testName}: non-UTF-8"
+      continue
     let result ← runSingleTest testName content
 
     if result.crashed then

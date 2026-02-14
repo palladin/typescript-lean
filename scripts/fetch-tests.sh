@@ -1,6 +1,6 @@
 #!/bin/bash
-# Fetch TypeScript conformance test files from GitHub.
-# Downloads a tarball and extracts only the scanner/parser tests + baselines.
+# Fetch TypeScript test files from GitHub.
+# Downloads a tarball and extracts scanner/parser conformance tests + compiler tests + baselines.
 
 set -e
 
@@ -17,15 +17,21 @@ echo "Downloading tarball (this may take a moment)..."
 curl -sL "$TARBALL_URL" | tar xz -C "$TMPDIR" \
   --include="TypeScript-main/tests/cases/conformance/scanner/*" \
   --include="TypeScript-main/tests/cases/conformance/parser/*" \
+  --include="TypeScript-main/tests/cases/compiler/*" \
   2>/dev/null || true
 
 echo "Extracting test files..."
 mkdir -p "$DEST/tests/cases/conformance"
+mkdir -p "$DEST/tests/cases"
+
 if [ -d "$TMPDIR/TypeScript-main/tests/cases/conformance/scanner" ]; then
   cp -r "$TMPDIR/TypeScript-main/tests/cases/conformance/scanner" "$DEST/tests/cases/conformance/"
 fi
 if [ -d "$TMPDIR/TypeScript-main/tests/cases/conformance/parser" ]; then
   cp -r "$TMPDIR/TypeScript-main/tests/cases/conformance/parser" "$DEST/tests/cases/conformance/"
+fi
+if [ -d "$TMPDIR/TypeScript-main/tests/cases/compiler" ]; then
+  cp -r "$TMPDIR/TypeScript-main/tests/cases/compiler" "$DEST/tests/cases/"
 fi
 
 # Now fetch baselines for these test files
@@ -37,7 +43,7 @@ while IFS= read -r f; do
   name=$(basename "$f" .ts)
   name=${name%.tsx}
   test_names+=("$name")
-done < <(find "$DEST/tests/cases/conformance" -name "*.ts" -o -name "*.tsx")
+done < <(find "$DEST/tests/cases/conformance" "$DEST/tests/cases/compiler" -name "*.ts" -o -name "*.tsx" 2>/dev/null)
 
 echo "Found ${#test_names[@]} test files, downloading baselines..."
 
@@ -65,8 +71,10 @@ rm -rf "$TMPDIR"
 echo ""
 echo "Done. Test files in $DEST/"
 scanner_count=$(find "$DEST/tests/cases/conformance/scanner" -name "*.ts" 2>/dev/null | wc -l | tr -d ' ')
-parser_count=$(find "$DEST/tests/cases/conformance/parser" -name "*.ts" 2>/dev/null | wc -l | tr -d ' ')
+parser_count=$(find "$DEST/tests/cases/conformance/parser" -name "*.ts" -o -name "*.tsx" 2>/dev/null | wc -l | tr -d ' ')
+compiler_count=$(find "$DEST/tests/cases/compiler" -name "*.ts" -o -name "*.tsx" 2>/dev/null | wc -l | tr -d ' ')
 baseline_count=$(find "$DEST/tests/baselines" -type f 2>/dev/null | wc -l | tr -d ' ')
-echo "  Scanner tests:  $scanner_count"
-echo "  Parser tests:   $parser_count"
-echo "  Baseline files: $baseline_count"
+echo "  Scanner tests:   $scanner_count"
+echo "  Parser tests:    $parser_count"
+echo "  Compiler tests:  $compiler_count"
+echo "  Baseline files:  $baseline_count"
