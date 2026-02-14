@@ -136,6 +136,13 @@ def canFollowSemicolon : ParserM Bool := do
   let tok ← currentToken
   return tok == .semicolonToken || tok == .closeBraceToken || tok == .endOfFileToken
 
+-- Re-scan > to potentially produce >>, >>>, >>=, >>>=
+def reScanGreaterToken : ParserM SyntaxKind := do
+  let st ← get
+  let newScanner := st.scanner.reScanGreaterToken
+  set { st with scanner := newScanner }
+  return newScanner.token
+
 -- ============================================================================
 -- Lookahead
 -- ============================================================================
@@ -165,9 +172,23 @@ def lookAhead (f : ParserM Bool) : ParserM Bool := do
 -- Non-recursive parsing helpers
 -- ============================================================================
 
+private def isKeywordUsableAsIdentifier (tok : SyntaxKind) : Bool :=
+  match tok with
+  | .abstractKeyword | .accessorKeyword | .asKeyword | .assertsKeyword
+  | .assertKeyword | .anyKeyword | .asyncKeyword | .awaitKeyword
+  | .booleanKeyword | .constructorKeyword | .declareKeyword | .getKeyword
+  | .inferKeyword | .intrinsicKeyword | .isKeyword | .keyOfKeyword
+  | .moduleKeyword | .namespaceKeyword | .neverKeyword | .outKeyword
+  | .readonlyKeyword | .requireKeyword | .numberKeyword | .objectKeyword
+  | .satisfiesKeyword | .setKeyword | .stringKeyword | .symbolKeyword
+  | .typeKeyword | .undefinedKeyword | .uniqueKeyword | .unknownKeyword
+  | .usingKeyword | .fromKeyword | .globalKeyword | .bigIntKeyword
+  | .overrideKeyword | .ofKeyword | .yieldKeyword => true
+  | _ => false
+
 def parseIdentifier : ParserM Node := do
   let tok ← currentToken
-  if tok == .identifier then
+  if tok == .identifier || isKeywordUsableAsIdentifier tok then
     let start ← getTokenStart
     let value ← currentTokenValue
     let _ ← nextToken
@@ -216,20 +237,6 @@ partial def parseList (closingToken : SyntaxKind)
 -- Pure helpers
 -- ============================================================================
 
-private def isKeywordUsableAsIdentifier (tok : SyntaxKind) : Bool :=
-  match tok with
-  | .abstractKeyword | .accessorKeyword | .asKeyword | .assertsKeyword
-  | .assertKeyword | .anyKeyword | .asyncKeyword | .awaitKeyword
-  | .booleanKeyword | .constructorKeyword | .declareKeyword | .getKeyword
-  | .inferKeyword | .intrinsicKeyword | .isKeyword | .keyOfKeyword
-  | .moduleKeyword | .namespaceKeyword | .neverKeyword | .outKeyword
-  | .readonlyKeyword | .requireKeyword | .numberKeyword | .objectKeyword
-  | .satisfiesKeyword | .setKeyword | .stringKeyword | .symbolKeyword
-  | .typeKeyword | .undefinedKeyword | .uniqueKeyword | .unknownKeyword
-  | .usingKeyword | .fromKeyword | .globalKeyword | .bigIntKeyword
-  | .overrideKeyword | .ofKeyword => true
-  | _ => false
-
 private def isAssignmentOperator (tok : SyntaxKind) : Bool :=
   match tok with
   | .equalsToken | .plusEqualsToken | .minusEqualsToken
@@ -251,10 +258,43 @@ private def isModifierKeyword (tok : SyntaxKind) : Bool :=
   | .exportKeyword => true
   | _ => false
 
+-- Can a token follow a modifier? If not, the "modifier" is actually the member name.
+-- e.g. `static public;` → `public` is NOT a modifier (followed by `;`)
+-- e.g. `static public foo` → `public` IS a modifier (followed by identifier)
+private def canFollowModifier (tok : SyntaxKind) : Bool :=
+  match tok with
+  | .identifier => true
+  | .openBracketToken | .openBraceToken | .asteriskToken | .dotDotDotToken
+  | .hashToken => true
+  -- Keywords that can start a declaration after modifiers
+  | .abstractKeyword | .accessorKeyword | .asyncKeyword | .constKeyword
+  | .declareKeyword | .getKeyword | .setKeyword | .readonlyKeyword
+  | .overrideKeyword | .staticKeyword
+  | .publicKeyword | .privateKeyword | .protectedKeyword => true
+  -- Keyword identifiers that can be used as property names
+  | _ => isKeywordUsableAsIdentifier tok
+
 -- Parse an identifier or contextual keyword used as an identifier name.
+-- Any keyword can be used as a property name / identifier name in TypeScript
+private def isKeyword (tok : SyntaxKind) : Bool :=
+  isKeywordUsableAsIdentifier tok || isModifierKeyword tok ||
+  match tok with
+  | .breakKeyword | .caseKeyword | .catchKeyword | .classKeyword
+  | .continueKeyword | .debuggerKeyword | .defaultKeyword | .deleteKeyword
+  | .doKeyword | .elseKeyword | .enumKeyword
+  | .extendsKeyword | .falseKeyword | .finallyKeyword | .forKeyword
+  | .functionKeyword | .ifKeyword | .importKeyword | .inKeyword
+  | .instanceOfKeyword | .newKeyword | .nullKeyword | .returnKeyword
+  | .superKeyword | .switchKeyword | .thisKeyword | .throwKeyword
+  | .trueKeyword | .tryKeyword | .typeOfKeyword | .varKeyword
+  | .voidKeyword | .whileKeyword | .withKeyword
+  | .implementsKeyword | .interfaceKeyword | .letKeyword | .packageKeyword
+  | .yieldKeyword => true
+  | _ => false
+
 def parseIdentifierName : ParserM Node := do
   let tok ← currentToken
-  if tok == .identifier || isKeywordUsableAsIdentifier tok then
+  if tok == .identifier || isKeyword tok then
     let start ← getTokenStart
     let value ← currentTokenValue
     let _ ← nextToken
@@ -396,14 +436,14 @@ partial def parsePrimaryExpression : ParserM Node := do
   | .openParenToken => do
     let start ← getTokenStart
     let _ ← nextToken
-    let expr ← parseAssignmentExpressionOrHigher
+    let expr ← parseExpression
     let _ ← parseExpected .closeParenToken
     let nd ← makeNodeData start (← getPos)
     return .parenthesized nd expr
   | .openBracketToken => do
     let start ← getTokenStart
     let _ ← nextToken
-    let elements ← parseDelimitedList .closeBracketToken parseSpreadOrAssignmentExpression
+    let elements ← parseDelimitedList .closeBracketToken parseArrayLiteralElement
     let _ ← parseExpected .closeBracketToken
     let nd ← makeNodeData start (← getPos)
     return .arrayLiteral nd elements
@@ -477,6 +517,14 @@ partial def parseSpreadOrAssignmentExpression : ParserM Node := do
     return .spread nd expr
   else
     parseAssignmentExpressionOrHigher
+
+-- Parse array literal element with elision support (commas without expressions create holes).
+partial def parseArrayLiteralElement : ParserM Node := do
+  if (← currentToken) == .commaToken then
+    let pos ← getPos
+    let nd ← makeNodeData pos pos
+    return .omitted nd
+  parseSpreadOrAssignmentExpression
 
 partial def parseMemberExpressionRest (expr : Node) : ParserM Node := do
   let tok ← currentToken
@@ -603,7 +651,10 @@ partial def parseYieldExpression : ParserM Node := do
   return .yield_ nd asterisk expr
 
 partial def parseBinaryExpressionRest (precedence : Precedence) (left : Node) : ParserM Node := do
-  let tok ← currentToken
+  let mut tok ← currentToken
+  -- Re-scan > to potentially produce >>, >>>, >>=, >>>=
+  if tok == .greaterThanToken then
+    tok ← reScanGreaterToken
   let newPrec := getBinaryOperatorPrecedence tok
   if newPrec <= precedence then
     -- Check for as/satisfies at relational precedence
@@ -1224,16 +1275,32 @@ partial def parseTypeMember : ParserM Node := do
     let _ ← parseOptional .commaToken
     let nd ← makeNodeData start (← getPos)
     return .constructSignature nd typeParams params type_
-  -- Index signature: [key: string]: Type
+  -- Index signature: [key: string]: Type  vs  computed property: [expr]: Type
   if tok == .openBracketToken then
-    let _ ← nextToken
-    let params ← parseDelimitedList .closeBracketToken parseParameterDeclaration
-    let _ ← parseExpected .closeBracketToken
-    let type_ ← if (← parseOptional .colonToken) then some <$> parseTypeNode else pure none
-    let _ ← parseOptional .semicolonToken
-    let _ ← parseOptional .commaToken
-    let nd ← makeNodeData start (← getPos)
-    return .indexSignature nd #[] params type_
+    -- Look ahead to distinguish index signature from computed property name.
+    -- Index signature: [identifier :  or  [identifier ,  or  [modifier identifier
+    let isIndexSig ← lookAhead do
+      let _ ← nextToken  -- skip [
+      -- Skip modifiers (readonly, etc.)
+      while isModifierKeyword (← currentToken) do
+        let _ ← nextToken
+      let t ← currentToken
+      if t == .identifier || isKeywordUsableAsIdentifier t then
+        let _ ← nextToken
+        let t2 ← currentToken
+        return t2 == .colonToken || t2 == .commaToken || t2 == .closeBracketToken
+      else
+        return false
+    if isIndexSig then
+      let _ ← nextToken
+      let params ← parseDelimitedList .closeBracketToken parseParameterDeclaration
+      let _ ← parseExpected .closeBracketToken
+      let type_ ← if (← parseOptional .colonToken) then some <$> parseTypeNode else pure none
+      let _ ← parseOptional .semicolonToken
+      let _ ← parseOptional .commaToken
+      let nd ← makeNodeData start (← getPos)
+      return .indexSignature nd #[] params type_
+    -- else fall through: treat as computed property name
   -- Parse modifiers (readonly, etc.)
   let memberMods ← parseModifiers
   let name ← parsePropertyName
@@ -1467,6 +1534,12 @@ partial def parseWithStatement : ParserM Node := do
 partial def parseModifiers : ParserM (Array Modifier) := do
   let mut mods : Array Modifier := #[]
   while isModifierKeyword (← currentToken) do
+    -- Check if what follows this keyword can follow a modifier;
+    -- if not, this keyword is actually the member name, not a modifier.
+    let nextCanFollow ← lookAhead do
+      let _ ← nextToken
+      return canFollowModifier (← currentToken)
+    if !nextCanFollow then break
     let start ← getTokenStart
     let kind ← currentToken
     let _ ← nextToken
@@ -1521,7 +1594,10 @@ partial def parseExpressionWithTypeArguments : ParserM Node := do
 partial def parseFunctionDeclaration (start : Nat) (mods : Array Modifier) : ParserM Node := do
   let _ ← nextToken  -- consume 'function'
   let asterisk ← parseOptional .asteriskToken
-  let name ← if (← currentToken) == .identifier then some <$> parseIdentifier else pure none
+  let tok ← currentToken
+  let name ← if tok == .identifier || isKeywordUsableAsIdentifier tok then
+    some <$> parseIdentifier
+  else pure none
   let typeParams ← parseTypeParameters
   let _ ← parseExpected .openParenToken
   let params ← parseDelimitedList .closeParenToken parseParameterDeclaration
@@ -1536,7 +1612,10 @@ partial def parseFunctionExpression : ParserM Node := do
   let start ← getTokenStart
   let _ ← nextToken
   let asterisk ← parseOptional .asteriskToken
-  let name ← if (← currentToken) == .identifier then some <$> parseIdentifier else pure none
+  let tok ← currentToken
+  let name ← if tok == .identifier || isKeywordUsableAsIdentifier tok then
+    some <$> parseIdentifier
+  else pure none
   let typeParams ← parseTypeParameters
   let _ ← parseExpected .openParenToken
   let params ← parseDelimitedList .closeParenToken parseParameterDeclaration
@@ -1584,6 +1663,7 @@ partial def parseClassMember : ParserM Node := do
     if isAccessor then
       let _ ← nextToken
       let name ← parsePropertyName
+      let _typeParams ← parseTypeParameters
       let _ ← parseExpected .openParenToken
       let params ← parseDelimitedList .closeParenToken parseParameterDeclaration
       let _ ← parseExpected .closeParenToken
@@ -1598,6 +1678,27 @@ partial def parseClassMember : ParserM Node := do
           let _ ← parseSemicolon; pure none
         let nd ← makeNodeData start (← getPos)
         return .setAccessor nd mods name params body
+  -- Index signature: [key: type]: Type
+  if tok == .openBracketToken then
+    let isIndexSig ← lookAhead do
+      let _ ← nextToken  -- skip [
+      while isModifierKeyword (← currentToken) do
+        let _ ← nextToken
+      let t ← currentToken
+      if t == .identifier || isKeywordUsableAsIdentifier t then
+        let _ ← nextToken
+        let t2 ← currentToken
+        return t2 == .colonToken || t2 == .commaToken || t2 == .closeBracketToken
+      else
+        return false
+    if isIndexSig then
+      let _ ← nextToken  -- consume [
+      let params ← parseDelimitedList .closeBracketToken parseParameterDeclaration
+      let _ ← parseExpected .closeBracketToken
+      let type_ ← if (← parseOptional .colonToken) then some <$> parseTypeNode else pure none
+      let _ ← parseSemicolon
+      let nd ← makeNodeData start (← getPos)
+      return .indexSignature nd mods params type_
   -- Regular member: name, method or property
   let name ← parsePropertyName
   let questionToken ← parseOptional .questionToken
@@ -1623,7 +1724,10 @@ partial def parseClassMember : ParserM Node := do
 
 partial def parseClassDeclaration (start : Nat) (mods : Array Modifier) : ParserM Node := do
   let _ ← nextToken  -- consume 'class'
-  let name ← if (← currentToken) == .identifier then some <$> parseIdentifier else pure none
+  let ctok ← currentToken
+  let name ← if ctok == .identifier || isKeywordUsableAsIdentifier ctok then
+    some <$> parseIdentifier
+  else pure none
   let typeParams ← parseTypeParameters
   let heritageClauses ← parseHeritageClauses
   let _ ← parseExpected .openBraceToken
@@ -1634,7 +1738,10 @@ partial def parseClassDeclaration (start : Nat) (mods : Array Modifier) : Parser
 
 partial def parseClassExpression (start : Nat) : ParserM Node := do
   let _ ← nextToken  -- consume 'class'
-  let name ← if (← currentToken) == .identifier then some <$> parseIdentifier else pure none
+  let ctok ← currentToken
+  let name ← if ctok == .identifier || isKeywordUsableAsIdentifier ctok then
+    some <$> parseIdentifier
+  else pure none
   let typeParams ← parseTypeParameters
   let heritageClauses ← parseHeritageClauses
   let _ ← parseExpected .openBraceToken
@@ -1665,7 +1772,7 @@ partial def parseEnumDeclaration (start : Nat) (mods : Array Modifier) : ParserM
 
 partial def parseEnumMember : ParserM Node := do
   let start ← getTokenStart
-  let name ← parseIdentifierName
+  let name ← parsePropertyName
   let init ← if (← parseOptional .equalsToken) then
     some <$> parseAssignmentExpressionOrHigher
   else pure none
@@ -1682,14 +1789,9 @@ partial def parseTypeAliasDeclaration (start : Nat) (mods : Array Modifier) : Pa
   let nd ← makeNodeData start (← getPos)
   return .typeAliasDeclaration nd mods name typeParams type_
 
-partial def parseModuleDeclaration (start : Nat) (mods : Array Modifier) : ParserM Node := do
-  let _ ← nextToken  -- consume 'module' or 'namespace'
-  let name ← if (← currentToken) == .stringLiteral then do
-    let s ← getTokenStart; let v ← currentTokenValue; let _ ← nextToken
-    let sNd ← makeNodeData s (← getPos)
-    pure (.stringLiteral sNd v false)
-  else parseIdentifier
-  let body ← if (← currentToken) == .openBraceToken then do
+-- Parse the body of a module: either { stmts } or .Name { stmts } (dotted)
+partial def parseModuleBody : ParserM (Option Node) := do
+  if (← currentToken) == .openBraceToken then do
     let bStart ← getTokenStart
     let _ ← nextToken
     let stmts ← parseList .closeBraceToken parseStatement
@@ -1697,11 +1799,23 @@ partial def parseModuleDeclaration (start : Nat) (mods : Array Modifier) : Parse
     let bNd ← makeNodeData bStart (← getPos)
     pure (some (.moduleBlock bNd stmts))
   else if (← currentToken) == .dotToken then
-    -- Nested: module A.B { }
+    -- Nested: module A.B.C { } → moduleDeclaration(A, moduleDeclaration(B, moduleDeclaration(C, block)))
     let _ ← nextToken
     let nestedStart ← getTokenStart
-    some <$> parseModuleDeclaration nestedStart #[]
+    let nestedName ← parseIdentifier
+    let nestedBody ← parseModuleBody
+    let nestedNd ← makeNodeData nestedStart (← getPos)
+    pure (some (.moduleDeclaration nestedNd #[] nestedName nestedBody))
   else pure none
+
+partial def parseModuleDeclaration (start : Nat) (mods : Array Modifier) : ParserM Node := do
+  let _ ← nextToken  -- consume 'module' or 'namespace'
+  let name ← if (← currentToken) == .stringLiteral then do
+    let s ← getTokenStart; let v ← currentTokenValue; let _ ← nextToken
+    let sNd ← makeNodeData s (← getPos)
+    pure (.stringLiteral sNd v false)
+  else parseIdentifier
+  let body ← parseModuleBody
   let nd ← makeNodeData start (← getPos)
   return .moduleDeclaration nd mods name body
 
@@ -2087,7 +2201,9 @@ partial def parseStatement : ParserM Node := do
   -- Contextual keyword declarations
   | .typeKeyword => do
     let isDecl ← lookAhead do
-      let _ ← nextToken; return (← currentToken) == .identifier
+      let _ ← nextToken
+      let t ← currentToken
+      return t == .identifier || isKeywordUsableAsIdentifier t
     if isDecl then do
       let start ← getTokenStart; parseTypeAliasDeclaration start #[]
     else parseExpressionOrLabeledStatement
@@ -2095,7 +2211,7 @@ partial def parseStatement : ParserM Node := do
     let isDecl ← lookAhead do
       let _ ← nextToken
       let t ← currentToken
-      return t == .identifier || t == .stringLiteral
+      return t == .identifier || t == .stringLiteral || isKeywordUsableAsIdentifier t
     if isDecl then do
       let start ← getTokenStart; parseModuleDeclaration start #[]
     else parseExpressionOrLabeledStatement

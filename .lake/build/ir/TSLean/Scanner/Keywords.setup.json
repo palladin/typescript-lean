@@ -1,9 +1,0 @@
-{"plugins": [],
- "package": "typescript-lean",
- "options": {"autoImplicit": false},
- "name": "TSLean.Scanner.Keywords",
- "isModule": false,
- "importArts":
- {"TSLean.Ast.SyntaxKind":
-  ["/Users/nick.palladinos/Projects/typescript-lean/.lake/build/lib/lean/TSLean/Ast/SyntaxKind.olean"]},
- "dynlibs": []}

@@ -1,7 +1,0 @@
-{"plugins": [],
- "package": "typescript-lean",
- "options": {"autoImplicit": false},
- "name": "TSLean.Diagnostics.Category",
- "isModule": false,
- "importArts": {},
- "dynlibs": []}

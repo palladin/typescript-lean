@@ -51,56 +51,81 @@ private def parseDirectives (content : String) : TestDirectives := Id.run do
 -- Error baseline generation
 -- ============================================================================
 
-/-- Format diagnostics in TypeScript .errors.txt baseline format. -/
+/-- Build a line-start offset table for fast line/col lookups. -/
+private def buildLineStarts (content : String) : Array Nat := Id.run do
+  let mut starts : Array Nat := #[0]
+  let mut i := 0
+  for c in content.toList do
+    i := i + 1
+    if c == '\n' then starts := starts.push i
+  return starts
+
+private def posToLineCol (lineStarts : Array Nat) (pos : Nat) : Nat × Nat := Id.run do
+  -- Binary search for the line
+  let mut lo := 0
+  let mut hi := lineStarts.size
+  while lo + 1 < hi do
+    let mid := (lo + hi) / 2
+    if lineStarts[mid]! <= pos then lo := mid
+    else hi := mid
+  return (lo, pos - lineStarts[lo]!)
+
+private def categoryStr (cat : DiagnosticCategory) : String :=
+  match cat with
+  | .error => "error"
+  | .warning => "warning"
+  | .suggestion => "suggestion"
+  | .message => "message"
+
+/-- Format diagnostics in TypeScript .errors.txt baseline format.
+    Pre-computes line/col in one pass for efficiency. -/
 private def formatErrorBaseline (fileName : String) (content : String)
     (diagnostics : Array Diagnostic) : String := Id.run do
+  let lineStarts := buildLineStarts content
   let lines := content.splitOn "\n"
   let errorCount := diagnostics.filter (·.category == .error) |>.size
-  let mut output := ""
+  let mut parts : Array String := #[]
 
-  -- File header with error count
-  output := output ++ s!"==== {fileName} ({errorCount} errors) ====\n"
+  -- Pre-compute line/col for each diagnostic
+  let diagInfo := diagnostics.map fun diag =>
+    let (line, col) := posToLineCol lineStarts diag.start.toNat
+    (diag, line, col)
 
-  -- For each source line, output it and any diagnostics that point to it
+  -- Header lines
+  for (diag, line, col) in diagInfo do
+    parts := parts.push s!"{fileName}({line + 1},{col + 1}): {categoryStr diag.category} TS{diag.code}: {diag.messageText}\n"
+
+  parts := parts.push "\n\n"
+  parts := parts.push s!"==== {fileName} ({errorCount} errors) ====\n"
+
+  -- Source lines with annotations
   let mut lineIdx := 0
   for line in lines do
-    output := output ++ s!"    {line}\n"
-    -- Find diagnostics on this line
-    for diag in diagnostics do
-      let diagLine := getLineOfPos content diag.start.toNat
+    parts := parts.push s!"    {line}\n"
+    for (diag, diagLine, col) in diagInfo do
       if diagLine == lineIdx then
-        let col := getColumnOfPos content diag.start.toNat
         let len := diag.length.toNat
         let padding := String.ofList (List.replicate (col + 4) ' ')
         let squiggles := String.ofList (List.replicate (max len 1) '~')
-        output := output ++ padding ++ squiggles ++ "\n"
-        let cat := match diag.category with
-          | .error => "error"
-          | .warning => "warning"
-          | .suggestion => "suggestion"
-          | .message => "message"
-        output := output ++ s!"!!! {cat} TS{diag.code}: {diag.messageText}\n"
+        parts := parts.push (padding ++ squiggles ++ "\n")
+        parts := parts.push s!"!!! {categoryStr diag.category} TS{diag.code}: {diag.messageText}\n"
     lineIdx := lineIdx + 1
 
-  return output
-where
-  getLineOfPos (content : String) (pos : Nat) : Nat := Id.run do
-    let mut line := 0
-    let mut i := 0
-    for c in content.toList do
-      if i >= pos then return line
-      if c == '\n' then line := line + 1
-      i := i + 1
-    return line
-  getColumnOfPos (content : String) (pos : Nat) : Nat := Id.run do
-    let mut col := 0
-    let mut i := 0
-    for c in content.toList do
-      if i >= pos then return col
-      if c == '\n' then col := 0
-      else col := col + 1
-      i := i + 1
-    return col
+  return String.join parts.toList
+
+-- ============================================================================
+-- Baseline comparison: count errors in reference .errors.txt
+-- ============================================================================
+
+/-- Count the number of "!!! error" lines in a reference baseline.
+    This gives us the total error count from the official tsc. -/
+def countRefErrors (baseline : String) : Nat := Id.run do
+  let mut count := 0
+  for line in baseline.splitOn "\n" do
+    let trimmed := line.trimAscii.toString
+    if trimmed.startsWith "!!! error" then
+      count := count + 1
+  return count
 
 -- ============================================================================
 -- Test runner
@@ -108,17 +133,16 @@ where
 
 structure TestResult where
   testName : String
-  parsed : Bool      -- parsed without Except error (may have diagnostics)
-  crashed : Bool     -- Except.error was returned
-  errorCount : Nat   -- number of diagnostics
-  errorMessage : Option String  -- crash message if any
+  parsed : Bool
+  crashed : Bool
+  errorCount : Nat
+  errorMessage : Option String
 
 inductive TestMode where
-  | parseOnly       -- just check if parsing succeeds
-  | errorBaseline   -- generate and compare .errors.txt
+  | parseOnly
+  | errorBaseline
   deriving BEq
 
-/-- Run a single test: parse the file and return the result. -/
 def runSingleTest (testName : String) (content : String) : IO TestResult := do
   match parseSourceFile testName content with
   | .ok (_, diagnostics) =>
@@ -138,7 +162,6 @@ def runSingleTest (testName : String) (content : String) : IO TestResult := do
       errorMessage := some msg
     }
 
-/-- Discover all .ts files recursively in a directory. -/
 partial def findTsFiles (dir : System.FilePath) : IO (Array System.FilePath) := do
   let mut files : Array System.FilePath := #[]
   let entries ← dir.readDir
@@ -152,12 +175,12 @@ partial def findTsFiles (dir : System.FilePath) : IO (Array System.FilePath) := 
         files := files.push entry.path
   return files
 
-/-- Get just the test name from a file path (without directory and extension). -/
+/-- Get the test name: filename minus .ts/.tsx extension. -/
 def testNameFromPath (path : System.FilePath) : String :=
   let name := path.fileName.getD ""
-  match name.splitOn "." with
-  | [] => name
-  | parts => parts.head!
+  if name.endsWith ".tsx" then (name.dropEnd 4).toString
+  else if name.endsWith ".ts" then (name.dropEnd 3).toString
+  else name
 
 -- ============================================================================
 -- Main entry point
@@ -166,32 +189,27 @@ def testNameFromPath (path : System.FilePath) : String :=
 def main (args : List String) : IO UInt32 := do
   let mode := if args.contains "--errors" then TestMode.errorBaseline else TestMode.parseOnly
 
-  -- Determine test directories
   let tsTestBase : System.FilePath := "testdata/TypeScript/tests"
   let scannerTests := tsTestBase / "cases" / "conformance" / "scanner"
   let parserTests := tsTestBase / "cases" / "conformance" / "parser"
+  let refBaselineDir := tsTestBase / "baselines" / "reference"
 
-  -- Check test files exist
   unless ← scannerTests.pathExists do
     IO.eprintln "Error: TypeScript test files not found."
     IO.eprintln "Run: bash scripts/fetch-tests.sh"
     return 1
 
-  -- Find all test files
   let filterArg := args.filter (· != "--errors") |>.filter (· != "--verbose")
   let verbose := args.contains "--verbose"
 
   let testDirs ← if filterArg.isEmpty then do
-    -- Default: run scanner + parser conformance
     pure #[scannerTests, parserTests]
   else
-    -- Filter by category
     let mut dirs : Array System.FilePath := #[]
     for arg in filterArg do
       if arg == "scanner" then dirs := dirs.push scannerTests
       else if arg == "parser" then dirs := dirs.push parserTests
       else if !arg.startsWith "--" then
-        -- Treat as a specific subdirectory
         dirs := dirs.push (tsTestBase / "cases" / "conformance" / arg)
     pure dirs
 
@@ -202,6 +220,8 @@ def main (args : List String) : IO UInt32 := do
       allFiles := allFiles ++ files
 
   IO.println s!"Found {allFiles.size} test files"
+  if mode == .errorBaseline then
+    IO.println "Mode: error baseline comparison"
   IO.println ""
 
   -- Run tests
@@ -212,6 +232,14 @@ def main (args : List String) : IO UInt32 := do
   let mut crashMessages : Array (String × String) := #[]
   let mut testIdx := 0
   let total := allFiles.size
+
+  -- Baseline stats
+  let mut errorCountMatch := 0
+  let mut errorCountMismatch := 0
+  let mut cleanMatch := 0
+  let mut falsePositive := 0
+  let mut falseMissing := 0
+  let mut mismatchDetails : Array (String × Nat × Nat) := #[]
 
   for file in allFiles do
     testIdx := testIdx + 1
@@ -226,29 +254,49 @@ def main (args : List String) : IO UInt32 := do
       let msg := result.errorMessage.getD "unknown"
       crashMessages := crashMessages.push (testName, msg)
       if verbose then
-        IO.println s!"  CRASH  {testName}: {msg}"
+        IO.println s!"\n  CRASH  {testName}: {msg}"
     else if result.parsed then
       passed := passed + 1
       totalDiags := totalDiags + result.errorCount
-      if verbose && result.errorCount > 0 then
-        IO.println s!"  PARSE  {testName} ({result.errorCount} diagnostics)"
+      if verbose && result.errorCount > 0 && mode != .errorBaseline then
+        IO.println s!"\n  PARSE  {testName} ({result.errorCount} diagnostics)"
     else
       failed := failed + 1
       if verbose then
-        IO.println s!"  FAIL   {testName}"
+        IO.println s!"\n  FAIL   {testName}"
 
-    -- Progress every 50 tests
-    if testIdx % 50 == 0 || testIdx == total then
-      let pct := testIdx * 100 / max total 1
-      IO.print s!"\r  [{testIdx}/{total}] {pct}% | passed:{passed} crashed:{crashed}    "
-      (← IO.getStdout).flush
-
-    -- Generate error baseline if requested
+    -- Baseline comparison
     if mode == .errorBaseline && result.parsed then
+      let refPath := refBaselineDir / s!"{testName}.errors.txt"
+      let refExists ← refPath.pathExists
+      if refExists then
+        let refContent ← IO.FS.readFile refPath
+        let refCount := countRefErrors refContent
+        if result.errorCount == 0 && refCount > 0 then
+          falseMissing := falseMissing + 1
+          if verbose then
+            IO.println s!"\n  MISS   {testName}: ref={refCount} ours=0"
+        else if result.errorCount == refCount then
+          errorCountMatch := errorCountMatch + 1
+        else
+          errorCountMismatch := errorCountMismatch + 1
+          if mismatchDetails.size < 20 then
+            mismatchDetails := mismatchDetails.push (testName, refCount, result.errorCount)
+          if verbose then
+            IO.println s!"\n  DIFF   {testName}: ref={refCount} ours={result.errorCount}"
+      else
+        if result.errorCount == 0 then
+          cleanMatch := cleanMatch + 1
+        else
+          falsePositive := falsePositive + 1
+          if verbose then
+            IO.println s!"\n  EXTRA  {testName}: we emit {result.errorCount}, ref clean"
+
+      -- Write our baseline
       match parseSourceFile testName content with
       | .ok (_, diagnostics) =>
         if diagnostics.size > 0 then
-          let baseline := formatErrorBaseline testName content diagnostics
+          let baseline := formatErrorBaseline (testName ++ ".ts") content diagnostics
           let outDir : System.FilePath := "testdata" / "baselines" / "local"
           IO.FS.createDirAll outDir
           IO.FS.writeFile (outDir / s!"{testName}.errors.txt") baseline
@@ -264,7 +312,25 @@ def main (args : List String) : IO UInt32 := do
   IO.println s!"  Diagnostics emitted: {totalDiags}"
   IO.println "============================================"
 
-  -- Show first few crash messages
+  if mode == .errorBaseline then
+    IO.println ""
+    IO.println "Baseline comparison (error count):"
+    IO.println s!"  Exact match:     {errorCountMatch}"
+    IO.println s!"  Count mismatch:  {errorCountMismatch}"
+    IO.println s!"  Clean match:     {cleanMatch} (both agree: 0 errors)"
+    IO.println s!"  False positive:  {falsePositive} (we emit errors, ref clean)"
+    IO.println s!"  Missing errors:  {falseMissing} (ref has errors, we have 0)"
+    let totalCompared := errorCountMatch + errorCountMismatch + cleanMatch + falsePositive + falseMissing
+    if totalCompared > 0 then
+      let accuracy := (errorCountMatch + cleanMatch) * 100 / totalCompared
+      IO.println s!"  Accuracy:        {accuracy}%"
+
+    if mismatchDetails.size > 0 then
+      IO.println ""
+      IO.println "Sample mismatches (ref vs ours):"
+      for (name, refN, ourN) in mismatchDetails do
+        IO.println s!"  {name}: ref={refN} ours={ourN}"
+
   if crashMessages.size > 0 then
     IO.println ""
     IO.println "First crash messages:"

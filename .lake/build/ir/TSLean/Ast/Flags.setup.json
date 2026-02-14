@@ -1,7 +1,0 @@
-{"plugins": [],
- "package": "typescript-lean",
- "options": {"autoImplicit": false},
- "name": "TSLean.Ast.Flags",
- "isModule": false,
- "importArts": {},
- "dynlibs": []}
