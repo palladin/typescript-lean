@@ -440,6 +440,12 @@ partial def scan (s : Scanner) : Scanner :=
 -- ReScan methods
 -- ============================================================
 
+/-- Based on Go: scanner.go:960 (ReScanLessThanToken) -/
+def reScanLessThanToken (s : Scanner) : Scanner :=
+  if s.state.token == Kind.lessThanLessThanToken then
+    { s with state := { s.state with pos := s.state.tokenStart + 1, token := Kind.lessThanToken } }
+  else s
+
 /-- Based on Go: scanner.go:968 (ReScanGreaterThanToken) -/
 def reScanGreaterThanToken (s : Scanner) : Scanner :=
   if s.state.token == Kind.greaterThanToken then
@@ -452,6 +458,18 @@ def reScanGreaterThanToken (s : Scanner) : Scanner :=
       else setTok (adv s 1) Kind.greaterThanGreaterThanToken
     else if c == 0x3D then setTok (adv s 1) Kind.greaterThanEqualsToken
     else s
+  else s
+
+/-- Based on Go: scanner.go:995 (ReScanTemplateToken) -/
+def reScanTemplateToken (s : Scanner) (_isTaggedTemplate : Bool) : Scanner :=
+  let start := s.state.tokenStart
+  let s := { s with state := { s.state with pos := start, tokenStart := start, tokenFlags := TokenFlags.none } }
+  scanTmpl s
+
+/-- Based on Go: scanner.go:1001 (ReScanAsteriskEqualsToken) -/
+def reScanAsteriskEqualsToken (s : Scanner) : Scanner :=
+  if s.state.token == Kind.asteriskEqualsToken then
+    { s with state := { s.state with pos := s.state.tokenStart + 1, token := Kind.equalsToken } }
   else s
 
 /-- Based on Go: scanner.go:1011 (ReScanSlashToken) -/
@@ -473,6 +491,81 @@ partial def reScanSlashToken (s : Scanner) : Scanner :=
     let s := flg s
     setTok (setVal s (extract s start s.state.pos)) Kind.regularExpressionLiteral
   else s
+
+/-- Based on Go: scanner.go:1114 (ReScanHashToken) -/
+def reScanHashToken (s : Scanner) : Scanner :=
+  if s.state.token == Kind.privateIdentifier then
+    setTok (setVal { s with state := { s.state with pos := s.state.tokenStart + 1 } } "#") Kind.hashToken
+  else s
+
+/-- Based on Go: scanner.go:1122 (ReScanQuestionToken) -/
+def reScanQuestionToken (s : Scanner) : Scanner :=
+  if s.state.token == Kind.questionQuestionToken then
+    { s with state := { s.state with pos := s.state.tokenStart + 1, token := Kind.questionToken } }
+  else s
+
+/-- Based on Go: scanner.go:1135 (ScanJsxTokenEx) -/
+partial def scanJsxTokenEx (s : Scanner) (allowMultilineJsxText : Bool) : Scanner :=
+  let s := { s with state := { s.state with fullStartPos := s.state.pos, tokenStart := s.state.pos, tokenFlags := TokenFlags.none } }
+  let c := ch s
+  if c == 0xFFFFFFFF then
+    setTok s Kind.endOfFile
+  else if c == 0x3C then
+    if chAt s 1 == 0x2F then setTok (adv s 2) Kind.lessThanSlashToken
+    else setTok (adv s 1) Kind.lessThanToken
+  else if c == 0x7B then
+    setTok (adv s 1) Kind.openBraceToken
+  else
+    let rec go (s : Scanner) (allWs : Bool) : Scanner × Bool :=
+      let c := ch s
+      if c == 0xFFFFFFFF || c == 0x7B || c == 0x3C then (s, allWs)
+      else if !allowMultilineJsxText && isLB c then (s, allWs)
+      else
+        let allWs := allWs && (isWsSingle c || isLB c)
+        go (adv s 1) allWs
+    let (s, allWs) := go s true
+    let v := extract s s.state.fullStartPos s.state.pos
+    let s := setVal s v
+    if allWs then setTok s Kind.jsxTextAllWhiteSpaces else setTok s Kind.jsxText
+
+/-- Based on Go: scanner.go:1131 (ScanJsxToken) -/
+def scanJsxToken (s : Scanner) : Scanner :=
+  scanJsxTokenEx s true
+
+/-- Based on Go: scanner.go:1107 (ReScanJsxToken) -/
+def reScanJsxToken (s : Scanner) (allowMultilineJsxText : Bool := true) : Scanner :=
+  let s := { s with state := { s.state with pos := s.state.fullStartPos, tokenStart := s.state.fullStartPos } }
+  scanJsxTokenEx s allowMultilineJsxText
+
+/-- Based on Go: scanner.go:1203 (ScanJsxIdentifier) -/
+partial def scanJsxIdentifier (s : Scanner) : Scanner :=
+  if s.state.token == Kind.identifier || Kind.isKeywordKind s.state.token then
+    let rec go (s : Scanner) : Scanner :=
+      let c := ch s
+      if c == 0x2D then
+        go (adv s 1)
+      else
+        let (s', ok) := scanIdent s 0
+        if ok then go s' else s
+    let s := go s
+    let v := extract s s.state.tokenStart s.state.pos
+    setTok (setVal s v) (getIdentifierToken v)
+  else s
+
+/-- Based on Go: scanner.go:1230 (ScanJsxAttributeValue) -/
+def scanJsxAttributeValue (s : Scanner) : Scanner :=
+  let s := { s with state := { s.state with fullStartPos := s.state.pos, tokenStart := s.state.pos, tokenFlags := TokenFlags.none } }
+  let c := ch s
+  if c == 0x22 || c == 0x27 then
+    let (s, v) := scanStr s
+    setTok (setVal s v) Kind.stringLiteral
+  else
+    scan s
+
+/-- Based on Go: scanner.go:1243 (ReScanJsxAttributeValue) -/
+def reScanJsxAttributeValue (s : Scanner) : Scanner :=
+  let s := { s with state := { s.state with pos := s.state.fullStartPos, tokenStart := s.state.fullStartPos } }
+  scanJsxAttributeValue s
 
 -- ============================================================
 -- Convenience

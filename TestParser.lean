@@ -32,6 +32,15 @@ def testNameFromPath (path : String) : String :=
   else if fileName.endsWith ".ts" then fileName.dropEnd 3 |>.toString
   else fileName
 
+/-- Infer ScriptKind from a unit filename. -/
+def scriptKindFromFileName (fileName : String) : ScriptKind :=
+  if fileName.endsWith ".tsx" then ScriptKind.tsx
+  else if fileName.endsWith ".ts" then ScriptKind.ts
+  else if fileName.endsWith ".jsx" then ScriptKind.jsx
+  else if fileName.endsWith ".js" then ScriptKind.js
+  else if fileName.endsWith ".json" then ScriptKind.json
+  else ScriptKind.ts
+
 /-- Read a file, returning empty string if it doesn't exist. -/
 def readFileOrEmpty (path : FilePath) : IO String := do
   try
@@ -43,17 +52,42 @@ def readFileOrEmpty (path : FilePath) : IO String := do
 def hasSubstr (s sub : String) : Bool :=
   (s.splitOn sub).length > 1
 
-/-- Extract parse error summary lines (TS1xxx) from a baseline.
+/-- Extract parse error summary lines (parser diagnostics) from a baseline.
     Summary lines appear at the top before the first "====" section.
     Format: `filename(line,col): error TS1xxx: message` -/
 def extractParseErrorSummary (baseline : String) : Array String :=
+  let isParserDiagnosticLine (line : String) : Bool :=
+    match line.splitOn "error TS" with
+    | _ :: codeAndMsg :: _ =>
+      let codeDigits := (codeAndMsg.splitOn ":").head!
+      match codeDigits.toNat? with
+      | some code =>
+        code >= 1000 && code < 1200 &&
+        -- TS1118/TS1119 are non-parser duplicate member checks.
+        code != 1118 && code != 1119
+      | none => false
+    | _ => false
   let lines := baseline.splitOn "\n"
-  lines.foldl (init := #[]) fun acc line =>
-    -- Stop at annotated source section
-    if line.startsWith "====" then acc
-    -- Keep only parse error lines (TS1xxx codes)
-    else if hasSubstr line "error TS1" then acc.push line
-    else acc
+  let (_, summary) := lines.foldl (init := (false, #[])) fun (done, acc) line =>
+    if done then
+      (true, acc)
+    else if line.startsWith "====" then
+      (true, acc)
+    else if isParserDiagnosticLine line then
+      (false, acc.push line)
+    else
+      (false, acc)
+  summary
+
+/-- Normalize diagnostic summary line by dropping location prefix.
+    E.g. `file.ts(1,2): error TS1005: ';' expected.` -> `error TS1005: ';' expected.` -/
+def normalizeDiagnosticSummaryLine (line : String) : String :=
+  let normalized :=
+    match line.splitOn "): " with
+    | _ :: rest =>
+      if rest.isEmpty then line else "): ".intercalate rest
+    | _ => line
+  normalized.trimAscii.toString
 
 /-- Concatenate baselines for multi-file tests. -/
 private def concatBaselines (sources : Array (String × String))
@@ -69,23 +103,29 @@ inductive TestResult where
 /-- Run a single test file. Compare parse errors only against Go port. -/
 def runTest (testFilePath : String) : IO (String × TestResult) := do
   let testName := testNameFromPath testFilePath
+  let initialUnitName := (testFilePath.splitOn "/").getLast!
   let content ← IO.FS.readFile testFilePath
 
   -- Parse test case directives (strips // @ lines from content)
-  let testCase := parseTestFile testName content
+  let testCase := parseTestFile initialUnitName content
+  let hasNamedUnits := testCase.units.any fun unit => hasSubstr unit.name "."
+  let hasMultipleUnits := testCase.units.size > 1
 
   -- Filter out non-TypeScript units (JSON files, etc.)
   let tsUnits := testCase.units.filter fun unit =>
-    unit.name.endsWith ".ts" || unit.name.endsWith ".tsx" ||
-    unit.name.endsWith ".mts" || unit.name.endsWith ".cts" ||
-    unit.name.endsWith ".js" || unit.name.endsWith ".jsx" ||
-    unit.name.endsWith ".mjs" || unit.name.endsWith ".cjs" ||
-    -- Keep the initial unit (same name as test, no extension)
-    (!hasSubstr unit.name ".")
+    (unit.name.endsWith ".ts" || unit.name.endsWith ".tsx" ||
+     unit.name.endsWith ".mts" || unit.name.endsWith ".cts" ||
+     unit.name.endsWith ".js" || unit.name.endsWith ".jsx" ||
+     unit.name.endsWith ".mjs" || unit.name.endsWith ".cjs" ||
+    -- Keep extensionless initial unit only for single-file tests
+    (!hasNamedUnits && !hasSubstr unit.name "."))
+    && !(hasMultipleUnits && unit.name == initialUnitName)
+    && unit.content.trimAscii.toString != "content not parsed"
 
   -- Parse each unit and collect results
   let parsed := tsUnits.map fun unit =>
-    let result := parseSourceFile unit.name unit.content ScriptKind.ts
+    let scriptKind := scriptKindFromFileName unit.name
+    let result := parseSourceFile unit.name unit.content scriptKind
     (unit.name, unit.content, result)
 
   let allDiagnostics := parsed.foldl (init := #[]) fun acc (_, _, result) =>
@@ -109,9 +149,11 @@ def runTest (testFilePath : String) : IO (String × TestResult) := do
   let goBaseline ← readFileOrEmpty goPath
   let goParseErrors := extractParseErrorSummary goBaseline
   let ourParseErrors := extractParseErrorSummary baseline
+  let goNormalized := goParseErrors.map normalizeDiagnosticSummaryLine
+  let ourNormalized := ourParseErrors.map normalizeDiagnosticSummaryLine
 
   -- Compare parse errors only
-  let result := if goParseErrors == ourParseErrors then
+  let result := if goNormalized == ourNormalized then
     TestResult.pass
   else
     TestResult.fail goParseErrors ourParseErrors

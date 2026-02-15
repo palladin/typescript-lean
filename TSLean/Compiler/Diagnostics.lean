@@ -49,6 +49,7 @@ def export_or_import_expected : DiagnosticMessage := ⟨1142, "'{' or '*' or ide
 def enum_member_expected : DiagnosticMessage := ⟨1132, "Enum member expected."⟩
 def private_identifiers_not_allowed : DiagnosticMessage := ⟨18016, "Private identifiers are not allowed outside class bodies."⟩
 def private_identifiers_not_in_variables : DiagnosticMessage := ⟨18028, "Private identifiers are not allowed in variable declarations."⟩
+def rest_parameter_cannot_be_optional : DiagnosticMessage := ⟨1047, "A rest parameter cannot be optional."⟩
 
 end Diagnostics
 
