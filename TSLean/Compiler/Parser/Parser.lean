@@ -4,7 +4,11 @@
   Based on Go: internal/parser/parser.go (6582 lines)
   Uses ParserM (StateM Parser) monad with `do` notation for clean state threading.
   All mutually recursive parsing functions are in a `mutual` block.
-  Organized in sections: Utilities, Lists, Expressions, Types, Statements, Declarations, Entry.
+  Organized in sections: Utilities, Loop, Lists, Expressions, Types, Statements, Declarations, Entry.
+
+  Recursion control: iterative constructs use `loop`, which decrements
+  `Parser.fuel` only when recursing (the `none` path). When fuel reaches
+  zero, `ParseError.fuelExhausted` is thrown.
 -/
 import TSLean.Compiler.Parser.Types
 import TSLean.Compiler.Ast.Precedence
@@ -130,26 +134,12 @@ def setContextFlag (flag : NodeFlags) (value : Bool) : ParserM Unit :=
     if value then { p with contextFlags := p.contextFlags ||| flag }
     else { p with contextFlags := ⟨p.contextFlags.val &&& (~~~ flag.val)⟩ }
 
-/-- Based on Go: parser.go:271 (mark) -/
-def saveMark : ParserM ParserState := do
-  let p ← get
-  return { scannerState := p.scanner.mark, contextFlags := p.contextFlags,
-           diagnosticsLen := p.diagnostics.size, hasParseError := p.hasParseError }
-
-/-- Based on Go: parser.go:282 (rewind) -/
-def restoreMark (state : ParserState) : ParserM Unit :=
-  modify fun p => { p with
-    scanner := p.scanner.rewind state.scannerState
-    token := state.scannerState.token
-    contextFlags := state.contextFlags
-    diagnostics := p.diagnostics.shrink state.diagnosticsLen
-    hasParseError := state.hasParseError }
-
-/-- Based on Go: parser.go:292 (lookAhead) -/
+/-- Based on Go: parser.go:292 (lookAhead)
+    State is immutable — just save and restore the whole parser value. -/
 def lookAhead (callback : ParserM Bool) : ParserM Bool := do
-  let state ← saveMark
+  let saved ← get
   let result ← callback
-  restoreMark state
+  set saved
   return result
 
 -- ============================================================
@@ -173,6 +163,48 @@ def parseIdentifier : ParserM Node := do
 /-- Based on Go: parser.go:5677 (parseBindingIdentifier) -/
 def parseBindingIdentifier : ParserM Node := do
   createIdentifier (← isBindingIdentifierToken)
+
+-- ============================================================
+-- Section: Loop Combinator
+-- ============================================================
+
+/-- Append a trace message (only when debug is enabled). -/
+@[inline] def traceMsg (msg : String) : ParserM Unit :=
+  modify fun p =>
+    if p.debug then { p with traceLog := p.traceLog.push msg } else p
+
+/-- Loop combinator. Runs action repeatedly until it returns `some`.
+    Fuel only decrements on the `none` (recurse) path.
+    Structural recursion on fuel. -/
+@[inline] def loop {α : Type} (action : ParserM (Option α)) : ParserM α := do
+  let p ← get
+  let rec run : Nat → ParserM α
+    | 0 => throw ParseError.fuelExhausted
+    | fuel + 1 => do
+      let result ← action
+      match result with
+      | some value => return value
+      | none =>
+        modify fun p => { p with fuel := fuel }
+        run fuel
+  run p.fuel
+
+/-- Fold-loop combinator. Threads accumulator through iterations.
+    Returns `Sum.inl acc` to continue, `Sum.inr result` to stop.
+    Fuel only decrements on the `inl` (continue) path.
+    Structural recursion on fuel. -/
+@[inline] def loopFold {σ α : Type} (init : σ) (step : σ → ParserM (Sum σ α)) : ParserM α := do
+  let p ← get
+  let rec run : Nat → σ → ParserM α
+    | 0, _ => throw ParseError.fuelExhausted
+    | fuel + 1, acc => do
+      let result ← step acc
+      match result with
+      | .inr value => return value
+      | .inl acc' =>
+        modify fun p => { p with fuel := fuel }
+        run fuel acc'
+  run p.fuel init
 
 -- ============================================================
 -- Section: List Parsing Infrastructure
@@ -218,65 +250,52 @@ def abortParsingListOrMoveToNextToken (_kind : ParsingContext) : ParserM Bool :=
   if ← isInSomeParsingContext then return true
   else nextToken; return false
 
-/-- Based on Go: parser.go:533 (parseList) — recursive loop
-    Includes progress tracking: if parseElement fails to consume any tokens,
-    forces advancement to prevent infinite loops. -/
-partial def parseListLoop (kind : ParsingContext) (isElement : ParserM Bool)
-    (parseElement : ParserM Node) (acc : Array Node) : ParserM (Array Node) := do
-  if ← isListTerminator kind then return acc
-  else if ← isElement then
-    let startPos := (← get).scanner.tokenFullStart
-    let node ← parseElement
-    let acc' := acc.push node
-    -- Safety: if no tokens were consumed, skip one to prevent infinite loop
-    let endPos := (← get).scanner.tokenFullStart
-    if endPos == startPos then
-      if ← isListTerminator kind then return acc'
-      nextToken
-    parseListLoop kind isElement parseElement acc'
-  else
-    if ← abortParsingListOrMoveToNextToken kind then return acc
-    else parseListLoop kind isElement parseElement acc
-
 /-- Based on Go: parser.go:533 (parseList) -/
-partial def parseList (kind : ParsingContext) (isElement : ParserM Bool)
+def parseList (kind : ParsingContext) (isElement : ParserM Bool)
     (parseElement : ParserM Node) : ParserM (Array Node) := do
   let savedContexts := (← get).parsingContexts
   modify fun p => { p with parsingContexts := p.parsingContexts ||| ((1 : UInt32) <<< kind.toNat.toUInt32) }
-  let result ← parseListLoop kind isElement parseElement #[]
+  let result ← loopFold #[] fun acc => do
+    if ← isListTerminator kind then return .inr acc
+    else if ← isElement then
+      let startPos := (← get).scanner.tokenFullStart
+      let node ← parseElement
+      let acc' := acc.push node
+      let endPos := (← get).scanner.tokenFullStart
+      if endPos == startPos then
+        if ← isListTerminator kind then return .inr acc'
+        nextToken
+      return .inl acc'
+    else
+      if ← abortParsingListOrMoveToNextToken kind then return .inr acc
+      else return .inl acc
   modify fun p => { p with parsingContexts := savedContexts }
   return result
 
-/-- Based on Go: parser.go:540 (parseDelimitedList) — recursive loop
-    Includes progress tracking to prevent infinite loops. -/
-partial def parseDelimitedListLoop (kind : ParsingContext) (isElement : ParserM Bool)
-    (parseElement : ParserM Node) (acc : Array Node) : ParserM (Array Node) := do
-  if ← isElement then
-    let startPos := (← get).scanner.tokenFullStart
-    let node ← parseElement
-    let acc' := acc.push node
-    let endPos := (← get).scanner.tokenFullStart
-    -- Safety: if no tokens were consumed, skip one to prevent infinite loop
-    if endPos == startPos then
-      if ← isListTerminator kind then return acc'
-      nextToken
-    if ← parseOptional Kind.commaToken then
-      parseDelimitedListLoop kind isElement parseElement acc'
-    else if ← isListTerminator kind then return acc'
-    else
-      let _ ← parseExpected Kind.commaToken
-      parseDelimitedListLoop kind isElement parseElement acc'
-  else if ← isListTerminator kind then return acc
-  else
-    if ← abortParsingListOrMoveToNextToken kind then return acc
-    else parseDelimitedListLoop kind isElement parseElement acc
-
 /-- Based on Go: parser.go:540 (parseDelimitedList) -/
-partial def parseDelimitedList (kind : ParsingContext) (isElement : ParserM Bool)
+def parseDelimitedList (kind : ParsingContext) (isElement : ParserM Bool)
     (parseElement : ParserM Node) : ParserM (Array Node) := do
   let savedContexts := (← get).parsingContexts
   modify fun p => { p with parsingContexts := p.parsingContexts ||| ((1 : UInt32) <<< kind.toNat.toUInt32) }
-  let result ← parseDelimitedListLoop kind isElement parseElement #[]
+  let result ← loopFold #[] fun acc => do
+    if ← isElement then
+      let startPos := (← get).scanner.tokenFullStart
+      let node ← parseElement
+      let acc' := acc.push node
+      let endPos := (← get).scanner.tokenFullStart
+      if endPos == startPos then
+        if ← isListTerminator kind then return .inr acc'
+        nextToken
+      if ← parseOptional Kind.commaToken then
+        return .inl acc'
+      else if ← isListTerminator kind then return .inr acc'
+      else
+        let _ ← parseExpected Kind.commaToken
+        return .inl acc'
+    else if ← isListTerminator kind then return .inr acc
+    else
+      if ← abortParsingListOrMoveToNextToken kind then return .inr acc
+      else return .inl acc
   modify fun p => { p with parsingContexts := savedContexts }
   return result
 
@@ -332,6 +351,9 @@ def isStartOfStatement : ParserM Bool := do
 -- ============================================================
 -- Section: All Mutually Recursive Parse Functions
 -- Based on Go: parser.go:945-5800
+-- Every function takes `fuel : Nat` for termination proof.
+-- Fuel decrements only at mutual call boundaries (match fuel+1 → fuel).
+-- Self-recursive iteration uses `loopFold` (bounded by state fuel).
 -- ============================================================
 
 mutual
@@ -339,7 +361,7 @@ mutual
 -- ---- Expression Parsing ----
 
 /-- Based on Go: parser.go:5636 (parseLiteralExpression) -/
-partial def parseLiteralExpression : ParserM Node := do
+def parseLiteralExpression (_fuel : Nat) : ParserM Node := do
   let pos ← nodePos
   let text := (← get).scanner.tokenValue
   let kind ← currentToken
@@ -350,157 +372,204 @@ partial def parseLiteralExpression : ParserM Node := do
   finishNode node pos
 
 /-- Based on Go: parser.go:5413 (parsePrimaryExpression) -/
-partial def parsePrimaryExpression : ParserM Node := do
-  let tok ← currentToken
-  if tok == Kind.numericLiteral || tok == Kind.bigIntLiteral || tok == Kind.stringLiteral then
-    parseLiteralExpression
-  else if tok == Kind.thisKeyword || tok == Kind.superKeyword || tok == Kind.nullKeyword ||
-          tok == Kind.trueKeyword || tok == Kind.falseKeyword then
-    parseTokenNode
-  else if tok == Kind.openParenToken then
-    parseParenthesizedExpression
-  else
-    parseIdentifier
+def parsePrimaryExpression (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let tok ← currentToken
+    if tok == Kind.numericLiteral || tok == Kind.bigIntLiteral || tok == Kind.stringLiteral then
+      parseLiteralExpression fuel
+    else if tok == Kind.thisKeyword || tok == Kind.superKeyword || tok == Kind.nullKeyword ||
+            tok == Kind.trueKeyword || tok == Kind.falseKeyword then
+      parseTokenNode
+    else if tok == Kind.openParenToken then
+      parseParenthesizedExpression fuel
+    else
+      parseIdentifier
 
 /-- Based on Go: parser.go:5458 (parseParenthesizedExpression) -/
-partial def parseParenthesizedExpression : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.openParenToken
-  let expr ← parseExpressionAllowIn
-  let _ ← parseExpected Kind.closeParenToken
-  finishNode (Node.parenthesizedExpression {} expr) pos
+def parseParenthesizedExpression (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.openParenToken
+    let expr ← parseExpressionAllowIn fuel
+    let _ ← parseExpected Kind.closeParenToken
+    finishNode (Node.parenthesizedExpression {} expr) pos
 
 /-- Based on Go: parser.go:5143 (parseMemberExpressionOrHigher) -/
-partial def parseMemberExpressionOrHigher : ParserM Node := do
-  let pos ← nodePos
-  let expr ← parsePrimaryExpression
-  parseMemberExpressionRest pos expr
+def parseMemberExpressionOrHigher (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let expr ← parsePrimaryExpression fuel
+    parseMemberExpressionRest fuel pos expr
 
 /-- Helper: parse member expression rest (.prop, [idx]).
-    Based on Go: parser.go:5162 -/
-partial def parseMemberExpressionRest (pos : Nat) (expr : Node) : ParserM Node := do
-  let tok ← currentToken
-  if tok == Kind.dotToken then
-    nextToken
-    let name ← parseIdentifier
-    let node ← finishNode (Node.propertyAccessExpression {} expr name) pos
-    parseMemberExpressionRest pos node
-  else if tok == Kind.openBracketToken then
-    nextToken
-    let argExpr ← parseExpressionAllowIn
-    let _ ← parseExpected Kind.closeBracketToken
-    let node ← finishNode (Node.elementAccessExpression {} expr argExpr) pos
-    parseMemberExpressionRest pos node
-  else return expr
+    Based on Go: parser.go:5162
+    Uses loopFold for iteration. -/
+def parseMemberExpressionRest (fuel : Nat) (pos : Nat) (expr : Node) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 =>
+    loopFold expr fun current => do
+      let tok ← currentToken
+      if tok == Kind.dotToken then
+        nextToken
+        let name ← parseIdentifier
+        let node ← finishNode (Node.propertyAccessExpression {} current name) pos
+        return .inl node
+      else if tok == Kind.openBracketToken then
+        nextToken
+        let argExpr ← parseExpressionAllowIn fuel
+        let _ ← parseExpected Kind.closeBracketToken
+        let node ← finishNode (Node.elementAccessExpression {} current argExpr) pos
+        return .inl node
+      else return .inr current
 
-/-- Based on Go: parser.go:5312 (parseCallExpressionRest) -/
-partial def parseCallExpressionRest (pos : Nat) (expr : Node) : ParserM Node := do
-  let tok ← currentToken
-  if tok == Kind.openParenToken then
-    let _ ← parseExpected Kind.openParenToken
-    let args ← parseDelimitedList .argumentExpressions isStartOfExpression
-      parseAssignmentExpressionOrHigher
-    let _ ← parseExpected Kind.closeParenToken
-    let node ← finishNode (Node.callExpression {} expr args) pos
-    parseCallExpressionRest pos node
-  else if tok == Kind.dotToken || tok == Kind.openBracketToken then
-    let expr' ← parseMemberExpressionRest pos expr
-    parseCallExpressionRest pos expr'
-  else return expr
+/-- Based on Go: parser.go:5312 (parseCallExpressionRest)
+    Uses loopFold for iteration. -/
+def parseCallExpressionRest (fuel : Nat) (pos : Nat) (expr : Node) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 =>
+    loopFold expr fun current => do
+      let tok ← currentToken
+      if tok == Kind.openParenToken then
+        let _ ← parseExpected Kind.openParenToken
+        let args ← parseDelimitedList .argumentExpressions isStartOfExpression
+          (parseAssignmentExpressionOrHigher fuel)
+        let _ ← parseExpected Kind.closeParenToken
+        let node ← finishNode (Node.callExpression {} current args) pos
+        return .inl node
+      else if tok == Kind.dotToken || tok == Kind.openBracketToken then
+        let expr' ← parseMemberExpressionRest fuel pos current
+        return .inl expr'
+      else return .inr current
 
 /-- Based on Go: parser.go:5002 (parseLeftHandSideExpressionOrHigher) -/
-partial def parseLeftHandSideExpressionOrHigher : ParserM Node := do
-  let pos ← nodePos
-  let expr ← parseMemberExpressionOrHigher
-  parseCallExpressionRest pos expr
+def parseLeftHandSideExpressionOrHigher (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let expr ← parseMemberExpressionOrHigher fuel
+    parseCallExpressionRest fuel pos expr
 
 /-- Based on Go: parser.go:4528 (parseUnaryExpressionOrHigher) -/
-partial def parseUnaryExpressionOrHigher : ParserM Node := do
-  let tok ← currentToken
-  if tok == Kind.plusToken || tok == Kind.minusToken || tok == Kind.tildeToken ||
-     tok == Kind.exclamationToken || tok == Kind.plusPlusToken || tok == Kind.minusMinusToken ||
-     tok == Kind.typeOfKeyword || tok == Kind.voidKeyword || tok == Kind.deleteKeyword then
-    let pos ← nodePos
-    let op ← currentToken
-    nextToken
-    let operand ← parseUnaryExpressionOrHigher
-    finishNode (Node.prefixUnaryExpression {} op operand) pos
-  else
-    let pos ← nodePos
-    let expr ← parseLeftHandSideExpressionOrHigher
-    if !(← get).scanner.hasPrecedingLineBreak then
-      let tok ← currentToken
-      if tok == Kind.plusPlusToken || tok == Kind.minusMinusToken then
-        nextToken
-        finishNode (Node.postfixUnaryExpression {} expr tok) pos
+def parseUnaryExpressionOrHigher (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let tok ← currentToken
+    if tok == Kind.plusToken || tok == Kind.minusToken || tok == Kind.tildeToken ||
+       tok == Kind.exclamationToken || tok == Kind.plusPlusToken || tok == Kind.minusMinusToken ||
+       tok == Kind.typeOfKeyword || tok == Kind.voidKeyword || tok == Kind.deleteKeyword then
+      let pos ← nodePos
+      let op ← currentToken
+      nextToken
+      let operand ← parseUnaryExpressionOrHigher fuel
+      finishNode (Node.prefixUnaryExpression {} op operand) pos
+    else
+      let pos ← nodePos
+      let expr ← parseLeftHandSideExpressionOrHigher fuel
+      if !(← get).scanner.hasPrecedingLineBreak then
+        let tok ← currentToken
+        if tok == Kind.plusPlusToken || tok == Kind.minusMinusToken then
+          nextToken
+          finishNode (Node.postfixUnaryExpression {} expr tok) pos
+        else return expr
       else return expr
-    else return expr
 
-/-- Based on Go: parser.go:4453 (parseBinaryExpressionRest) — Pratt parser -/
-partial def parseBinaryExpressionRest (precedence : OperatorPrecedence)
-    (leftOperand : Node) (pos : Nat) : ParserM Node := do
-  -- Rescan > tokens (for >=, >>=, >>>=)
-  if (← currentToken) == Kind.greaterThanToken then
-    modify fun p =>
-      let s := p.scanner.reScanGreaterThanToken
-      { p with scanner := s, token := s.state.token }
-  let newPrecedence := getBinaryOperatorPrecedence (← currentToken)
-  let consume := if (← currentToken) == Kind.asteriskAsteriskToken then
-    newPrecedence.toInt >= precedence.toInt  -- right-associative
-  else
-    newPrecedence.toInt > precedence.toInt   -- left-associative
-  if !consume then return leftOperand
-  if (← currentToken) == Kind.inKeyword &&
-     (← get).contextFlags.hasFlag NodeFlags.disallowInContext then
-    return leftOperand
-  let opNode ← parseTokenNode
-  let rightOperand ← parseBinaryExpressionOrHigher newPrecedence
-  let binExpr ← finishNode (Node.binaryExpression {} leftOperand opNode rightOperand) pos
-  parseBinaryExpressionRest precedence binExpr pos
+/-- Based on Go: parser.go:4453 (parseBinaryExpressionRest) — Pratt parser
+    Uses loopFold for iteration. -/
+def parseBinaryExpressionRest (fuel : Nat) (precedence : OperatorPrecedence)
+    (leftOperand : Node) (pos : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 =>
+    loopFold leftOperand fun left => do
+      -- Rescan > tokens (for >=, >>=, >>>=)
+      if (← currentToken) == Kind.greaterThanToken then
+        modify fun p =>
+          let s := p.scanner.reScanGreaterThanToken
+          { p with scanner := s, token := s.state.token }
+      let newPrecedence := getBinaryOperatorPrecedence (← currentToken)
+      let consume := if (← currentToken) == Kind.asteriskAsteriskToken then
+        newPrecedence.toInt >= precedence.toInt  -- right-associative
+      else
+        newPrecedence.toInt > precedence.toInt   -- left-associative
+      if !consume then return .inr left
+      if (← currentToken) == Kind.inKeyword &&
+         (← get).contextFlags.hasFlag NodeFlags.disallowInContext then
+        return .inr left
+      let opNode ← parseTokenNode
+      let rightOperand ← parseBinaryExpressionOrHigher fuel newPrecedence
+      let binExpr ← finishNode (Node.binaryExpression {} left opNode rightOperand) pos
+      return .inl binExpr
 
 /-- Based on Go: parser.go:4447 (parseBinaryExpressionOrHigher) -/
-partial def parseBinaryExpressionOrHigher (precedence : OperatorPrecedence) : ParserM Node := do
-  let pos ← nodePos
-  let leftOperand ← parseUnaryExpressionOrHigher
-  parseBinaryExpressionRest precedence leftOperand pos
+def parseBinaryExpressionOrHigher (fuel : Nat) (precedence : OperatorPrecedence) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let leftOperand ← parseUnaryExpressionOrHigher fuel
+    parseBinaryExpressionRest fuel precedence leftOperand pos
 
 /-- Based on Go: parser.go:3952 (parseAssignmentExpressionOrHigher) — simplified -/
-partial def parseAssignmentExpressionOrHigher : ParserM Node := do
-  let pos ← nodePos
-  let expr ← parseBinaryExpressionOrHigher OperatorPrecedence.lowest
-  if isLeftHandSideExpression expr && Kind.isAssignment (← currentToken) then
-    let opNode ← parseTokenNode
-    let right ← parseAssignmentExpressionOrHigher
-    finishNode (Node.binaryExpression {} expr opNode right) pos
-  else return expr
+def parseAssignmentExpressionOrHigher (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let expr ← parseBinaryExpressionOrHigher fuel OperatorPrecedence.lowest
+    if isLeftHandSideExpression expr && Kind.isAssignment (← currentToken) then
+      let opNode ← parseTokenNode
+      let right ← parseAssignmentExpressionOrHigher fuel
+      finishNode (Node.binaryExpression {} expr opNode right) pos
+    else return expr
 
-/-- Helper: parse comma expression rest -/
-partial def parseExpressionCommaRest (expr : Node) (pos : Nat) : ParserM Node := do
-  if (← currentToken) == Kind.commaToken then
-    let opNode ← parseTokenNode
-    let right ← parseAssignmentExpressionOrHigher
-    let binExpr ← finishNode (Node.binaryExpression {} expr opNode right) pos
-    parseExpressionCommaRest binExpr pos
-  else return expr
+/-- Helper: parse comma expression rest.
+    Uses loopFold for iteration. -/
+def parseExpressionCommaRest (fuel : Nat) (expr : Node) (pos : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 =>
+    loopFold expr fun current => do
+      if (← currentToken) == Kind.commaToken then
+        let opNode ← parseTokenNode
+        let right ← parseAssignmentExpressionOrHigher fuel
+        let binExpr ← finishNode (Node.binaryExpression {} current opNode right) pos
+        return .inl binExpr
+      else return .inr current
 
 /-- Based on Go: parser.go:3927 (parseExpression) — comma expressions -/
-partial def parseExpression : ParserM Node := do
-  let pos ← nodePos
-  let expr ← parseAssignmentExpressionOrHigher
-  parseExpressionCommaRest expr pos
+def parseExpression (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let expr ← parseAssignmentExpressionOrHigher fuel
+    parseExpressionCommaRest fuel expr pos
 
 /-- Based on Go: parser.go:3948 (parseExpressionAllowIn) -/
-partial def parseExpressionAllowIn : ParserM Node := do
-  let saved := (← get).contextFlags
-  setContextFlag NodeFlags.disallowInContext false
-  let expr ← parseExpression
-  modify fun p => { p with contextFlags := saved }
-  return expr
+def parseExpressionAllowIn (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let saved := (← get).contextFlags
+    setContextFlag NodeFlags.disallowInContext false
+    let expr ← parseExpression fuel
+    modify fun p => { p with contextFlags := saved }
+    return expr
 
 -- ---- Type Parsing ----
 
 /-- Based on Go: parser.go:2484 (parseType) — simplified -/
-partial def parseType' : ParserM Node := do
+def parseType' (_fuel : Nat) : ParserM Node := do
   let tok ← currentToken
   if isKeywordType tok then parseTokenNode
   else if ← isIdentifierToken then
@@ -510,19 +579,25 @@ partial def parseType' : ParserM Node := do
   else parseTokenNode  -- fallback
 
 /-- Based on Go: parser.go:1588 (parseTypeAnnotation) -/
-partial def parseTypeAnnotation : ParserM (Option Node) := do
-  if ← parseOptional Kind.colonToken then
-    pure (some (← parseType'))
-  else return none
+def parseTypeAnnotation (fuel : Nat) : ParserM (Option Node) :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    if ← parseOptional Kind.colonToken then
+      pure (some (← parseType' fuel))
+    else return none
 
 /-- Based on Go: parser.go:3255 (parseReturnType) -/
-partial def parseReturnType : ParserM (Option Node) := do
-  if ← parseOptional Kind.colonToken then
-    pure (some (← parseType'))
-  else return none
+def parseReturnType (fuel : Nat) : ParserM (Option Node) :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    if ← parseOptional Kind.colonToken then
+      pure (some (← parseType' fuel))
+    else return none
 
 /-- Based on Go: parser.go:3096 (parseTypeParameters) -/
-partial def parseTypeParameters : ParserM (Option (Array Node)) := do
+def parseTypeParameters (_fuel : Nat) : ParserM (Option (Array Node)) := do
   if (← currentToken) == Kind.lessThanToken then
     let _ ← parseExpected Kind.lessThanToken
     let params ← parseDelimitedList .typeParameters isIdentifierToken parseIdentifier
@@ -531,99 +606,120 @@ partial def parseTypeParameters : ParserM (Option (Array Node)) := do
   else return none
 
 /-- Based on Go: parser.go:3191 (parseParameter) -/
-partial def parseParameter : ParserM Node := do
-  let pos ← nodePos
-  let dotDotDot ← parseOptionalToken Kind.dotDotDotToken
-  let name ← parseBindingIdentifier
-  let questionToken ← parseOptionalToken Kind.questionToken
-  let typeNode ← parseTypeAnnotation
-  let initializer ← parseInitializer
-  finishNode (Node.parameterDeclaration {} dotDotDot name questionToken typeNode initializer) pos
+def parseParameter (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let dotDotDot ← parseOptionalToken Kind.dotDotDotToken
+    let name ← parseBindingIdentifier
+    let questionToken ← parseOptionalToken Kind.questionToken
+    let typeNode ← parseTypeAnnotation fuel
+    let initializer ← parseInitializer fuel
+    finishNode (Node.parameterDeclaration {} dotDotDot name questionToken typeNode initializer) pos
 
 /-- Based on Go: parser.go:3136 (parseParameters) -/
-partial def parseParameters : ParserM (Array Node) := do
-  let ok ← parseExpected Kind.openParenToken
-  if ok then
-    let isParam : ParserM Bool := do
-      let tok ← currentToken
-      let bindId ← isBindingIdentifierToken
-      return bindId || tok == Kind.dotDotDotToken ||
-        tok == Kind.openBracketToken || tok == Kind.openBraceToken ||
-        isModifierKind tok || tok == Kind.thisKeyword
-    let params ← parseDelimitedList .parameters isParam parseParameter
-    let _ ← parseExpected Kind.closeParenToken
-    return params
-  else return #[]
+def parseParameters (fuel : Nat) : ParserM (Array Node) :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let ok ← parseExpected Kind.openParenToken
+    if ok then
+      let isParam : ParserM Bool := do
+        let tok ← currentToken
+        let bindId ← isBindingIdentifierToken
+        return bindId || tok == Kind.dotDotDotToken ||
+          tok == Kind.openBracketToken || tok == Kind.openBraceToken ||
+          isModifierKind tok || tok == Kind.thisKeyword
+      let params ← parseDelimitedList .parameters isParam (parseParameter fuel)
+      let _ ← parseExpected Kind.closeParenToken
+      return params
+    else return #[]
 
 -- ---- Statement Parsing ----
 
 /-- Based on Go: parser.go:1090 (parseBlock) -/
-partial def parseBlock : ParserM Node := do
-  let pos ← nodePos
-  let ok ← parseExpected Kind.openBraceToken
-  if ok then
-    let stmts ← parseList .blockStatements isStartOfStatement parseStatement
-    let _ ← parseExpected Kind.closeBraceToken
-    finishNode (Node.block {} stmts) pos
-  else
-    finishNode (Node.block {} #[]) pos
+def parseBlock (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let ok ← parseExpected Kind.openBraceToken
+    if ok then
+      let stmts ← parseList .blockStatements isStartOfStatement (parseStatement fuel)
+      let _ ← parseExpected Kind.closeBraceToken
+      finishNode (Node.block {} stmts) pos
+    else
+      finishNode (Node.block {} #[]) pos
 
 /-- Based on Go: parser.go:1113 (parseEmptyStatement) -/
-partial def parseEmptyStatement : ParserM Node := do
+def parseEmptyStatement (_fuel : Nat) : ParserM Node := do
   let pos ← nodePos
   let _ ← parseExpected Kind.semicolonToken
   finishNode (Node.emptyStatement {}) pos
 
 /-- Based on Go: parser.go:1122 (parseIfStatement) -/
-partial def parseIfStatement : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.ifKeyword
-  let _ ← parseExpected Kind.openParenToken
-  let expr ← parseExpressionAllowIn
-  let _ ← parseExpected Kind.closeParenToken
-  let thenStmt ← parseStatement
-  let hasElse ← parseOptional Kind.elseKeyword
-  let elseStmt ← if hasElse then do
-    let s ← parseStatement; pure (some s)
-  else pure none
-  finishNode (Node.ifStatement {} expr thenStmt elseStmt) pos
+def parseIfStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.ifKeyword
+    let _ ← parseExpected Kind.openParenToken
+    let expr ← parseExpressionAllowIn fuel
+    let _ ← parseExpected Kind.closeParenToken
+    let thenStmt ← parseStatement fuel
+    let hasElse ← parseOptional Kind.elseKeyword
+    let elseStmt ← if hasElse then do
+      let s ← parseStatement fuel; pure (some s)
+    else pure none
+    finishNode (Node.ifStatement {} expr thenStmt elseStmt) pos
 
 /-- Based on Go: parser.go:1249 (parseReturnStatement) -/
-partial def parseReturnStatement : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.returnKeyword
-  let expr ← if !(← canParseSemicolon) then do
-    let e ← parseExpressionAllowIn; pure (some e)
-  else pure none
-  let _ ← parseSemicolon
-  finishNode (Node.returnStatement {} expr) pos
+def parseReturnStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.returnKeyword
+    let expr ← if !(← canParseSemicolon) then do
+      let e ← parseExpressionAllowIn fuel; pure (some e)
+    else pure none
+    let _ ← parseSemicolon
+    finishNode (Node.returnStatement {} expr) pos
 
 /-- Based on Go: parser.go:1401 (parseExpressionOrLabeledStatement) -/
-partial def parseExpressionOrLabeledStatement : ParserM Node := do
-  let pos ← nodePos
-  let expr ← parseExpression
-  -- Check for labeled statement: identifier followed by ':'
-  if (← currentToken) == Kind.colonToken then
-    match expr with
-    | .identifier _ _ =>
-      nextToken
-      let stmt ← parseStatement
-      return ← finishNode (Node.labeledStatement {} expr stmt) pos
-    | _ => pure ()
-  let _ ← parseSemicolon
-  finishNode (Node.expressionStatement {} expr) pos
+def parseExpressionOrLabeledStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let expr ← parseExpression fuel
+    -- Check for labeled statement: identifier followed by ':'
+    if (← currentToken) == Kind.colonToken then
+      match expr with
+      | .identifier _ _ =>
+        nextToken
+        let stmt ← parseStatement fuel
+        return ← finishNode (Node.labeledStatement {} expr stmt) pos
+      | _ => pure ()
+    let _ ← parseSemicolon
+    finishNode (Node.expressionStatement {} expr) pos
 
 /-- Based on Go: parser.go:1289 (parseThrowStatement) -/
-partial def parseThrowStatement : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.throwKeyword
-  let expr ← if ← canParseSemicolon then pure none
-    else pure (some (← parseExpressionAllowIn))
-  let _ ← parseSemicolon
-  finishNode (Node.throwStatement {} expr) pos
+def parseThrowStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.throwKeyword
+    let expr ← if ← canParseSemicolon then pure none
+      else pure (some (← parseExpressionAllowIn fuel))
+    let _ ← parseSemicolon
+    finishNode (Node.throwStatement {} expr) pos
 
 /-- Based on Go: parser.go:1202 (parseBreakOrContinueStatement) -/
-partial def parseBreakStatement : ParserM Node := do
+def parseBreakStatement (_fuel : Nat) : ParserM Node := do
   let pos ← nodePos
   let _ ← parseExpected Kind.breakKeyword
   let label ← if ← canParseSemicolon then pure none
@@ -633,7 +729,7 @@ partial def parseBreakStatement : ParserM Node := do
   finishNode (Node.breakStatement {} label) pos
 
 /-- Based on Go: parser.go:1202 (parseBreakOrContinueStatement) -/
-partial def parseContinueStatement : ParserM Node := do
+def parseContinueStatement (_fuel : Nat) : ParserM Node := do
   let pos ← nodePos
   let _ ← parseExpected Kind.continueKeyword
   let label ← if ← canParseSemicolon then pure none
@@ -643,301 +739,360 @@ partial def parseContinueStatement : ParserM Node := do
   finishNode (Node.continueStatement {} label) pos
 
 /-- Based on Go: parser.go:1282 (parseDebuggerStatement) -/
-partial def parseDebuggerStatement : ParserM Node := do
+def parseDebuggerStatement (_fuel : Nat) : ParserM Node := do
   let pos ← nodePos
   let _ ← parseExpected Kind.debuggerKeyword
   let _ ← parseSemicolon
   finishNode (Node.debuggerStatement {}) pos
 
 /-- Based on Go: parser.go:1151 (parseWhileStatement) -/
-partial def parseWhileStatement : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.whileKeyword
-  let _ ← parseExpected Kind.openParenToken
-  let expr ← parseExpressionAllowIn
-  let _ ← parseExpected Kind.closeParenToken
-  let stmt ← parseStatement
-  finishNode (Node.whileStatement {} expr stmt) pos
+def parseWhileStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.whileKeyword
+    let _ ← parseExpected Kind.openParenToken
+    let expr ← parseExpressionAllowIn fuel
+    let _ ← parseExpected Kind.closeParenToken
+    let stmt ← parseStatement fuel
+    finishNode (Node.whileStatement {} expr stmt) pos
 
 /-- Based on Go: parser.go:1141 (parseDoStatement) -/
-partial def parseDoStatement : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.doKeyword
-  let stmt ← parseStatement
-  let _ ← parseExpected Kind.whileKeyword
-  let _ ← parseExpected Kind.openParenToken
-  let expr ← parseExpressionAllowIn
-  let _ ← parseExpected Kind.closeParenToken
-  let _ ← parseSemicolon
-  finishNode (Node.doStatement {} stmt expr) pos
+def parseDoStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.doKeyword
+    let stmt ← parseStatement fuel
+    let _ ← parseExpected Kind.whileKeyword
+    let _ ← parseExpected Kind.openParenToken
+    let expr ← parseExpressionAllowIn fuel
+    let _ ← parseExpected Kind.closeParenToken
+    let _ ← parseSemicolon
+    finishNode (Node.doStatement {} stmt expr) pos
 
 /-- Based on Go: parser.go:1160 (parseForStatement) — simplified -/
-partial def parseForStatement : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.forKeyword
-  let _ ← parseExpected Kind.openParenToken
-  let initializer ← if (← currentToken) == Kind.semicolonToken then pure none
-    else if (← currentToken) == Kind.varKeyword || (← currentToken) == Kind.letKeyword ||
-            (← currentToken) == Kind.constKeyword then
-      pure (some (← parseVariableDeclarationList))
-    else pure (some (← parseExpressionAllowIn))
-  let tok ← currentToken
-  if tok == Kind.inKeyword then
-    let _ ← parseExpected Kind.inKeyword
-    let expr ← parseExpressionAllowIn
-    let _ ← parseExpected Kind.closeParenToken
-    let stmt ← parseStatement
-    finishNode (Node.forInStatement {} initializer expr stmt) pos
-  else if tok == Kind.ofKeyword then
-    nextToken
-    let expr ← parseExpressionAllowIn
-    let _ ← parseExpected Kind.closeParenToken
-    let stmt ← parseStatement
-    finishNode (Node.forOfStatement {} initializer expr stmt) pos
-  else
-    let _ ← parseExpected Kind.semicolonToken
-    let condition ← if (← currentToken) == Kind.semicolonToken then pure none
-      else pure (some (← parseExpressionAllowIn))
-    let _ ← parseExpected Kind.semicolonToken
-    let incrementor ← if (← currentToken) == Kind.closeParenToken then pure none
-      else pure (some (← parseExpressionAllowIn))
-    let _ ← parseExpected Kind.closeParenToken
-    let stmt ← parseStatement
-    finishNode (Node.forStatement {} initializer condition incrementor stmt) pos
+def parseForStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.forKeyword
+    let _ ← parseExpected Kind.openParenToken
+    let initializer ← if (← currentToken) == Kind.semicolonToken then pure none
+      else if (← currentToken) == Kind.varKeyword || (← currentToken) == Kind.letKeyword ||
+              (← currentToken) == Kind.constKeyword then
+        pure (some (← parseVariableDeclarationList fuel))
+      else pure (some (← parseExpressionAllowIn fuel))
+    let tok ← currentToken
+    if tok == Kind.inKeyword then
+      let _ ← parseExpected Kind.inKeyword
+      let expr ← parseExpressionAllowIn fuel
+      let _ ← parseExpected Kind.closeParenToken
+      let stmt ← parseStatement fuel
+      finishNode (Node.forInStatement {} initializer expr stmt) pos
+    else if tok == Kind.ofKeyword then
+      nextToken
+      let expr ← parseExpressionAllowIn fuel
+      let _ ← parseExpected Kind.closeParenToken
+      let stmt ← parseStatement fuel
+      finishNode (Node.forOfStatement {} initializer expr stmt) pos
+    else
+      let _ ← parseExpected Kind.semicolonToken
+      let condition ← if (← currentToken) == Kind.semicolonToken then pure none
+        else pure (some (← parseExpressionAllowIn fuel))
+      let _ ← parseExpected Kind.semicolonToken
+      let incrementor ← if (← currentToken) == Kind.closeParenToken then pure none
+        else pure (some (← parseExpressionAllowIn fuel))
+      let _ ← parseExpected Kind.closeParenToken
+      let stmt ← parseStatement fuel
+      finishNode (Node.forStatement {} initializer condition incrementor stmt) pos
 
 /-- Based on Go: parser.go:1305 (parseSwitchStatement) -/
-partial def parseSwitchStatement : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.switchKeyword
-  let _ ← parseExpected Kind.openParenToken
-  let expr ← parseExpressionAllowIn
-  let _ ← parseExpected Kind.closeParenToken
-  let _ ← parseExpected Kind.openBraceToken
-  let clauses ← parseSwitchClauses #[]
-  let _ ← parseExpected Kind.closeBraceToken
-  finishNode (Node.switchStatement {} expr clauses) pos
+def parseSwitchStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.switchKeyword
+    let _ ← parseExpected Kind.openParenToken
+    let expr ← parseExpressionAllowIn fuel
+    let _ ← parseExpected Kind.closeParenToken
+    let _ ← parseExpected Kind.openBraceToken
+    let clauses ← parseSwitchClauses fuel
+    let _ ← parseExpected Kind.closeBraceToken
+    finishNode (Node.switchStatement {} expr clauses) pos
 
-/-- Helper: parse switch case/default clauses. -/
-partial def parseSwitchClauses (acc : Array Node) : ParserM (Array Node) := do
-  let tok ← currentToken
-  if tok == Kind.closeBraceToken || tok == Kind.endOfFile then return acc
-  else if tok == Kind.caseKeyword then
-    let pos ← nodePos
-    let _ ← parseExpected Kind.caseKeyword
-    let expr ← parseExpressionAllowIn
-    let _ ← parseExpected Kind.colonToken
-    let stmts ← parseList .switchClauseStatements isStartOfStatement parseStatement
-    let node ← finishNode (Node.caseClause {} expr stmts) pos
-    parseSwitchClauses (acc.push node)
-  else if tok == Kind.defaultKeyword then
-    let pos ← nodePos
-    let _ ← parseExpected Kind.defaultKeyword
-    let _ ← parseExpected Kind.colonToken
-    let stmts ← parseList .switchClauseStatements isStartOfStatement parseStatement
-    let node ← finishNode (Node.defaultClause {} stmts) pos
-    parseSwitchClauses (acc.push node)
-  else
-    nextToken
-    parseSwitchClauses acc
+/-- Helper: parse switch case/default clauses.
+    Uses loopFold for iteration. -/
+def parseSwitchClauses (fuel : Nat) : ParserM (Array Node) :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 =>
+    loopFold #[] fun acc => do
+      let tok ← currentToken
+      if tok == Kind.closeBraceToken || tok == Kind.endOfFile then return .inr acc
+      else if tok == Kind.caseKeyword then
+        let pos ← nodePos
+        let _ ← parseExpected Kind.caseKeyword
+        let expr ← parseExpressionAllowIn fuel
+        let _ ← parseExpected Kind.colonToken
+        let stmts ← parseList .switchClauseStatements isStartOfStatement (parseStatement fuel)
+        let node ← finishNode (Node.caseClause {} expr stmts) pos
+        return .inl (acc.push node)
+      else if tok == Kind.defaultKeyword then
+        let pos ← nodePos
+        let _ ← parseExpected Kind.defaultKeyword
+        let _ ← parseExpected Kind.colonToken
+        let stmts ← parseList .switchClauseStatements isStartOfStatement (parseStatement fuel)
+        let node ← finishNode (Node.defaultClause {} stmts) pos
+        return .inl (acc.push node)
+      else
+        nextToken
+        return .inl acc
 
 /-- Based on Go: parser.go:1308 (parseTryStatement) -/
-partial def parseTryStatement : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.tryKeyword
-  let tryBlock ← parseBlock
-  let catchClause ← if (← currentToken) == Kind.catchKeyword then do
-    let cPos ← nodePos
-    let _ ← parseExpected Kind.catchKeyword
-    let decl ← if (← currentToken) == Kind.openParenToken then do
-      let _ ← parseExpected Kind.openParenToken
-      let name ← parseBindingIdentifier
-      let typeNode ← parseTypeAnnotation
-      let _ ← parseExpected Kind.closeParenToken
-      pure (some (Node.variableDeclaration {} name typeNode none))
+def parseTryStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.tryKeyword
+    let tryBlock ← parseBlock fuel
+    let catchClause ← if (← currentToken) == Kind.catchKeyword then do
+      let cPos ← nodePos
+      let _ ← parseExpected Kind.catchKeyword
+      let decl ← if (← currentToken) == Kind.openParenToken then do
+        let _ ← parseExpected Kind.openParenToken
+        let name ← parseBindingIdentifier
+        let typeNode ← parseTypeAnnotation fuel
+        let _ ← parseExpected Kind.closeParenToken
+        pure (some (Node.variableDeclaration {} name typeNode none))
+      else pure none
+      let block ← parseBlock fuel
+      let node ← finishNode (Node.catchClause {} decl block) cPos
+      pure (some node)
     else pure none
-    let block ← parseBlock
-    let node ← finishNode (Node.catchClause {} decl block) cPos
-    pure (some node)
-  else pure none
-  let finallyBlock ← if (← currentToken) == Kind.finallyKeyword then do
-    let _ ← parseExpected Kind.finallyKeyword
-    pure (some (← parseBlock))
-  else pure none
-  finishNode (Node.tryStatement {} tryBlock catchClause finallyBlock) pos
+    let finallyBlock ← if (← currentToken) == Kind.finallyKeyword then do
+      let _ ← parseExpected Kind.finallyKeyword
+      pure (some (← parseBlock fuel))
+    else pure none
+    finishNode (Node.tryStatement {} tryBlock catchClause finallyBlock) pos
 
 /-- Based on Go: parser.go:1131 (parseWithStatement) -/
-partial def parseWithStatement : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.withKeyword
-  let _ ← parseExpected Kind.openParenToken
-  let expr ← parseExpressionAllowIn
-  let _ ← parseExpected Kind.closeParenToken
-  let stmt ← parseStatement
-  finishNode (Node.withStatement {} expr stmt) pos
+def parseWithStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.withKeyword
+    let _ ← parseExpected Kind.openParenToken
+    let expr ← parseExpressionAllowIn fuel
+    let _ ← parseExpected Kind.closeParenToken
+    let stmt ← parseStatement fuel
+    finishNode (Node.withStatement {} expr stmt) pos
 
 /-- Based on Go: parser.go:1581 (parseInitializer) -/
-partial def parseInitializer : ParserM (Option Node) := do
-  if ← parseOptional Kind.equalsToken then
-    pure (some (← parseAssignmentExpressionOrHigher))
-  else return none
+def parseInitializer (fuel : Nat) : ParserM (Option Node) :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    if ← parseOptional Kind.equalsToken then
+      pure (some (← parseAssignmentExpressionOrHigher fuel))
+    else return none
 
 /-- Based on Go: parser.go:1495 (parseVariableDeclaration) -/
-partial def parseVariableDeclaration : ParserM Node := do
-  let pos ← nodePos
-  let name ← parseBindingIdentifier
-  let typeNode ← parseTypeAnnotation
-  let initializer ← parseInitializer
-  finishNode (Node.variableDeclaration {} name typeNode initializer) pos
+def parseVariableDeclaration (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let name ← parseBindingIdentifier
+    let typeNode ← parseTypeAnnotation fuel
+    let initializer ← parseInitializer fuel
+    finishNode (Node.variableDeclaration {} name typeNode initializer) pos
 
 /-- Based on Go: parser.go:1434 (parseVariableDeclarationList) -/
-partial def parseVariableDeclarationList : ParserM Node := do
-  let pos ← nodePos
-  let tok ← currentToken
-  let flags := if tok == Kind.letKeyword then NodeFlags.let_
-    else if tok == Kind.constKeyword then NodeFlags.const_
-    else if tok == Kind.usingKeyword then NodeFlags.using_
-    else NodeFlags.none
-  nextToken
-  let isDecl : ParserM Bool := do
-    let bindId ← isBindingIdentifierToken
+def parseVariableDeclarationList (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
     let tok ← currentToken
-    return bindId || tok == Kind.openBracketToken || tok == Kind.openBraceToken
-  let decls ← parseDelimitedList .variableDeclarations isDecl parseVariableDeclaration
-  finishNode (Node.variableDeclarationList {} flags decls) pos
+    let flags := if tok == Kind.letKeyword then NodeFlags.let_
+      else if tok == Kind.constKeyword then NodeFlags.const_
+      else if tok == Kind.usingKeyword then NodeFlags.using_
+      else NodeFlags.none
+    nextToken
+    let isDecl : ParserM Bool := do
+      let bindId ← isBindingIdentifierToken
+      let tok ← currentToken
+      return bindId || tok == Kind.openBracketToken || tok == Kind.openBraceToken
+    let decls ← parseDelimitedList .variableDeclarations isDecl (parseVariableDeclaration fuel)
+    finishNode (Node.variableDeclarationList {} flags decls) pos
 
 /-- Based on Go: parser.go:1425 (parseVariableStatement) -/
-partial def parseVariableStatement : ParserM Node := do
-  let pos ← nodePos
-  let declList ← parseVariableDeclarationList
-  let _ ← parseSemicolon
-  finishNode (Node.variableStatement {} declList) pos
+def parseVariableStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let declList ← parseVariableDeclarationList fuel
+    let _ ← parseSemicolon
+    finishNode (Node.variableStatement {} declList) pos
 
 /-- Based on Go: parser.go:945 (parseStatement) — dispatch on token -/
-partial def parseStatement : ParserM Node := do
-  let tok ← currentToken
-  if tok == Kind.semicolonToken then parseEmptyStatement
-  else if tok == Kind.openBraceToken then parseBlock
-  else if tok == Kind.varKeyword || tok == Kind.letKeyword || tok == Kind.constKeyword then
-    parseVariableStatement
-  else if tok == Kind.functionKeyword then parseFunctionDeclaration
-  else if tok == Kind.classKeyword then parseClassDeclaration
-  else if tok == Kind.ifKeyword then parseIfStatement
-  else if tok == Kind.returnKeyword then parseReturnStatement
-  else if tok == Kind.throwKeyword then parseThrowStatement
-  else if tok == Kind.breakKeyword then parseBreakStatement
-  else if tok == Kind.continueKeyword then parseContinueStatement
-  else if tok == Kind.debuggerKeyword then parseDebuggerStatement
-  else if tok == Kind.whileKeyword then parseWhileStatement
-  else if tok == Kind.doKeyword then parseDoStatement
-  else if tok == Kind.forKeyword then parseForStatement
-  else if tok == Kind.switchKeyword then parseSwitchStatement
-  else if tok == Kind.tryKeyword then parseTryStatement
-  else if tok == Kind.withKeyword then parseWithStatement
-  else if tok == Kind.exportKeyword || tok == Kind.importKeyword ||
-          tok == Kind.enumKeyword || tok == Kind.interfaceKeyword ||
-          tok == Kind.typeKeyword || tok == Kind.moduleKeyword ||
-          tok == Kind.namespaceKeyword || tok == Kind.abstractKeyword ||
-          tok == Kind.declareKeyword then
-    -- Unsupported declaration kinds: emit error and skip one token.
-    -- The list loop's progress tracking handles further recovery.
-    let pos ← nodePos
-    parseErrorAtCurrentToken Diagnostics.declaration_or_statement_expected
-    nextToken
-    finishNode (Node.missing {} tok) pos
-  else parseExpressionOrLabeledStatement
+def parseStatement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let tok ← currentToken
+    if tok == Kind.semicolonToken then parseEmptyStatement fuel
+    else if tok == Kind.openBraceToken then parseBlock fuel
+    else if tok == Kind.varKeyword || tok == Kind.letKeyword || tok == Kind.constKeyword then
+      parseVariableStatement fuel
+    else if tok == Kind.functionKeyword then parseFunctionDeclaration fuel
+    else if tok == Kind.classKeyword then parseClassDeclaration fuel
+    else if tok == Kind.ifKeyword then parseIfStatement fuel
+    else if tok == Kind.returnKeyword then parseReturnStatement fuel
+    else if tok == Kind.throwKeyword then parseThrowStatement fuel
+    else if tok == Kind.breakKeyword then parseBreakStatement fuel
+    else if tok == Kind.continueKeyword then parseContinueStatement fuel
+    else if tok == Kind.debuggerKeyword then parseDebuggerStatement fuel
+    else if tok == Kind.whileKeyword then parseWhileStatement fuel
+    else if tok == Kind.doKeyword then parseDoStatement fuel
+    else if tok == Kind.forKeyword then parseForStatement fuel
+    else if tok == Kind.switchKeyword then parseSwitchStatement fuel
+    else if tok == Kind.tryKeyword then parseTryStatement fuel
+    else if tok == Kind.withKeyword then parseWithStatement fuel
+    else if tok == Kind.exportKeyword || tok == Kind.importKeyword ||
+            tok == Kind.enumKeyword || tok == Kind.interfaceKeyword ||
+            tok == Kind.typeKeyword || tok == Kind.moduleKeyword ||
+            tok == Kind.namespaceKeyword || tok == Kind.abstractKeyword ||
+            tok == Kind.declareKeyword then
+      let pos ← nodePos
+      parseErrorAtCurrentToken Diagnostics.declaration_or_statement_expected
+      nextToken
+      finishNode (Node.missing {} tok) pos
+    else parseExpressionOrLabeledStatement fuel
 
 -- ---- Declaration Parsing ----
 
 /-- Based on Go: parser.go:3370 (parseFunctionBlock) -/
-partial def parseFunctionBlock : ParserM (Option Node) := do
-  if (← currentToken) == Kind.openBraceToken then
-    pure (some (← parseBlock))
-  else if ← canParseSemicolon then
-    let _ ← parseSemicolon; return none
-  else
-    pure (some (← parseBlock))
+def parseFunctionBlock (fuel : Nat) : ParserM (Option Node) :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    if (← currentToken) == Kind.openBraceToken then
+      pure (some (← parseBlock fuel))
+    else if ← canParseSemicolon then
+      let _ ← parseSemicolon; return none
+    else
+      pure (some (← parseBlock fuel))
 
 /-- Based on Go: parser.go:1595 (parseFunctionDeclaration) -/
-partial def parseFunctionDeclaration : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.functionKeyword
-  let name ← if ← isBindingIdentifierToken then do
-    let n ← parseBindingIdentifier; pure (some n)
-  else pure none
-  let typeParams ← parseTypeParameters
-  let params ← parseParameters
-  let returnType ← parseReturnType
-  let body ← parseFunctionBlock
-  finishNode (Node.functionDeclaration {} name typeParams params returnType body) pos
+def parseFunctionDeclaration (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.functionKeyword
+    let name ← if ← isBindingIdentifierToken then do
+      let n ← parseBindingIdentifier; pure (some n)
+    else pure none
+    let typeParams ← parseTypeParameters fuel
+    let params ← parseParameters fuel
+    let returnType ← parseReturnType fuel
+    let body ← parseFunctionBlock fuel
+    finishNode (Node.functionDeclaration {} name typeParams params returnType body) pos
 
 /-- Based on Go: parser.go:5895 (parsePropertyName) -/
-partial def parsePropertyName : ParserM Node := do
-  let tok ← currentToken
-  if tok == Kind.stringLiteral || tok == Kind.numericLiteral then
-    parseLiteralExpression
-  else parseIdentifier
+def parsePropertyName (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let tok ← currentToken
+    if tok == Kind.stringLiteral || tok == Kind.numericLiteral then
+      parseLiteralExpression fuel
+    else parseIdentifier
 
 /-- Based on Go: parser.go:1833 (parseMethodDeclaration) rest -/
-partial def parseMethodDeclarationRest (pos : Nat) (name : Node)
-    (questionToken : Option Node) : ParserM Node := do
-  let typeParams ← parseTypeParameters
-  let params ← parseParameters
-  let returnType ← parseReturnType
-  let body ← parseFunctionBlock
-  finishNode (Node.methodDeclaration {} name questionToken typeParams params returnType body) pos
+def parseMethodDeclarationRest (fuel : Nat) (pos : Nat) (name : Node)
+    (questionToken : Option Node) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let typeParams ← parseTypeParameters fuel
+    let params ← parseParameters fuel
+    let returnType ← parseReturnType fuel
+    let body ← parseFunctionBlock fuel
+    finishNode (Node.methodDeclaration {} name questionToken typeParams params returnType body) pos
 
 /-- Based on Go: parser.go:1821 (parsePropertyOrMethodDeclaration) -/
-partial def parsePropertyOrMethodDeclaration : ParserM Node := do
-  let pos ← nodePos
-  let name ← parsePropertyName
-  let questionToken ← parseOptionalToken Kind.questionToken
-  let tok ← currentToken
-  if tok == Kind.openParenToken || tok == Kind.lessThanToken then
-    parseMethodDeclarationRest pos name questionToken
-  else
-    let typeNode ← parseTypeAnnotation
-    let initializer ← parseInitializer
-    let _ ← parseSemicolon
-    finishNode (Node.variableDeclaration {} name typeNode initializer) pos
+def parsePropertyOrMethodDeclaration (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let name ← parsePropertyName fuel
+    let questionToken ← parseOptionalToken Kind.questionToken
+    let tok ← currentToken
+    if tok == Kind.openParenToken || tok == Kind.lessThanToken then
+      parseMethodDeclarationRest fuel pos name questionToken
+    else
+      let typeNode ← parseTypeAnnotation fuel
+      let initializer ← parseInitializer fuel
+      let _ ← parseSemicolon
+      finishNode (Node.variableDeclaration {} name typeNode initializer) pos
 
 /-- Based on Go: parser.go:1728 (parseClassElement) -/
-partial def parseClassElement : ParserM Node := do
-  let pos ← nodePos
-  if (← currentToken) == Kind.semicolonToken then
-    nextToken
-    finishNode (Node.semicolonClassElement {}) pos
-  else parsePropertyOrMethodDeclaration
+def parseClassElement (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    if (← currentToken) == Kind.semicolonToken then
+      nextToken
+      finishNode (Node.semicolonClassElement {}) pos
+    else parsePropertyOrMethodDeclaration fuel
 
 /-- Based on Go: parser.go:1619 (parseClassDeclaration) -/
-partial def parseClassDeclaration : ParserM Node := do
-  let pos ← nodePos
-  let _ ← parseExpected Kind.classKeyword
-  let name ← if ← isBindingIdentifierToken then do
-    let n ← parseBindingIdentifier; pure (some n)
-  else pure none
-  let typeParams ← parseTypeParameters
-  -- Skip heritage clauses for now
-  let ok ← parseExpected Kind.openBraceToken
-  let members ← if ok then
-    let isClassElem : ParserM Bool := do
-      let tok ← currentToken
-      return tok != Kind.closeBraceToken && tok != Kind.endOfFile
-    parseList .classMembers isClassElem parseClassElement
-  else pure #[]
-  let _ ← parseExpected Kind.closeBraceToken
-  finishNode (Node.classDeclaration {} name typeParams none members) pos
+def parseClassDeclaration (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let _ ← parseExpected Kind.classKeyword
+    let name ← if ← isBindingIdentifierToken then do
+      let n ← parseBindingIdentifier; pure (some n)
+    else pure none
+    let typeParams ← parseTypeParameters fuel
+    let ok ← parseExpected Kind.openBraceToken
+    let members ← if ok then
+      let isClassElem : ParserM Bool := do
+        let tok ← currentToken
+        return tok != Kind.closeBraceToken && tok != Kind.endOfFile
+      parseList .classMembers isClassElem (parseClassElement fuel)
+    else pure #[]
+    let _ ← parseExpected Kind.closeBraceToken
+    finishNode (Node.classDeclaration {} name typeParams none members) pos
 
 -- ---- Entry Point ----
 
 /-- Based on Go: parser.go:336 (parseSourceFileWorker) -/
-partial def parseSourceFileWorker : ParserM Node := do
-  let pos ← nodePos
-  let isStmtNotEof : ParserM Bool := do
-    if (← currentToken) == Kind.endOfFile then return false
-    else isStartOfStatement
-  let stmts ← parseList .sourceElements isStmtNotEof parseStatement
-  let eof ← parseTokenNode
-  finishNode (Node.sourceFile {} stmts eof) pos
+def parseSourceFileWorker (fuel : Nat) : ParserM Node :=
+  match fuel with
+  | 0 => throw ParseError.fuelExhausted
+  | fuel + 1 => do
+    let pos ← nodePos
+    let isStmtNotEof : ParserM Bool := do
+      if (← currentToken) == Kind.endOfFile then return false
+      else isStartOfStatement
+    let stmts ← parseList .sourceElements isStmtNotEof (parseStatement fuel)
+    let eof ← parseTokenNode
+    finishNode (Node.sourceFile {} stmts eof) pos
 
 end -- mutual
 
@@ -948,7 +1103,8 @@ end -- mutual
 
 /-- Initialize a parser from source text.
     Based on Go: parser.go:114 (initializeState + ParseSourceFile) -/
-def Parser.initializeState (sourceText : String) (scriptKind : ScriptKind) : Parser :=
+def Parser.initializeState (sourceText : String) (scriptKind : ScriptKind)
+    (fuel : Nat) : Parser :=
   let scanner : Scanner := {
     text := sourceText
     bytes := sourceText.toUTF8
@@ -960,16 +1116,23 @@ def Parser.initializeState (sourceText : String) (scriptKind : ScriptKind) : Par
   }
   { scanner := scanner
   , sourceText := sourceText
-  , token := Kind.unknown }
+  , token := Kind.unknown
+  , fuel := fuel }
 
 /-- Based on Go: parser.go:114 (ParseSourceFile)
     Main entry point for parsing a TypeScript/JavaScript source file.
-    Returns the AST and any diagnostics. -/
-partial def parseSourceFile (_fileName : String) (sourceText : String)
-    (scriptKind : ScriptKind) : ParseResult :=
-  let p := Parser.initializeState sourceText scriptKind
-  let ((), p) := nextToken p
-  let (result, p) := parseSourceFileWorker p
-  { sourceFile := result, diagnostics := p.diagnostics }
+    Caller controls fuel — the recursion budget for the entire parse.
+    If fuel is exhausted, returns partial results with `fuelExhausted = true`. -/
+def parseSourceFile (_fileName : String) (sourceText : String)
+    (scriptKind : ScriptKind) (fuel : Nat) : ParseResult :=
+  let p := Parser.initializeState sourceText scriptKind fuel
+  let action : ParserM Node := do nextToken; parseSourceFileWorker fuel
+  let (result, p) := ExceptT.run action |>.run p
+  match result with
+  | .ok node => { sourceFile := node, diagnostics := p.diagnostics }
+  | .error .fuelExhausted =>
+    { sourceFile := Node.missing {} Kind.unknown
+    , diagnostics := p.diagnostics
+    , fuelExhausted := true }
 
 end TSLean.Compiler

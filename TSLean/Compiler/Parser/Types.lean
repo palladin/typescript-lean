@@ -80,15 +80,6 @@ def count : Nat := 26
 
 end ParsingContext
 
-/-- Based on Go: internal/parser/parser.go:258-269 (ParserState)
-    Snapshot for mark/rewind/lookAhead. -/
-structure ParserState where
-  scannerState : ScannerState
-  contextFlags : NodeFlags
-  diagnosticsLen : Nat
-  hasParseError : Bool
-  deriving Repr
-
 -- Inhabited instances needed for partial mutual recursion in Parser.lean
 instance : Inhabited ScannerState := ⟨{}⟩
 instance : Inhabited Scanner := ⟨{}⟩
@@ -105,16 +96,32 @@ structure Parser where
   diagnostics : Array Diagnostic := #[]
   identifiers : HashMap String String := HashMap.ofList []
   identifierCount : Nat := 0
-  deriving Inhabited
+  /-- Global recursion budget shared by parser.
+      Decremented by `loop` on every recursive call.
+      When zero, recursion stops and default values are returned. -/
+  fuel : Nat
+  /-- Enable debug tracing (false by default for performance). -/
+  debug : Bool := false
+  /-- Collected trace messages when debug is enabled. -/
+  traceLog : Array String := #[]
 
-/-- Parser monad — state monad over Parser for clean state threading.
-    All parse functions use `do` notation via this monad. -/
-abbrev ParserM (α : Type) := StateM Parser α
+instance : Inhabited Parser := ⟨{ scanner := default, sourceText := "", fuel := 0 }⟩
+
+/-- Parsing halts immediately when fuel is exhausted. -/
+inductive ParseError where
+  | fuelExhausted
+  deriving Repr
+
+/-- Parser monad — ExceptT over StateM for fuel-exhaustion-as-exception.
+    When fuel reaches zero, `loop` throws `fuelExhausted` which
+    propagates through every `do` block automatically. -/
+abbrev ParserM (α : Type) := ExceptT ParseError (StateM Parser) α
 
 /-- Result of parsing a source file.
     Based on Go: parser.go — ParseSourceFile returns (SourceFile, diagnostics) -/
 structure ParseResult where
   sourceFile : Node
   diagnostics : Array Diagnostic
+  fuelExhausted : Bool := false
 
 end TSLean.Compiler

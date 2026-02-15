@@ -1,14 +1,13 @@
 /-
-  Test runner for the TSLean parser — mirrors the Go port's test infrastructure.
+  Test runner for the TSLean parser — validates against the Go port's baselines.
 
-  Based on Go: internal/testrunner/compiler_runner.go
-  Discovers .ts test files, parses them, generates .errors.txt baselines,
-  and compares against reference baselines.
+  Compares only parse errors (TS1xxx) since we test the parser, not the
+  full compiler. Type errors (TS2xxx), semantic errors (TS7xxx), etc.
+  in the Go baselines are ignored.
 
   Usage:
     lake exe test_parser                          -- run all compiler tests
-    lake exe test_parser --accept                  -- accept local baselines as reference
-    lake exe test_parser path/to/test.ts           -- run a specific test
+    lake exe test_parser path/to/test.ts          -- run a specific test
 -/
 import TSLean.Compiler
 import TSLean.TestRunner
@@ -20,10 +19,10 @@ open System (FilePath)
 /-- Default path to Go port's test cases. -/
 def testCasesDir : FilePath := "reference/typescript-go/testdata/tests/cases/compiler"
 
-/-- Path to our reference baselines. -/
-def referenceBaselineDir : FilePath := "testdata/baselines/reference/compiler"
+/-- Path to Go port's reference baselines (ground truth). -/
+def goBaselineDir : FilePath := "reference/typescript-go/testdata/baselines/reference/compiler"
 
-/-- Path to locally generated baselines. -/
+/-- Path to locally generated baselines (for inspection). -/
 def localBaselineDir : FilePath := "testdata/baselines/local/compiler"
 
 /-- Get the test name from a file path (strip directory and extension). -/
@@ -40,6 +39,22 @@ def readFileOrEmpty (path : FilePath) : IO String := do
   catch _ =>
     return ""
 
+/-- Check if a string contains a substring. -/
+def hasSubstr (s sub : String) : Bool :=
+  (s.splitOn sub).length > 1
+
+/-- Extract parse error summary lines (TS1xxx) from a baseline.
+    Summary lines appear at the top before the first "====" section.
+    Format: `filename(line,col): error TS1xxx: message` -/
+def extractParseErrorSummary (baseline : String) : Array String :=
+  let lines := baseline.splitOn "\n"
+  lines.foldl (init := #[]) fun acc line =>
+    -- Stop at annotated source section
+    if line.startsWith "====" then acc
+    -- Keep only parse error lines (TS1xxx codes)
+    else if hasSubstr line "error TS1" then acc.push line
+    else acc
+
 /-- Concatenate baselines for multi-file tests. -/
 private def concatBaselines (sources : Array (String × String))
     (diagnostics : Array Diagnostic) : String :=
@@ -49,11 +64,9 @@ private def concatBaselines (sources : Array (String × String))
 /-- Result of running a single test. -/
 inductive TestResult where
   | pass : TestResult
-  | fail (expected actual : String) : TestResult
-  | new_ (baseline : String) : TestResult
+  | fail (goParseErrors ourParseErrors : Array String) : TestResult
 
-/-- Run a single test file.
-    Based on Go: compiler_runner.go (runSingleConfigTest) -/
+/-- Run a single test file. Compare parse errors only against Go port. -/
 def runTest (testFilePath : String) : IO (String × TestResult) := do
   let testName := testNameFromPath testFilePath
   let content ← IO.FS.readFile testFilePath
@@ -63,7 +76,7 @@ def runTest (testFilePath : String) : IO (String × TestResult) := do
 
   -- Parse each unit and collect results
   let parsed := testCase.units.map fun unit =>
-    let result := parseSourceFile unit.name unit.content ScriptKind.ts
+    let result := parseSourceFile unit.name unit.content ScriptKind.ts 100000
     (unit.name, unit.content, result)
 
   let allDiagnostics := parsed.foldl (init := #[]) fun acc (_, _, result) =>
@@ -71,55 +84,32 @@ def runTest (testFilePath : String) : IO (String × TestResult) := do
 
   let allSources := parsed.map fun (name, content, _) => (name, content)
 
-  -- Generate error baseline
+  -- Generate our error baseline
   let baseline := if allSources.size == 1 then
     let (name, src) := allSources[0]!
     generateErrorBaseline name src allDiagnostics
   else
     concatBaselines allSources allDiagnostics
 
-  -- Write local baseline (write even if empty, for comparison)
+  -- Write local baseline for inspection
   let localPath : FilePath := s!"{localBaselineDir}/{testName}.errors.txt"
   IO.FS.writeFile localPath baseline
 
-  -- Compare with reference baseline
-  let refPath : FilePath := s!"{referenceBaselineDir}/{testName}.errors.txt"
-  let reference ← readFileOrEmpty refPath
+  -- Load Go port's baseline and extract parse errors only
+  let goPath : FilePath := s!"{goBaselineDir}/{testName}.errors.txt"
+  let goBaseline ← readFileOrEmpty goPath
+  let goParseErrors := extractParseErrorSummary goBaseline
+  let ourParseErrors := extractParseErrorSummary baseline
 
-  let result := if baseline == reference then
+  -- Compare parse errors only
+  let result := if goParseErrors == ourParseErrors then
     TestResult.pass
-  else if reference == "" && !(baseline == "") then
-    TestResult.new_ baseline
   else
-    TestResult.fail reference baseline
+    TestResult.fail goParseErrors ourParseErrors
 
   return (testName, result)
 
-/-- Accept local baselines as reference (copy local → reference).
-    Based on Go: baseline management -/
-def acceptBaselines : IO Unit := do
-  IO.FS.createDirAll referenceBaselineDir
-  let entries ← try
-    System.FilePath.readDir localBaselineDir
-  catch _ =>
-    IO.println "No local baselines to accept."
-    return
-
-
-  let mut count : Nat := 0
-  for entry in entries do
-    let name := entry.fileName
-    if name.endsWith ".errors.txt" then
-      let src : FilePath := s!"{localBaselineDir}/{name}"
-      let dst : FilePath := s!"{referenceBaselineDir}/{name}"
-      let content ← IO.FS.readFile src
-      IO.FS.writeFile dst content
-      count := count + 1
-
-  IO.println s!"Accepted {count} baselines."
-
-/-- Discover all .ts test files in a directory.
-    Based on Go: compiler_runner.go (EnumerateFiles) -/
+/-- Discover all .ts test files in a directory. -/
 def discoverTestFiles (dir : FilePath) : IO (Array String) := do
   let entries ← try
     System.FilePath.readDir dir
@@ -129,35 +119,27 @@ def discoverTestFiles (dir : FilePath) : IO (Array String) := do
   let files := entries.filter fun entry =>
     entry.fileName.endsWith ".ts" || entry.fileName.endsWith ".tsx"
   let paths := files.map fun entry => s!"{dir}/{entry.fileName}"
-  -- Sort for deterministic order
   return paths.qsort (· < ·)
 
-/-- Main entry point.
-    Based on Go: compiler_runner.go (RunTests) -/
+/-- Main entry point. -/
 def main (args : List String) : IO UInt32 := do
   match args with
-  | ["--accept"] =>
-    acceptBaselines
-    return 0
   | [path] =>
     if path.startsWith "--" then
       IO.println s!"Unknown option: {path}"
-      IO.println "Usage: test_parser [--accept | path/to/test.ts]"
+      IO.println "Usage: test_parser [path/to/test.ts]"
       return 1
     -- Run single test
     IO.FS.createDirAll localBaselineDir
     let (name, result) ← runTest path
     match result with
     | .pass => IO.println s!"PASS: {name}"; return 0
-    | .new_ baseline =>
-      IO.println s!"NEW:  {name}"
-      IO.println "  (no reference baseline — run with --accept to accept)"
-      IO.println baseline
-      return 1
-    | .fail _expected actual =>
+    | .fail goErrs ourErrs =>
       IO.println s!"FAIL: {name}"
-      IO.println "  Actual (local):"
-      IO.println actual
+      IO.println s!"  Go parse errors ({goErrs.size}):"
+      for e in goErrs do IO.println s!"    {e}"
+      IO.println s!"  Our parse errors ({ourErrs.size}):"
+      for e in ourErrs do IO.println s!"    {e}"
       return 1
   | _ =>
     -- Run all tests
@@ -169,45 +151,51 @@ def main (args : List String) : IO UInt32 := do
 
     let mut passCount : Nat := 0
     let mut failCount : Nat := 0
-    let mut newCount : Nat := 0
+    let mut spuriousCount : Nat := 0  -- we emit errors, Go doesn't
+    let mut missingCount : Nat := 0   -- Go emits errors, we don't
+    let mut mismatchCount : Nat := 0  -- both emit but different
     let mut failures : Array String := #[]
 
     let total := testFiles.size
     for testFile in testFiles do
-      let idx := passCount + failCount + newCount + 1
+      let idx := passCount + failCount + 1
       let name := testNameFromPath testFile
-      IO.println s!"[{idx}/{total}] Parsing {name}..."
       let stdout ← IO.getStdout
+      IO.print s!"[{idx}/{total}] {name}... "
       stdout.flush
       let (name, result) ← runTest testFile
       match result with
       | .pass =>
-        IO.println s!"[{idx}/{total}] PASS: {name}"
+        IO.println "PASS"
         passCount := passCount + 1
-      | .new_ _ =>
-        IO.println s!"[{idx}/{total}] NEW:  {name}"
-        newCount := newCount + 1
-      | .fail _ _ =>
-        IO.println s!"[{idx}/{total}] FAIL: {name}"
+      | .fail goErrs ourErrs =>
+        if goErrs.size == 0 && ourErrs.size > 0 then
+          IO.println s!"FAIL (spurious: {ourErrs.size} false parse errors)"
+          spuriousCount := spuriousCount + 1
+        else if goErrs.size > 0 && ourErrs.size == 0 then
+          IO.println s!"FAIL (missing: {goErrs.size} parse errors not reported)"
+          missingCount := missingCount + 1
+        else
+          IO.println s!"FAIL (mismatch: go={goErrs.size} ours={ourErrs.size})"
+          mismatchCount := mismatchCount + 1
         failCount := failCount + 1
         failures := failures.push name
 
     -- Print summary
     IO.println ""
-    IO.println "=== Test Summary ==="
-    IO.println s!"  Total:  {testFiles.size}"
-    IO.println s!"  Pass:   {passCount}"
-    IO.println s!"  Fail:   {failCount}"
-    IO.println s!"  New:    {newCount}"
-
+    IO.println "=== Test Summary (parse errors vs Go port) ==="
+    IO.println s!"  Total:    {testFiles.size}"
+    IO.println s!"  Pass:     {passCount} ({passCount * 100 / testFiles.size}%)"
+    IO.println s!"  Fail:     {failCount}"
     if failCount > 0 then
+      IO.println s!"    Spurious: {spuriousCount} (we emit parse errors, Go doesn't)"
+      IO.println s!"    Missing:  {missingCount} (Go has parse errors, we don't)"
+      IO.println s!"    Mismatch: {mismatchCount} (both emit but different)"
+
+    if failures.size > 0 && failures.size <= 20 then
       IO.println ""
       IO.println "Failed tests:"
       for name in failures do
         IO.println s!"  - {name}"
-
-    if newCount > 0 then
-      IO.println ""
-      IO.println s!"{newCount} new baseline(s) — run with --accept to accept."
 
     return if failCount > 0 then 1 else 0
