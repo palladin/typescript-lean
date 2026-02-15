@@ -1,0 +1,1636 @@
+packageDeduplicationDuplicateGlobals(1,1): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,1): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,1): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,1): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,1): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,1): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,1): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: ';' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: '}' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: ';' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: '}' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: '}' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: '}' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: ';' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: '}' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: '}' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: ';' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: ';' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1005: ';' expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,9): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,19): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,19): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,19): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,19): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,19): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,26): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,26): error TS1128: Declaration or statement expected.
+packageDeduplicationDuplicateGlobals(1,60): error TS1005: '{' expected.
+packageDeduplicationDuplicateGlobals(1,60): error TS1005: '{' expected.
+
+==== packageDeduplicationDuplicateGlobals (40 errors) ====
+    
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(2,22): error TS1005: '{' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json(2,22): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/package.json (40 errors) ====
+    { "name": "foo", "version": "1.0.0" }
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(2,8): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(2,8): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(2,42): error TS1005: '{' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts(2,42): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/foo/index.d.ts (40 errors) ====
+    import "globals";
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+    export declare function useFoo(): typeof myGlobal;
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                             ~~~~~~~~
+!!! error TS1005: '{' expected.
+                                             ~~~~~~~~
+!!! error TS1005: '{' expected.
+    
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(2,18): error TS1005: '{' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json(2,18): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/package.json (40 errors) ====
+    { "name": "globals", "version": "1.0.0" }
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(2,30): error TS1005: '{' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts(2,30): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/foo@1.0.0+globals@1.0.0/node_modules/globals/index.d.ts (40 errors) ====
+    declare var myGlobal: string;
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(2,22): error TS1005: '{' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json(2,22): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/package.json (40 errors) ====
+    { "name": "foo", "version": "1.0.0" }
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(2,8): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(2,8): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(2,42): error TS1005: '{' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts(2,42): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/foo/index.d.ts (40 errors) ====
+    import "globals";
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+    export declare function useFoo(): typeof myGlobal;
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                             ~~~~~~~~
+!!! error TS1005: '{' expected.
+                                             ~~~~~~~~
+!!! error TS1005: '{' expected.
+    
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(2,18): error TS1005: '{' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json(2,18): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/package.json (40 errors) ====
+    { "name": "globals", "version": "2.0.0" }
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(2,30): error TS1005: '{' expected.
+/node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts(2,30): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/foo@1.0.0+globals@2.0.0/node_modules/globals/index.d.ts (40 errors) ====
+    declare var myGlobal: number;
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(2,22): error TS1005: '{' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json(2,22): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/bar@1.0.0/node_modules/bar/package.json (40 errors) ====
+    { "name": "bar", "version": "1.0.0" }
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(2,30): error TS1005: '{' expected.
+/node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts(2,30): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/bar@1.0.0/node_modules/bar/index.d.ts (40 errors) ====
+    import { useFoo } from "foo";
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~
+!!! error TS1128: Declaration or statement expected.
+    export declare function useBar(): ReturnType<typeof useFoo>;
+                                 ~~~~~~~~
+!!! error TS1005: '{' expected.
+                                 ~~~~~~~~
+!!! error TS1005: '{' expected.
+    
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(2,22): error TS1005: '{' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json(2,22): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/baz@1.0.0/node_modules/baz/package.json (40 errors) ====
+    { "name": "baz", "version": "1.0.0" }
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,19): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(1,26): error TS1128: Declaration or statement expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(2,30): error TS1005: '{' expected.
+/node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts(2,30): error TS1005: '{' expected.
+
+==== /node_modules/.pnpm/baz@1.0.0/node_modules/baz/index.d.ts (40 errors) ====
+    import { useFoo } from "foo";
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~
+!!! error TS1128: Declaration or statement expected.
+    export declare function useBaz(): ReturnType<typeof useFoo>;
+                                 ~~~~~~~~
+!!! error TS1005: '{' expected.
+                                 ~~~~~~~~
+!!! error TS1005: '{' expected.
+    
+    
+    
+    
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1005: ';' expected.
+/src/index.ts(1,9): error TS1005: '}' expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1005: ';' expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1005: '}' expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1005: '}' expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1005: '}' expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1005: ';' expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1005: '}' expected.
+/src/index.ts(1,9): error TS1005: '}' expected.
+/src/index.ts(1,9): error TS1005: ';' expected.
+/src/index.ts(1,9): error TS1005: ';' expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1005: ';' expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,19): error TS1128: Declaration or statement expected.
+/src/index.ts(1,19): error TS1128: Declaration or statement expected.
+/src/index.ts(1,19): error TS1128: Declaration or statement expected.
+/src/index.ts(1,19): error TS1128: Declaration or statement expected.
+/src/index.ts(1,19): error TS1128: Declaration or statement expected.
+/src/index.ts(1,26): error TS1128: Declaration or statement expected.
+/src/index.ts(1,26): error TS1128: Declaration or statement expected.
+/src/index.ts(2,30): error TS1005: '{' expected.
+/src/index.ts(2,30): error TS1005: '{' expected.
+
+==== /src/index.ts (40 errors) ====
+    import { useBar } from "bar";
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~~~~~
+!!! error TS1128: Declaration or statement expected.
+    import { useBaz } from "baz";
+                                 ~
+!!! error TS1005: '{' expected.
+                                 ~
+!!! error TS1005: '{' expected.
+    
+    const barResult = useBar();
+    const bazResult = useBaz();
+    
+    const x: string = myGlobal;
+    

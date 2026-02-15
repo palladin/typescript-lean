@@ -1,0 +1,363 @@
+symbolLinkDeclarationEmitModuleNamesRootDir(1,1): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,1): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,1): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,1): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,1): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,8): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,8): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,23): error TS1005: '}' expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,23): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,23): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,23): error TS1005: ';' expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,24): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,24): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,28): error TS1003: Identifier expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,28): error TS1005: ';' expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,28): error TS1128: Declaration or statement expected.
+symbolLinkDeclarationEmitModuleNamesRootDir(1,28): error TS1128: Declaration or statement expected.
+
+==== symbolLinkDeclarationEmitModuleNamesRootDir (17 errors) ====
+    
+/monorepo/context/src/value-promise.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,8): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,8): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,23): error TS1005: '}' expected.
+/monorepo/context/src/value-promise.d.ts(1,23): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,23): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,23): error TS1005: ';' expected.
+/monorepo/context/src/value-promise.d.ts(1,24): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,24): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,28): error TS1003: Identifier expected.
+/monorepo/context/src/value-promise.d.ts(1,28): error TS1005: ';' expected.
+/monorepo/context/src/value-promise.d.ts(1,28): error TS1128: Declaration or statement expected.
+/monorepo/context/src/value-promise.d.ts(1,28): error TS1128: Declaration or statement expected.
+
+==== /monorepo/context/src/value-promise.d.ts (17 errors) ====
+    export type Constructor<T> = (...args: any[]) => T;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: '}' expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: ';' expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ';' expected.
+                               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                               ~
+!!! error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,8): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,8): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,23): error TS1005: '}' expected.
+/monorepo/context/src/bindingkey.d.ts(1,23): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,23): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,23): error TS1005: ';' expected.
+/monorepo/context/src/bindingkey.d.ts(1,24): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,24): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,28): error TS1003: Identifier expected.
+/monorepo/context/src/bindingkey.d.ts(1,28): error TS1005: ';' expected.
+/monorepo/context/src/bindingkey.d.ts(1,28): error TS1128: Declaration or statement expected.
+/monorepo/context/src/bindingkey.d.ts(1,28): error TS1128: Declaration or statement expected.
+
+==== /monorepo/context/src/bindingkey.d.ts (17 errors) ====
+    import { Constructor } from "./value-promise"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: '}' expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: ';' expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ';' expected.
+                               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                               ~
+!!! error TS1128: Declaration or statement expected.
+    export declare class BindingKey<T> {
+      readonly __type: T;
+      static create<T extends Constructor<any>>(ctor: T): BindingKey<T>;
+    }
+    
+/monorepo/context/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,23): error TS1005: '}' expected.
+/monorepo/context/index.d.ts(1,23): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,23): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,23): error TS1005: ';' expected.
+/monorepo/context/index.d.ts(1,24): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,24): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,28): error TS1003: Identifier expected.
+/monorepo/context/index.d.ts(1,28): error TS1005: ';' expected.
+/monorepo/context/index.d.ts(1,28): error TS1128: Declaration or statement expected.
+/monorepo/context/index.d.ts(1,28): error TS1128: Declaration or statement expected.
+
+==== /monorepo/context/index.d.ts (17 errors) ====
+    export * from "./src/value-promise";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: '}' expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: ';' expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ';' expected.
+                               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                               ~
+!!! error TS1128: Declaration or statement expected.
+    export * from "./src/bindingkey";
+    
+/monorepo/core/tsconfig.json(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(2,5): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(2,5): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(2,20): error TS1005: '}' expected.
+/monorepo/core/tsconfig.json(2,20): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(2,20): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(2,20): error TS1005: ';' expected.
+/monorepo/core/tsconfig.json(2,21): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(2,21): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(3,1): error TS1003: Identifier expected.
+/monorepo/core/tsconfig.json(3,1): error TS1005: ';' expected.
+/monorepo/core/tsconfig.json(3,1): error TS1128: Declaration or statement expected.
+/monorepo/core/tsconfig.json(3,1): error TS1128: Declaration or statement expected.
+
+==== /monorepo/core/tsconfig.json (17 errors) ====
+    {
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+      "compilerOptions": {
+        ~
+!!! error TS1128: Declaration or statement expected.
+        ~~~~
+!!! error TS1128: Declaration or statement expected.
+                       ~
+!!! error TS1005: '}' expected.
+                       ~
+!!! error TS1128: Declaration or statement expected.
+                       ~
+!!! error TS1128: Declaration or statement expected.
+                       ~
+!!! error TS1005: ';' expected.
+                        ~~~~
+!!! error TS1128: Declaration or statement expected.
+                        ~~~~
+!!! error TS1128: Declaration or statement expected.
+        "rootDir": ".",
+    ~
+!!! error TS1003: Identifier expected.
+    ~
+!!! error TS1005: ';' expected.
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~
+!!! error TS1128: Declaration or statement expected.
+        "declaration": true,
+        "outDir": "./dist"
+      }
+    }
+/monorepo/core/src/application.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,8): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,8): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,23): error TS1005: '}' expected.
+/monorepo/core/src/application.ts(1,23): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,23): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,23): error TS1005: ';' expected.
+/monorepo/core/src/application.ts(1,24): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,24): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,28): error TS1003: Identifier expected.
+/monorepo/core/src/application.ts(1,28): error TS1005: ';' expected.
+/monorepo/core/src/application.ts(1,28): error TS1128: Declaration or statement expected.
+/monorepo/core/src/application.ts(1,28): error TS1128: Declaration or statement expected.
+
+==== /monorepo/core/src/application.ts (17 errors) ====
+    import { Constructor } from "@loopback/context";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: '}' expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: ';' expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ';' expected.
+                               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                               ~
+!!! error TS1128: Declaration or statement expected.
+    export type ControllerClass = Constructor<any>;
+    
+/monorepo/core/src/usage.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,1): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,8): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,8): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,23): error TS1005: '}' expected.
+/monorepo/core/src/usage.ts(1,23): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,23): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,23): error TS1005: ';' expected.
+/monorepo/core/src/usage.ts(1,24): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,24): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,28): error TS1003: Identifier expected.
+/monorepo/core/src/usage.ts(1,28): error TS1005: ';' expected.
+/monorepo/core/src/usage.ts(1,28): error TS1128: Declaration or statement expected.
+/monorepo/core/src/usage.ts(1,28): error TS1128: Declaration or statement expected.
+
+==== /monorepo/core/src/usage.ts (17 errors) ====
+    import { ControllerClass } from './application';
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: '}' expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: ';' expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ';' expected.
+                               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                               ~
+!!! error TS1128: Declaration or statement expected.
+    import { BindingKey } from '@loopback/context';
+    
+    export const CONTROLLER_CLASS = BindingKey.create<ControllerClass>(null as any); // line in question
+    

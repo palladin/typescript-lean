@@ -1,0 +1,104 @@
+declarationEmitQualifiedName(1,1): error TS1128: Declaration or statement expected.
+declarationEmitQualifiedName(1,1): error TS1128: Declaration or statement expected.
+declarationEmitQualifiedName(1,1): error TS1128: Declaration or statement expected.
+declarationEmitQualifiedName(1,8): error TS1128: Declaration or statement expected.
+declarationEmitQualifiedName(1,14): error TS1128: Declaration or statement expected.
+declarationEmitQualifiedName(1,14): error TS1128: Declaration or statement expected.
+declarationEmitQualifiedName(1,15): error TS1005: ';' expected.
+declarationEmitQualifiedName(1,43): error TS1003: Identifier expected.
+
+==== declarationEmitQualifiedName (8 errors) ====
+    
+e.ts(1,1): error TS1128: Declaration or statement expected.
+e.ts(1,1): error TS1128: Declaration or statement expected.
+e.ts(1,1): error TS1128: Declaration or statement expected.
+e.ts(1,8): error TS1128: Declaration or statement expected.
+e.ts(1,14): error TS1128: Declaration or statement expected.
+e.ts(1,14): error TS1128: Declaration or statement expected.
+e.ts(1,15): error TS1005: ';' expected.
+e.ts(4,1): error TS1003: Identifier expected.
+
+==== e.ts (8 errors) ====
+    export enum E {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+        A = 'a',
+        B = 'b',
+    }
+    ~
+!!! error TS1003: Identifier expected.
+    
+a.ts(1,1): error TS1128: Declaration or statement expected.
+a.ts(1,1): error TS1128: Declaration or statement expected.
+a.ts(1,1): error TS1128: Declaration or statement expected.
+a.ts(1,8): error TS1128: Declaration or statement expected.
+a.ts(1,14): error TS1128: Declaration or statement expected.
+a.ts(1,14): error TS1128: Declaration or statement expected.
+a.ts(1,15): error TS1005: ';' expected.
+a.ts(2,16): error TS1003: Identifier expected.
+
+==== a.ts (8 errors) ====
+    import { E } from './e.js'
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+    export const A = {
+                   ~
+!!! error TS1003: Identifier expected.
+        item: {
+            a: E.A,
+        },
+    } as const
+    
+b.ts(1,1): error TS1128: Declaration or statement expected.
+b.ts(1,1): error TS1128: Declaration or statement expected.
+b.ts(1,1): error TS1128: Declaration or statement expected.
+b.ts(1,8): error TS1128: Declaration or statement expected.
+b.ts(1,14): error TS1128: Declaration or statement expected.
+b.ts(1,14): error TS1128: Declaration or statement expected.
+b.ts(1,15): error TS1005: ';' expected.
+b.ts(2,16): error TS1003: Identifier expected.
+
+==== b.ts (8 errors) ====
+    import { A } from './a.js'
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+    export const B = { ...A } as const
+                   ~
+!!! error TS1003: Identifier expected.
+    

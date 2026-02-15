@@ -1,0 +1,19 @@
+reachabilityChecks10(2,7): error TS1005: ';' expected.
+reachabilityChecks10(2,7): error TS1003: Identifier expected.
+reachabilityChecks10(2,7): error TS1005: ';' expected.
+reachabilityChecks10(2,7): error TS1003: Identifier expected.
+
+==== reachabilityChecks10 (4 errors) ====
+    
+    throw new Error("")
+          ~~~
+!!! error TS1005: ';' expected.
+          ~~~
+!!! error TS1003: Identifier expected.
+          ~~~
+!!! error TS1005: ';' expected.
+          ~~~
+!!! error TS1003: Identifier expected.
+    console.log("1")
+    console.log("2")
+    

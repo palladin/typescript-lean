@@ -1,0 +1,45 @@
+switchExhaustiveNarrowing(2,1): error TS1128: Declaration or statement expected.
+switchExhaustiveNarrowing(2,24): error TS1005: ';' expected.
+switchExhaustiveNarrowing(3,3): error TS1128: Declaration or statement expected.
+switchExhaustiveNarrowing(3,7): error TS1128: Declaration or statement expected.
+switchExhaustiveNarrowing(3,7): error TS1128: Declaration or statement expected.
+switchExhaustiveNarrowing(3,7): error TS1005: '}' expected.
+
+==== switchExhaustiveNarrowing (6 errors) ====
+    
+    interface ClientSource {
+    ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1005: ';' expected.
+      type: "client";
+      ~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1005: '}' expected.
+    }
+    
+    interface ServiceSource {
+      type: "service";
+    }
+    
+    function isDisplaySource(source: ClientSource | ServiceSource | undefined): boolean {
+      switch (source?.type) {
+        case "client":
+          return true;
+        case "service":
+          return false;
+        case undefined:
+          return false;
+        default:
+          neverReached(source);
+          return false;
+      }
+    }
+    
+    function neverReached(_v: never): void {}
+    

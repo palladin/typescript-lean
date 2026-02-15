@@ -1,0 +1,318 @@
+nodeModulesPackageImportsRootWildcard(1,1): error TS1128: Declaration or statement expected.
+nodeModulesPackageImportsRootWildcard(1,1): error TS1128: Declaration or statement expected.
+nodeModulesPackageImportsRootWildcard(1,1): error TS1128: Declaration or statement expected.
+nodeModulesPackageImportsRootWildcard(1,13): error TS1005: ';' expected.
+nodeModulesPackageImportsRootWildcard(1,13): error TS1128: Declaration or statement expected.
+nodeModulesPackageImportsRootWildcard(1,13): error TS1128: Declaration or statement expected.
+nodeModulesPackageImportsRootWildcard(1,13): error TS1005: '}' expected.
+nodeModulesPackageImportsRootWildcard(1,20): error TS1128: Declaration or statement expected.
+nodeModulesPackageImportsRootWildcard(1,20): error TS1128: Declaration or statement expected.
+nodeModulesPackageImportsRootWildcard(1,20): error TS1128: Declaration or statement expected.
+nodeModulesPackageImportsRootWildcard(1,35): error TS1128: Declaration or statement expected.
+nodeModulesPackageImportsRootWildcard(1,35): error TS1128: Declaration or statement expected.
+nodeModulesPackageImportsRootWildcard(1,35): error TS1128: Declaration or statement expected.
+
+==== nodeModulesPackageImportsRootWildcard (13 errors) ====
+    
+package.json(1,1): error TS1128: Declaration or statement expected.
+package.json(1,1): error TS1128: Declaration or statement expected.
+package.json(1,1): error TS1128: Declaration or statement expected.
+package.json(2,11): error TS1005: ';' expected.
+package.json(2,11): error TS1128: Declaration or statement expected.
+package.json(2,11): error TS1128: Declaration or statement expected.
+package.json(2,11): error TS1005: '}' expected.
+package.json(2,18): error TS1128: Declaration or statement expected.
+package.json(2,18): error TS1128: Declaration or statement expected.
+package.json(2,18): error TS1128: Declaration or statement expected.
+package.json(3,10): error TS1128: Declaration or statement expected.
+package.json(3,10): error TS1128: Declaration or statement expected.
+package.json(3,10): error TS1128: Declaration or statement expected.
+
+==== package.json (13 errors) ====
+    {
+    ~~
+!!! error TS1128: Declaration or statement expected.
+    ~~
+!!! error TS1128: Declaration or statement expected.
+    ~~
+!!! error TS1128: Declaration or statement expected.
+        "name": "package",
+              ~
+!!! error TS1005: ';' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: '}' expected.
+                     ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                     ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                     ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        "private": true,
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+        "type": "module",
+        "imports": {
+            "#/*": "./src/*"
+        }
+    }
+src/foo.ts(1,1): error TS1128: Declaration or statement expected.
+src/foo.ts(1,1): error TS1128: Declaration or statement expected.
+src/foo.ts(1,1): error TS1128: Declaration or statement expected.
+src/foo.ts(1,13): error TS1005: ';' expected.
+src/foo.ts(1,13): error TS1128: Declaration or statement expected.
+src/foo.ts(1,13): error TS1128: Declaration or statement expected.
+src/foo.ts(1,13): error TS1005: '}' expected.
+src/foo.ts(1,20): error TS1128: Declaration or statement expected.
+src/foo.ts(1,20): error TS1128: Declaration or statement expected.
+src/foo.ts(1,20): error TS1128: Declaration or statement expected.
+src/foo.ts(1,35): error TS1128: Declaration or statement expected.
+src/foo.ts(1,35): error TS1128: Declaration or statement expected.
+src/foo.ts(1,35): error TS1128: Declaration or statement expected.
+
+==== src/foo.ts (13 errors) ====
+    export const foo = "foo";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+                       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+src/features/bar.ts(1,1): error TS1128: Declaration or statement expected.
+src/features/bar.ts(1,1): error TS1128: Declaration or statement expected.
+src/features/bar.ts(1,1): error TS1128: Declaration or statement expected.
+src/features/bar.ts(1,13): error TS1005: ';' expected.
+src/features/bar.ts(1,13): error TS1128: Declaration or statement expected.
+src/features/bar.ts(1,13): error TS1128: Declaration or statement expected.
+src/features/bar.ts(1,13): error TS1005: '}' expected.
+src/features/bar.ts(1,20): error TS1128: Declaration or statement expected.
+src/features/bar.ts(1,20): error TS1128: Declaration or statement expected.
+src/features/bar.ts(1,20): error TS1128: Declaration or statement expected.
+src/features/bar.ts(1,35): error TS1128: Declaration or statement expected.
+src/features/bar.ts(1,35): error TS1128: Declaration or statement expected.
+src/features/bar.ts(1,35): error TS1128: Declaration or statement expected.
+
+==== src/features/bar.ts (13 errors) ====
+    export const bar = "bar";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+                       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+src/nested/deep/baz.ts(1,1): error TS1128: Declaration or statement expected.
+src/nested/deep/baz.ts(1,1): error TS1128: Declaration or statement expected.
+src/nested/deep/baz.ts(1,1): error TS1128: Declaration or statement expected.
+src/nested/deep/baz.ts(1,13): error TS1005: ';' expected.
+src/nested/deep/baz.ts(1,13): error TS1128: Declaration or statement expected.
+src/nested/deep/baz.ts(1,13): error TS1128: Declaration or statement expected.
+src/nested/deep/baz.ts(1,13): error TS1005: '}' expected.
+src/nested/deep/baz.ts(1,20): error TS1128: Declaration or statement expected.
+src/nested/deep/baz.ts(1,20): error TS1128: Declaration or statement expected.
+src/nested/deep/baz.ts(1,20): error TS1128: Declaration or statement expected.
+src/nested/deep/baz.ts(1,35): error TS1128: Declaration or statement expected.
+src/nested/deep/baz.ts(1,35): error TS1128: Declaration or statement expected.
+src/nested/deep/baz.ts(1,35): error TS1128: Declaration or statement expected.
+
+==== src/nested/deep/baz.ts (13 errors) ====
+    export const baz = "baz";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+                       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+index.ts(1,1): error TS1128: Declaration or statement expected.
+index.ts(1,1): error TS1128: Declaration or statement expected.
+index.ts(1,1): error TS1128: Declaration or statement expected.
+index.ts(1,13): error TS1005: ';' expected.
+index.ts(1,13): error TS1128: Declaration or statement expected.
+index.ts(1,13): error TS1128: Declaration or statement expected.
+index.ts(1,13): error TS1005: '}' expected.
+index.ts(2,1): error TS1128: Declaration or statement expected.
+index.ts(2,1): error TS1128: Declaration or statement expected.
+index.ts(2,1): error TS1128: Declaration or statement expected.
+index.ts(2,16): error TS1128: Declaration or statement expected.
+index.ts(2,16): error TS1128: Declaration or statement expected.
+index.ts(2,16): error TS1128: Declaration or statement expected.
+
+==== index.ts (13 errors) ====
+    // esm format file
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+    import { foo } from "#/foo.js";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+    import { bar } from "#/features/bar.js";
+    import { baz } from "#/nested/deep/baz.js";
+    foo;
+    bar;
+    baz;
+index.mts(1,1): error TS1128: Declaration or statement expected.
+index.mts(1,1): error TS1128: Declaration or statement expected.
+index.mts(1,1): error TS1128: Declaration or statement expected.
+index.mts(1,13): error TS1005: ';' expected.
+index.mts(1,13): error TS1128: Declaration or statement expected.
+index.mts(1,13): error TS1128: Declaration or statement expected.
+index.mts(1,13): error TS1005: '}' expected.
+index.mts(2,1): error TS1128: Declaration or statement expected.
+index.mts(2,1): error TS1128: Declaration or statement expected.
+index.mts(2,1): error TS1128: Declaration or statement expected.
+index.mts(2,16): error TS1128: Declaration or statement expected.
+index.mts(2,16): error TS1128: Declaration or statement expected.
+index.mts(2,16): error TS1128: Declaration or statement expected.
+
+==== index.mts (13 errors) ====
+    // esm format file
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+    import { foo } from "#/foo.js";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+    import { bar } from "#/features/bar.js";
+    import { baz } from "#/nested/deep/baz.js";
+    foo;
+    bar;
+    baz;
+index.cts(1,1): error TS1128: Declaration or statement expected.
+index.cts(1,1): error TS1128: Declaration or statement expected.
+index.cts(1,1): error TS1128: Declaration or statement expected.
+index.cts(1,13): error TS1005: ';' expected.
+index.cts(1,13): error TS1128: Declaration or statement expected.
+index.cts(1,13): error TS1128: Declaration or statement expected.
+index.cts(1,13): error TS1005: '}' expected.
+index.cts(2,1): error TS1128: Declaration or statement expected.
+index.cts(2,1): error TS1128: Declaration or statement expected.
+index.cts(2,1): error TS1128: Declaration or statement expected.
+index.cts(2,16): error TS1128: Declaration or statement expected.
+index.cts(2,16): error TS1128: Declaration or statement expected.
+index.cts(2,16): error TS1128: Declaration or statement expected.
+
+==== index.cts (13 errors) ====
+    // cjs format file
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+    import { foo } from "#/foo.js";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+    import { bar } from "#/features/bar.js";
+    import { baz } from "#/nested/deep/baz.js";
+    foo;
+    bar;
+    baz;
+    

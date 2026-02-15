@@ -1,0 +1,36 @@
+protectedAccessibilityCheck(3,13): error TS1005: ';' expected.
+protectedAccessibilityCheck(6,11): error TS1128: Declaration or statement expected.
+protectedAccessibilityCheck(6,11): error TS1005: ',' expected.
+protectedAccessibilityCheck(6,11): error TS1128: Declaration or statement expected.
+protectedAccessibilityCheck(6,11): error TS1005: '>' expected.
+protectedAccessibilityCheck(6,11): error TS1005: '{' expected.
+protectedAccessibilityCheck(6,11): error TS1005: '}' expected.
+
+==== protectedAccessibilityCheck (7 errors) ====
+    
+    class C {
+      protected constructor() {}
+                ~~~~~~~~~~~
+!!! error TS1005: ';' expected.
+    }
+    
+    class B<T = any> extends C {}
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: ',' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: '>' expected.
+              ~
+!!! error TS1005: '{' expected.
+              ~
+!!! error TS1005: '}' expected.
+    
+    class A extends B {
+      f() {
+        new A();
+      }
+    }
+    

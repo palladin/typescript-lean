@@ -1,0 +1,41 @@
+noCrashOnMixin2(5,15): error TS1005: ';' expected.
+noCrashOnMixin2(9,16): error TS1128: Declaration or statement expected.
+noCrashOnMixin2(9,16): error TS1005: '{' expected.
+noCrashOnMixin2(9,16): error TS1005: '}' expected.
+
+==== noCrashOnMixin2 (4 errors) ====
+    
+    // https://github.com/microsoft/TypeScript/issues/62921
+    
+    class Abstract {
+        protected constructor() {
+                  ~~~~~~~~~~~
+!!! error TS1005: ';' expected.
+        }
+    }
+    
+    class Concrete extends Abstract {
+                   ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~~~~
+!!! error TS1005: '{' expected.
+                   ~~~~~~~
+!!! error TS1005: '}' expected.
+    }
+    
+    type Constructor<T = {}> = new (...args?: any[]) => T;
+    
+    function Mixin<TBase extends Constructor>(Base: TBase) {
+        return class extends Base {
+        };
+    }
+    
+    class Empty {
+    }
+    
+    class CrashTrigger extends Mixin(Empty) {
+        public trigger() {
+            new Concrete();
+        }
+    }
+    

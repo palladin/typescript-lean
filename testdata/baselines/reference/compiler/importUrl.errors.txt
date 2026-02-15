@@ -1,0 +1,11 @@
+importUrl(1,1): error TS1128: Declaration or statement expected.
+
+==== importUrl (1 error) ====
+    
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+
+==== /src/index.ts (1 error) ====
+    import "https://deno.land/std@0.208.0/path/mod.ts"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    

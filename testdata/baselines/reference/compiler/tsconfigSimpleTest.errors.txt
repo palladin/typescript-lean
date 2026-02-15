@@ -1,0 +1,50 @@
+tsconfigSimpleTest(1,1): error TS1128: Declaration or statement expected.
+tsconfigSimpleTest(1,25): error TS1005: ';' expected.
+tsconfigSimpleTest(1,25): error TS1128: Declaration or statement expected.
+tsconfigSimpleTest(1,25): error TS1005: '}' expected.
+tsconfigSimpleTest(1,25): error TS1128: Declaration or statement expected.
+
+==== tsconfigSimpleTest (5 errors) ====
+    
+tsconfig.json(1,1): error TS1128: Declaration or statement expected.
+tsconfig.json(2,22): error TS1005: ';' expected.
+tsconfig.json(2,22): error TS1128: Declaration or statement expected.
+tsconfig.json(2,22): error TS1005: '}' expected.
+tsconfig.json(2,22): error TS1128: Declaration or statement expected.
+
+==== tsconfig.json (5 errors) ====
+    {
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+        "compilerOptions": {
+                         ~
+!!! error TS1005: ';' expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1005: '}' expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+            "target": "es2020",
+            "strictNullChecks": true
+        }
+    }
+foo.ts(1,1): error TS1128: Declaration or statement expected.
+foo.ts(2,13): error TS1005: ';' expected.
+foo.ts(2,13): error TS1128: Declaration or statement expected.
+foo.ts(2,13): error TS1005: '}' expected.
+foo.ts(2,13): error TS1128: Declaration or statement expected.
+
+==== foo.ts (5 errors) ====
+    export {};
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    const x: string = undefined;
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.

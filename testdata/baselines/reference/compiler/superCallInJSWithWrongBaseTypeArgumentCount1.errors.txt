@@ -1,0 +1,49 @@
+superCallInJSWithWrongBaseTypeArgumentCount1(1,1): error TS1128: Declaration or statement expected.
+superCallInJSWithWrongBaseTypeArgumentCount1(1,1): error TS1128: Declaration or statement expected.
+superCallInJSWithWrongBaseTypeArgumentCount1(1,14): error TS1128: Declaration or statement expected.
+
+==== superCallInJSWithWrongBaseTypeArgumentCount1 (3 errors) ====
+    
+a.ts(1,1): error TS1128: Declaration or statement expected.
+a.ts(1,1): error TS1128: Declaration or statement expected.
+a.ts(1,14): error TS1128: Declaration or statement expected.
+
+==== a.ts (3 errors) ====
+    export class A<T> {}
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+b.js(1,1): error TS1128: Declaration or statement expected.
+b.js(1,1): error TS1128: Declaration or statement expected.
+b.js(1,14): error TS1128: Declaration or statement expected.
+
+==== b.js (3 errors) ====
+    import { A } from './a.js';
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+    export class B1 extends A {
+        constructor() {
+            super();
+        }
+    }
+    
+    export class B2 extends A<string> {
+        constructor() {
+            super();
+        }
+    }
+    
+    export class B3 extends A<string, string> {
+        constructor() {
+            super();
+        }
+    }

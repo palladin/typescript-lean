@@ -1,0 +1,43 @@
+exportAssignNamedImport(1,1): error TS1128: Declaration or statement expected.
+exportAssignNamedImport(1,1): error TS1128: Declaration or statement expected.
+exportAssignNamedImport(1,16): error TS1128: Declaration or statement expected.
+exportAssignNamedImport(1,48): error TS1128: Declaration or statement expected.
+
+==== exportAssignNamedImport (4 errors) ====
+    
+bar.ts(1,1): error TS1128: Declaration or statement expected.
+bar.ts(1,1): error TS1128: Declaration or statement expected.
+bar.ts(1,16): error TS1128: Declaration or statement expected.
+bar.ts(4,1): error TS1128: Declaration or statement expected.
+
+==== bar.ts (4 errors) ====
+    export class Bar {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+        name: string = "bar";
+    }
+    export function baz() {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        return "baz";
+    }
+    
+reexport.ts(1,1): error TS1128: Declaration or statement expected.
+reexport.ts(1,1): error TS1128: Declaration or statement expected.
+reexport.ts(1,16): error TS1128: Declaration or statement expected.
+reexport.ts(3,5): error TS1128: Declaration or statement expected.
+
+==== reexport.ts (4 errors) ====
+    import { Bar } from './bar';
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+    export = Bar;
+    

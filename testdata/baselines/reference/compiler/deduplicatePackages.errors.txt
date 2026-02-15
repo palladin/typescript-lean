@@ -1,0 +1,953 @@
+deduplicatePackages(1,1): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,1): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,1): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,1): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,1): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,1): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,8): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,8): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,9): error TS1005: ';' expected.
+deduplicatePackages(1,9): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,9): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,9): error TS1005: ';' expected.
+deduplicatePackages(1,9): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,9): error TS1005: '}' expected.
+deduplicatePackages(1,9): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,9): error TS1005: ';' expected.
+deduplicatePackages(1,9): error TS1005: '}' expected.
+deduplicatePackages(1,9): error TS1005: ';' expected.
+deduplicatePackages(1,9): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,9): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,9): error TS1005: '}' expected.
+deduplicatePackages(1,10): error TS1005: ';' expected.
+deduplicatePackages(1,10): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,10): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,10): error TS1005: ';' expected.
+deduplicatePackages(1,10): error TS1128: Declaration or statement expected.
+deduplicatePackages(1,10): error TS1005: ';' expected.
+deduplicatePackages(1,13): error TS1005: ';' expected.
+deduplicatePackages(1,14): error TS1128: Declaration or statement expected.
+
+==== deduplicatePackages (29 errors) ====
+    
+/node_modules/a/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/a/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/a/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/a/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/a/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/a/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/a/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/a/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/a/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/a/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/a/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/a/index.d.ts(1,13): error TS1005: ';' expected.
+/node_modules/a/index.d.ts(1,14): error TS1128: Declaration or statement expected.
+
+==== /node_modules/a/index.d.ts (29 errors) ====
+    import X from "x";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~~~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+                ~~~~~~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+    export function a(x: X): void;
+    
+/node_modules/a/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/a/node_modules/x/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/index.d.ts(1,13): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/index.d.ts(1,14): error TS1128: Declaration or statement expected.
+
+==== /node_modules/a/node_modules/x/index.d.ts (29 errors) ====
+    export default class X {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~~~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+                ~~~~~~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+        private x: number;
+    }
+    
+/node_modules/a/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,8): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,8): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1005: '}' expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1005: '}' expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,9): error TS1005: '}' expected.
+/node_modules/a/node_modules/x/package.json(1,10): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/package.json(1,10): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,10): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,10): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/package.json(1,10): error TS1128: Declaration or statement expected.
+/node_modules/a/node_modules/x/package.json(1,10): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/package.json(1,13): error TS1005: ';' expected.
+/node_modules/a/node_modules/x/package.json(1,14): error TS1128: Declaration or statement expected.
+
+==== /node_modules/a/node_modules/x/package.json (29 errors) ====
+    { "name": "x", "version": "1.2.3" }
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~~~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+                ~~~~~~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/b/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/b/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/b/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/b/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/b/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/b/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/b/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/b/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/b/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/b/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/b/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/b/index.d.ts(1,13): error TS1005: ';' expected.
+/node_modules/b/index.d.ts(1,14): error TS1128: Declaration or statement expected.
+
+==== /node_modules/b/index.d.ts (29 errors) ====
+    import X from "x";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~~~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+                ~~~~~~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+    export const b: X;
+    
+/node_modules/b/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/b/node_modules/x/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/index.d.ts(1,13): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/index.d.ts(1,14): error TS1128: Declaration or statement expected.
+
+==== /node_modules/b/node_modules/x/index.d.ts (29 errors) ====
+    content not parsed
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~~~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+                ~~~~~~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/b/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,8): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,8): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1005: '}' expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1005: '}' expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,9): error TS1005: '}' expected.
+/node_modules/b/node_modules/x/package.json(1,10): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/package.json(1,10): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,10): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,10): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/package.json(1,10): error TS1128: Declaration or statement expected.
+/node_modules/b/node_modules/x/package.json(1,10): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/package.json(1,13): error TS1005: ';' expected.
+/node_modules/b/node_modules/x/package.json(1,14): error TS1128: Declaration or statement expected.
+
+==== /node_modules/b/node_modules/x/package.json (29 errors) ====
+    { "name": "x", "version": "1.2.3" }
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~~~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+                ~~~~~~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/c/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/c/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/c/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/c/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/c/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/c/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/c/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/c/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/c/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/c/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/c/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/c/index.d.ts(1,13): error TS1005: ';' expected.
+/node_modules/c/index.d.ts(1,14): error TS1128: Declaration or statement expected.
+
+==== /node_modules/c/index.d.ts (29 errors) ====
+    import X from "x";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~~~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+                ~~~~~~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+    export const c: X;
+    
+/node_modules/c/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,9): error TS1005: '}' expected.
+/node_modules/c/node_modules/x/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/index.d.ts(1,10): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/index.d.ts(1,10): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/index.d.ts(1,13): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/index.d.ts(1,14): error TS1128: Declaration or statement expected.
+
+==== /node_modules/c/node_modules/x/index.d.ts (29 errors) ====
+    export default class X {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~~~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+                ~~~~~~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+        private x: number;
+    }
+    
+/node_modules/c/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,8): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,8): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1005: '}' expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1005: '}' expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,9): error TS1005: '}' expected.
+/node_modules/c/node_modules/x/package.json(1,10): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/package.json(1,10): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,10): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,10): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/package.json(1,10): error TS1128: Declaration or statement expected.
+/node_modules/c/node_modules/x/package.json(1,10): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/package.json(1,13): error TS1005: ';' expected.
+/node_modules/c/node_modules/x/package.json(1,14): error TS1128: Declaration or statement expected.
+
+==== /node_modules/c/node_modules/x/package.json (29 errors) ====
+    { "name": "x", "version": "1.2.4" }
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~~~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+                ~~~~~~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/src/a.ts(1,1): error TS1128: Declaration or statement expected.
+/src/a.ts(1,1): error TS1128: Declaration or statement expected.
+/src/a.ts(1,1): error TS1128: Declaration or statement expected.
+/src/a.ts(1,1): error TS1128: Declaration or statement expected.
+/src/a.ts(1,1): error TS1128: Declaration or statement expected.
+/src/a.ts(1,1): error TS1128: Declaration or statement expected.
+/src/a.ts(1,8): error TS1128: Declaration or statement expected.
+/src/a.ts(1,8): error TS1128: Declaration or statement expected.
+/src/a.ts(1,9): error TS1005: ';' expected.
+/src/a.ts(1,9): error TS1128: Declaration or statement expected.
+/src/a.ts(1,9): error TS1128: Declaration or statement expected.
+/src/a.ts(1,9): error TS1005: ';' expected.
+/src/a.ts(1,9): error TS1128: Declaration or statement expected.
+/src/a.ts(1,9): error TS1005: '}' expected.
+/src/a.ts(1,9): error TS1128: Declaration or statement expected.
+/src/a.ts(1,9): error TS1005: ';' expected.
+/src/a.ts(1,9): error TS1005: '}' expected.
+/src/a.ts(1,9): error TS1005: ';' expected.
+/src/a.ts(1,9): error TS1128: Declaration or statement expected.
+/src/a.ts(1,9): error TS1128: Declaration or statement expected.
+/src/a.ts(1,9): error TS1005: '}' expected.
+/src/a.ts(1,10): error TS1005: ';' expected.
+/src/a.ts(1,10): error TS1128: Declaration or statement expected.
+/src/a.ts(1,10): error TS1128: Declaration or statement expected.
+/src/a.ts(1,10): error TS1005: ';' expected.
+/src/a.ts(1,10): error TS1128: Declaration or statement expected.
+/src/a.ts(1,10): error TS1005: ';' expected.
+/src/a.ts(1,13): error TS1005: ';' expected.
+/src/a.ts(1,14): error TS1128: Declaration or statement expected.
+
+==== /src/a.ts (29 errors) ====
+    import { a } from "a";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~~~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+                ~~~~~~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+    import { b } from "b";
+    import { c } from "c";
+    a(b); // Works
+    a(c); // Error, these are from different versions of the library.
+    

@@ -1,0 +1,23 @@
+typeParameterComparableRelation(4,1): error TS1128: Declaration or statement expected.
+typeParameterComparableRelation(4,19): error TS1128: Declaration or statement expected.
+typeParameterComparableRelation(4,19): error TS1003: Identifier expected.
+typeParameterComparableRelation(4,19): error TS1005: ';' expected.
+
+==== typeParameterComparableRelation (4 errors) ====
+    
+    // https://github.com/microsoft/typescript-go/issues/1462
+    
+    type StringOrT<T> = T | string
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~
+!!! error TS1128: Declaration or statement expected.
+                      ~
+!!! error TS1003: Identifier expected.
+                      ~
+!!! error TS1005: ';' expected.
+    
+    function func<A, B, T extends StringOrT<B>>(thing: T): void {
+        thing as A; // Error
+    }
+    

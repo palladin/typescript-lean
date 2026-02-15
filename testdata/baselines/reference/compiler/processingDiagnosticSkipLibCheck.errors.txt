@@ -1,0 +1,171 @@
+processingDiagnosticSkipLibCheck(1,1): error TS1128: Declaration or statement expected.
+processingDiagnosticSkipLibCheck(1,14): error TS1005: '}' expected.
+processingDiagnosticSkipLibCheck(1,14): error TS1005: ';' expected.
+processingDiagnosticSkipLibCheck(1,14): error TS1128: Declaration or statement expected.
+processingDiagnosticSkipLibCheck(1,14): error TS1128: Declaration or statement expected.
+processingDiagnosticSkipLibCheck(1,16): error TS1128: Declaration or statement expected.
+processingDiagnosticSkipLibCheck(1,25): error TS1128: Declaration or statement expected.
+processingDiagnosticSkipLibCheck(1,25): error TS1128: Declaration or statement expected.
+processingDiagnosticSkipLibCheck(1,25): error TS1005: ';' expected.
+processingDiagnosticSkipLibCheck(1,25): error TS1005: '}' expected.
+processingDiagnosticSkipLibCheck(1,42): error TS1128: Declaration or statement expected.
+
+==== processingDiagnosticSkipLibCheck (11 errors) ====
+    
+/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/foo/index.d.ts(1,14): error TS1005: '}' expected.
+/node_modules/foo/index.d.ts(1,14): error TS1005: ';' expected.
+/node_modules/foo/index.d.ts(1,14): error TS1128: Declaration or statement expected.
+/node_modules/foo/index.d.ts(1,14): error TS1128: Declaration or statement expected.
+/node_modules/foo/index.d.ts(1,16): error TS1128: Declaration or statement expected.
+/node_modules/foo/index.d.ts(1,25): error TS1128: Declaration or statement expected.
+/node_modules/foo/index.d.ts(1,25): error TS1128: Declaration or statement expected.
+/node_modules/foo/index.d.ts(1,25): error TS1005: ';' expected.
+/node_modules/foo/index.d.ts(1,25): error TS1005: '}' expected.
+/node_modules/foo/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+
+==== /node_modules/foo/index.d.ts (11 errors) ====
+    /// <reference types="cookie-session"/>
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~
+!!! error TS1005: '}' expected.
+                 ~
+!!! error TS1005: ';' expected.
+                 ~
+!!! error TS1128: Declaration or statement expected.
+                 ~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                            ~
+!!! error TS1128: Declaration or statement expected.
+                            ~
+!!! error TS1128: Declaration or statement expected.
+                            ~
+!!! error TS1005: ';' expected.
+                            ~
+!!! error TS1005: '}' expected.
+    export const foo = 1;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/foo/package.json(2,11): error TS1005: '}' expected.
+/node_modules/foo/package.json(2,11): error TS1005: ';' expected.
+/node_modules/foo/package.json(2,11): error TS1128: Declaration or statement expected.
+/node_modules/foo/package.json(2,11): error TS1128: Declaration or statement expected.
+/node_modules/foo/package.json(2,13): error TS1128: Declaration or statement expected.
+/node_modules/foo/package.json(3,2): error TS1128: Declaration or statement expected.
+/node_modules/foo/package.json(3,2): error TS1128: Declaration or statement expected.
+/node_modules/foo/package.json(3,2): error TS1005: ';' expected.
+/node_modules/foo/package.json(3,2): error TS1005: '}' expected.
+/node_modules/foo/package.json(3,19): error TS1128: Declaration or statement expected.
+
+==== /node_modules/foo/package.json (11 errors) ====
+    {
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+        "name": "foo",
+              ~
+!!! error TS1005: '}' expected.
+              ~
+!!! error TS1005: ';' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+                ~~~~
+!!! error TS1128: Declaration or statement expected.
+        "version": "1.0.0",
+     ~
+!!! error TS1128: Declaration or statement expected.
+     ~
+!!! error TS1128: Declaration or statement expected.
+     ~
+!!! error TS1005: ';' expected.
+     ~
+!!! error TS1005: '}' expected.
+                      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        "types": "index.d.ts"
+    }
+/index.ts(1,1): error TS1128: Declaration or statement expected.
+/index.ts(1,14): error TS1005: '}' expected.
+/index.ts(1,14): error TS1005: ';' expected.
+/index.ts(1,14): error TS1128: Declaration or statement expected.
+/index.ts(1,14): error TS1128: Declaration or statement expected.
+/index.ts(1,16): error TS1128: Declaration or statement expected.
+/index.ts(1,25): error TS1128: Declaration or statement expected.
+/index.ts(1,25): error TS1128: Declaration or statement expected.
+/index.ts(1,25): error TS1005: ';' expected.
+/index.ts(1,25): error TS1005: '}' expected.
+/index.ts(2,14): error TS1128: Declaration or statement expected.
+
+==== /index.ts (11 errors) ====
+    import { foo } from 'foo';
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~
+!!! error TS1005: '}' expected.
+                 ~
+!!! error TS1005: ';' expected.
+                 ~
+!!! error TS1128: Declaration or statement expected.
+                 ~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                            ~
+!!! error TS1128: Declaration or statement expected.
+                            ~
+!!! error TS1128: Declaration or statement expected.
+                            ~
+!!! error TS1005: ';' expected.
+                            ~
+!!! error TS1005: '}' expected.
+    const y = foo;
+                 ~~~
+!!! error TS1128: Declaration or statement expected.
+    
+/tsconfig.json(1,1): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,11): error TS1005: '}' expected.
+/tsconfig.json(2,11): error TS1005: ';' expected.
+/tsconfig.json(2,11): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,11): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,13): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,22): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,22): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,22): error TS1005: ';' expected.
+/tsconfig.json(2,22): error TS1005: '}' expected.
+/tsconfig.json(3,13): error TS1128: Declaration or statement expected.
+
+==== /tsconfig.json (11 errors) ====
+    {
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+        "compilerOptions": {
+              ~
+!!! error TS1005: '}' expected.
+              ~
+!!! error TS1005: ';' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+                ~~~~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1005: ';' expected.
+                         ~
+!!! error TS1005: '}' expected.
+            "strict": true,
+                ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            "skipLibCheck": true
+        }
+    }

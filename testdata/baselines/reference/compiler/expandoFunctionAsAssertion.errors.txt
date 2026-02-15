@@ -1,0 +1,28 @@
+expandoFunctionAsAssertion(4,17): error TS1005: ';' expected.
+expandoFunctionAsAssertion(4,17): error TS1003: Identifier expected.
+expandoFunctionAsAssertion(4,56): error TS1005: '{' expected.
+expandoFunctionAsAssertion(4,62): error TS1128: Declaration or statement expected.
+expandoFunctionAsAssertion(4,62): error TS1005: ';' expected.
+
+==== expandoFunctionAsAssertion (5 errors) ====
+    
+    function example() {}
+    
+    example.isFoo = function isFoo(value: string): asserts value is 'foo' {
+                    ~~~~~~~~
+!!! error TS1005: ';' expected.
+                    ~~~~~~~~
+!!! error TS1003: Identifier expected.
+                                                           ~~~~~
+!!! error TS1005: '{' expected.
+                                                                 ~~
+!!! error TS1128: Declaration or statement expected.
+                                                                 ~~
+!!! error TS1005: ';' expected.
+      if (value !== 'foo') {
+        throw new Error('Not foo');
+      }
+    };
+    
+    example.isFoo('test');
+    

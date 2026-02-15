@@ -1,0 +1,121 @@
+circularControlFlowNarrowingWithCurrentElement01(3,11): error TS1003: Identifier expected.
+circularControlFlowNarrowingWithCurrentElement01(3,11): error TS1005: ';' expected.
+circularControlFlowNarrowingWithCurrentElement01(3,11): error TS1005: ';' expected.
+circularControlFlowNarrowingWithCurrentElement01(3,13): error TS1005: ';' expected.
+circularControlFlowNarrowingWithCurrentElement01(3,13): error TS1003: Identifier expected.
+circularControlFlowNarrowingWithCurrentElement01(3,18): error TS1003: Identifier expected.
+circularControlFlowNarrowingWithCurrentElement01(5,24): error TS1005: ',' expected.
+circularControlFlowNarrowingWithCurrentElement01(5,35): error TS1005: ',' expected.
+circularControlFlowNarrowingWithCurrentElement01(5,37): error TS1005: ';' expected.
+circularControlFlowNarrowingWithCurrentElement01(5,37): error TS1005: ',' expected.
+circularControlFlowNarrowingWithCurrentElement01(5,37): error TS1128: Declaration or statement expected.
+circularControlFlowNarrowingWithCurrentElement01(5,37): error TS1005: ')' expected.
+circularControlFlowNarrowingWithCurrentElement01(5,37): error TS1005: '{' expected.
+circularControlFlowNarrowingWithCurrentElement01(5,37): error TS1003: Identifier expected.
+circularControlFlowNarrowingWithCurrentElement01(5,39): error TS1005: ';' expected.
+circularControlFlowNarrowingWithCurrentElement01(5,39): error TS1003: Identifier expected.
+circularControlFlowNarrowingWithCurrentElement01(5,43): error TS1003: Identifier expected.
+circularControlFlowNarrowingWithCurrentElement01(5,43): error TS1005: ';' expected.
+circularControlFlowNarrowingWithCurrentElement01(5,44): error TS1005: ';' expected.
+circularControlFlowNarrowingWithCurrentElement01(5,44): error TS1003: Identifier expected.
+circularControlFlowNarrowingWithCurrentElement01(5,45): error TS1003: Identifier expected.
+circularControlFlowNarrowingWithCurrentElement01(5,45): error TS1005: ';' expected.
+circularControlFlowNarrowingWithCurrentElement01(5,46): error TS1003: Identifier expected.
+circularControlFlowNarrowingWithCurrentElement01(5,46): error TS1005: ';' expected.
+circularControlFlowNarrowingWithCurrentElement01(5,48): error TS1003: Identifier expected.
+circularControlFlowNarrowingWithCurrentElement01(5,48): error TS1005: ';' expected.
+circularControlFlowNarrowingWithCurrentElement01(6,1): error TS1128: Declaration or statement expected.
+
+==== circularControlFlowNarrowingWithCurrentElement01 (27 errors) ====
+    
+    class A {
+      next: A | null = null;
+              ~
+!!! error TS1003: Identifier expected.
+              ~
+!!! error TS1005: ';' expected.
+              ~
+!!! error TS1005: ';' expected.
+                ~~~~
+!!! error TS1005: ';' expected.
+                ~~~~
+!!! error TS1003: Identifier expected.
+                     ~
+!!! error TS1003: Identifier expected.
+    
+      constructor(readonly children: (A | null)[]) {}
+                           ~~~~~~~~
+!!! error TS1005: ',' expected.
+                                      ~
+!!! error TS1005: ',' expected.
+                                        ~
+!!! error TS1005: ';' expected.
+                                        ~
+!!! error TS1005: ',' expected.
+                                        ~
+!!! error TS1128: Declaration or statement expected.
+                                        ~
+!!! error TS1005: ')' expected.
+                                        ~
+!!! error TS1005: '{' expected.
+                                        ~
+!!! error TS1003: Identifier expected.
+                                          ~~~~
+!!! error TS1005: ';' expected.
+                                          ~~~~
+!!! error TS1003: Identifier expected.
+                                              ~
+!!! error TS1003: Identifier expected.
+                                              ~
+!!! error TS1005: ';' expected.
+                                               ~
+!!! error TS1005: ';' expected.
+                                               ~
+!!! error TS1003: Identifier expected.
+                                                ~
+!!! error TS1003: Identifier expected.
+                                                ~
+!!! error TS1005: ';' expected.
+                                                 ~
+!!! error TS1003: Identifier expected.
+                                                 ~
+!!! error TS1005: ';' expected.
+                                                   ~
+!!! error TS1003: Identifier expected.
+                                                   ~
+!!! error TS1005: ';' expected.
+    }
+    ~
+!!! error TS1128: Declaration or statement expected.
+    
+    function getNodes(): A[] {
+      const out: A[] = [];
+    
+      let current: A | null = new A([]);
+    
+      while (current !== null) {
+        let firstChild = null;
+    
+        if (out.length) {
+          current = current.next;
+          continue;
+        }
+    
+        for (let i = 0; i < current.children.length; i++) {
+          const child = current.children[i];
+    
+          if (child) {
+            if (!firstChild) {
+              firstChild = child;
+              firstChild.next = current.next;
+            }
+    
+            child.next = current.next;
+          }
+        }
+    
+        current = firstChild || current.next;
+      }
+    
+      return out;
+    }

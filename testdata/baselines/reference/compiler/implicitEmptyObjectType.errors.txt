@@ -1,0 +1,32 @@
+implicitEmptyObjectType(6,32): error TS1128: Declaration or statement expected.
+implicitEmptyObjectType(6,32): error TS1005: ')' expected.
+implicitEmptyObjectType(6,32): error TS1005: ',' expected.
+implicitEmptyObjectType(6,32): error TS1128: Declaration or statement expected.
+implicitEmptyObjectType(6,32): error TS1005: ';' expected.
+implicitEmptyObjectType(6,32): error TS1128: Declaration or statement expected.
+implicitEmptyObjectType(6,32): error TS1005: '}' expected.
+
+==== implicitEmptyObjectType (7 errors) ====
+    
+    // https://github.com/microsoft/typescript-go/issues/1563
+    
+    function f() {
+      const v: unknown = "lol";
+      const acceptsRecord = (record: Record<string, string>) => {};
+                                   ~
+!!! error TS1128: Declaration or statement expected.
+                                   ~
+!!! error TS1005: ')' expected.
+                                   ~
+!!! error TS1005: ',' expected.
+                                   ~
+!!! error TS1128: Declaration or statement expected.
+                                   ~
+!!! error TS1005: ';' expected.
+                                   ~
+!!! error TS1128: Declaration or statement expected.
+                                   ~
+!!! error TS1005: '}' expected.
+      acceptsRecord(v || {});
+    }
+    

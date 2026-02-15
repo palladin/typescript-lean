@@ -1,0 +1,51 @@
+importAttributesWithValueComments(1,1): error TS1128: Declaration or statement expected.
+importAttributesWithValueComments(1,1): error TS1128: Declaration or statement expected.
+importAttributesWithValueComments(1,8): error TS1128: Declaration or statement expected.
+importAttributesWithValueComments(1,10): error TS1128: Declaration or statement expected.
+importAttributesWithValueComments(1,10): error TS1005: ';' expected.
+
+==== importAttributesWithValueComments (5 errors) ====
+    
+/a.ts(1,1): error TS1128: Declaration or statement expected.
+/a.ts(1,1): error TS1128: Declaration or statement expected.
+/a.ts(1,8): error TS1128: Declaration or statement expected.
+/a.ts(1,10): error TS1128: Declaration or statement expected.
+/a.ts(1,10): error TS1005: ';' expected.
+
+==== /a.ts (5 errors) ====
+    export default {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+        a: "a",
+        b: "b",
+        1: "1",
+    }
+    
+/b.ts(1,1): error TS1128: Declaration or statement expected.
+/b.ts(1,1): error TS1128: Declaration or statement expected.
+/b.ts(1,8): error TS1128: Declaration or statement expected.
+/b.ts(1,10): error TS1128: Declaration or statement expected.
+/b.ts(1,10): error TS1005: ';' expected.
+
+==== /b.ts (5 errors) ====
+    import a from "./a" with { a: /* a */ "a", "b": /* b */ "b" };
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~
+!!! error TS1005: ';' expected.
+    a;
+    

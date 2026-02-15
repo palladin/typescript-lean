@@ -1,0 +1,49 @@
+typePredicateParameterMismatch(5,1): error TS1128: Declaration or statement expected.
+typePredicateParameterMismatch(5,14): error TS1005: ';' expected.
+typePredicateParameterMismatch(5,14): error TS1003: Identifier expected.
+typePredicateParameterMismatch(6,1): error TS1128: Declaration or statement expected.
+typePredicateParameterMismatch(6,14): error TS1003: Identifier expected.
+typePredicateParameterMismatch(6,14): error TS1005: ';' expected.
+typePredicateParameterMismatch(7,1): error TS1128: Declaration or statement expected.
+typePredicateParameterMismatch(11,10): error TS1128: Declaration or statement expected.
+typePredicateParameterMismatch(11,10): error TS1005: '{' expected.
+
+==== typePredicateParameterMismatch (9 errors) ====
+    
+    // This test verifies that the checker doesn't panic when a type predicate
+    // references a parameter name that doesn't match any actual function parameter.
+    
+    type TypeA = { kind: 'a' };
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~
+!!! error TS1005: ';' expected.
+                 ~
+!!! error TS1003: Identifier expected.
+    type TypeB = { kind: 'b' };
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~
+!!! error TS1003: Identifier expected.
+                 ~
+!!! error TS1005: ';' expected.
+    type UnionType = TypeA | TypeB;
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+    function isTypeA(
+      _value: UnionType
+    ): value is TypeA {  // "value" doesn't match parameter "_value"
+             ~~
+!!! error TS1128: Declaration or statement expected.
+             ~~
+!!! error TS1005: '{' expected.
+      return true;
+    }
+    
+    function test(input: UnionType): void {
+      if (isTypeA(input)) {
+        console.log(input.kind);
+      }
+    }
+    

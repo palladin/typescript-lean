@@ -1,0 +1,75 @@
+parameterPropertyWithDefaultValueExtended(3,1): error TS1128: Declaration or statement expected.
+parameterPropertyWithDefaultValueExtended(4,24): error TS1005: ',' expected.
+parameterPropertyWithDefaultValueExtended(4,36): error TS1003: Identifier expected.
+parameterPropertyWithDefaultValueExtended(4,36): error TS1005: ',' expected.
+parameterPropertyWithDefaultValueExtended(4,40): error TS1005: ',' expected.
+parameterPropertyWithDefaultValueExtended(4,44): error TS1005: ')' expected.
+parameterPropertyWithDefaultValueExtended(4,44): error TS1005: ',' expected.
+parameterPropertyWithDefaultValueExtended(4,44): error TS1005: '{' expected.
+parameterPropertyWithDefaultValueExtended(4,44): error TS1128: Declaration or statement expected.
+parameterPropertyWithDefaultValueExtended(4,44): error TS1003: Identifier expected.
+parameterPropertyWithDefaultValueExtended(4,46): error TS1003: Identifier expected.
+parameterPropertyWithDefaultValueExtended(4,46): error TS1005: ';' expected.
+parameterPropertyWithDefaultValueExtended(4,46): error TS1005: '{' expected.
+parameterPropertyWithDefaultValueExtended(4,48): error TS1003: Identifier expected.
+parameterPropertyWithDefaultValueExtended(4,48): error TS1005: ';' expected.
+parameterPropertyWithDefaultValueExtended(5,1): error TS1128: Declaration or statement expected.
+
+==== parameterPropertyWithDefaultValueExtended (16 errors) ====
+    
+    // Test with default value - should not have undefined
+    export class WithDefault {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+      constructor(readonly timestamp = new Date()) {}
+                           ~~~~~~~~~
+!!! error TS1005: ',' expected.
+                                       ~~~
+!!! error TS1003: Identifier expected.
+                                       ~~~
+!!! error TS1005: ',' expected.
+                                           ~~~~
+!!! error TS1005: ',' expected.
+                                               ~
+!!! error TS1005: ')' expected.
+                                               ~
+!!! error TS1005: ',' expected.
+                                               ~
+!!! error TS1005: '{' expected.
+                                               ~
+!!! error TS1128: Declaration or statement expected.
+                                               ~
+!!! error TS1003: Identifier expected.
+                                                 ~
+!!! error TS1003: Identifier expected.
+                                                 ~
+!!! error TS1005: ';' expected.
+                                                 ~
+!!! error TS1005: '{' expected.
+                                                   ~
+!!! error TS1003: Identifier expected.
+                                                   ~
+!!! error TS1005: ';' expected.
+    }
+    ~
+!!! error TS1128: Declaration or statement expected.
+    
+    // Test without default value but optional - should have undefined
+    export class WithoutDefault {
+      constructor(readonly timestamp?: Date) {}
+    }
+    
+    // Test with explicit undefined type - should keep it
+    export class ExplicitUndefined {
+      constructor(readonly timestamp: Date | undefined = new Date()) {}
+    }
+    
+    // Test private parameter property with default value
+    export class PrivateWithDefault {
+      constructor(private timestamp = new Date()) {}
+    }
+    
+    // Test public parameter property with default value
+    export class PublicWithDefault {
+      constructor(public timestamp = new Date()) {}
+    }

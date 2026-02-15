@@ -1,0 +1,27 @@
+emitDecoratorMetadataParamDecoratorNoModifiers(2,1): error TS1128: Declaration or statement expected.
+emitDecoratorMetadataParamDecoratorNoModifiers(2,60): error TS1128: Declaration or statement expected.
+emitDecoratorMetadataParamDecoratorNoModifiers(2,60): error TS1005: ',' expected.
+emitDecoratorMetadataParamDecoratorNoModifiers(2,60): error TS1128: Declaration or statement expected.
+emitDecoratorMetadataParamDecoratorNoModifiers(2,60): error TS1005: ')' expected.
+emitDecoratorMetadataParamDecoratorNoModifiers(2,60): error TS1005: '{' expected.
+
+==== emitDecoratorMetadataParamDecoratorNoModifiers (6 errors) ====
+    
+    declare function paramDec(target: any, propertyKey: string | symbol | undefined, parameterIndex: number): void;
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                                               ~
+!!! error TS1128: Declaration or statement expected.
+                                                               ~
+!!! error TS1005: ',' expected.
+                                                               ~
+!!! error TS1128: Declaration or statement expected.
+                                                               ~
+!!! error TS1005: ')' expected.
+                                                               ~
+!!! error TS1005: '{' expected.
+    
+    class C {
+        constructor(@paramDec _value: string) {}
+    }
+    

@@ -1,0 +1,211 @@
+declarationEmitAugmentationUsesCorrectSourceFile(1,2): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,17): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,25): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,39): error TS1005: ';' expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,43): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,58): error TS1005: ';' expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,88): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,88): error TS1005: '}' expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,88): error TS1005: '{' expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,88): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,88): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,88): error TS1005: '}' expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,507): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,530): error TS1003: Identifier expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,541): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,549): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,564): error TS1005: ';' expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,568): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,588): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,596): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,611): error TS1005: ';' expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,615): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,635): error TS1005: ';' expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,649): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,649): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,649): error TS1005: '}' expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,649): error TS1128: Declaration or statement expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,649): error TS1005: '}' expected.
+declarationEmitAugmentationUsesCorrectSourceFile(1,649): error TS1005: ';' expected.
+
+==== declarationEmitAugmentationUsesCorrectSourceFile (29 errors) ====
+    
+node_modules/knex/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(2,16): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(2,24): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(2,38): error TS1005: ';' expected.
+node_modules/knex/index.d.ts(2,42): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(3,1): error TS1005: ';' expected.
+node_modules/knex/index.d.ts(3,31): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(3,31): error TS1005: '}' expected.
+node_modules/knex/index.d.ts(3,31): error TS1005: '{' expected.
+node_modules/knex/index.d.ts(3,31): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(3,31): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(3,31): error TS1005: '}' expected.
+node_modules/knex/index.d.ts(12,1): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(12,24): error TS1003: Identifier expected.
+node_modules/knex/index.d.ts(14,1): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(14,9): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(14,24): error TS1005: ';' expected.
+node_modules/knex/index.d.ts(15,3): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(18,1): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(18,9): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(18,24): error TS1005: ';' expected.
+node_modules/knex/index.d.ts(19,3): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(19,23): error TS1005: ';' expected.
+node_modules/knex/index.d.ts(20,13): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(20,13): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(20,13): error TS1005: '}' expected.
+node_modules/knex/index.d.ts(20,13): error TS1128: Declaration or statement expected.
+node_modules/knex/index.d.ts(20,13): error TS1005: '}' expected.
+node_modules/knex/index.d.ts(20,13): error TS1005: ';' expected.
+
+==== node_modules/knex/index.d.ts (29 errors) ====
+    
+    // A bunch of random text to move the positions forward
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                         ~
+!!! error TS1005: ';' expected.
+                                             ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    // A bunch of random text to move the positions forward
+    ~
+!!! error TS1005: ';' expected.
+                                  ~
+!!! error TS1128: Declaration or statement expected.
+                                  ~
+!!! error TS1005: '}' expected.
+                                  ~
+!!! error TS1005: '{' expected.
+                                  ~
+!!! error TS1128: Declaration or statement expected.
+                                  ~
+!!! error TS1128: Declaration or statement expected.
+                                  ~
+!!! error TS1005: '}' expected.
+    // A bunch of random text to move the positions forward
+    // A bunch of random text to move the positions forward
+    // A bunch of random text to move the positions forward
+    // A bunch of random text to move the positions forward
+    // A bunch of random text to move the positions forward
+    // A bunch of random text to move the positions forward
+    // A bunch of random text to move the positions forward
+    
+    type ShouldJustBeAny = [any][0];
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1003: Identifier expected.
+    
+    declare namespace knex {
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1005: ';' expected.
+      export { Knex };
+      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    }
+    
+    declare namespace Knex {
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1005: ';' expected.
+      interface Interface {
+      ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: ';' expected.
+        method(): ShouldJustBeAny;
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+                ~
+!!! error TS1005: ';' expected.
+      }
+    }
+    
+    export = knex;
+    
+index.ts(2,1): error TS1128: Declaration or statement expected.
+index.ts(3,1): error TS1128: Declaration or statement expected.
+index.ts(3,9): error TS1128: Declaration or statement expected.
+index.ts(3,23): error TS1005: ';' expected.
+index.ts(4,3): error TS1128: Declaration or statement expected.
+index.ts(4,18): error TS1005: ';' expected.
+index.ts(5,29): error TS1128: Declaration or statement expected.
+index.ts(5,29): error TS1005: '}' expected.
+index.ts(5,29): error TS1005: '{' expected.
+index.ts(5,29): error TS1128: Declaration or statement expected.
+index.ts(5,29): error TS1128: Declaration or statement expected.
+index.ts(5,29): error TS1005: '}' expected.
+index.ts(10,400): error TS1128: Declaration or statement expected.
+index.ts(10,423): error TS1003: Identifier expected.
+index.ts(10,434): error TS1128: Declaration or statement expected.
+index.ts(10,442): error TS1128: Declaration or statement expected.
+index.ts(10,457): error TS1005: ';' expected.
+index.ts(10,461): error TS1128: Declaration or statement expected.
+index.ts(10,481): error TS1128: Declaration or statement expected.
+index.ts(10,489): error TS1128: Declaration or statement expected.
+index.ts(10,504): error TS1005: ';' expected.
+index.ts(10,508): error TS1128: Declaration or statement expected.
+index.ts(10,528): error TS1005: ';' expected.
+index.ts(10,542): error TS1128: Declaration or statement expected.
+index.ts(10,542): error TS1128: Declaration or statement expected.
+index.ts(10,542): error TS1005: '}' expected.
+index.ts(10,542): error TS1128: Declaration or statement expected.
+index.ts(10,542): error TS1005: '}' expected.
+index.ts(10,542): error TS1005: ';' expected.
+
+==== index.ts (29 errors) ====
+    
+    import "knex";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    declare module "knex" {
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: ';' expected.
+      namespace Knex {
+      ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                     ~
+!!! error TS1005: ';' expected.
+        function newFunc(): Knex.Interface;
+                                ~
+!!! error TS1128: Declaration or statement expected.
+                                ~
+!!! error TS1005: '}' expected.
+                                ~
+!!! error TS1005: '{' expected.
+                                ~
+!!! error TS1128: Declaration or statement expected.
+                                ~
+!!! error TS1128: Declaration or statement expected.
+                                ~
+!!! error TS1005: '}' expected.
+      }
+    }
+    
+    
+    

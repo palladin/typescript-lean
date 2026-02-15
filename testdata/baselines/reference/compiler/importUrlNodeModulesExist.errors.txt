@@ -1,0 +1,86 @@
+importUrlNodeModulesExist(1,1): error TS1128: Declaration or statement expected.
+importUrlNodeModulesExist(1,1): error TS1128: Declaration or statement expected.
+importUrlNodeModulesExist(1,8): error TS1128: Declaration or statement expected.
+importUrlNodeModulesExist(1,9): error TS1005: ';' expected.
+importUrlNodeModulesExist(1,9): error TS1128: Declaration or statement expected.
+importUrlNodeModulesExist(1,9): error TS1128: Declaration or statement expected.
+importUrlNodeModulesExist(1,9): error TS1005: '}' expected.
+
+==== importUrlNodeModulesExist (7 errors) ====
+    
+/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/foo/package.json(1,1): error TS1128: Declaration or statement expected.
+/node_modules/foo/package.json(1,8): error TS1128: Declaration or statement expected.
+/node_modules/foo/package.json(1,9): error TS1005: ';' expected.
+/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/foo/package.json(1,9): error TS1128: Declaration or statement expected.
+/node_modules/foo/package.json(1,9): error TS1005: '}' expected.
+
+==== /node_modules/foo/package.json (7 errors) ====
+    { "name": "foo", "version": "1.0.0" }
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+    
+/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/foo/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+/node_modules/foo/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+/node_modules/foo/index.d.ts(1,9): error TS1005: ';' expected.
+/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/foo/index.d.ts(1,9): error TS1128: Declaration or statement expected.
+/node_modules/foo/index.d.ts(1,9): error TS1005: '}' expected.
+
+==== /node_modules/foo/index.d.ts (7 errors) ====
+    export declare function useFoo(): string;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+    
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+/src/index.ts(1,8): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1005: ';' expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1128: Declaration or statement expected.
+/src/index.ts(1,9): error TS1005: '}' expected.
+
+==== /src/index.ts (7 errors) ====
+    import "https://deno.land/std@0.208.0/path/mod.ts"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+    
+    

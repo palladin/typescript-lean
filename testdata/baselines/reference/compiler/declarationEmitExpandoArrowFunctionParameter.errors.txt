@@ -1,0 +1,84 @@
+declarationEmitExpandoArrowFunctionParameter(1,1): error TS1128: Declaration or statement expected.
+declarationEmitExpandoArrowFunctionParameter(1,1): error TS1128: Declaration or statement expected.
+declarationEmitExpandoArrowFunctionParameter(1,19): error TS1128: Declaration or statement expected.
+declarationEmitExpandoArrowFunctionParameter(1,19): error TS1005: ';' expected.
+declarationEmitExpandoArrowFunctionParameter(1,24): error TS1128: Declaration or statement expected.
+
+==== declarationEmitExpandoArrowFunctionParameter (5 errors) ====
+    
+component.ts(1,1): error TS1128: Declaration or statement expected.
+component.ts(1,1): error TS1128: Declaration or statement expected.
+component.ts(1,19): error TS1128: Declaration or statement expected.
+component.ts(1,19): error TS1005: ';' expected.
+component.ts(1,24): error TS1128: Declaration or statement expected.
+
+==== component.ts (5 errors) ====
+    interface Props<T extends string = string> {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~~
+!!! error TS1005: ';' expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+        colors: Array<T>;
+        value: T;
+        onValueChange: (value: T) => void;
+        disabled?: boolean;
+    }
+    
+    declare function forwardRef<T, P>(
+        render: (props: P, ref: { current: T | null }) => string
+    ): (props: P & { ref?: { current: T | null } }) => string;
+    
+    type FixedForwardRef = <T, P = {}>(
+        render: (props: P, ref: { current: T | null }) => string
+    ) => (props: P & { ref?: { current: T | null } }) => string;
+    
+    const GenericForwardRef = forwardRef as FixedForwardRef;
+    
+    function Inner<T extends string>(
+        { disabled, value, onValueChange, colors }: Props<T>,
+        ref: { current: HTMLButtonElement | null }
+    ) {
+        return "rendered";
+    }
+    
+    export const ColorPicker = GenericForwardRef(Inner);
+    
+story.ts(1,1): error TS1128: Declaration or statement expected.
+story.ts(1,1): error TS1128: Declaration or statement expected.
+story.ts(1,19): error TS1128: Declaration or statement expected.
+story.ts(1,19): error TS1005: ';' expected.
+story.ts(1,24): error TS1128: Declaration or statement expected.
+
+==== story.ts (5 errors) ====
+    import { ColorPicker } from "./component";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                      ~~~~~~~
+!!! error TS1005: ';' expected.
+                           ~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+    type StoryFn<T> = ((args: T extends (props: infer P) => any ? P : never) => string) & {
+        args?: Partial<T extends (props: infer P) => any ? P : never>;
+    };
+    
+    // Story with StoryFn<typeof ImportedGenericComponent>
+    export const Default: StoryFn<typeof ColorPicker> = (args) => {
+        return "story";
+    };
+    
+    // Property assignment on arrow function - TRIGGERS PANIC
+    Default.args = {
+        disabled: false,
+    };
+    

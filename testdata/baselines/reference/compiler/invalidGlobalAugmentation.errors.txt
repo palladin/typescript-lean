@@ -1,0 +1,58 @@
+invalidGlobalAugmentation(1,1): error TS1128: Declaration or statement expected.
+invalidGlobalAugmentation(1,1): error TS1128: Declaration or statement expected.
+invalidGlobalAugmentation(1,11): error TS1128: Declaration or statement expected.
+invalidGlobalAugmentation(1,16): error TS1005: ';' expected.
+invalidGlobalAugmentation(1,19): error TS1128: Declaration or statement expected.
+invalidGlobalAugmentation(1,41): error TS1005: ';' expected.
+
+==== invalidGlobalAugmentation (6 errors) ====
+    
+globals.ts(1,1): error TS1128: Declaration or statement expected.
+globals.ts(1,1): error TS1128: Declaration or statement expected.
+globals.ts(1,11): error TS1128: Declaration or statement expected.
+globals.ts(1,16): error TS1005: ';' expected.
+globals.ts(2,2): error TS1128: Declaration or statement expected.
+globals.ts(3,2): error TS1005: ';' expected.
+
+==== globals.ts (6 errors) ====
+    declare global {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+              ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~
+!!! error TS1005: ';' expected.
+      const __FOO__: any;
+     ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    }
+     ~
+!!! error TS1005: ';' expected.
+    
+react-native.ts(1,1): error TS1128: Declaration or statement expected.
+react-native.ts(1,1): error TS1128: Declaration or statement expected.
+react-native.ts(2,1): error TS1128: Declaration or statement expected.
+react-native.ts(2,6): error TS1005: ';' expected.
+react-native.ts(2,9): error TS1128: Declaration or statement expected.
+react-native.ts(2,31): error TS1005: ';' expected.
+
+==== react-native.ts (6 errors) ====
+    export {}
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    declare module "react-native" {
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+         ~
+!!! error TS1005: ';' expected.
+            ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                  ~
+!!! error TS1005: ';' expected.
+      const __FOO__: any;
+    }
+    

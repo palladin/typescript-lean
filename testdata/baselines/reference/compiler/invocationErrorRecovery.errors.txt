@@ -1,0 +1,61 @@
+invocationErrorRecovery(1,1): error TS1128: Declaration or statement expected.
+invocationErrorRecovery(1,1): error TS1128: Declaration or statement expected.
+invocationErrorRecovery(1,8): error TS1128: Declaration or statement expected.
+invocationErrorRecovery(1,32): error TS1128: Declaration or statement expected.
+invocationErrorRecovery(1,40): error TS1128: Declaration or statement expected.
+invocationErrorRecovery(1,54): error TS1005: ';' expected.
+invocationErrorRecovery(1,58): error TS1128: Declaration or statement expected.
+invocationErrorRecovery(1,65): error TS1128: Declaration or statement expected.
+
+==== invocationErrorRecovery (8 errors) ====
+    
+foo.d.ts(1,1): error TS1128: Declaration or statement expected.
+foo.d.ts(1,1): error TS1128: Declaration or statement expected.
+foo.d.ts(1,8): error TS1128: Declaration or statement expected.
+foo.d.ts(2,1): error TS1128: Declaration or statement expected.
+foo.d.ts(2,9): error TS1128: Declaration or statement expected.
+foo.d.ts(2,23): error TS1005: ';' expected.
+foo.d.ts(3,1): error TS1128: Declaration or statement expected.
+foo.d.ts(3,8): error TS1128: Declaration or statement expected.
+
+==== foo.d.ts (8 errors) ====
+    declare function foo(): void;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+    declare namespace foo {}
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1005: ';' expected.
+    export = foo;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+index.ts(1,1): error TS1128: Declaration or statement expected.
+index.ts(1,1): error TS1128: Declaration or statement expected.
+index.ts(1,8): error TS1128: Declaration or statement expected.
+index.ts(2,1): error TS1128: Declaration or statement expected.
+index.ts(3,2): error TS1128: Declaration or statement expected.
+index.ts(3,16): error TS1005: ';' expected.
+index.ts(3,20): error TS1128: Declaration or statement expected.
+index.ts(3,27): error TS1128: Declaration or statement expected.
+
+==== index.ts (8 errors) ====
+    import * as foo from "./foo";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+    foo()
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    

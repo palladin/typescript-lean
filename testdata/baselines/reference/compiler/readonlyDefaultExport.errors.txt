@@ -1,0 +1,87 @@
+readonlyDefaultExport(1,1): error TS1128: Declaration or statement expected.
+readonlyDefaultExport(1,12): error TS1128: Declaration or statement expected.
+readonlyDefaultExport(1,12): error TS1005: ';' expected.
+readonlyDefaultExport(1,13): error TS1003: Identifier expected.
+readonlyDefaultExport(1,13): error TS1003: Identifier expected.
+readonlyDefaultExport(1,13): error TS1005: ',' expected.
+readonlyDefaultExport(1,17): error TS1005: ',' expected.
+readonlyDefaultExport(1,22): error TS1005: ',' expected.
+readonlyDefaultExport(1,22): error TS1128: Declaration or statement expected.
+readonlyDefaultExport(1,22): error TS1128: Declaration or statement expected.
+
+==== readonlyDefaultExport (10 errors) ====
+    
+a.ts(1,1): error TS1128: Declaration or statement expected.
+a.ts(1,12): error TS1128: Declaration or statement expected.
+a.ts(1,12): error TS1005: ';' expected.
+a.ts(1,13): error TS1003: Identifier expected.
+a.ts(1,13): error TS1003: Identifier expected.
+a.ts(1,13): error TS1005: ',' expected.
+a.ts(2,3): error TS1005: ',' expected.
+a.ts(3,1): error TS1005: ',' expected.
+a.ts(3,1): error TS1128: Declaration or statement expected.
+a.ts(3,1): error TS1128: Declaration or statement expected.
+
+==== a.ts (10 errors) ====
+    const foo = {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1003: Identifier expected.
+                ~
+!!! error TS1003: Identifier expected.
+                ~
+!!! error TS1005: ',' expected.
+      a: 1
+      ~
+!!! error TS1005: ',' expected.
+    }
+    ~
+!!! error TS1005: ',' expected.
+    ~
+!!! error TS1128: Declaration or statement expected.
+    ~
+!!! error TS1128: Declaration or statement expected.
+    
+    export default foo as Readonly<typeof foo>
+    
+b.ts(1,1): error TS1128: Declaration or statement expected.
+b.ts(1,12): error TS1128: Declaration or statement expected.
+b.ts(1,12): error TS1005: ';' expected.
+b.ts(1,13): error TS1003: Identifier expected.
+b.ts(1,13): error TS1003: Identifier expected.
+b.ts(1,13): error TS1005: ',' expected.
+b.ts(1,17): error TS1005: ',' expected.
+b.ts(1,22): error TS1005: ',' expected.
+b.ts(1,22): error TS1128: Declaration or statement expected.
+b.ts(1,22): error TS1128: Declaration or statement expected.
+
+==== b.ts (10 errors) ====
+    import foo from './a'
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1003: Identifier expected.
+                ~
+!!! error TS1003: Identifier expected.
+                ~
+!!! error TS1005: ',' expected.
+                    ~
+!!! error TS1005: ',' expected.
+                         ~
+!!! error TS1005: ',' expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+    
+    foo.a = 2
+    

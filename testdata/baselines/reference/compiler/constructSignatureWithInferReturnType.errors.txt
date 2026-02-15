@@ -1,0 +1,17 @@
+constructSignatureWithInferReturnType(2,1): error TS1128: Declaration or statement expected.
+constructSignatureWithInferReturnType(2,23): error TS1128: Declaration or statement expected.
+constructSignatureWithInferReturnType(2,23): error TS1003: Identifier expected.
+constructSignatureWithInferReturnType(2,23): error TS1005: ';' expected.
+
+==== constructSignatureWithInferReturnType (4 errors) ====
+    
+    type ExtractReturn<T> = T extends { new(): infer R } ? R : never;
+    ~~~~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1003: Identifier expected.
+                          ~
+!!! error TS1005: ';' expected.
+    

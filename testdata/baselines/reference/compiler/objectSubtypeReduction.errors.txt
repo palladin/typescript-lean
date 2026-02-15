@@ -1,0 +1,31 @@
+objectSubtypeReduction(5,32): error TS1005: ',' expected.
+objectSubtypeReduction(5,32): error TS1003: Identifier expected.
+objectSubtypeReduction(5,32): error TS1003: Identifier expected.
+objectSubtypeReduction(5,33): error TS1005: ',' expected.
+objectSubtypeReduction(5,33): error TS1005: ')' expected.
+objectSubtypeReduction(5,33): error TS1128: Declaration or statement expected.
+objectSubtypeReduction(5,34): error TS1128: Declaration or statement expected.
+
+==== objectSubtypeReduction (7 errors) ====
+    
+    // https://github.com/microsoft/typescript-go/issues/1164
+    
+    function foo(x?: object) {
+        return Object.entries(x || {})
+                                   ~
+!!! error TS1005: ',' expected.
+                                   ~
+!!! error TS1003: Identifier expected.
+                                   ~
+!!! error TS1003: Identifier expected.
+                                    ~
+!!! error TS1005: ',' expected.
+                                    ~
+!!! error TS1005: ')' expected.
+                                    ~
+!!! error TS1128: Declaration or statement expected.
+                                     ~
+!!! error TS1128: Declaration or statement expected.
+            .sort(([k1, v1], [k2, v2]) => v1.name.localeCompare(v2.name));
+    }
+    

@@ -1,0 +1,66 @@
+declarationEmitNoCrashOnCommentCopiedFromOtherFile(1,1): error TS1128: Declaration or statement expected.
+declarationEmitNoCrashOnCommentCopiedFromOtherFile(1,16): error TS1128: Declaration or statement expected.
+declarationEmitNoCrashOnCommentCopiedFromOtherFile(1,133): error TS1128: Declaration or statement expected.
+declarationEmitNoCrashOnCommentCopiedFromOtherFile(1,173): error TS1005: ';' expected.
+declarationEmitNoCrashOnCommentCopiedFromOtherFile(1,173): error TS1128: Declaration or statement expected.
+declarationEmitNoCrashOnCommentCopiedFromOtherFile(1,173): error TS1005: '}' expected.
+declarationEmitNoCrashOnCommentCopiedFromOtherFile(1,173): error TS1128: Declaration or statement expected.
+declarationEmitNoCrashOnCommentCopiedFromOtherFile(1,173): error TS1005: ')' expected.
+
+==== declarationEmitNoCrashOnCommentCopiedFromOtherFile (8 errors) ====
+    
+export.ts(1,1): error TS1128: Declaration or statement expected.
+export.ts(2,11): error TS1128: Declaration or statement expected.
+export.ts(9,1): error TS1128: Declaration or statement expected.
+export.ts(10,16): error TS1005: ';' expected.
+export.ts(10,16): error TS1128: Declaration or statement expected.
+export.ts(10,16): error TS1005: '}' expected.
+export.ts(10,16): error TS1128: Declaration or statement expected.
+export.ts(10,16): error TS1005: ')' expected.
+
+==== export.ts (8 errors) ====
+    /**
+    ~~~~~
+!!! error TS1128: Declaration or statement expected.
+     * blah blah blah blah
+              ~~~~
+!!! error TS1128: Declaration or statement expected.
+     * blah blah blah blah
+     * blah blah blah blah
+     * blah blah blah blah
+     * blah blah blah blah
+     */
+    
+    export function foo() {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+      return (_item: unknown): _item is boolean => {
+                   ~
+!!! error TS1005: ';' expected.
+                   ~
+!!! error TS1128: Declaration or statement expected.
+                   ~
+!!! error TS1005: '}' expected.
+                   ~
+!!! error TS1128: Declaration or statement expected.
+                   ~
+!!! error TS1005: ')' expected.
+        return true;
+      };
+    }
+import.ts(1,1): error TS1128: Declaration or statement expected.
+import.ts(1,16): error TS1128: Declaration or statement expected.
+import.ts(2,100): error TS1128: Declaration or statement expected.
+import.ts(2,140): error TS1005: ';' expected.
+import.ts(2,140): error TS1128: Declaration or statement expected.
+import.ts(2,140): error TS1005: '}' expected.
+import.ts(2,140): error TS1128: Declaration or statement expected.
+import.ts(2,140): error TS1005: ')' expected.
+
+==== import.ts (8 errors) ====
+    import { foo } from './export';
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+    export const x = foo();

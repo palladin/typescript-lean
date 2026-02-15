@@ -1,0 +1,206 @@
+packageJsonImportsWildcardTsExtensionError(1,1): error TS1128: Declaration or statement expected.
+packageJsonImportsWildcardTsExtensionError(1,1): error TS1128: Declaration or statement expected.
+packageJsonImportsWildcardTsExtensionError(1,13): error TS1005: '}' expected.
+packageJsonImportsWildcardTsExtensionError(1,13): error TS1128: Declaration or statement expected.
+packageJsonImportsWildcardTsExtensionError(1,13): error TS1005: ';' expected.
+packageJsonImportsWildcardTsExtensionError(1,13): error TS1128: Declaration or statement expected.
+packageJsonImportsWildcardTsExtensionError(1,18): error TS1128: Declaration or statement expected.
+packageJsonImportsWildcardTsExtensionError(1,24): error TS1128: Declaration or statement expected.
+packageJsonImportsWildcardTsExtensionError(1,24): error TS1005: ';' expected.
+packageJsonImportsWildcardTsExtensionError(1,24): error TS1128: Declaration or statement expected.
+packageJsonImportsWildcardTsExtensionError(1,24): error TS1005: '}' expected.
+
+==== packageJsonImportsWildcardTsExtensionError (11 errors) ====
+    // Test verifies that when a module specifier contains ".ts" that gets matched by a
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                     ~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1005: ';' expected.
+                           ~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1005: '}' expected.
+    // wildcard pattern, resolvedUsingTsExtension is correctly set to true.
+    // Example: import "#/foo.ts.omg" with pattern "#/*.omg": "./src/*"
+    // The * matches "foo.ts", and when expanded becomes "./src/foo.ts"
+    // Since the wildcard matched ".ts" from the specifier, an error should be reported.
+    
+src/foo.ts(1,1): error TS1128: Declaration or statement expected.
+src/foo.ts(1,1): error TS1128: Declaration or statement expected.
+src/foo.ts(1,13): error TS1005: '}' expected.
+src/foo.ts(1,13): error TS1128: Declaration or statement expected.
+src/foo.ts(1,13): error TS1005: ';' expected.
+src/foo.ts(1,13): error TS1128: Declaration or statement expected.
+src/foo.ts(1,18): error TS1128: Declaration or statement expected.
+src/foo.ts(1,24): error TS1128: Declaration or statement expected.
+src/foo.ts(1,24): error TS1005: ';' expected.
+src/foo.ts(1,24): error TS1128: Declaration or statement expected.
+src/foo.ts(1,24): error TS1005: '}' expected.
+
+==== src/foo.ts (11 errors) ====
+    export function hello() {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                     ~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1005: ';' expected.
+                           ~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1005: '}' expected.
+        return "world";
+    }
+    
+src/index.ts(1,1): error TS1128: Declaration or statement expected.
+src/index.ts(1,1): error TS1128: Declaration or statement expected.
+src/index.ts(1,13): error TS1005: '}' expected.
+src/index.ts(1,13): error TS1128: Declaration or statement expected.
+src/index.ts(1,13): error TS1005: ';' expected.
+src/index.ts(1,13): error TS1128: Declaration or statement expected.
+src/index.ts(1,18): error TS1128: Declaration or statement expected.
+src/index.ts(1,24): error TS1128: Declaration or statement expected.
+src/index.ts(1,24): error TS1005: ';' expected.
+src/index.ts(1,24): error TS1128: Declaration or statement expected.
+src/index.ts(1,24): error TS1005: '}' expected.
+
+==== src/index.ts (11 errors) ====
+    import { hello } from "#/foo.ts.omg";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                     ~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1005: ';' expected.
+                           ~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1005: '}' expected.
+    
+    hello();
+    
+package.json(1,1): error TS1128: Declaration or statement expected.
+package.json(1,1): error TS1128: Declaration or statement expected.
+package.json(2,11): error TS1005: '}' expected.
+package.json(2,11): error TS1128: Declaration or statement expected.
+package.json(2,11): error TS1005: ';' expected.
+package.json(2,11): error TS1128: Declaration or statement expected.
+package.json(2,16): error TS1128: Declaration or statement expected.
+package.json(2,22): error TS1128: Declaration or statement expected.
+package.json(2,22): error TS1005: ';' expected.
+package.json(2,22): error TS1128: Declaration or statement expected.
+package.json(2,22): error TS1005: '}' expected.
+
+==== package.json (11 errors) ====
+    {
+    ~~
+!!! error TS1128: Declaration or statement expected.
+    ~~
+!!! error TS1128: Declaration or statement expected.
+        "type": "module",
+              ~
+!!! error TS1005: '}' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: ';' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1005: ';' expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1005: '}' expected.
+        "imports": {
+            "#/*.omg": "./src/*"
+        }
+    }
+    
+tsconfig.json(1,1): error TS1128: Declaration or statement expected.
+tsconfig.json(1,1): error TS1128: Declaration or statement expected.
+tsconfig.json(2,11): error TS1005: '}' expected.
+tsconfig.json(2,11): error TS1128: Declaration or statement expected.
+tsconfig.json(2,11): error TS1005: ';' expected.
+tsconfig.json(2,11): error TS1128: Declaration or statement expected.
+tsconfig.json(2,16): error TS1128: Declaration or statement expected.
+tsconfig.json(2,22): error TS1128: Declaration or statement expected.
+tsconfig.json(2,22): error TS1005: ';' expected.
+tsconfig.json(2,22): error TS1128: Declaration or statement expected.
+tsconfig.json(2,22): error TS1005: '}' expected.
+
+==== tsconfig.json (11 errors) ====
+    {
+    ~~
+!!! error TS1128: Declaration or statement expected.
+    ~~
+!!! error TS1128: Declaration or statement expected.
+        "compilerOptions": {
+              ~
+!!! error TS1005: '}' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: ';' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1005: ';' expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1005: '}' expected.
+            "module": "nodenext",
+            "moduleResolution": "nodenext",
+            "rootDir": "src",
+            "outDir": "dist"
+        },
+        "include": ["src"]
+    }
+    

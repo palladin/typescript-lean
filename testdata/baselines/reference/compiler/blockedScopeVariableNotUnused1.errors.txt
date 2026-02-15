@@ -1,0 +1,35 @@
+blockedScopeVariableNotUnused1(2,1): error TS1128: Declaration or statement expected.
+blockedScopeVariableNotUnused1(3,16): error TS1003: Identifier expected.
+blockedScopeVariableNotUnused1(3,18): error TS1128: Declaration or statement expected.
+blockedScopeVariableNotUnused1(3,18): error TS1005: ',' expected.
+blockedScopeVariableNotUnused1(3,18): error TS1128: Declaration or statement expected.
+blockedScopeVariableNotUnused1(3,18): error TS1005: ';' expected.
+blockedScopeVariableNotUnused1(3,18): error TS1128: Declaration or statement expected.
+blockedScopeVariableNotUnused1(3,18): error TS1005: '}' expected.
+
+==== blockedScopeVariableNotUnused1 (8 errors) ====
+    
+    export function foo() {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+      const _fn = () => {
+                   ~
+!!! error TS1003: Identifier expected.
+                     ~~
+!!! error TS1128: Declaration or statement expected.
+                     ~~
+!!! error TS1005: ',' expected.
+                     ~~
+!!! error TS1128: Declaration or statement expected.
+                     ~~
+!!! error TS1005: ';' expected.
+                     ~~
+!!! error TS1128: Declaration or statement expected.
+                     ~~
+!!! error TS1005: '}' expected.
+        ;(() => numFilesSelected)()
+      }
+    
+      const numFilesSelected = 1
+    }
+    

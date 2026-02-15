@@ -1,0 +1,2634 @@
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,1): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,8): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,12): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,15): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,15): error TS1005: ';' expected.
+incrementalConcurrentSafeAliasFollowing(1,15): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,15): error TS1005: '}' expected.
+incrementalConcurrentSafeAliasFollowing(1,16): error TS1005: ',' expected.
+incrementalConcurrentSafeAliasFollowing(1,23): error TS1005: ',' expected.
+incrementalConcurrentSafeAliasFollowing(1,28): error TS1003: Identifier expected.
+incrementalConcurrentSafeAliasFollowing(1,28): error TS1005: ',' expected.
+incrementalConcurrentSafeAliasFollowing(1,29): error TS1005: ',' expected.
+incrementalConcurrentSafeAliasFollowing(1,31): error TS1005: ',' expected.
+incrementalConcurrentSafeAliasFollowing(1,34): error TS1005: ',' expected.
+incrementalConcurrentSafeAliasFollowing(1,35): error TS1005: ',' expected.
+incrementalConcurrentSafeAliasFollowing(1,35): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,35): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,191): error TS1128: Declaration or statement expected.
+incrementalConcurrentSafeAliasFollowing(1,202): error TS1128: Declaration or statement expected.
+
+==== incrementalConcurrentSafeAliasFollowing (46 errors) ====
+    
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(1,1): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,5): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,9): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,12): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,12): error TS1005: ';' expected.
+/a.tsbuildinfo(2,12): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(2,12): error TS1005: '}' expected.
+/a.tsbuildinfo(2,13): error TS1005: ',' expected.
+/a.tsbuildinfo(2,20): error TS1005: ',' expected.
+/a.tsbuildinfo(3,3): error TS1003: Identifier expected.
+/a.tsbuildinfo(3,3): error TS1005: ',' expected.
+/a.tsbuildinfo(3,4): error TS1005: ',' expected.
+/a.tsbuildinfo(3,6): error TS1005: ',' expected.
+/a.tsbuildinfo(3,9): error TS1005: ',' expected.
+/a.tsbuildinfo(3,10): error TS1005: ',' expected.
+/a.tsbuildinfo(3,10): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(3,10): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(9,23): error TS1128: Declaration or statement expected.
+/a.tsbuildinfo(10,6): error TS1128: Declaration or statement expected.
+
+==== /a.tsbuildinfo (46 errors) ====
+    {
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~
+!!! error TS1128: Declaration or statement expected.
+      "version": "TEST",
+        ~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~
+!!! error TS1128: Declaration or statement expected.
+               ~
+!!! error TS1005: ';' expected.
+               ~
+!!! error TS1128: Declaration or statement expected.
+               ~
+!!! error TS1005: '}' expected.
+                ~~~~~~
+!!! error TS1005: ',' expected.
+                       ~~~
+!!! error TS1005: ',' expected.
+      "root": [ [ 8, 9 ] ],
+      ~
+!!! error TS1003: Identifier expected.
+      ~
+!!! error TS1005: ',' expected.
+       ~
+!!! error TS1005: ',' expected.
+         ~~
+!!! error TS1005: ',' expected.
+            ~
+!!! error TS1005: ',' expected.
+             ~
+!!! error TS1005: ',' expected.
+             ~
+!!! error TS1128: Declaration or statement expected.
+             ~
+!!! error TS1128: Declaration or statement expected.
+      "fileNames": [
+        "lib.d.ts",
+        "lib.es5.d.ts",
+        "lib.dom.d.ts",
+        "lib.webworker.importscripts.d.ts",
+        "lib.scripthost.d.ts",
+                          ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        "lib.decorators.d.ts",
+         ~~~~
+!!! error TS1128: Declaration or statement expected.
+        "lib.decorators.legacy.d.ts",
+        "./.src/file2.ts",
+        "./.src/file1.ts"
+      ],
+      "fileInfos": [
+        "8aa2344ef67b04dfd9aa23b0f29ffb31",
+        {
+          "version": "71cf8049ea8d435bcdf47408dac2525c",
+          "affectsGlobalScope": true,
+          "impliedNodeFormat": 1
+        },
+        {
+          "version": "9cf691967d2e0b0210f5864fdf1ad87a",
+          "affectsGlobalScope": true,
+          "impliedNodeFormat": 1
+        },
+        {
+          "version": "eb49c11101339d745cfc83e213607152",
+          "affectsGlobalScope": true,
+          "impliedNodeFormat": 1
+        },
+        {
+          "version": "a4fa81fccf6300a830a36517b5beb51f",
+          "affectsGlobalScope": true,
+          "impliedNodeFormat": 1
+        },
+        {
+          "version": "45c91c5f844a9ee1df11d1b71c484b0e",
+          "affectsGlobalScope": true,
+          "impliedNodeFormat": 1
+        },
+        {
+          "version": "39e009135c77d60baa790854b51d2195",
+          "affectsGlobalScope": true,
+          "impliedNodeFormat": 1
+        },
+        "ed441e10e1833cd4635f7c61645b7ee7",
+        "553372ff8498789eb6e91ea68f08e47a"
+      ],
+      "fileIdsList": [ [ 8 ] ],
+      "options": {
+        "newLine": 1,
+        "noErrorTruncation": true,
+        "skipDefaultLibCheck": true,
+        "tsBuildInfoFile": "./a.tsbuildinfo"
+      },
+      "referencedMap": [ [ 9, 1 ] ]
+    }
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,1): error TS1128: Declaration or statement expected.
+file1.ts(1,8): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,12): error TS1128: Declaration or statement expected.
+file1.ts(1,15): error TS1128: Declaration or statement expected.
+file1.ts(1,15): error TS1005: ';' expected.
+file1.ts(1,15): error TS1128: Declaration or statement expected.
+file1.ts(1,15): error TS1005: '}' expected.
+file1.ts(1,16): error TS1005: ',' expected.
+file1.ts(1,23): error TS1005: ',' expected.
+file1.ts(1,28): error TS1003: Identifier expected.
+file1.ts(1,28): error TS1005: ',' expected.
+file1.ts(1,29): error TS1005: ',' expected.
+file1.ts(1,31): error TS1005: ',' expected.
+file1.ts(1,34): error TS1005: ',' expected.
+file1.ts(1,35): error TS1005: ',' expected.
+file1.ts(1,35): error TS1128: Declaration or statement expected.
+file1.ts(1,35): error TS1128: Declaration or statement expected.
+file1.ts(4,1): error TS1128: Declaration or statement expected.
+file1.ts(4,12): error TS1128: Declaration or statement expected.
+
+==== file1.ts (46 errors) ====
+    // need an out of date but present buildinfo, chained export aliases,
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+                                  ~~
+!!! error TS1005: ',' expected.
+                                     ~
+!!! error TS1005: ',' expected.
+                                      ~
+!!! error TS1005: ',' expected.
+                                      ~
+!!! error TS1128: Declaration or statement expected.
+                                      ~
+!!! error TS1128: Declaration or statement expected.
+    // and enough files that the same checker is used for multiple files
+    // to trigger the race from typescript-go/#1470
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+    export type {b as c}
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,1): error TS1128: Declaration or statement expected.
+file2.ts(1,8): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(1,12): error TS1128: Declaration or statement expected.
+file2.ts(2,2): error TS1128: Declaration or statement expected.
+file2.ts(2,2): error TS1005: ';' expected.
+file2.ts(2,2): error TS1128: Declaration or statement expected.
+file2.ts(2,2): error TS1005: '}' expected.
+file2.ts(3,1): error TS1005: ',' expected.
+file2.ts(3,8): error TS1005: ',' expected.
+file2.ts(3,13): error TS1003: Identifier expected.
+file2.ts(3,13): error TS1005: ',' expected.
+file2.ts(3,14): error TS1005: ',' expected.
+file2.ts(3,16): error TS1005: ',' expected.
+file2.ts(3,19): error TS1005: ',' expected.
+file2.ts(3,20): error TS1005: ',' expected.
+file2.ts(3,20): error TS1128: Declaration or statement expected.
+file2.ts(3,20): error TS1128: Declaration or statement expected.
+file2.ts(4,155): error TS1128: Declaration or statement expected.
+file2.ts(4,166): error TS1128: Declaration or statement expected.
+
+==== file2.ts (46 errors) ====
+    const a = 1
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+               ~~
+!!! error TS1128: Declaration or statement expected.
+    
+     ~
+!!! error TS1128: Declaration or statement expected.
+     ~
+!!! error TS1005: ';' expected.
+     ~
+!!! error TS1128: Declaration or statement expected.
+     ~
+!!! error TS1005: '}' expected.
+    export type {a as b}
+    ~~~~~~
+!!! error TS1005: ',' expected.
+           ~~~~
+!!! error TS1005: ',' expected.
+                ~
+!!! error TS1003: Identifier expected.
+                ~
+!!! error TS1005: ',' expected.
+                 ~
+!!! error TS1005: ',' expected.
+                   ~~
+!!! error TS1005: ',' expected.
+                      ~
+!!! error TS1005: ',' expected.
+                       ~
+!!! error TS1005: ',' expected.
+                       ~
+!!! error TS1128: Declaration or statement expected.
+                       ~
+!!! error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,1): error TS1128: Declaration or statement expected.
+file0.ts(1,8): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,12): error TS1128: Declaration or statement expected.
+file0.ts(1,15): error TS1128: Declaration or statement expected.
+file0.ts(1,15): error TS1005: ';' expected.
+file0.ts(1,15): error TS1128: Declaration or statement expected.
+file0.ts(1,15): error TS1005: '}' expected.
+file0.ts(1,16): error TS1005: ',' expected.
+file0.ts(1,23): error TS1005: ',' expected.
+file0.ts(1,28): error TS1003: Identifier expected.
+file0.ts(1,28): error TS1005: ',' expected.
+file0.ts(1,29): error TS1005: ',' expected.
+file0.ts(2,1): error TS1005: ',' expected.
+file0.ts(3,2): error TS1005: ',' expected.
+file0.ts(3,3): error TS1005: ',' expected.
+file0.ts(3,3): error TS1128: Declaration or statement expected.
+file0.ts(3,3): error TS1128: Declaration or statement expected.
+file0.ts(4,138): error TS1128: Declaration or statement expected.
+file0.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file0.ts (46 errors) ====
+    import {c} from "./file1.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {c as d}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,1): error TS1128: Declaration or statement expected.
+file3.ts(1,8): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,12): error TS1128: Declaration or statement expected.
+file3.ts(1,15): error TS1128: Declaration or statement expected.
+file3.ts(1,15): error TS1005: ';' expected.
+file3.ts(1,15): error TS1128: Declaration or statement expected.
+file3.ts(1,15): error TS1005: '}' expected.
+file3.ts(1,16): error TS1005: ',' expected.
+file3.ts(1,23): error TS1005: ',' expected.
+file3.ts(1,28): error TS1003: Identifier expected.
+file3.ts(1,28): error TS1005: ',' expected.
+file3.ts(1,29): error TS1005: ',' expected.
+file3.ts(2,1): error TS1005: ',' expected.
+file3.ts(3,2): error TS1005: ',' expected.
+file3.ts(3,3): error TS1005: ',' expected.
+file3.ts(3,3): error TS1128: Declaration or statement expected.
+file3.ts(3,3): error TS1128: Declaration or statement expected.
+file3.ts(4,138): error TS1128: Declaration or statement expected.
+file3.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file3.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as e}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,1): error TS1128: Declaration or statement expected.
+file4.ts(1,8): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,12): error TS1128: Declaration or statement expected.
+file4.ts(1,15): error TS1128: Declaration or statement expected.
+file4.ts(1,15): error TS1005: ';' expected.
+file4.ts(1,15): error TS1128: Declaration or statement expected.
+file4.ts(1,15): error TS1005: '}' expected.
+file4.ts(1,16): error TS1005: ',' expected.
+file4.ts(1,23): error TS1005: ',' expected.
+file4.ts(1,28): error TS1003: Identifier expected.
+file4.ts(1,28): error TS1005: ',' expected.
+file4.ts(1,29): error TS1005: ',' expected.
+file4.ts(2,1): error TS1005: ',' expected.
+file4.ts(3,2): error TS1005: ',' expected.
+file4.ts(3,3): error TS1005: ',' expected.
+file4.ts(3,3): error TS1128: Declaration or statement expected.
+file4.ts(3,3): error TS1128: Declaration or statement expected.
+file4.ts(4,138): error TS1128: Declaration or statement expected.
+file4.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file4.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as f}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,1): error TS1128: Declaration or statement expected.
+file5.ts(1,8): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,12): error TS1128: Declaration or statement expected.
+file5.ts(1,15): error TS1128: Declaration or statement expected.
+file5.ts(1,15): error TS1005: ';' expected.
+file5.ts(1,15): error TS1128: Declaration or statement expected.
+file5.ts(1,15): error TS1005: '}' expected.
+file5.ts(1,16): error TS1005: ',' expected.
+file5.ts(1,23): error TS1005: ',' expected.
+file5.ts(1,28): error TS1003: Identifier expected.
+file5.ts(1,28): error TS1005: ',' expected.
+file5.ts(1,29): error TS1005: ',' expected.
+file5.ts(2,1): error TS1005: ',' expected.
+file5.ts(3,2): error TS1005: ',' expected.
+file5.ts(3,3): error TS1005: ',' expected.
+file5.ts(3,3): error TS1128: Declaration or statement expected.
+file5.ts(3,3): error TS1128: Declaration or statement expected.
+file5.ts(4,138): error TS1128: Declaration or statement expected.
+file5.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file5.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as g}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,1): error TS1128: Declaration or statement expected.
+file6.ts(1,8): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,12): error TS1128: Declaration or statement expected.
+file6.ts(1,15): error TS1128: Declaration or statement expected.
+file6.ts(1,15): error TS1005: ';' expected.
+file6.ts(1,15): error TS1128: Declaration or statement expected.
+file6.ts(1,15): error TS1005: '}' expected.
+file6.ts(1,16): error TS1005: ',' expected.
+file6.ts(1,23): error TS1005: ',' expected.
+file6.ts(1,28): error TS1003: Identifier expected.
+file6.ts(1,28): error TS1005: ',' expected.
+file6.ts(1,29): error TS1005: ',' expected.
+file6.ts(2,1): error TS1005: ',' expected.
+file6.ts(3,2): error TS1005: ',' expected.
+file6.ts(3,3): error TS1005: ',' expected.
+file6.ts(3,3): error TS1128: Declaration or statement expected.
+file6.ts(3,3): error TS1128: Declaration or statement expected.
+file6.ts(4,138): error TS1128: Declaration or statement expected.
+file6.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file6.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as h}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,1): error TS1128: Declaration or statement expected.
+file7.ts(1,8): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,12): error TS1128: Declaration or statement expected.
+file7.ts(1,15): error TS1128: Declaration or statement expected.
+file7.ts(1,15): error TS1005: ';' expected.
+file7.ts(1,15): error TS1128: Declaration or statement expected.
+file7.ts(1,15): error TS1005: '}' expected.
+file7.ts(1,16): error TS1005: ',' expected.
+file7.ts(1,23): error TS1005: ',' expected.
+file7.ts(1,28): error TS1003: Identifier expected.
+file7.ts(1,28): error TS1005: ',' expected.
+file7.ts(1,29): error TS1005: ',' expected.
+file7.ts(2,1): error TS1005: ',' expected.
+file7.ts(3,2): error TS1005: ',' expected.
+file7.ts(3,3): error TS1005: ',' expected.
+file7.ts(3,3): error TS1128: Declaration or statement expected.
+file7.ts(3,3): error TS1128: Declaration or statement expected.
+file7.ts(4,138): error TS1128: Declaration or statement expected.
+file7.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file7.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as i}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,1): error TS1128: Declaration or statement expected.
+file8.ts(1,8): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,12): error TS1128: Declaration or statement expected.
+file8.ts(1,15): error TS1128: Declaration or statement expected.
+file8.ts(1,15): error TS1005: ';' expected.
+file8.ts(1,15): error TS1128: Declaration or statement expected.
+file8.ts(1,15): error TS1005: '}' expected.
+file8.ts(1,16): error TS1005: ',' expected.
+file8.ts(1,23): error TS1005: ',' expected.
+file8.ts(1,28): error TS1003: Identifier expected.
+file8.ts(1,28): error TS1005: ',' expected.
+file8.ts(1,29): error TS1005: ',' expected.
+file8.ts(2,1): error TS1005: ',' expected.
+file8.ts(3,2): error TS1005: ',' expected.
+file8.ts(3,3): error TS1005: ',' expected.
+file8.ts(3,3): error TS1128: Declaration or statement expected.
+file8.ts(3,3): error TS1128: Declaration or statement expected.
+file8.ts(4,138): error TS1128: Declaration or statement expected.
+file8.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file8.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as j}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,1): error TS1128: Declaration or statement expected.
+file9.ts(1,8): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,12): error TS1128: Declaration or statement expected.
+file9.ts(1,15): error TS1128: Declaration or statement expected.
+file9.ts(1,15): error TS1005: ';' expected.
+file9.ts(1,15): error TS1128: Declaration or statement expected.
+file9.ts(1,15): error TS1005: '}' expected.
+file9.ts(1,16): error TS1005: ',' expected.
+file9.ts(1,23): error TS1005: ',' expected.
+file9.ts(1,28): error TS1003: Identifier expected.
+file9.ts(1,28): error TS1005: ',' expected.
+file9.ts(1,29): error TS1005: ',' expected.
+file9.ts(2,1): error TS1005: ',' expected.
+file9.ts(3,2): error TS1005: ',' expected.
+file9.ts(3,3): error TS1005: ',' expected.
+file9.ts(3,3): error TS1128: Declaration or statement expected.
+file9.ts(3,3): error TS1128: Declaration or statement expected.
+file9.ts(4,138): error TS1128: Declaration or statement expected.
+file9.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file9.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as k}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,1): error TS1128: Declaration or statement expected.
+file10.ts(1,8): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,12): error TS1128: Declaration or statement expected.
+file10.ts(1,15): error TS1128: Declaration or statement expected.
+file10.ts(1,15): error TS1005: ';' expected.
+file10.ts(1,15): error TS1128: Declaration or statement expected.
+file10.ts(1,15): error TS1005: '}' expected.
+file10.ts(1,16): error TS1005: ',' expected.
+file10.ts(1,23): error TS1005: ',' expected.
+file10.ts(1,28): error TS1003: Identifier expected.
+file10.ts(1,28): error TS1005: ',' expected.
+file10.ts(1,29): error TS1005: ',' expected.
+file10.ts(2,1): error TS1005: ',' expected.
+file10.ts(3,2): error TS1005: ',' expected.
+file10.ts(3,3): error TS1005: ',' expected.
+file10.ts(3,3): error TS1128: Declaration or statement expected.
+file10.ts(3,3): error TS1128: Declaration or statement expected.
+file10.ts(4,138): error TS1128: Declaration or statement expected.
+file10.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file10.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as l}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,1): error TS1128: Declaration or statement expected.
+file11.ts(1,8): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,12): error TS1128: Declaration or statement expected.
+file11.ts(1,15): error TS1128: Declaration or statement expected.
+file11.ts(1,15): error TS1005: ';' expected.
+file11.ts(1,15): error TS1128: Declaration or statement expected.
+file11.ts(1,15): error TS1005: '}' expected.
+file11.ts(1,16): error TS1005: ',' expected.
+file11.ts(1,23): error TS1005: ',' expected.
+file11.ts(1,28): error TS1003: Identifier expected.
+file11.ts(1,28): error TS1005: ',' expected.
+file11.ts(1,29): error TS1005: ',' expected.
+file11.ts(2,1): error TS1005: ',' expected.
+file11.ts(3,2): error TS1005: ',' expected.
+file11.ts(3,3): error TS1005: ',' expected.
+file11.ts(3,3): error TS1128: Declaration or statement expected.
+file11.ts(3,3): error TS1128: Declaration or statement expected.
+file11.ts(4,138): error TS1128: Declaration or statement expected.
+file11.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file11.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as m}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,1): error TS1128: Declaration or statement expected.
+file12.ts(1,8): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,12): error TS1128: Declaration or statement expected.
+file12.ts(1,15): error TS1128: Declaration or statement expected.
+file12.ts(1,15): error TS1005: ';' expected.
+file12.ts(1,15): error TS1128: Declaration or statement expected.
+file12.ts(1,15): error TS1005: '}' expected.
+file12.ts(1,16): error TS1005: ',' expected.
+file12.ts(1,23): error TS1005: ',' expected.
+file12.ts(1,28): error TS1003: Identifier expected.
+file12.ts(1,28): error TS1005: ',' expected.
+file12.ts(1,29): error TS1005: ',' expected.
+file12.ts(2,1): error TS1005: ',' expected.
+file12.ts(3,2): error TS1005: ',' expected.
+file12.ts(3,3): error TS1005: ',' expected.
+file12.ts(3,3): error TS1128: Declaration or statement expected.
+file12.ts(3,3): error TS1128: Declaration or statement expected.
+file12.ts(4,138): error TS1128: Declaration or statement expected.
+file12.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file12.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as n}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,1): error TS1128: Declaration or statement expected.
+file13.ts(1,8): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,12): error TS1128: Declaration or statement expected.
+file13.ts(1,15): error TS1128: Declaration or statement expected.
+file13.ts(1,15): error TS1005: ';' expected.
+file13.ts(1,15): error TS1128: Declaration or statement expected.
+file13.ts(1,15): error TS1005: '}' expected.
+file13.ts(1,16): error TS1005: ',' expected.
+file13.ts(1,23): error TS1005: ',' expected.
+file13.ts(1,28): error TS1003: Identifier expected.
+file13.ts(1,28): error TS1005: ',' expected.
+file13.ts(1,29): error TS1005: ',' expected.
+file13.ts(2,1): error TS1005: ',' expected.
+file13.ts(3,2): error TS1005: ',' expected.
+file13.ts(3,3): error TS1005: ',' expected.
+file13.ts(3,3): error TS1128: Declaration or statement expected.
+file13.ts(3,3): error TS1128: Declaration or statement expected.
+file13.ts(4,138): error TS1128: Declaration or statement expected.
+file13.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file13.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as o}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,1): error TS1128: Declaration or statement expected.
+file14.ts(1,8): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,12): error TS1128: Declaration or statement expected.
+file14.ts(1,15): error TS1128: Declaration or statement expected.
+file14.ts(1,15): error TS1005: ';' expected.
+file14.ts(1,15): error TS1128: Declaration or statement expected.
+file14.ts(1,15): error TS1005: '}' expected.
+file14.ts(1,16): error TS1005: ',' expected.
+file14.ts(1,23): error TS1005: ',' expected.
+file14.ts(1,28): error TS1003: Identifier expected.
+file14.ts(1,28): error TS1005: ',' expected.
+file14.ts(1,29): error TS1005: ',' expected.
+file14.ts(2,1): error TS1005: ',' expected.
+file14.ts(3,2): error TS1005: ',' expected.
+file14.ts(3,3): error TS1005: ',' expected.
+file14.ts(3,3): error TS1128: Declaration or statement expected.
+file14.ts(3,3): error TS1128: Declaration or statement expected.
+file14.ts(4,138): error TS1128: Declaration or statement expected.
+file14.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file14.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as p}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,1): error TS1128: Declaration or statement expected.
+file15.ts(1,8): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,12): error TS1128: Declaration or statement expected.
+file15.ts(1,15): error TS1128: Declaration or statement expected.
+file15.ts(1,15): error TS1005: ';' expected.
+file15.ts(1,15): error TS1128: Declaration or statement expected.
+file15.ts(1,15): error TS1005: '}' expected.
+file15.ts(1,16): error TS1005: ',' expected.
+file15.ts(1,23): error TS1005: ',' expected.
+file15.ts(1,28): error TS1003: Identifier expected.
+file15.ts(1,28): error TS1005: ',' expected.
+file15.ts(1,29): error TS1005: ',' expected.
+file15.ts(2,1): error TS1005: ',' expected.
+file15.ts(3,2): error TS1005: ',' expected.
+file15.ts(3,3): error TS1005: ',' expected.
+file15.ts(3,3): error TS1128: Declaration or statement expected.
+file15.ts(3,3): error TS1128: Declaration or statement expected.
+file15.ts(4,138): error TS1128: Declaration or statement expected.
+file15.ts(4,149): error TS1128: Declaration or statement expected.
+
+==== file15.ts (46 errors) ====
+    import {b} from "./file2.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+                                ~
+!!! error TS1005: ',' expected.
+    
+    ~~
+!!! error TS1005: ',' expected.
+    export type {b as q}
+     ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1005: ',' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,1): error TS1128: Declaration or statement expected.
+barrel.ts(1,8): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,12): error TS1128: Declaration or statement expected.
+barrel.ts(1,15): error TS1128: Declaration or statement expected.
+barrel.ts(1,15): error TS1005: ';' expected.
+barrel.ts(1,15): error TS1128: Declaration or statement expected.
+barrel.ts(1,15): error TS1005: '}' expected.
+barrel.ts(1,16): error TS1005: ',' expected.
+barrel.ts(1,23): error TS1005: ',' expected.
+barrel.ts(1,28): error TS1003: Identifier expected.
+barrel.ts(1,28): error TS1005: ',' expected.
+barrel.ts(2,1): error TS1005: ',' expected.
+barrel.ts(2,3): error TS1005: ',' expected.
+barrel.ts(2,6): error TS1005: ',' expected.
+barrel.ts(2,7): error TS1005: ',' expected.
+barrel.ts(2,7): error TS1128: Declaration or statement expected.
+barrel.ts(2,7): error TS1128: Declaration or statement expected.
+barrel.ts(7,23): error TS1128: Declaration or statement expected.
+barrel.ts(8,6): error TS1128: Declaration or statement expected.
+
+==== barrel.ts (46 errors) ====
+    export * from "./file0.js"
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: '}' expected.
+                   ~~~~~~
+!!! error TS1005: ',' expected.
+                          ~~~~
+!!! error TS1005: ',' expected.
+                               ~
+!!! error TS1003: Identifier expected.
+                               ~
+!!! error TS1005: ',' expected.
+    export * from "./file1.js"
+    ~
+!!! error TS1005: ',' expected.
+      ~~
+!!! error TS1005: ',' expected.
+         ~
+!!! error TS1005: ',' expected.
+          ~
+!!! error TS1005: ',' expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+    export * from "./file2.js"
+    export * from "./file3.js"
+    export * from "./file4.js"
+    export * from "./file5.js"
+    export * from "./file6.js"
+                          ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    export * from "./file7.js"
+         ~~~~
+!!! error TS1128: Declaration or statement expected.
+    export * from "./file8.js"
+    export * from "./file9.js"
+    export * from "./file10.js"
+    export * from "./file11.js"
+    export * from "./file12.js"
+    export * from "./file13.js"
+    export * from "./file14.js"
+    export * from "./file15.js"

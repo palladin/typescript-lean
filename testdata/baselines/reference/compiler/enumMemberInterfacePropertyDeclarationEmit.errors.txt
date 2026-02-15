@@ -1,0 +1,68 @@
+enumMemberInterfacePropertyDeclarationEmit(1,1): error TS1128: Declaration or statement expected.
+enumMemberInterfacePropertyDeclarationEmit(1,1): error TS1128: Declaration or statement expected.
+enumMemberInterfacePropertyDeclarationEmit(1,8): error TS1128: Declaration or statement expected.
+enumMemberInterfacePropertyDeclarationEmit(1,8): error TS1128: Declaration or statement expected.
+enumMemberInterfacePropertyDeclarationEmit(1,17): error TS1005: ';' expected.
+enumMemberInterfacePropertyDeclarationEmit(1,22): error TS1128: Declaration or statement expected.
+enumMemberInterfacePropertyDeclarationEmit(1,36): error TS1003: Identifier expected.
+
+==== enumMemberInterfacePropertyDeclarationEmit (7 errors) ====
+    
+enum.ts(1,1): error TS1128: Declaration or statement expected.
+enum.ts(1,1): error TS1128: Declaration or statement expected.
+enum.ts(1,8): error TS1128: Declaration or statement expected.
+enum.ts(1,8): error TS1128: Declaration or statement expected.
+enum.ts(1,17): error TS1005: ';' expected.
+enum.ts(2,4): error TS1128: Declaration or statement expected.
+enum.ts(3,1): error TS1003: Identifier expected.
+
+==== enum.ts (7 errors) ====
+    export enum WWMF{
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                    ~
+!!! error TS1005: ';' expected.
+        AAR = 'AAR',
+       ~~~~
+!!! error TS1128: Declaration or statement expected.
+    }
+    ~
+!!! error TS1003: Identifier expected.
+    
+base.ts(1,1): error TS1128: Declaration or statement expected.
+base.ts(1,1): error TS1128: Declaration or statement expected.
+base.ts(1,8): error TS1128: Declaration or statement expected.
+base.ts(1,8): error TS1128: Declaration or statement expected.
+base.ts(1,17): error TS1005: ';' expected.
+base.ts(1,22): error TS1128: Declaration or statement expected.
+base.ts(1,36): error TS1003: Identifier expected.
+
+==== base.ts (7 errors) ====
+    import type { WWMF } from "./enum";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                    ~
+!!! error TS1005: ';' expected.
+                         ~~~~
+!!! error TS1128: Declaration or statement expected.
+                                       ~
+!!! error TS1003: Identifier expected.
+    
+    interface WWMFMap {
+        [WWMF.AAR]?: any;
+    }
+    
+    export const wwmfMap: WWMFMap = {};
+    

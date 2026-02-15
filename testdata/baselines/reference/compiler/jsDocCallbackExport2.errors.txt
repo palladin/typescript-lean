@@ -1,0 +1,16 @@
+jsDocCallbackExport2(2,72): error TS1128: Declaration or statement expected.
+
+==== jsDocCallbackExport2 (1 error) ====
+    
+x.js(6,1): error TS1128: Declaration or statement expected.
+
+==== x.js (1 error) ====
+    /**
+     * @callback Foo
+     * @param {string} x
+     * @returns {number}
+     */
+    export function f1() {}
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    

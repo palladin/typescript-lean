@@ -1,0 +1,56 @@
+allowSyntheticDefaultImports9(1,1): error TS1128: Declaration or statement expected.
+allowSyntheticDefaultImports9(1,1): error TS1128: Declaration or statement expected.
+allowSyntheticDefaultImports9(1,10): error TS1128: Declaration or statement expected.
+allowSyntheticDefaultImports9(1,10): error TS1128: Declaration or statement expected.
+allowSyntheticDefaultImports9(1,10): error TS1005: '}' expected.
+allowSyntheticDefaultImports9(1,27): error TS1128: Declaration or statement expected.
+
+==== allowSyntheticDefaultImports9 (6 errors) ====
+    
+b.d.ts(1,1): error TS1128: Declaration or statement expected.
+b.d.ts(1,1): error TS1128: Declaration or statement expected.
+b.d.ts(1,10): error TS1128: Declaration or statement expected.
+b.d.ts(1,10): error TS1128: Declaration or statement expected.
+b.d.ts(1,10): error TS1005: '}' expected.
+b.d.ts(3,1): error TS1128: Declaration or statement expected.
+
+==== b.d.ts (6 errors) ====
+    export function foo();
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~~~~
+!!! error TS1005: '}' expected.
+    
+    export function bar();
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+a.ts(1,1): error TS1128: Declaration or statement expected.
+a.ts(1,1): error TS1128: Declaration or statement expected.
+a.ts(1,10): error TS1128: Declaration or statement expected.
+a.ts(1,10): error TS1128: Declaration or statement expected.
+a.ts(1,10): error TS1005: '}' expected.
+a.ts(1,27): error TS1128: Declaration or statement expected.
+
+==== a.ts (6 errors) ====
+    import { default as Foo } from "./b";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~~~~
+!!! error TS1005: '}' expected.
+                              ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    Foo.bar();
+    Foo.foo();

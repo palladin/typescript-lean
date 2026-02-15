@@ -1,0 +1,155 @@
+reachabilityChecks11(5,1): error TS1128: Declaration or statement expected.
+reachabilityChecks11(5,10): error TS1005: ';' expected.
+reachabilityChecks11(10,1): error TS1128: Declaration or statement expected.
+reachabilityChecks11(10,11): error TS1005: ';' expected.
+reachabilityChecks11(12,5): error TS1128: Declaration or statement expected.
+reachabilityChecks11(12,14): error TS1005: ';' expected.
+reachabilityChecks11(13,9): error TS1128: Declaration or statement expected.
+reachabilityChecks11(13,21): error TS1005: ';' expected.
+reachabilityChecks11(17,1): error TS1128: Declaration or statement expected.
+reachabilityChecks11(17,11): error TS1005: ';' expected.
+reachabilityChecks11(19,5): error TS1128: Declaration or statement expected.
+reachabilityChecks11(19,14): error TS1005: ';' expected.
+reachabilityChecks11(24,1): error TS1128: Declaration or statement expected.
+reachabilityChecks11(24,11): error TS1005: ';' expected.
+reachabilityChecks11(26,5): error TS1128: Declaration or statement expected.
+reachabilityChecks11(29,1): error TS1128: Declaration or statement expected.
+reachabilityChecks11(29,11): error TS1005: ';' expected.
+reachabilityChecks11(31,5): error TS1128: Declaration or statement expected.
+reachabilityChecks11(31,14): error TS1005: ';' expected.
+reachabilityChecks11(32,20): error TS1005: ',' expected.
+reachabilityChecks11(32,22): error TS1003: Identifier expected.
+reachabilityChecks11(32,22): error TS1005: ',' expected.
+reachabilityChecks11(32,24): error TS1005: ',' expected.
+reachabilityChecks11(32,26): error TS1128: Declaration or statement expected.
+reachabilityChecks11(32,26): error TS1005: ',' expected.
+reachabilityChecks11(34,1): error TS1128: Declaration or statement expected.
+
+==== reachabilityChecks11 (26 errors) ====
+    
+    // while (true);
+    var x = 1;
+    
+    module A {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~
+!!! error TS1005: ';' expected.
+        while (true);
+        let x;
+    }
+    
+    module A1 {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: ';' expected.
+        do {} while(true);
+        module A {
+        ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~
+!!! error TS1005: ';' expected.
+            interface F {}
+            ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                        ~
+!!! error TS1005: ';' expected.
+        }
+    }
+    
+    module A2 {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: ';' expected.
+        while (true);
+        module A {
+        ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~
+!!! error TS1005: ';' expected.
+            var x = 1;
+        }
+    }
+    
+    module A3 {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: ';' expected.
+        while (true);
+        type T = string;
+        ~~~~
+!!! error TS1128: Declaration or statement expected.
+    }
+    
+    module A4 {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: ';' expected.
+        while (true);
+        module A {
+        ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~
+!!! error TS1005: ';' expected.
+            const enum E { X }
+                       ~
+!!! error TS1005: ',' expected.
+                         ~
+!!! error TS1003: Identifier expected.
+                         ~
+!!! error TS1005: ',' expected.
+                           ~
+!!! error TS1005: ',' expected.
+                             ~
+!!! error TS1128: Declaration or statement expected.
+                             ~
+!!! error TS1005: ',' expected.
+        }
+    }
+    ~
+!!! error TS1128: Declaration or statement expected.
+    
+    function f1(x) {
+        if (x) {
+            return;
+        }
+        else {
+            throw new Error("123");
+        }
+        var x;
+    }
+    
+    function f2() {
+        return;
+        class A {
+        }
+    }
+    
+    module B {
+        for (; ;);
+        module C {
+        }
+    }
+    
+    function f3() {
+        do {
+        } while (true);
+        enum E {
+            X = 1
+        }
+    }
+    
+    function f4() {
+        if (true) {
+            throw new Error();
+        }
+        const enum E {
+            X = 1
+        }
+    }
+    
+    

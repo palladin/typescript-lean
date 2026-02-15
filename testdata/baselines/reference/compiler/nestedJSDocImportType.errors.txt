@@ -1,0 +1,30 @@
+nestedJSDocImportType(1,1): error TS1128: Declaration or statement expected.
+nestedJSDocImportType(1,7): error TS1128: Declaration or statement expected.
+
+==== nestedJSDocImportType (2 errors) ====
+    
+a.js(1,1): error TS1128: Declaration or statement expected.
+a.js(1,7): error TS1128: Declaration or statement expected.
+
+==== a.js (2 errors) ====
+    /** @typedef {string} A */
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+    
+b.js(1,1): error TS1128: Declaration or statement expected.
+b.js(1,7): error TS1128: Declaration or statement expected.
+
+==== b.js (2 errors) ====
+    module.exports = {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+      create() {
+        /** @param {import("./a").A} x */
+        function f(x) {}
+        return f("hi");
+      }
+    }

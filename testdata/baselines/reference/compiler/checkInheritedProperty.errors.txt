@@ -1,0 +1,34 @@
+checkInheritedProperty(5,1): error TS1128: Declaration or statement expected.
+checkInheritedProperty(5,31): error TS1005: ';' expected.
+checkInheritedProperty(5,31): error TS1005: ',' expected.
+checkInheritedProperty(5,31): error TS1128: Declaration or statement expected.
+checkInheritedProperty(5,32): error TS1003: Identifier expected.
+checkInheritedProperty(5,34): error TS1128: Declaration or statement expected.
+checkInheritedProperty(5,34): error TS1005: ';' expected.
+
+==== checkInheritedProperty (7 errors) ====
+    
+    class Base {
+    }
+    
+    declare const BaseFactory: new() => Base & { c: string }
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                  ~
+!!! error TS1005: ';' expected.
+                                  ~
+!!! error TS1005: ',' expected.
+                                  ~
+!!! error TS1128: Declaration or statement expected.
+                                   ~
+!!! error TS1003: Identifier expected.
+                                     ~~
+!!! error TS1128: Declaration or statement expected.
+                                     ~~
+!!! error TS1005: ';' expected.
+    
+    class Derived extends BaseFactory {
+        a = this.b
+        b = "abc"
+    }
+    

@@ -1,0 +1,8 @@
+settingsSimpleTest(2,1): error TS1128: Declaration or statement expected.
+
+==== settingsSimpleTest (1 error) ====
+    
+    export {};
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    const x: string = undefined;

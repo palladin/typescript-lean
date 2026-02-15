@@ -1,0 +1,29 @@
+constEnumInEmbeddedStatements(4,35): error TS1005: ',' expected.
+constEnumInEmbeddedStatements(4,37): error TS1005: ',' expected.
+constEnumInEmbeddedStatements(4,37): error TS1003: Identifier expected.
+constEnumInEmbeddedStatements(4,39): error TS1005: ',' expected.
+constEnumInEmbeddedStatements(4,45): error TS1128: Declaration or statement expected.
+constEnumInEmbeddedStatements(4,45): error TS1005: ',' expected.
+constEnumInEmbeddedStatements(5,1): error TS1128: Declaration or statement expected.
+
+==== constEnumInEmbeddedStatements (7 errors) ====
+    
+    function t(x: number) {
+        if (x)
+            /* before E */ const enum E { A = 1 } /* after E */
+                                      ~
+!!! error TS1005: ',' expected.
+                                        ~
+!!! error TS1005: ',' expected.
+                                        ~
+!!! error TS1003: Identifier expected.
+                                          ~
+!!! error TS1005: ',' expected.
+                                                ~
+!!! error TS1128: Declaration or statement expected.
+                                                ~
+!!! error TS1005: ',' expected.
+    }
+    ~
+!!! error TS1128: Declaration or statement expected.
+    

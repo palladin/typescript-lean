@@ -1,0 +1,45 @@
+exhaustiveSwitchStatementsGeneric1(4,1): error TS1128: Declaration or statement expected.
+exhaustiveSwitchStatementsGeneric1(4,13): error TS1005: ';' expected.
+exhaustiveSwitchStatementsGeneric1(5,3): error TS1128: Declaration or statement expected.
+exhaustiveSwitchStatementsGeneric1(5,7): error TS1128: Declaration or statement expected.
+exhaustiveSwitchStatementsGeneric1(5,7): error TS1128: Declaration or statement expected.
+exhaustiveSwitchStatementsGeneric1(5,7): error TS1005: '}' expected.
+
+==== exhaustiveSwitchStatementsGeneric1 (6 errors) ====
+    
+    // https://github.com/microsoft/typescript-go/issues/986
+    
+    interface A {
+    ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+      type: "a";
+      ~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1005: '}' expected.
+    }
+    
+    interface B {
+      type: "b";
+    }
+    
+    interface Types {
+      a: A;
+      b: B;
+    }
+    
+    export function exhaustiveSwitch<T extends keyof Types>(type: T): boolean {
+      switch (type) {
+        case "a":
+          return true;
+        case "b":
+          return true;
+      }
+    }
+    

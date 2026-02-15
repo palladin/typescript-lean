@@ -1,0 +1,88 @@
+erasableSyntaxOnlyJS(1,1): error TS1128: Declaration or statement expected.
+erasableSyntaxOnlyJS(1,1): error TS1128: Declaration or statement expected.
+erasableSyntaxOnlyJS(2,6): error TS1128: Declaration or statement expected.
+erasableSyntaxOnlyJS(2,6): error TS1128: Declaration or statement expected.
+erasableSyntaxOnlyJS(3,4): error TS1128: Declaration or statement expected.
+erasableSyntaxOnlyJS(3,39): error TS1128: Declaration or statement expected.
+
+==== erasableSyntaxOnlyJS (6 errors) ====
+    
+    ~
+!!! error TS1128: Declaration or statement expected.
+    ~
+!!! error TS1128: Declaration or statement expected.
+    // JavaScript files should not have erasableSyntaxOnly checks
+         ~
+!!! error TS1128: Declaration or statement expected.
+         ~
+!!! error TS1128: Declaration or statement expected.
+    // because they are already "erased" by definition.
+       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                          ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+bar.cjs(1,1): error TS1128: Declaration or statement expected.
+bar.cjs(1,1): error TS1128: Declaration or statement expected.
+bar.cjs(1,7): error TS1128: Declaration or statement expected.
+bar.cjs(1,7): error TS1128: Declaration or statement expected.
+bar.cjs(4,36): error TS1128: Declaration or statement expected.
+bar.cjs(4,71): error TS1128: Declaration or statement expected.
+
+==== bar.cjs (6 errors) ====
+    module.exports = {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+        a: 1,
+    }
+    
+foo.js(1,1): error TS1128: Declaration or statement expected.
+foo.js(1,1): error TS1128: Declaration or statement expected.
+foo.js(1,7): error TS1128: Declaration or statement expected.
+foo.js(1,7): error TS1128: Declaration or statement expected.
+foo.js(4,36): error TS1128: Declaration or statement expected.
+foo.js(4,71): error TS1128: Declaration or statement expected.
+
+==== foo.js (6 errors) ====
+    module.exports = {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+        b: 2,
+    }
+    
+index.ts(1,1): error TS1128: Declaration or statement expected.
+index.ts(1,1): error TS1128: Declaration or statement expected.
+index.ts(1,7): error TS1128: Declaration or statement expected.
+index.ts(1,7): error TS1128: Declaration or statement expected.
+index.ts(2,1): error TS1128: Declaration or statement expected.
+index.ts(3,1): error TS1128: Declaration or statement expected.
+
+==== index.ts (6 errors) ====
+    // These should still error because they are in a TypeScript file
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+    import bar = require("./bar.cjs");
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    import foo = require("./foo.js");
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    

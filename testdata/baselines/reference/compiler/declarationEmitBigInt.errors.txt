@@ -1,0 +1,26 @@
+declarationEmitBigInt(1,1): error TS1128: Declaration or statement expected.
+declarationEmitBigInt(1,22): error TS1128: Declaration or statement expected.
+declarationEmitBigInt(1,44): error TS1128: Declaration or statement expected.
+declarationEmitBigInt(1,66): error TS1128: Declaration or statement expected.
+
+==== declarationEmitBigInt (4 errors) ====
+    
+a.ts(1,1): error TS1128: Declaration or statement expected.
+a.ts(2,1): error TS1128: Declaration or statement expected.
+a.ts(3,1): error TS1128: Declaration or statement expected.
+a.ts(4,1): error TS1128: Declaration or statement expected.
+
+==== a.ts (4 errors) ====
+    export const a = 0n;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    export const b = 10n;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    export const c = -0n;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    export const d = -10n;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    

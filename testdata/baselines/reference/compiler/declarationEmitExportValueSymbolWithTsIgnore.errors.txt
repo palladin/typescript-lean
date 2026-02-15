@@ -1,0 +1,103 @@
+declarationEmitExportValueSymbolWithTsIgnore(1,1): error TS1128: Declaration or statement expected.
+declarationEmitExportValueSymbolWithTsIgnore(1,8): error TS1128: Declaration or statement expected.
+declarationEmitExportValueSymbolWithTsIgnore(1,39): error TS1005: ',' expected.
+declarationEmitExportValueSymbolWithTsIgnore(1,47): error TS1128: Declaration or statement expected.
+declarationEmitExportValueSymbolWithTsIgnore(1,54): error TS1128: Declaration or statement expected.
+declarationEmitExportValueSymbolWithTsIgnore(1,68): error TS1128: Declaration or statement expected.
+declarationEmitExportValueSymbolWithTsIgnore(1,88): error TS1128: Declaration or statement expected.
+declarationEmitExportValueSymbolWithTsIgnore(1,97): error TS1003: Identifier expected.
+declarationEmitExportValueSymbolWithTsIgnore(1,102): error TS1003: Identifier expected.
+declarationEmitExportValueSymbolWithTsIgnore(1,103): error TS1005: ';' expected.
+declarationEmitExportValueSymbolWithTsIgnore(1,103): error TS1128: Declaration or statement expected.
+
+==== declarationEmitExportValueSymbolWithTsIgnore (11 errors) ====
+    
+node_modules/lib/index.d.ts(1,1): error TS1128: Declaration or statement expected.
+node_modules/lib/index.d.ts(1,8): error TS1128: Declaration or statement expected.
+node_modules/lib/index.d.ts(1,39): error TS1005: ',' expected.
+node_modules/lib/index.d.ts(2,1): error TS1128: Declaration or statement expected.
+node_modules/lib/index.d.ts(2,8): error TS1128: Declaration or statement expected.
+node_modules/lib/index.d.ts(2,22): error TS1128: Declaration or statement expected.
+node_modules/lib/index.d.ts(2,42): error TS1128: Declaration or statement expected.
+node_modules/lib/index.d.ts(3,5): error TS1003: Identifier expected.
+node_modules/lib/index.d.ts(3,10): error TS1003: Identifier expected.
+node_modules/lib/index.d.ts(3,11): error TS1005: ';' expected.
+node_modules/lib/index.d.ts(3,11): error TS1128: Declaration or statement expected.
+
+==== node_modules/lib/index.d.ts (11 errors) ====
+    export declare const MySymbol: unique symbol;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                          ~~~~~~
+!!! error TS1005: ',' expected.
+    export declare function createService<T>(): {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                         ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                             ~~~~
+!!! error TS1128: Declaration or statement expected.
+        new (): {
+        ~~~
+!!! error TS1003: Identifier expected.
+             ~
+!!! error TS1003: Identifier expected.
+              ~
+!!! error TS1005: ';' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+            [MySymbol](): T | undefined;
+        };
+    };
+    
+client.ts(1,1): error TS1128: Declaration or statement expected.
+client.ts(1,8): error TS1128: Declaration or statement expected.
+client.ts(1,39): error TS1005: ',' expected.
+client.ts(1,47): error TS1128: Declaration or statement expected.
+client.ts(1,54): error TS1128: Declaration or statement expected.
+client.ts(2,1): error TS1128: Declaration or statement expected.
+client.ts(2,21): error TS1128: Declaration or statement expected.
+client.ts(2,30): error TS1003: Identifier expected.
+client.ts(3,3): error TS1003: Identifier expected.
+client.ts(3,4): error TS1005: ';' expected.
+client.ts(3,4): error TS1128: Declaration or statement expected.
+
+==== client.ts (11 errors) ====
+    // @ts-ignore Import needed for type visibility but appears unused
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                          ~~~~~~
+!!! error TS1005: ',' expected.
+                                                  ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                                         ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    import { MySymbol } from "lib";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                        ~~~~
+!!! error TS1128: Declaration or statement expected.
+                                 ~~~
+!!! error TS1003: Identifier expected.
+    import { createService } from "lib";
+      ~
+!!! error TS1003: Identifier expected.
+       ~
+!!! error TS1005: ';' expected.
+       ~
+!!! error TS1128: Declaration or statement expected.
+    
+    // The extends clause references the factory result which uses MySymbol
+    // This should trigger symbol accessibility check for MySymbol
+    export class Client extends createService<string>() {
+        doSomething(): string {
+            return "hello";
+        }
+    }
+    

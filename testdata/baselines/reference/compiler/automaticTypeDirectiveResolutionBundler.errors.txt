@@ -1,0 +1,261 @@
+automaticTypeDirectiveResolutionBundler(1,13): error TS1128: Declaration or statement expected.
+automaticTypeDirectiveResolutionBundler(1,13): error TS1005: ';' expected.
+automaticTypeDirectiveResolutionBundler(1,13): error TS1128: Declaration or statement expected.
+automaticTypeDirectiveResolutionBundler(1,13): error TS1005: '}' expected.
+automaticTypeDirectiveResolutionBundler(1,77): error TS1128: Declaration or statement expected.
+automaticTypeDirectiveResolutionBundler(1,84): error TS1128: Declaration or statement expected.
+automaticTypeDirectiveResolutionBundler(1,87): error TS1128: Declaration or statement expected.
+automaticTypeDirectiveResolutionBundler(1,94): error TS1128: Declaration or statement expected.
+automaticTypeDirectiveResolutionBundler(1,102): error TS1005: ';' expected.
+automaticTypeDirectiveResolutionBundler(1,112): error TS1005: ';' expected.
+automaticTypeDirectiveResolutionBundler(1,131): error TS1128: Declaration or statement expected.
+automaticTypeDirectiveResolutionBundler(1,146): error TS1005: ';' expected.
+automaticTypeDirectiveResolutionBundler(1,182): error TS1128: Declaration or statement expected.
+automaticTypeDirectiveResolutionBundler(1,197): error TS1005: ';' expected.
+automaticTypeDirectiveResolutionBundler(1,228): error TS1128: Declaration or statement expected.
+automaticTypeDirectiveResolutionBundler(1,235): error TS1128: Declaration or statement expected.
+automaticTypeDirectiveResolutionBundler(1,252): error TS1128: Declaration or statement expected.
+
+==== automaticTypeDirectiveResolutionBundler (17 errors) ====
+    
+/node_modules/pkg/package.json(2,11): error TS1128: Declaration or statement expected.
+/node_modules/pkg/package.json(2,11): error TS1005: ';' expected.
+/node_modules/pkg/package.json(2,11): error TS1128: Declaration or statement expected.
+/node_modules/pkg/package.json(2,11): error TS1005: '}' expected.
+/node_modules/pkg/package.json(5,15): error TS1128: Declaration or statement expected.
+/node_modules/pkg/package.json(6,7): error TS1128: Declaration or statement expected.
+/node_modules/pkg/package.json(6,10): error TS1128: Declaration or statement expected.
+/node_modules/pkg/package.json(6,17): error TS1128: Declaration or statement expected.
+/node_modules/pkg/package.json(7,1): error TS1005: ';' expected.
+/node_modules/pkg/package.json(7,11): error TS1005: ';' expected.
+/node_modules/pkg/package.json(7,30): error TS1128: Declaration or statement expected.
+/node_modules/pkg/package.json(8,6): error TS1005: ';' expected.
+/node_modules/pkg/package.json(10,2): error TS1128: Declaration or statement expected.
+/node_modules/pkg/package.json(10,17): error TS1005: ';' expected.
+/node_modules/pkg/package.json(11,10): error TS1128: Declaration or statement expected.
+/node_modules/pkg/package.json(12,3): error TS1128: Declaration or statement expected.
+/node_modules/pkg/package.json(15,2): error TS1128: Declaration or statement expected.
+
+==== /node_modules/pkg/package.json (17 errors) ====
+    {
+        "name": "pkg",
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: ';' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: '}' expected.
+        "version": "1.0.0",
+        "exports": {
+            ".": {
+                  ~
+!!! error TS1128: Declaration or statement expected.
+                "import": {
+          ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                    ~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                    "types": "./esm.d.mts"
+    ~
+!!! error TS1005: ';' expected.
+              ~
+!!! error TS1005: ';' expected.
+                                 ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                },
+         ~
+!!! error TS1005: ';' expected.
+                "default": {
+                    "types": "./cjs.d.ts"
+     ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                    ~
+!!! error TS1005: ';' expected.
+                }
+             ~~~~~
+!!! error TS1128: Declaration or statement expected.
+            }
+      ~~~~
+!!! error TS1128: Declaration or statement expected.
+        }
+    }
+    
+/node_modules/pkg/esm.d.mts(1,13): error TS1128: Declaration or statement expected.
+/node_modules/pkg/esm.d.mts(1,13): error TS1005: ';' expected.
+/node_modules/pkg/esm.d.mts(1,13): error TS1128: Declaration or statement expected.
+/node_modules/pkg/esm.d.mts(1,13): error TS1005: '}' expected.
+/node_modules/pkg/esm.d.mts(1,77): error TS1128: Declaration or statement expected.
+/node_modules/pkg/esm.d.mts(1,84): error TS1128: Declaration or statement expected.
+/node_modules/pkg/esm.d.mts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/pkg/esm.d.mts(2,8): error TS1128: Declaration or statement expected.
+/node_modules/pkg/esm.d.mts(2,16): error TS1005: ';' expected.
+/node_modules/pkg/esm.d.mts(2,26): error TS1005: ';' expected.
+/node_modules/pkg/esm.d.mts(5,1): error TS1128: Declaration or statement expected.
+/node_modules/pkg/esm.d.mts(5,16): error TS1005: ';' expected.
+/node_modules/pkg/esm.d.mts(6,35): error TS1128: Declaration or statement expected.
+/node_modules/pkg/esm.d.mts(8,11): error TS1005: ';' expected.
+/node_modules/pkg/esm.d.mts(8,42): error TS1128: Declaration or statement expected.
+/node_modules/pkg/esm.d.mts(8,49): error TS1128: Declaration or statement expected.
+/node_modules/pkg/esm.d.mts(8,66): error TS1128: Declaration or statement expected.
+
+==== /node_modules/pkg/esm.d.mts (17 errors) ====
+    // This file should be resolved when using bundler resolution with "import" condition
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+                                                                                ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                                                                       ~~~
+!!! error TS1128: Declaration or statement expected.
+    export interface PkgType {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~
+!!! error TS1005: ';' expected.
+                             ~
+!!! error TS1005: ';' expected.
+        esm: true;
+    }
+    declare global {
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~
+!!! error TS1005: ';' expected.
+        var expectedCondition: "import";
+                                      ~~~
+!!! error TS1128: Declaration or statement expected.
+    }
+    
+/node_modules/pkg/cjs.d.ts(1,13): error TS1128: Declaration or statement expected.
+/node_modules/pkg/cjs.d.ts(1,13): error TS1005: ';' expected.
+/node_modules/pkg/cjs.d.ts(1,13): error TS1128: Declaration or statement expected.
+/node_modules/pkg/cjs.d.ts(1,13): error TS1005: '}' expected.
+/node_modules/pkg/cjs.d.ts(2,1): error TS1128: Declaration or statement expected.
+/node_modules/pkg/cjs.d.ts(2,8): error TS1128: Declaration or statement expected.
+/node_modules/pkg/cjs.d.ts(2,11): error TS1128: Declaration or statement expected.
+/node_modules/pkg/cjs.d.ts(2,18): error TS1128: Declaration or statement expected.
+/node_modules/pkg/cjs.d.ts(2,26): error TS1005: ';' expected.
+/node_modules/pkg/cjs.d.ts(3,9): error TS1005: ';' expected.
+/node_modules/pkg/cjs.d.ts(3,28): error TS1128: Declaration or statement expected.
+/node_modules/pkg/cjs.d.ts(3,43): error TS1005: ';' expected.
+/node_modules/pkg/cjs.d.ts(5,1): error TS1128: Declaration or statement expected.
+/node_modules/pkg/cjs.d.ts(5,16): error TS1005: ';' expected.
+/node_modules/pkg/cjs.d.ts(6,30): error TS1128: Declaration or statement expected.
+/node_modules/pkg/cjs.d.ts(6,37): error TS1128: Declaration or statement expected.
+/node_modules/pkg/cjs.d.ts(6,54): error TS1128: Declaration or statement expected.
+
+==== /node_modules/pkg/cjs.d.ts (17 errors) ====
+    // This file should NOT be resolved - it's the "default" condition fallback
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+    export interface PkgType {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+              ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                     ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                             ~
+!!! error TS1005: ';' expected.
+        cjs: true;  // Different shape - will cause error if wrong file is used
+            ~
+!!! error TS1005: ';' expected.
+                               ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                              ~
+!!! error TS1005: ';' expected.
+    }
+    declare global {
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~
+!!! error TS1005: ';' expected.
+        var expectedCondition: "default";  // Conflicts with esm.d.mts if both are loaded
+                                 ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                        ~~~~
+!!! error TS1128: Declaration or statement expected.
+                                                         ~~~~
+!!! error TS1128: Declaration or statement expected.
+    }
+    
+/index.ts(1,13): error TS1128: Declaration or statement expected.
+/index.ts(1,13): error TS1005: ';' expected.
+/index.ts(1,13): error TS1128: Declaration or statement expected.
+/index.ts(1,13): error TS1005: '}' expected.
+/index.ts(1,77): error TS1128: Declaration or statement expected.
+/index.ts(2,6): error TS1128: Declaration or statement expected.
+/index.ts(2,9): error TS1128: Declaration or statement expected.
+/index.ts(2,16): error TS1128: Declaration or statement expected.
+/index.ts(2,24): error TS1005: ';' expected.
+/index.ts(2,34): error TS1005: ';' expected.
+/index.ts(2,53): error TS1128: Declaration or statement expected.
+/index.ts(3,9): error TS1005: ';' expected.
+/index.ts(3,45): error TS1128: Declaration or statement expected.
+/index.ts(3,60): error TS1005: ';' expected.
+/index.ts(4,1): error TS1128: Declaration or statement expected.
+/index.ts(4,8): error TS1128: Declaration or statement expected.
+/index.ts(4,25): error TS1128: Declaration or statement expected.
+
+==== /index.ts (17 errors) ====
+    // The automatic type directive "pkg" from @types should resolve to esm.d.mts
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: ';' expected.
+                ~
+!!! error TS1128: Declaration or statement expected.
+                ~
+!!! error TS1005: '}' expected.
+                                                                                ~~
+!!! error TS1128: Declaration or statement expected.
+    // because bundler resolution uses the "import" condition.
+         ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                   ~~~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1005: ';' expected.
+                                     ~
+!!! error TS1005: ';' expected.
+                                                        ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    // If the wrong file is resolved, we'll get a type error due to conflicting declarations.
+            ~
+!!! error TS1005: ';' expected.
+                                                ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                                                               ~
+!!! error TS1005: ';' expected.
+    import type { PkgType } from "pkg";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                            ~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+    // This should work if esm.d.mts is correctly resolved
+    const x: PkgType = { esm: true };
+    

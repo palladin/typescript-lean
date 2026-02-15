@@ -1,0 +1,36 @@
+legacyDecoratorsSingleAccessor(2,1): error TS1128: Declaration or statement expected.
+legacyDecoratorsSingleAccessor(6,5): error TS1003: Identifier expected.
+legacyDecoratorsSingleAccessor(6,10): error TS1005: ';' expected.
+legacyDecoratorsSingleAccessor(6,14): error TS1005: ';' expected.
+legacyDecoratorsSingleAccessor(11,5): error TS1003: Identifier expected.
+legacyDecoratorsSingleAccessor(11,10): error TS1005: ';' expected.
+legacyDecoratorsSingleAccessor(11,14): error TS1005: ';' expected.
+
+==== legacyDecoratorsSingleAccessor (7 errors) ====
+    
+    declare function dec(target: any, propertyKey: string, descriptor: PropertyDescriptor): PropertyDescriptor;
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+    // Test case for single getter without setter
+    class C1 {
+        @dec get accessor() { return 1; }
+        ~
+!!! error TS1003: Identifier expected.
+             ~~~
+!!! error TS1005: ';' expected.
+                 ~~~~~~~~
+!!! error TS1005: ';' expected.
+    }
+    
+    // Test case for single setter without getter
+    class C2 {
+        @dec set accessor(value: number) { }
+        ~
+!!! error TS1003: Identifier expected.
+             ~~~
+!!! error TS1005: ';' expected.
+                 ~~~~~~~~
+!!! error TS1005: ';' expected.
+    }
+    

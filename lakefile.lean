@@ -9,13 +9,7 @@ package «typescript-lean» where
 
 @[default_target]
 lean_lib TSLean where
-  srcDir := "TSLean"
   roots := #[`TSLean]
 
-lean_exe tslean where
-  srcDir := "TSLean"
-  root := `Main
-
 lean_exe test_parser where
-  srcDir := "TSLean"
-  root := `TestParserMain
+  root := `TestParser

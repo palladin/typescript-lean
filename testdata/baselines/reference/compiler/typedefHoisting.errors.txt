@@ -1,0 +1,32 @@
+typedefHoisting(2,30): error TS1128: Declaration or statement expected.
+typedefHoisting(2,117): error TS1003: Identifier expected.
+
+==== typedefHoisting (2 errors) ====
+    
+x.js(2,20): error TS1128: Declaration or statement expected.
+x.js(5,11): error TS1003: Identifier expected.
+
+==== x.js (2 errors) ====
+    class C {
+        /** @import {Bar} from "./y" */
+                       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        /** @typedef {Bar[]} Bars */
+        /** @type {Bars} */
+        foo = ["abc", "def"]
+              ~
+!!! error TS1003: Identifier expected.
+        bar(/** @type {Bar} */ x) {
+            return x
+        }
+    }
+    
+y.js(2,1): error TS1128: Declaration or statement expected.
+y.js(3,77): error TS1003: Identifier expected.
+
+==== y.js (2 errors) ====
+    /** @typedef {string} Bar */
+    export {}
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    

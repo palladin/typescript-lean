@@ -1,0 +1,19 @@
+panicSatisfiesOnExportEqualsDeclaration(1,48): error TS1128: Declaration or statement expected.
+panicSatisfiesOnExportEqualsDeclaration(1,54): error TS1128: Declaration or statement expected.
+
+==== panicSatisfiesOnExportEqualsDeclaration (2 errors) ====
+    
+panicSatisfiesOnExportEqualsDeclaration.js(5,1): error TS1128: Declaration or statement expected.
+panicSatisfiesOnExportEqualsDeclaration.js(5,7): error TS1128: Declaration or statement expected.
+
+==== panicSatisfiesOnExportEqualsDeclaration.js (2 errors) ====
+    
+    /**
+     * @satisfies {Record<string, never>}
+     */
+    module.exports = {};
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~
+!!! error TS1128: Declaration or statement expected.
+    

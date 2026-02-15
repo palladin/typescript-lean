@@ -1,0 +1,177 @@
+subpathImportsJS(1,1): error TS1128: Declaration or statement expected.
+subpathImportsJS(1,1): error TS1128: Declaration or statement expected.
+subpathImportsJS(1,11): error TS1128: Declaration or statement expected.
+subpathImportsJS(1,11): error TS1005: '}' expected.
+subpathImportsJS(1,11): error TS1128: Declaration or statement expected.
+subpathImportsJS(1,11): error TS1005: ';' expected.
+subpathImportsJS(1,16): error TS1128: Declaration or statement expected.
+subpathImportsJS(1,22): error TS1005: '}' expected.
+subpathImportsJS(1,22): error TS1128: Declaration or statement expected.
+subpathImportsJS(1,22): error TS1128: Declaration or statement expected.
+subpathImportsJS(1,22): error TS1005: ';' expected.
+
+==== subpathImportsJS (11 errors) ====
+    
+/tsconfig.json(1,1): error TS1128: Declaration or statement expected.
+/tsconfig.json(1,1): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,9): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,9): error TS1005: '}' expected.
+/tsconfig.json(2,9): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,9): error TS1005: ';' expected.
+/tsconfig.json(2,14): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,20): error TS1005: '}' expected.
+/tsconfig.json(2,20): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,20): error TS1128: Declaration or statement expected.
+/tsconfig.json(2,20): error TS1005: ';' expected.
+
+==== /tsconfig.json (11 errors) ====
+    {
+    ~~
+!!! error TS1128: Declaration or statement expected.
+    ~~
+!!! error TS1128: Declaration or statement expected.
+      "compilerOptions": {
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+                       ~
+!!! error TS1005: '}' expected.
+                       ~
+!!! error TS1128: Declaration or statement expected.
+                       ~
+!!! error TS1128: Declaration or statement expected.
+                       ~
+!!! error TS1005: ';' expected.
+        "module": "nodenext",
+        "outDir": "dist",
+        "rootDir": "src",
+        "declaration": true,
+      },
+      "include": ["src/*.ts"]
+    }
+    
+/package.json(1,1): error TS1128: Declaration or statement expected.
+/package.json(1,1): error TS1128: Declaration or statement expected.
+/package.json(2,9): error TS1128: Declaration or statement expected.
+/package.json(2,9): error TS1005: '}' expected.
+/package.json(2,9): error TS1128: Declaration or statement expected.
+/package.json(2,9): error TS1005: ';' expected.
+/package.json(2,14): error TS1128: Declaration or statement expected.
+/package.json(3,3): error TS1005: '}' expected.
+/package.json(3,3): error TS1128: Declaration or statement expected.
+/package.json(3,3): error TS1128: Declaration or statement expected.
+/package.json(3,3): error TS1005: ';' expected.
+
+==== /package.json (11 errors) ====
+    {
+    ~~
+!!! error TS1128: Declaration or statement expected.
+    ~~
+!!! error TS1128: Declaration or statement expected.
+      "name": "pkg",
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: '}' expected.
+            ~
+!!! error TS1128: Declaration or statement expected.
+            ~
+!!! error TS1005: ';' expected.
+                 ~~~~
+!!! error TS1128: Declaration or statement expected.
+      "type": "module",
+      ~
+!!! error TS1005: '}' expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1128: Declaration or statement expected.
+      ~
+!!! error TS1005: ';' expected.
+      "imports": {
+        "#subpath": "./dist/subpath.js"
+      }
+    }
+    
+/src/subpath.ts(1,1): error TS1128: Declaration or statement expected.
+/src/subpath.ts(1,1): error TS1128: Declaration or statement expected.
+/src/subpath.ts(1,11): error TS1128: Declaration or statement expected.
+/src/subpath.ts(1,11): error TS1005: '}' expected.
+/src/subpath.ts(1,11): error TS1128: Declaration or statement expected.
+/src/subpath.ts(1,11): error TS1005: ';' expected.
+/src/subpath.ts(1,16): error TS1128: Declaration or statement expected.
+/src/subpath.ts(1,22): error TS1005: '}' expected.
+/src/subpath.ts(1,22): error TS1128: Declaration or statement expected.
+/src/subpath.ts(1,22): error TS1128: Declaration or statement expected.
+/src/subpath.ts(1,22): error TS1005: ';' expected.
+
+==== /src/subpath.ts (11 errors) ====
+    export const foo = "foo";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: '}' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: ';' expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1005: '}' expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1005: ';' expected.
+    
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+/src/index.ts(1,1): error TS1128: Declaration or statement expected.
+/src/index.ts(1,11): error TS1128: Declaration or statement expected.
+/src/index.ts(1,11): error TS1005: '}' expected.
+/src/index.ts(1,11): error TS1128: Declaration or statement expected.
+/src/index.ts(1,11): error TS1005: ';' expected.
+/src/index.ts(1,16): error TS1128: Declaration or statement expected.
+/src/index.ts(1,22): error TS1005: '}' expected.
+/src/index.ts(1,22): error TS1128: Declaration or statement expected.
+/src/index.ts(1,22): error TS1128: Declaration or statement expected.
+/src/index.ts(1,22): error TS1005: ';' expected.
+
+==== /src/index.ts (11 errors) ====
+    import { foo } from "#subpath";
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: '}' expected.
+              ~
+!!! error TS1128: Declaration or statement expected.
+              ~
+!!! error TS1005: ';' expected.
+                   ~~~~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1005: '}' expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1005: ';' expected.
+    foo;
+    

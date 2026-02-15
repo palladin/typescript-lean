@@ -1,0 +1,194 @@
+jsdocCommentDefaultExport(1,21): error TS1128: Declaration or statement expected.
+jsdocCommentDefaultExport(1,22): error TS1128: Declaration or statement expected.
+jsdocCommentDefaultExport(1,23): error TS1128: Declaration or statement expected.
+jsdocCommentDefaultExport(1,24): error TS1128: Declaration or statement expected.
+jsdocCommentDefaultExport(1,25): error TS1128: Declaration or statement expected.
+jsdocCommentDefaultExport(1,28): error TS1128: Declaration or statement expected.
+jsdocCommentDefaultExport(1,29): error TS1128: Declaration or statement expected.
+jsdocCommentDefaultExport(1,30): error TS1128: Declaration or statement expected.
+jsdocCommentDefaultExport(1,31): error TS1128: Declaration or statement expected.
+jsdocCommentDefaultExport(1,32): error TS1128: Declaration or statement expected.
+
+==== jsdocCommentDefaultExport (10 errors) ====
+    
+exportDefaultObject.ts(1,21): error TS1128: Declaration or statement expected.
+exportDefaultObject.ts(1,22): error TS1128: Declaration or statement expected.
+exportDefaultObject.ts(2,1): error TS1128: Declaration or statement expected.
+exportDefaultObject.ts(2,2): error TS1128: Declaration or statement expected.
+exportDefaultObject.ts(2,3): error TS1128: Declaration or statement expected.
+exportDefaultObject.ts(2,6): error TS1128: Declaration or statement expected.
+exportDefaultObject.ts(2,7): error TS1128: Declaration or statement expected.
+exportDefaultObject.ts(2,8): error TS1128: Declaration or statement expected.
+exportDefaultObject.ts(2,9): error TS1128: Declaration or statement expected.
+exportDefaultObject.ts(2,10): error TS1128: Declaration or statement expected.
+
+==== exportDefaultObject.ts (10 errors) ====
+    /** Object comment */
+                        ~~
+!!! error TS1128: Declaration or statement expected.
+                         ~
+!!! error TS1128: Declaration or statement expected.
+    export default {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+     ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+         ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        fn() {}
+    }
+    
+exportDefaultFunction.ts(1,21): error TS1128: Declaration or statement expected.
+exportDefaultFunction.ts(1,22): error TS1128: Declaration or statement expected.
+exportDefaultFunction.ts(1,23): error TS1128: Declaration or statement expected.
+exportDefaultFunction.ts(1,24): error TS1128: Declaration or statement expected.
+exportDefaultFunction.ts(2,1): error TS1128: Declaration or statement expected.
+exportDefaultFunction.ts(2,4): error TS1128: Declaration or statement expected.
+exportDefaultFunction.ts(2,5): error TS1128: Declaration or statement expected.
+exportDefaultFunction.ts(2,6): error TS1128: Declaration or statement expected.
+exportDefaultFunction.ts(2,7): error TS1128: Declaration or statement expected.
+exportDefaultFunction.ts(2,8): error TS1128: Declaration or statement expected.
+
+==== exportDefaultFunction.ts (10 errors) ====
+    /** Function comment */
+                        ~~~~
+!!! error TS1128: Declaration or statement expected.
+                         ~~~
+!!! error TS1128: Declaration or statement expected.
+                          ~~
+!!! error TS1128: Declaration or statement expected.
+                           ~
+!!! error TS1128: Declaration or statement expected.
+    export default function() {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+       ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+         ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        return 42;
+    }
+    
+exportDefaultClass.ts(1,21): error TS1128: Declaration or statement expected.
+exportDefaultClass.ts(2,1): error TS1128: Declaration or statement expected.
+exportDefaultClass.ts(2,2): error TS1128: Declaration or statement expected.
+exportDefaultClass.ts(2,3): error TS1128: Declaration or statement expected.
+exportDefaultClass.ts(2,4): error TS1128: Declaration or statement expected.
+exportDefaultClass.ts(2,7): error TS1128: Declaration or statement expected.
+exportDefaultClass.ts(2,8): error TS1128: Declaration or statement expected.
+exportDefaultClass.ts(2,9): error TS1128: Declaration or statement expected.
+exportDefaultClass.ts(2,10): error TS1128: Declaration or statement expected.
+exportDefaultClass.ts(2,11): error TS1128: Declaration or statement expected.
+
+==== exportDefaultClass.ts (10 errors) ====
+    /** Class comment */
+                        ~
+!!! error TS1128: Declaration or statement expected.
+    export default class {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+     ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+              ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        method() {}
+    }
+    
+exportDefaultLiteral.ts(1,21): error TS1128: Declaration or statement expected.
+exportDefaultLiteral.ts(1,22): error TS1128: Declaration or statement expected.
+exportDefaultLiteral.ts(1,23): error TS1128: Declaration or statement expected.
+exportDefaultLiteral.ts(2,1): error TS1128: Declaration or statement expected.
+exportDefaultLiteral.ts(2,2): error TS1128: Declaration or statement expected.
+exportDefaultLiteral.ts(2,5): error TS1128: Declaration or statement expected.
+exportDefaultLiteral.ts(2,6): error TS1128: Declaration or statement expected.
+exportDefaultLiteral.ts(2,7): error TS1128: Declaration or statement expected.
+exportDefaultLiteral.ts(2,8): error TS1128: Declaration or statement expected.
+exportDefaultLiteral.ts(2,9): error TS1128: Declaration or statement expected.
+
+==== exportDefaultLiteral.ts (10 errors) ====
+    /** Literal comment */
+                        ~~~
+!!! error TS1128: Declaration or statement expected.
+                         ~~
+!!! error TS1128: Declaration or statement expected.
+                          ~
+!!! error TS1128: Declaration or statement expected.
+    export default 42;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+     ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+         ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+          ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+exportDefaultNull.ts(2,1): error TS1128: Declaration or statement expected.
+exportDefaultNull.ts(2,2): error TS1128: Declaration or statement expected.
+exportDefaultNull.ts(2,3): error TS1128: Declaration or statement expected.
+exportDefaultNull.ts(2,4): error TS1128: Declaration or statement expected.
+exportDefaultNull.ts(2,5): error TS1128: Declaration or statement expected.
+exportDefaultNull.ts(2,8): error TS1128: Declaration or statement expected.
+exportDefaultNull.ts(2,9): error TS1128: Declaration or statement expected.
+exportDefaultNull.ts(2,10): error TS1128: Declaration or statement expected.
+exportDefaultNull.ts(2,11): error TS1128: Declaration or statement expected.
+exportDefaultNull.ts(2,12): error TS1128: Declaration or statement expected.
+
+==== exportDefaultNull.ts (10 errors) ====
+    /** Null comment */
+    export default null;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+     ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+      ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+       ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+            ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+             ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+              ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+               ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    

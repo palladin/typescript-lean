@@ -1,0 +1,54 @@
+parameterPropertyWithDefaultValue(2,1): error TS1128: Declaration or statement expected.
+parameterPropertyWithDefaultValue(3,24): error TS1005: ',' expected.
+parameterPropertyWithDefaultValue(3,36): error TS1003: Identifier expected.
+parameterPropertyWithDefaultValue(3,36): error TS1005: ',' expected.
+parameterPropertyWithDefaultValue(3,40): error TS1005: ',' expected.
+parameterPropertyWithDefaultValue(3,44): error TS1005: ')' expected.
+parameterPropertyWithDefaultValue(3,44): error TS1005: ',' expected.
+parameterPropertyWithDefaultValue(3,44): error TS1005: '{' expected.
+parameterPropertyWithDefaultValue(3,44): error TS1128: Declaration or statement expected.
+parameterPropertyWithDefaultValue(3,44): error TS1003: Identifier expected.
+parameterPropertyWithDefaultValue(3,46): error TS1003: Identifier expected.
+parameterPropertyWithDefaultValue(3,46): error TS1005: ';' expected.
+parameterPropertyWithDefaultValue(3,46): error TS1005: '{' expected.
+parameterPropertyWithDefaultValue(3,48): error TS1003: Identifier expected.
+parameterPropertyWithDefaultValue(3,48): error TS1005: ';' expected.
+parameterPropertyWithDefaultValue(4,1): error TS1128: Declaration or statement expected.
+
+==== parameterPropertyWithDefaultValue (16 errors) ====
+    
+    export class SomeClass {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+      constructor(readonly timestamp = new Date()) {}
+                           ~~~~~~~~~
+!!! error TS1005: ',' expected.
+                                       ~~~
+!!! error TS1003: Identifier expected.
+                                       ~~~
+!!! error TS1005: ',' expected.
+                                           ~~~~
+!!! error TS1005: ',' expected.
+                                               ~
+!!! error TS1005: ')' expected.
+                                               ~
+!!! error TS1005: ',' expected.
+                                               ~
+!!! error TS1005: '{' expected.
+                                               ~
+!!! error TS1128: Declaration or statement expected.
+                                               ~
+!!! error TS1003: Identifier expected.
+                                                 ~
+!!! error TS1003: Identifier expected.
+                                                 ~
+!!! error TS1005: ';' expected.
+                                                 ~
+!!! error TS1005: '{' expected.
+                                                   ~
+!!! error TS1003: Identifier expected.
+                                                   ~
+!!! error TS1005: ';' expected.
+    }
+    ~
+!!! error TS1128: Declaration or statement expected.

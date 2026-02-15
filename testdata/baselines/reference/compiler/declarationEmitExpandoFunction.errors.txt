@@ -1,0 +1,35 @@
+declarationEmitExpandoFunction(2,1): error TS1128: Declaration or statement expected.
+declarationEmitExpandoFunction(6,1): error TS1128: Declaration or statement expected.
+declarationEmitExpandoFunction(10,1): error TS1128: Declaration or statement expected.
+declarationEmitExpandoFunction(10,8): error TS1128: Declaration or statement expected.
+declarationEmitExpandoFunction(10,15): error TS1005: ';' expected.
+
+==== declarationEmitExpandoFunction (5 errors) ====
+    
+    export function A() {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        return 'A';
+    }
+    
+    export function B() {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+        return 'B';
+    }
+    
+    export enum C {
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+           ~~~~
+!!! error TS1128: Declaration or statement expected.
+                  ~
+!!! error TS1005: ';' expected.
+        C
+    }
+    
+    A.a = C;
+    A.b = C;
+    
+    B.c = C;
+    

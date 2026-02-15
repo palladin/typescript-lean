@@ -1,0 +1,30 @@
+exportDestructuring(2,13): error TS1003: Identifier expected.
+exportDestructuring(3,1): error TS1128: Declaration or statement expected.
+exportDestructuring(3,14): error TS1003: Identifier expected.
+exportDestructuring(3,15): error TS1005: ',' expected.
+exportDestructuring(3,19): error TS1128: Declaration or statement expected.
+exportDestructuring(3,19): error TS1005: ',' expected.
+exportDestructuring(3,19): error TS1128: Declaration or statement expected.
+exportDestructuring(3,19): error TS1005: ';' expected.
+
+==== exportDestructuring (8 errors) ====
+    
+    const arr = [1, 2];
+                ~
+!!! error TS1003: Identifier expected.
+    export const [a, b] = arr;
+    ~~~~~~
+!!! error TS1128: Declaration or statement expected.
+                 ~
+!!! error TS1003: Identifier expected.
+                  ~
+!!! error TS1005: ',' expected.
+                      ~
+!!! error TS1128: Declaration or statement expected.
+                      ~
+!!! error TS1005: ',' expected.
+                      ~
+!!! error TS1128: Declaration or statement expected.
+                      ~
+!!! error TS1005: ';' expected.
+    

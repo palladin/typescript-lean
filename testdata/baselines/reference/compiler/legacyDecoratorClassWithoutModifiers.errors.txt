@@ -1,0 +1,16 @@
+legacyDecoratorClassWithoutModifiers(3,1): error TS1128: Declaration or statement expected.
+legacyDecoratorClassWithoutModifiers(5,1): error TS1128: Declaration or statement expected.
+
+==== legacyDecoratorClassWithoutModifiers (2 errors) ====
+    
+    // Test case for decorated class without modifiers
+    declare function classDec(target: any): any;
+    ~~~~~~~
+!!! error TS1128: Declaration or statement expected.
+    
+    @classDec
+    ~
+!!! error TS1128: Declaration or statement expected.
+    class C {
+    }
+    
