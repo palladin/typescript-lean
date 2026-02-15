@@ -90,35 +90,24 @@ private def extract (s : Scanner) (startByte endByte : Nat) : String :=
   String.fromUTF8! (s.bytes.extract startByte endByte)
 
 /-- Skip contiguous single-line whitespace. -/
-private def skipWs (s : Scanner) (fuel : Nat) : Scanner :=
-  match fuel with
-  | 0 => s
-  | fuel + 1 => if isWsSingle (ch s) then skipWs (adv s 1) fuel else s
+private partial def skipWs (s : Scanner) : Scanner :=
+  if isWsSingle (ch s) then skipWs (adv s 1) else s
 
 /-- Scan hex digits [0-9A-Fa-f_]. -/
-private def scanHexDigits (s : Scanner) (fuel : Nat) : Scanner :=
-  match fuel with
-  | 0 => s
-  | fuel + 1 =>
-    let c := ch s
-    if isDig c || (c >= 0x41 && c <= 0x46) || (c >= 0x61 && c <= 0x66) || c == 0x5F
-    then scanHexDigits (adv s 1) fuel else s
+private partial def scanHexDigits (s : Scanner) : Scanner :=
+  let c := ch s
+  if isDig c || (c >= 0x41 && c <= 0x46) || (c >= 0x61 && c <= 0x66) || c == 0x5F
+  then scanHexDigits (adv s 1) else s
 
 /-- Scan binary digits [01_]. -/
-private def scanBinDigits (s : Scanner) (fuel : Nat) : Scanner :=
-  match fuel with
-  | 0 => s
-  | fuel + 1 =>
-    let c := ch s
-    if c == 0x30 || c == 0x31 || c == 0x5F then scanBinDigits (adv s 1) fuel else s
+private partial def scanBinDigits (s : Scanner) : Scanner :=
+  let c := ch s
+  if c == 0x30 || c == 0x31 || c == 0x5F then scanBinDigits (adv s 1) else s
 
 /-- Scan octal digits [0-7_]. -/
-private def scanOctDigits (s : Scanner) (fuel : Nat) : Scanner :=
-  match fuel with
-  | 0 => s
-  | fuel + 1 =>
-    let c := ch s
-    if (c >= 0x30 && c <= 0x37) || c == 0x5F then scanOctDigits (adv s 1) fuel else s
+private partial def scanOctDigits (s : Scanner) : Scanner :=
+  let c := ch s
+  if (c >= 0x30 && c <= 0x37) || c == 0x5F then scanOctDigits (adv s 1) else s
 
 -- ============================================================
 -- Construction and Setup
@@ -159,42 +148,37 @@ def hasPrecedingLineBreak (s : Scanner) : Bool :=
 -- String scanning (Go: scanner.go:1457)
 -- ============================================================
 
-private def scanStr (s : Scanner) : Scanner × String :=
+private partial def scanStr (s : Scanner) : Scanner × String :=
   let quote := ch s
   let s := if quote == 0x27 then addFlg s TokenFlags.singleQuote else s
   let s := adv s 1
-  let rec go (s : Scanner) (acc : String) (fuel : Nat) : Scanner × String :=
-    match fuel with
-    | 0 => (s, acc)
-    | fuel + 1 =>
-      let c := ch s
-      if c == 0xFFFFFFFF then (addFlg (err s "Unterminated string literal") TokenFlags.unterminated, acc)
-      else if c == quote then (adv s 1, acc)
-      else if c == 0x5C then -- '\\'
-        let s := adv s 1; let nc := ch s
-        if nc == 0xFFFFFFFF then (addFlg s TokenFlags.unterminated, acc ++ "\\")
-        else go (adv s 1) (acc.push '\\' |>.push (Char.ofNat nc.toNat)) fuel
-      else if c == 0x0A || c == 0x0D then (addFlg (err s "Unterminated string literal") TokenFlags.unterminated, acc)
-      else go (adv s 1) (acc.push (Char.ofNat c.toNat)) fuel
-  go s "" (s.bytes.size + 1)
+  let rec go (s : Scanner) (acc : String) : Scanner × String :=
+    let c := ch s
+    if c == 0xFFFFFFFF then (addFlg (err s "Unterminated string literal") TokenFlags.unterminated, acc)
+    else if c == quote then (adv s 1, acc)
+    else if c == 0x5C then -- '\\'
+      let s := adv s 1; let nc := ch s
+      if nc == 0xFFFFFFFF then (addFlg s TokenFlags.unterminated, acc ++ "\\")
+      else go (adv s 1) (acc.push '\\' |>.push (Char.ofNat nc.toNat))
+    else if c == 0x0A || c == 0x0D then (addFlg (err s "Unterminated string literal") TokenFlags.unterminated, acc)
+    else go (adv s 1) (acc.push (Char.ofNat c.toNat))
+  go s ""
 
 -- ============================================================
 -- Number scanning (Go: scanner.go:1731)
 -- ============================================================
 
-private def scanNum (s : Scanner) : Scanner × Kind :=
+private partial def scanNum (s : Scanner) : Scanner × Kind :=
   let start := s.state.pos
-  let rec digits (s : Scanner) (fuel : Nat) : Scanner :=
-    match fuel with
-    | 0 => s
-    | fuel + 1 => let c := ch s; if isDig c || c == 0x5F then digits (adv s 1) fuel else s
-  let s := digits s (s.bytes.size + 1)
-  let s := if ch s == 0x2E then digits (adv s 1) (s.bytes.size + 1) else s  -- '.'
+  let rec digits (s : Scanner) : Scanner :=
+    let c := ch s; if isDig c || c == 0x5F then digits (adv s 1) else s
+  let s := digits s
+  let s := if ch s == 0x2E then digits (adv s 1) else s  -- '.'
   let c := ch s
   let s := if c == 0x65 || c == 0x45 then  -- 'e'/'E'
     let s := addFlg (adv s 1) TokenFlags.scientific
     let s := let c2 := ch s; if c2 == 0x2B || c2 == 0x2D then adv s 1 else s
-    digits s (s.bytes.size + 1)
+    digits s
   else s
   let c := ch s
   let (s, k) := if c == 0x6E then (adv s 1, Kind.bigIntLiteral) else (s, Kind.numericLiteral)
@@ -204,16 +188,14 @@ private def scanNum (s : Scanner) : Scanner × Kind :=
 -- Identifier scanning (Go: scanner.go:1396)
 -- ============================================================
 
-private def scanIdent (s : Scanner) (prefixLen : Nat) : Scanner × Bool :=
+private partial def scanIdent (s : Scanner) (prefixLen : Nat) : Scanner × Bool :=
   let start := s.state.pos
   let s := adv s prefixLen
   let c := ch s
   if isAsciiLet c || c == 0x5F || c == 0x24 then
-    let rec go (s : Scanner) (fuel : Nat) : Scanner :=
-      match fuel with
-      | 0 => s
-      | fuel + 1 => let s := adv s 1; let c := ch s; if isWord c || c == 0x24 then go s fuel else s
-    let s := go s (s.bytes.size + 1)
+    let rec go (s : Scanner) : Scanner :=
+      let s := adv s 1; let c := ch s; if isWord c || c == 0x24 then go s else s
+    let s := go s
     (setVal s (extract s start s.state.pos), true)
   else
     ({ s with state := { s.state with pos := start + prefixLen } }, false)
@@ -222,45 +204,39 @@ private def scanIdent (s : Scanner) (prefixLen : Nat) : Scanner × Bool :=
 -- Template scanning (Go: scanner.go:1508)
 -- ============================================================
 
-private def scanTmpl (s : Scanner) : Scanner :=
+private partial def scanTmpl (s : Scanner) : Scanner :=
   let s := adv s 1
-  let rec go (s : Scanner) (acc : String) (fuel : Nat) : Scanner × String × Kind :=
-    match fuel with
-    | 0 => (s, acc, Kind.noSubstitutionTemplateLiteral)
-    | fuel + 1 =>
-      let c := ch s
-      if c == 0xFFFFFFFF then (addFlg (err s "Unterminated template") TokenFlags.unterminated, acc, Kind.noSubstitutionTemplateLiteral)
-      else if c == 0x60 then (adv s 1, acc, Kind.noSubstitutionTemplateLiteral)
-      else if c == 0x24 && chAt s 1 == 0x7B then (adv s 2, acc, Kind.templateHead)
-      else if c == 0x5C then let s := adv s 1; let nc := ch s;
-        if nc == 0xFFFFFFFF then (s, acc ++ "\\", Kind.noSubstitutionTemplateLiteral)
-        else go (adv s 1) (acc.push '\\' |>.push (Char.ofNat nc.toNat)) fuel
-      else go (adv s 1) (acc.push (Char.ofNat c.toNat)) fuel
-  let (s, v, k) := go s "" (s.bytes.size + 1)
+  let rec go (s : Scanner) (acc : String) : Scanner × String × Kind :=
+    let c := ch s
+    if c == 0xFFFFFFFF then (addFlg (err s "Unterminated template") TokenFlags.unterminated, acc, Kind.noSubstitutionTemplateLiteral)
+    else if c == 0x60 then (adv s 1, acc, Kind.noSubstitutionTemplateLiteral)
+    else if c == 0x24 && chAt s 1 == 0x7B then (adv s 2, acc, Kind.templateHead)
+    else if c == 0x5C then let s := adv s 1; let nc := ch s;
+      if nc == 0xFFFFFFFF then (s, acc ++ "\\", Kind.noSubstitutionTemplateLiteral)
+      else go (adv s 1) (acc.push '\\' |>.push (Char.ofNat nc.toNat))
+    else go (adv s 1) (acc.push (Char.ofNat c.toNat))
+  let (s, v, k) := go s ""
   setTok (setVal s v) k
 
 -- ============================================================
 -- Comment scanning
 -- ============================================================
 
-private def scanSLComment (s : Scanner) : Scanner :=
+private partial def scanSLComment (s : Scanner) : Scanner :=
   let s := adv s 2
-  let rec go (s : Scanner) (fuel : Nat) : Scanner :=
-    match fuel with | 0 => s | fuel + 1 => let c := ch s; if c == 0xFFFFFFFF || isLB c then s else go (adv s 1) fuel
-  go s (s.bytes.size + 1)
+  let rec go (s : Scanner) : Scanner :=
+    let c := ch s; if c == 0xFFFFFFFF || isLB c then s else go (adv s 1)
+  go s
 
-private def scanMLComment (s : Scanner) : Scanner × Bool :=
+private partial def scanMLComment (s : Scanner) : Scanner × Bool :=
   let s := adv s 2
   let isJSDoc := ch s == 0x2A && chAt s 1 != 0x2F
-  let rec go (s : Scanner) (fuel : Nat) : Scanner × Bool :=
-    match fuel with
-    | 0 => (s, false)
-    | fuel + 1 =>
-      let c := ch s
-      if c == 0xFFFFFFFF then (s, false)
-      else if c == 0x2A && chAt s 1 == 0x2F then (adv s 2, true)
-      else go (if isLB c then addFlg (adv s 1) TokenFlags.precedingLineBreak else adv s 1) fuel
-  let (s, closed) := go s (s.bytes.size + 1)
+  let rec go (s : Scanner) : Scanner × Bool :=
+    let c := ch s
+    if c == 0xFFFFFFFF then (s, false)
+    else if c == 0x2A && chAt s 1 == 0x2F then (adv s 2, true)
+    else go (if isLB c then addFlg (adv s 1) TokenFlags.precedingLineBreak else adv s 1)
+  let (s, closed) := go s
   let s := if isJSDoc then addFlg s TokenFlags.precedingJSDocComment else s
   let s := if !closed then addFlg (err s "Expected '*/'") TokenFlags.unterminated else s
   (s, closed)
@@ -269,26 +245,22 @@ private def scanMLComment (s : Scanner) : Scanner × Bool :=
 -- Main scan (Go: scanner.go:431-917)
 -- ============================================================
 
-def scan (s : Scanner) : Scanner :=
+partial def scan (s : Scanner) : Scanner :=
   let s := { s with state := { s.state with fullStartPos := s.state.pos, tokenFlags := TokenFlags.none } }
-  let bsz := s.bytes.size
-  let rec go (s : Scanner) (fuel : Nat) : Scanner :=
-    match fuel with
-    | 0 => setTok s Kind.endOfFile
-    | fuel + 1 =>
-      let s := { s with state := { s.state with tokenStart := s.state.pos } }
-      let c := ch s
-      match c with
-      -- Whitespace (Go: 439)
-      | 0x09 | 0x0B | 0x0C | 0x20 =>
-        let s := adv s 1
-        if s.skipTrivia then go s fuel
-        else setTok (skipWs s fuel) Kind.whitespaceTrivia
-      -- Newline (Go: 452)
-      | 0x0A | 0x0D =>
-        let s := addFlg s TokenFlags.precedingLineBreak
-        let s := if c == 0x0D && chAt s 1 == 0x0A then adv s 2 else adv s 1
-        if s.skipTrivia then go s fuel else setTok s Kind.newLineTrivia
+  let rec go (s : Scanner) : Scanner :=
+    let s := { s with state := { s.state with tokenStart := s.state.pos } }
+    let c := ch s
+    match c with
+    -- Whitespace (Go: 439)
+    | 0x09 | 0x0B | 0x0C | 0x20 =>
+      let s := adv s 1
+      if s.skipTrivia then go s
+      else setTok (skipWs s) Kind.whitespaceTrivia
+    -- Newline (Go: 452)
+    | 0x0A | 0x0D =>
+      let s := addFlg s TokenFlags.precedingLineBreak
+      let s := if c == 0x0D && chAt s 1 == 0x0A then adv s 2 else adv s 1
+      if s.skipTrivia then go s else setTok s Kind.newLineTrivia
       -- '!' (Go: 464)
       | 0x21 =>
         match chAt s 1 with
@@ -351,10 +323,10 @@ def scan (s : Scanner) : Scanner :=
         match chAt s 1 with
         | 0x2F =>  -- //
           let s := scanSLComment s
-          if s.skipTrivia then go s fuel else setTok s Kind.singleLineCommentTrivia
+          if s.skipTrivia then go s else setTok s Kind.singleLineCommentTrivia
         | 0x2A =>  -- /*
           let (s, _) := scanMLComment s
-          if s.skipTrivia then go s fuel else setTok s Kind.multiLineCommentTrivia
+          if s.skipTrivia then go s else setTok s Kind.multiLineCommentTrivia
         | 0x3D => setTok (adv s 2) Kind.slashEqualsToken                 -- /=
         | _    => setTok (adv s 1) Kind.slashToken                        -- /
       -- '0' prefix (Go: 644)
@@ -364,19 +336,19 @@ def scan (s : Scanner) : Scanner :=
         | 0x58 | 0x78 =>  -- 'X' 'x' hex
           let s := addFlg (adv s 2) TokenFlags.hexSpecifier
           let start := s.state.pos - 2
-          let s := scanHexDigits s (bsz + 1)
+          let s := scanHexDigits s
           let s := setVal s (extract s start s.state.pos)
           if ch s == 0x6E then setTok (adv s 1) Kind.bigIntLiteral else setTok s Kind.numericLiteral
         | 0x42 | 0x62 =>  -- 'B' 'b' binary
           let s := addFlg (adv s 2) TokenFlags.binarySpecifier
           let start := s.state.pos - 2
-          let s := scanBinDigits s (bsz + 1)
+          let s := scanBinDigits s
           let s := setVal s (extract s start s.state.pos)
           if ch s == 0x6E then setTok (adv s 1) Kind.bigIntLiteral else setTok s Kind.numericLiteral
         | 0x4F | 0x6F =>  -- 'O' 'o' octal
           let s := addFlg (adv s 2) TokenFlags.octalSpecifier
           let start := s.state.pos - 2
-          let s := scanOctDigits s (bsz + 1)
+          let s := scanOctDigits s
           let s := setVal s (extract s start s.state.pos)
           if ch s == 0x6E then setTok (adv s 1) Kind.bigIntLiteral else setTok s Kind.numericLiteral
         | _ => let (s, k) := scanNum s; setTok s k
@@ -462,7 +434,7 @@ def scan (s : Scanner) : Scanner :=
         let (s, ok) := scanIdent s 0
         if ok then setTok s (getIdentifierToken s.state.tokenValue)
         else setTok (err (adv s 1) "Invalid character") Kind.unknown
-  go s (bsz + 2)
+  go s
 
 -- ============================================================
 -- ReScan methods
@@ -483,24 +455,22 @@ def reScanGreaterThanToken (s : Scanner) : Scanner :=
   else s
 
 /-- Based on Go: scanner.go:1011 (ReScanSlashToken) -/
-def reScanSlashToken (s : Scanner) : Scanner :=
+partial def reScanSlashToken (s : Scanner) : Scanner :=
   if s.state.token == Kind.slashToken || s.state.token == Kind.slashEqualsToken then
     let start := s.state.tokenStart
     let s := { s with state := { s.state with pos := start + 1 } }
-    let rec body (s : Scanner) (inCC : Bool) (fuel : Nat) : Scanner := match fuel with
-      | 0 => s
-      | fuel + 1 =>
-        let c := ch s
-        if c == 0xFFFFFFFF || isLB c then addFlg (err s "Unterminated regex") TokenFlags.unterminated
-        else if c == 0x5C then body (adv s 2) inCC fuel
-        else if c == 0x5B then body (adv s 1) true fuel
-        else if c == 0x5D && inCC then body (adv s 1) false fuel
-        else if c == 0x2F && !inCC then adv s 1
-        else body (adv s 1) inCC fuel
-    let s := body s false (s.bytes.size + 1)
-    let rec flg (s : Scanner) (fuel : Nat) : Scanner := match fuel with
-      | 0 => s | fuel + 1 => if isAsciiLet (ch s) then flg (adv s 1) fuel else s
-    let s := flg s 10
+    let rec body (s : Scanner) (inCC : Bool) : Scanner :=
+      let c := ch s
+      if c == 0xFFFFFFFF || isLB c then addFlg (err s "Unterminated regex") TokenFlags.unterminated
+      else if c == 0x5C then body (adv s 2) inCC
+      else if c == 0x5B then body (adv s 1) true
+      else if c == 0x5D && inCC then body (adv s 1) false
+      else if c == 0x2F && !inCC then adv s 1
+      else body (adv s 1) inCC
+    let s := body s false
+    let rec flg (s : Scanner) : Scanner :=
+      if isAsciiLet (ch s) then flg (adv s 1) else s
+    let s := flg s
     setTok (setVal s (extract s start s.state.pos)) Kind.regularExpressionLiteral
   else s
 
@@ -509,16 +479,13 @@ def reScanSlashToken (s : Scanner) : Scanner :=
 -- ============================================================
 
 /-- Scan all tokens, useful for testing. -/
-def scanAll (text : String) : Array (Kind × String) :=
+partial def scanAll (text : String) : Array (Kind × String) :=
   let s := Scanner.new |>.setText text
-  let rec go (s : Scanner) (acc : Array (Kind × String)) (fuel : Nat) : Array (Kind × String) :=
-    match fuel with
-    | 0 => acc
-    | fuel + 1 =>
-      let s := s.scan
-      if s.token == Kind.endOfFile then acc
-      else go s (acc.push (s.token, s.state.tokenValue)) fuel
-  go s #[] (text.length + 2)
+  let rec go (s : Scanner) (acc : Array (Kind × String)) : Array (Kind × String) :=
+    let s := s.scan
+    if s.token == Kind.endOfFile then acc
+    else go s (acc.push (s.token, s.state.tokenValue))
+  go s #[]
 
 end Scanner
 

@@ -74,9 +74,18 @@ def runTest (testFilePath : String) : IO (String × TestResult) := do
   -- Parse test case directives (strips // @ lines from content)
   let testCase := parseTestFile testName content
 
+  -- Filter out non-TypeScript units (JSON files, etc.)
+  let tsUnits := testCase.units.filter fun unit =>
+    unit.name.endsWith ".ts" || unit.name.endsWith ".tsx" ||
+    unit.name.endsWith ".mts" || unit.name.endsWith ".cts" ||
+    unit.name.endsWith ".js" || unit.name.endsWith ".jsx" ||
+    unit.name.endsWith ".mjs" || unit.name.endsWith ".cjs" ||
+    -- Keep the initial unit (same name as test, no extension)
+    (!hasSubstr unit.name ".")
+
   -- Parse each unit and collect results
-  let parsed := testCase.units.map fun unit =>
-    let result := parseSourceFile unit.name unit.content ScriptKind.ts 100000
+  let parsed := tsUnits.map fun unit =>
+    let result := parseSourceFile unit.name unit.content ScriptKind.ts
     (unit.name, unit.content, result)
 
   let allDiagnostics := parsed.foldl (init := #[]) fun acc (_, _, result) =>

@@ -96,32 +96,20 @@ structure Parser where
   diagnostics : Array Diagnostic := #[]
   identifiers : HashMap String String := HashMap.ofList []
   identifierCount : Nat := 0
-  /-- Global recursion budget shared by parser.
-      Decremented by `loop` on every recursive call.
-      When zero, recursion stops and default values are returned. -/
-  fuel : Nat
   /-- Enable debug tracing (false by default for performance). -/
   debug : Bool := false
   /-- Collected trace messages when debug is enabled. -/
   traceLog : Array String := #[]
 
-instance : Inhabited Parser := ⟨{ scanner := default, sourceText := "", fuel := 0 }⟩
+instance : Inhabited Parser := ⟨{ scanner := default, sourceText := "" }⟩
 
-/-- Parsing halts immediately when fuel is exhausted. -/
-inductive ParseError where
-  | fuelExhausted
-  deriving Repr
-
-/-- Parser monad — ExceptT over StateM for fuel-exhaustion-as-exception.
-    When fuel reaches zero, `loop` throws `fuelExhausted` which
-    propagates through every `do` block automatically. -/
-abbrev ParserM (α : Type) := ExceptT ParseError (StateM Parser) α
+/-- Parser monad — StateM for clean imperative style. -/
+abbrev ParserM (α : Type) := StateM Parser α
 
 /-- Result of parsing a source file.
     Based on Go: parser.go — ParseSourceFile returns (SourceFile, diagnostics) -/
 structure ParseResult where
   sourceFile : Node
   diagnostics : Array Diagnostic
-  fuelExhausted : Bool := false
 
 end TSLean.Compiler

@@ -16,26 +16,23 @@ def unicodeESNextIdentifierPart : Array UInt32 := #[48, 57, 65, 90, 95, 95, 97, 
     Binary search on an array of range pairs to check if a code point falls within any range.
     The `ranges` array contains pairs of values: [rangeStart, rangeEnd, rangeStart, rangeEnd, ...].
     Returns `true` if `cp` is within any [rangeStart, rangeEnd] (inclusive). -/
-def lookupInUnicodeMap (cp : UInt32) (ranges : Array UInt32) : Bool :=
+partial def lookupInUnicodeMap (cp : UInt32) (ranges : Array UInt32) : Bool :=
   -- Bail out quickly if it couldn't possibly be in the map
   if ranges.size == 0 then false
   else if cp < ranges[0]! then false
   else
-    let rec go (lo hi : Nat) (fuel : Nat) : Bool :=
-      match fuel with
-      | 0 => false
-      | fuel' + 1 =>
-        if lo + 1 < hi then
-          let mid := lo + (hi - lo) / 2
-          -- mid has to be even to catch beginning of a range
-          let mid := mid - mid % 2
-          let rangeStart := ranges[mid]!
-          let rangeEnd := ranges[mid + 1]!
-          if rangeStart <= cp && cp <= rangeEnd then true
-          else if cp < rangeStart then go lo mid fuel'
-          else go (mid + 2) hi fuel'
-        else false
-    go 0 ranges.size ranges.size
+    let rec go (lo hi : Nat) : Bool :=
+      if lo + 1 < hi then
+        let mid := lo + (hi - lo) / 2
+        -- mid has to be even to catch beginning of a range
+        let mid := mid - mid % 2
+        let rangeStart := ranges[mid]!
+        let rangeEnd := ranges[mid + 1]!
+        if rangeStart <= cp && cp <= rangeEnd then true
+        else if cp < rangeStart then go lo mid
+        else go (mid + 2) hi
+      else false
+    go 0 ranges.size
 
 /-- Based on Go: internal/stringutil/util.go:83-85 (IsASCIILetter)
     Returns `true` if the character is an ASCII letter (A-Z or a-z). -/

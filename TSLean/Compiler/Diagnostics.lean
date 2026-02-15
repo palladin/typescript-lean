@@ -41,6 +41,12 @@ def unexpected_token_constructor : DiagnosticMessage := ⟨1068, "Unexpected tok
 def or_expected : DiagnosticMessage := ⟨1144, "'{' or ';' expected."⟩
 def identifier_expected_reserved : DiagnosticMessage := ⟨1359, "Identifier expected. '{0}' is a reserved word that cannot be used here."⟩
 def keywords_cannot_contain_escape : DiagnosticMessage := ⟨1260, "Keywords cannot contain escape characters."⟩
+def declaration_expected : DiagnosticMessage := ⟨1146, "Declaration expected."⟩
+def trailing_comma_not_allowed : DiagnosticMessage := ⟨1009, "Trailing comma not allowed."⟩
+def asterisk_or_brace_expected : DiagnosticMessage := ⟨1136, "'*' or '{' expected."⟩
+def import_require_string_literal : DiagnosticMessage := ⟨1141, "Import declaration in a namespace cannot reference a module."⟩
+def export_or_import_expected : DiagnosticMessage := ⟨1142, "'{' or '*' or identifier expected."⟩
+def enum_member_expected : DiagnosticMessage := ⟨1132, "Enum member expected."⟩
 def private_identifiers_not_allowed : DiagnosticMessage := ⟨18016, "Private identifiers are not allowed outside class bodies."⟩
 def private_identifiers_not_in_variables : DiagnosticMessage := ⟨18028, "Private identifiers are not allowed in variable declarations."⟩
 
