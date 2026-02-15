@@ -157,6 +157,8 @@ inductive Node where
   | namedExports (base : NodeBase) (elements : Array Node)
   | exportSpecifier (base : NodeBase) (propertyName : Option Node) (name : Node)
   | namespaceExport (base : NodeBase) (name : Node)
+  | importAttributes (base : NodeBase) (token : Kind) (elements : Array Node)
+  | importAttribute (base : NodeBase) (name : Node) (value : Node)
   -- Type nodes
   | typeReference (base : NodeBase) (typeName : Node) (typeArguments : Option (Array Node))
   | unionType (base : NodeBase) (types : Array Node)
@@ -286,6 +288,8 @@ def kind : Node → Kind
   | namedExports .. => Kind.namedExports
   | exportSpecifier .. => Kind.exportSpecifier
   | namespaceExport .. => Kind.namespaceExport
+  | importAttributes .. => Kind.importAttributes
+  | importAttribute .. => Kind.importAttribute
   | typeReference .. => Kind.typeReference
   | unionType .. => Kind.unionType
   | intersectionType .. => Kind.intersectionType
@@ -339,6 +343,7 @@ def base : Node → NodeBase
   | importSpecifier b .. | namespaceImport b .. | importEqualsDeclaration b ..
   | externalModuleReference b .. | exportDeclaration b .. | exportAssignment b ..
   | namedExports b .. | exportSpecifier b .. | namespaceExport b ..
+  | importAttributes b .. | importAttribute b ..
   | typeReference b .. | unionType b .. | intersectionType b .. | arrayType b ..
   | tupleType b .. | functionType b .. | constructorType b .. | typeLiteral b ..
   | parenthesizedType b .. | typeQuery b .. | typeOperator b .. | literalType b ..
@@ -443,6 +448,8 @@ def withBase : Node → NodeBase → Node
   | namedExports _ e, b => namedExports b e
   | exportSpecifier _ pn n, b => exportSpecifier b pn n
   | namespaceExport _ n, b => namespaceExport b n
+  | importAttributes _ t e, b => importAttributes b t e
+  | importAttribute _ n v, b => importAttribute b n v
   | typeReference _ tn ta, b => typeReference b tn ta
   | unionType _ ts, b => unionType b ts
   | intersectionType _ ts, b => intersectionType b ts

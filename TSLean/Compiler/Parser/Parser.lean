@@ -220,6 +220,7 @@ partial def isListTerminator (kind : ParsingContext) : ParserM Bool := do
   | .tupleElementTypes => tok == Kind.closeBracketToken
   | .heritageClauses => tok == Kind.openBraceToken || tok == Kind.closeBraceToken
   | .importOrExportSpecifiers => tok == Kind.closeBraceToken
+  | .importAttributes => tok == Kind.closeBraceToken
   | _ => false
 
 /-- Based on Go: parser.go:623 (isInSomeParsingContext) -/
@@ -312,6 +313,17 @@ partial def skipDecorators : ParserM Unit := do
     nextToken
     let _ ← parseLeftHandSideExpressionOrHigher
     skipDecorators
+
+/-- Based on Go: parser.go:3077 (isIndexSignature)
+    Lookahead: is `[` followed by `identifier :` (index sig) or something else (computed prop)? -/
+partial def isIndexSignature : ParserM Bool :=
+  lookAhead do
+    let _ ← parseExpected Kind.openBracketToken
+    if (← currentToken) == Kind.dotDotDotToken then return true
+    if ← isBindingIdentifierToken then
+      nextToken
+      return (← currentToken) == Kind.colonToken
+    return false
 
 /-- Parse dotted qualified name tail: A.B.C -/
 partial def parseQualifiedNameRest (acc : Node) (pos : Nat) : ParserM Node := do
@@ -862,27 +874,6 @@ partial def parseType' : ParserM Node :=
       let _ ← parseExpected Kind.equalsGreaterThanToken
       let retType ← parseType'
       finishNode (Node.constructorType {} none params (some retType)) pos
-    -- Type literal: { members }
-    else if tok == Kind.openBraceToken then
-      let pos ← nodePos
-      let _ ← parseExpected Kind.openBraceToken
-      let members ← parseList .typeMembers (isTypeMemberStart) (parseTypeMember)
-      let _ ← parseExpected Kind.closeBraceToken
-      finishNode (Node.typeLiteral {} members) pos
-    -- Tuple type: [Type, Type]
-    else if tok == Kind.openBracketToken then
-      let pos ← nodePos
-      let _ ← parseExpected Kind.openBracketToken
-      let elements ← parseDelimitedList .tupleElementTypes isStartOfType (parseType')
-      let _ ← parseExpected Kind.closeBracketToken
-      finishNode (Node.tupleType {} elements) pos
-    -- typeof type: typeof expr
-    else if tok == Kind.typeOfKeyword then
-      let pos ← nodePos
-      nextToken
-      let name ← parseIdentifier
-      let qname ← parseQualifiedNameRest name pos
-      finishNode (Node.typeQuery {} qname) pos
     -- keyof, unique, readonly type operators
     else if tok == Kind.keyOfKeyword || tok == Kind.uniqueKeyword || tok == Kind.readonlyKeyword then
       let pos ← nodePos
@@ -1067,18 +1058,34 @@ partial def parseTypeMember : ParserM Node :=
       let returnType ← parseReturnType
       parseTypeMemberSemicolon
       finishNode (Node.constructSignature {} typeParams params returnType) pos
-    -- Index signature: [key: Type]: Type
+    -- Index signature or computed property name
     else if tok == Kind.openBracketToken then
-      let _ ← parseExpected Kind.openBracketToken
-      let isIdx : ParserM Bool := do
-        let tok ← currentToken
-        let bindId ← isBindingIdentifierToken
-        return bindId || tok == Kind.dotDotDotToken
-      let params ← parseDelimitedList .parameters isIdx (parseParameter)
-      let _ ← parseExpected Kind.closeBracketToken
-      let typeNode ← parseTypeAnnotation
-      parseTypeMemberSemicolon
-      finishNode (Node.indexSignature {} params typeNode) pos
+      if ← isIndexSignature then
+        -- Index signature: [key: Type]: Type
+        let _ ← parseExpected Kind.openBracketToken
+        let isIdx : ParserM Bool := do
+          let tok ← currentToken
+          let bindId ← isBindingIdentifierToken
+          return bindId || tok == Kind.dotDotDotToken
+        let params ← parseDelimitedList .parameters isIdx (parseParameter)
+        let _ ← parseExpected Kind.closeBracketToken
+        let typeNode ← parseTypeAnnotation
+        parseTypeMemberSemicolon
+        finishNode (Node.indexSignature {} params typeNode) pos
+      else
+        -- Computed property name: [expr]?: Type or [expr](params): Type
+        let name ← parsePropertyName
+        let questionToken ← parseOptionalToken Kind.questionToken
+        if (← currentToken) == Kind.openParenToken || (← currentToken) == Kind.lessThanToken then
+          let typeParams ← parseTypeParameters
+          let params ← parseParameters
+          let returnType ← parseReturnType
+          parseTypeMemberSemicolon
+          finishNode (Node.methodSignature {} name questionToken typeParams params returnType) pos
+        else
+          let typeNode ← parseTypeAnnotation
+          parseTypeMemberSemicolon
+          finishNode (Node.propertySignature {} name questionToken typeNode) pos
     else
       -- Property or method signature
       let name ← parsePropertyName
@@ -1165,6 +1172,7 @@ partial def parseTypeParameters : ParserM (Option (Array Node)) :=
 partial def parseParameter : ParserM Node :=
   do
     let pos ← nodePos
+    skipDecorators
     -- Skip modifiers (public, private, protected, readonly)
     let tok ← currentToken
     if tok == Kind.publicKeyword || tok == Kind.privateKeyword ||
@@ -1187,7 +1195,8 @@ partial def parseParameters : ParserM (Array Node) :=
         let bindId ← isBindingIdentifierToken
         return bindId || tok == Kind.dotDotDotToken ||
           tok == Kind.openBracketToken || tok == Kind.openBraceToken ||
-          isModifierKind tok || tok == Kind.thisKeyword
+          isModifierKind tok || tok == Kind.thisKeyword ||
+          tok == Kind.atToken
       let params ← parseDelimitedList .parameters isParam (parseParameter)
       let _ ← parseExpected Kind.closeParenToken
       return params
@@ -1650,6 +1659,7 @@ partial def parsePropertyOrMethodDeclaration : ParserM Node :=
 partial def parseClassElement : ParserM Node :=
   do
     let pos ← nodePos
+    skipDecorators
     if (← currentToken) == Kind.semicolonToken then
       nextToken
       finishNode (Node.semicolonClassElement {}) pos
@@ -1796,6 +1806,29 @@ partial def parseModuleDeclaration : ParserM Node :=
 
 -- ---- Import/Export Parsing ----
 
+/-- Based on Go: parser.go:2943 (parseImportAttribute) -/
+partial def parseImportAttribute : ParserM Node := do
+  let pos ← nodePos
+  let name ← if (← currentToken) == Kind.stringLiteral then parseLiteralExpression
+    else parseIdentifierName
+  let _ ← parseExpected Kind.colonToken
+  let value ← parseAssignmentExpressionOrHigher
+  finishNode (Node.importAttribute {} name value) pos
+
+/-- Based on Go: parser.go:2380 (tryParseImportAttributes)
+    Skip optional `with { ... }` or `assert { ... }` after module specifier. -/
+partial def tryParseImportAttributes : ParserM Unit := do
+  let tok ← currentToken
+  if tok == Kind.withKeyword ||
+     (tok == Kind.assertKeyword && !(← get).scanner.hasPrecedingLineBreak) then
+    nextToken
+    let _ ← parseExpected Kind.openBraceToken
+    let isAttr : ParserM Bool := do
+      let t ← currentToken
+      return t == Kind.identifier || t == Kind.stringLiteral || Kind.isKeywordKind t
+    let _ ← parseDelimitedList .importAttributes isAttr parseImportAttribute
+    let _ ← parseExpected Kind.closeBraceToken
+
 /-- Based on Go: parser.go:2292 (parseImportOrExportSpecifier) -/
 partial def parseImportOrExportSpecifier : ParserM Node := do
   let pos ← nodePos
@@ -1839,6 +1872,7 @@ partial def parseImportDeclaration : ParserM Node :=
     -- import "module" (side-effect import)
     if tok == Kind.stringLiteral then
       let moduleSpec ← parseLiteralExpression
+      tryParseImportAttributes
       let _ ← parseSemicolon
       finishNode (Node.importDeclaration {} none moduleSpec) pos
     -- import id = require("module") or import id = X.Y
@@ -1866,6 +1900,7 @@ partial def parseImportDeclaration : ParserM Node :=
         let importClause ← parseImportClause
         let _ ← parseExpected Kind.fromKeyword
         let moduleSpec ← parseLiteralExpression
+        tryParseImportAttributes
         let _ ← parseSemicolon
         finishNode (Node.importDeclaration {} (some importClause) moduleSpec) pos
     -- import { named } from "module"
@@ -1875,6 +1910,7 @@ partial def parseImportDeclaration : ParserM Node :=
       let clause ← finishNode (Node.importClause {} none (some namedImports)) clausePos
       let _ ← parseExpected Kind.fromKeyword
       let moduleSpec ← parseLiteralExpression
+      tryParseImportAttributes
       let _ ← parseSemicolon
       finishNode (Node.importDeclaration {} (some clause) moduleSpec) pos
     -- import * as name from "module"
@@ -1886,6 +1922,7 @@ partial def parseImportDeclaration : ParserM Node :=
       let clause ← finishNode (Node.importClause {} none (some nsImport)) pos
       let _ ← parseExpected Kind.fromKeyword
       let moduleSpec ← parseLiteralExpression
+      tryParseImportAttributes
       let _ ← parseSemicolon
       finishNode (Node.importDeclaration {} (some clause) moduleSpec) pos
     else
@@ -1961,11 +1998,13 @@ partial def parseExportDeclarationOrAssignment : ParserM Node :=
         let nsExport ← finishNode (Node.namespaceExport {} name) pos
         let _ ← parseExpected Kind.fromKeyword
         let moduleSpec ← parseLiteralExpression
+        tryParseImportAttributes
         let _ ← parseSemicolon
         finishNode (Node.exportDeclaration {} (some nsExport) (some moduleSpec)) pos
       else
         let _ ← parseExpected Kind.fromKeyword
         let moduleSpec ← parseLiteralExpression
+        tryParseImportAttributes
         let _ ← parseSemicolon
         finishNode (Node.exportDeclaration {} none (some moduleSpec)) pos
     -- export { named } or export { named } from "module"
@@ -1975,6 +2014,7 @@ partial def parseExportDeclarationOrAssignment : ParserM Node :=
         nextToken
         pure (some (← parseLiteralExpression))
       else pure none
+      if moduleSpec.isSome then tryParseImportAttributes
       let _ ← parseSemicolon
       finishNode (Node.exportDeclaration {} (some namedExports) moduleSpec) pos
     -- export [declaration]
