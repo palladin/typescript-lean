@@ -90,14 +90,16 @@ partial def parseExpectedToken (kind : Kind) : ParserM Node := do
 /-- Based on Go: parser.go:5880 (tryParseSemicolon) -/
 partial def tryParseSemicolon : ParserM Bool := do
   if !(← canParseSemicolon) then return false
-  else if (← currentToken) == Kind.semicolonToken then nextToken; return true
-  else return true
+  else match (← currentToken) with
+    | .semicolonToken => nextToken; return true
+    | _ => return true
 
 /-- Based on Go: parser.go:5912 (parseTypeMemberSemicolon)
     Type members allow both `;` and `,` as separators. -/
 partial def parseTypeMemberSemicolon : ParserM Unit := do
-  if (← currentToken) == Kind.commaToken then nextToken
-  else let _ ← tryParseSemicolon
+  match (← currentToken) with
+  | .commaToken => nextToken
+  | _ => let _ ← tryParseSemicolon
 
 /-- Based on Go: parser.go:5891 (parseSemicolon) -/
 partial def parseSemicolon : ParserM Bool := do
@@ -281,29 +283,28 @@ partial def isStartOfExpression : ParserM Bool := do
 
 /-- Based on Go: parser.go:5899 (isStartOfStatement) -/
 partial def isStartOfStatement : ParserM Bool := do
-  let tok ← currentToken
-  if tok == Kind.semicolonToken || tok == Kind.openBraceToken ||
-     tok == Kind.varKeyword || tok == Kind.letKeyword ||
-     tok == Kind.functionKeyword || tok == Kind.classKeyword ||
-     tok == Kind.ifKeyword || tok == Kind.returnKeyword ||
-     tok == Kind.doKeyword || tok == Kind.whileKeyword ||
-     tok == Kind.forKeyword || tok == Kind.continueKeyword ||
-     tok == Kind.breakKeyword || tok == Kind.switchKeyword ||
-     tok == Kind.throwKeyword || tok == Kind.tryKeyword ||
-     tok == Kind.debuggerKeyword || tok == Kind.catchKeyword ||
-     tok == Kind.finallyKeyword || tok == Kind.withKeyword ||
-     tok == Kind.constKeyword || tok == Kind.enumKeyword ||
-     tok == Kind.exportKeyword || tok == Kind.importKeyword ||
-     tok == Kind.asyncKeyword || tok == Kind.declareKeyword ||
-     tok == Kind.interfaceKeyword || tok == Kind.typeKeyword ||
-     tok == Kind.moduleKeyword || tok == Kind.namespaceKeyword ||
-     tok == Kind.abstractKeyword || tok == Kind.accessorKeyword ||
-     tok == Kind.publicKeyword || tok == Kind.privateKeyword ||
-     tok == Kind.protectedKeyword || tok == Kind.staticKeyword ||
-     tok == Kind.readonlyKeyword || tok == Kind.globalKeyword ||
-     tok == Kind.atToken then
-    return true
-  else isStartOfExpression
+  match (← currentToken) with
+  | .semicolonToken | .openBraceToken
+  | .varKeyword | .letKeyword
+  | .functionKeyword | .classKeyword
+  | .ifKeyword | .returnKeyword
+  | .doKeyword | .whileKeyword
+  | .forKeyword | .continueKeyword
+  | .breakKeyword | .switchKeyword
+  | .throwKeyword | .tryKeyword
+  | .debuggerKeyword | .catchKeyword
+  | .finallyKeyword | .withKeyword
+  | .constKeyword | .enumKeyword
+  | .exportKeyword | .importKeyword
+  | .asyncKeyword | .declareKeyword
+  | .interfaceKeyword | .typeKeyword
+  | .moduleKeyword | .namespaceKeyword
+  | .abstractKeyword | .accessorKeyword
+  | .publicKeyword | .privateKeyword
+  | .protectedKeyword | .staticKeyword
+  | .readonlyKeyword | .globalKeyword
+  | .atToken => return true
+  | _ => isStartOfExpression
 
 /-- Check if current token starts a type. -/
 partial def isStartOfType : ParserM Bool := do
@@ -331,17 +332,21 @@ mutual
 
 /-- Skip decorator annotations: @expr @expr ... -/
 partial def skipDecorators : ParserM Unit := do
-  if (← currentToken) == Kind.atToken then
+  match (← currentToken) with
+  | .atToken =>
     nextToken
     let _ ← parseLeftHandSideExpressionOrHigher
     skipDecorators
+  | _ => pure ()
 
 /-- Based on Go: parser.go:3077 (isIndexSignature)
     Lookahead: is `[` followed by `identifier :` (index sig) or something else (computed prop)? -/
 partial def isIndexSignature : ParserM Bool :=
   lookAhead do
     let _ ← parseExpected Kind.openBracketToken
-    if (← currentToken) == Kind.dotDotDotToken then return true
+    match (← currentToken) with
+    | .dotDotDotToken => return true
+    | _ => pure ()
     if ← isBindingIdentifierToken then
       nextToken
       return (← currentToken) == Kind.colonToken
@@ -349,12 +354,13 @@ partial def isIndexSignature : ParserM Bool :=
 
 /-- Parse dotted qualified name tail: A.B.C -/
 partial def parseQualifiedNameRest (acc : Node) (pos : Nat) : ParserM Node := do
-  if (← currentToken) == Kind.dotToken then
+  match (← currentToken) with
+  | .dotToken =>
     nextToken
     let right ← parseIdentifier
     let node ← finishNode (Node.qualifiedName {} acc right) pos
     parseQualifiedNameRest node pos
-  else return acc
+  | _ => return acc
 
 /-- Based on Go: parser.go:533 (parseList) — loop body -/
 partial def parseListLoop (kind : ParsingContext) (isElement : ParserM Bool)
@@ -421,10 +427,11 @@ partial def parseLiteralExpression : ParserM Node := do
   let text := (← get).scanner.tokenValue
   let kind ← currentToken
   nextToken
-  let node := if kind == Kind.numericLiteral then Node.numericLiteral {} text
-    else if kind == Kind.stringLiteral then Node.stringLiteral {} text
-    else if kind == Kind.noSubstitutionTemplateLiteral then Node.noSubstitutionTemplateLiteral {} text
-    else Node.numericLiteral {} text
+  let node := match kind with
+    | .numericLiteral => Node.numericLiteral {} text
+    | .stringLiteral => Node.stringLiteral {} text
+    | .noSubstitutionTemplateLiteral => Node.noSubstitutionTemplateLiteral {} text
+    | _ => Node.numericLiteral {} text
   finishNode node pos
 
 /-- Based on Go: parser.go:5469 (parseArrayLiteralExpression) -/
@@ -434,9 +441,9 @@ partial def parseArrayLiteralExpression : ParserM Node :=
     let _ ← parseExpected Kind.openBracketToken
     let isElem : ParserM Bool := do
       let tok ← currentToken
-      if tok == Kind.commaToken then return true
-      else if tok == Kind.dotDotDotToken then return true
-      else isStartOfExpression
+      match tok with
+      | .commaToken | .dotDotDotToken => return true
+      | _ => isStartOfExpression
     let elements ← parseDelimitedList .arrayLiteralMembers isElem
       (parseSpreadOrAssignmentExpression)
     let _ ← parseExpected Kind.closeBracketToken
@@ -445,12 +452,13 @@ partial def parseArrayLiteralExpression : ParserM Node :=
 /-- Parse spread element or assignment expression (for array/argument lists). -/
 partial def parseSpreadOrAssignmentExpression : ParserM Node :=
   do
-    if (← currentToken) == Kind.dotDotDotToken then
+    match (← currentToken) with
+    | .dotDotDotToken =>
       let pos ← nodePos
       nextToken
       let expr ← parseAssignmentExpressionOrHigher
       finishNode (Node.spreadElement {} expr) pos
-    else parseAssignmentExpressionOrHigher
+    | _ => parseAssignmentExpressionOrHigher
 
 /-- Based on Go: parser.go:5479 (parseObjectLiteralExpression) -/
 partial def parseObjectLiteralExpression : ParserM Node :=
@@ -470,23 +478,44 @@ partial def parseObjectLiteralExpression : ParserM Node :=
     let _ ← parseExpected Kind.closeBraceToken
     finishNode (Node.objectLiteralExpression {} properties) pos
 
+/-- Helper: after parsing a property name, dispatch on the next token to decide
+    whether this is a method shorthand, property assignment, or shorthand property. -/
+partial def parsePropertyBody (name : Node) (pos : Nat) : ParserM Node := do
+  match (← currentToken) with
+  | .openParenToken | .lessThanToken =>
+    -- Method shorthand: name(params) { body }
+    let typeParams ← parseTypeParameters
+    let params ← parseParameters
+    let returnType ← parseReturnType
+    let body ← parseFunctionBlock
+    finishNode (Node.methodDeclaration {} name none typeParams params returnType body) pos
+  | .colonToken =>
+    -- Property assignment: name: value
+    nextToken
+    let value ← parseAssignmentExpressionOrHigher
+    finishNode (Node.propertyAssignment {} name (some value)) pos
+  | _ =>
+    -- Shorthand property: name  (or name = default)
+    finishNode (Node.shorthandPropertyAssignment {} name) pos
+
 /-- Parse a single object literal element (property, shorthand, spread, method). -/
 partial def parseObjectLiteralElement : ParserM Node :=
   do
     let pos ← nodePos
-    if (← currentToken) == Kind.dotDotDotToken then
+    match (← currentToken) with
+    | .dotDotDotToken =>
       nextToken
       let expr ← parseAssignmentExpressionOrHigher
       finishNode (Node.spreadAssignment {} expr) pos
-    else if (← currentToken) == Kind.getKeyword || (← currentToken) == Kind.setKeyword then
+    | .getKeyword | .setKeyword =>
       let isAccessor ← lookAhead do
         nextToken
         let t ← currentToken
         -- `get`/`set` can still be plain property names.
-        if t == Kind.openParenToken || t == Kind.colonToken ||
-           t == Kind.commaToken || t == Kind.closeBraceToken then
+        match t with
+        | .openParenToken | .colonToken | .commaToken | .closeBraceToken =>
           return false
-        else
+        | _ =>
           let _ ← parsePropertyName
           return (← currentToken) == Kind.openParenToken
       if isAccessor then
@@ -500,38 +529,10 @@ partial def parseObjectLiteralElement : ParserM Node :=
         finishNode (Node.methodDeclaration {} name questionToken typeParams params returnType body) pos
       else
         let name ← parsePropertyName
-        if (← currentToken) == Kind.openParenToken || (← currentToken) == Kind.lessThanToken then
-          -- Method shorthand: name(params) { body }
-          let typeParams ← parseTypeParameters
-          let params ← parseParameters
-          let returnType ← parseReturnType
-          let body ← parseFunctionBlock
-          finishNode (Node.methodDeclaration {} name none typeParams params returnType body) pos
-        else if (← currentToken) == Kind.colonToken then
-          -- Property assignment: name: value
-          nextToken
-          let value ← parseAssignmentExpressionOrHigher
-          finishNode (Node.propertyAssignment {} name (some value)) pos
-        else
-          -- Shorthand property: name  (or name = default)
-          finishNode (Node.shorthandPropertyAssignment {} name) pos
-    else
+        parsePropertyBody name pos
+    | _ =>
       let name ← parsePropertyName
-      if (← currentToken) == Kind.openParenToken || (← currentToken) == Kind.lessThanToken then
-        -- Method shorthand: name(params) { body }
-        let typeParams ← parseTypeParameters
-        let params ← parseParameters
-        let returnType ← parseReturnType
-        let body ← parseFunctionBlock
-        finishNode (Node.methodDeclaration {} name none typeParams params returnType body) pos
-      else if (← currentToken) == Kind.colonToken then
-        -- Property assignment: name: value
-        nextToken
-        let value ← parseAssignmentExpressionOrHigher
-        finishNode (Node.propertyAssignment {} name (some value)) pos
-      else
-        -- Shorthand property: name  (or name = default)
-        finishNode (Node.shorthandPropertyAssignment {} name) pos
+      parsePropertyBody name pos
 
 /-- Based on Go: parser.go:5610 (parseNewExpressionOrNewDotTarget) -/
 partial def parseNewExpression : ParserM Node :=
@@ -539,13 +540,14 @@ partial def parseNewExpression : ParserM Node :=
     let pos ← nodePos
     let _ ← parseExpected Kind.newKeyword
     let expr ← parseMemberExpressionOrHigher
-    let args ← if (← currentToken) == Kind.openParenToken then do
-      let _ ← parseExpected Kind.openParenToken
-      let a ← parseDelimitedList .argumentExpressions isStartOfExpression
-        (parseAssignmentExpressionOrHigher)
-      let _ ← parseExpected Kind.closeParenToken
-      pure (some a)
-    else pure none
+    let args ← match (← currentToken) with
+      | .openParenToken => do
+        let _ ← parseExpected Kind.openParenToken
+        let a ← parseDelimitedList .argumentExpressions isStartOfExpression
+          (parseAssignmentExpressionOrHigher)
+        let _ ← parseExpected Kind.closeParenToken
+        pure (some a)
+      | _ => pure none
     finishNode (Node.newExpression {} expr args) pos
 
 /-- Based on Go: parser.go:4335 (parseFunctionExpression) -/
@@ -630,18 +632,11 @@ partial def parseJsxLikeExpression : ParserM Node := do
     if depth == 0 then
       pure ()
     else
-      let tok ← currentToken
-      if tok == Kind.endOfFile then
-        pure ()
-      else if tok == Kind.openBraceToken then
-        nextToken
-        skipBraceExpression (depth + 1)
-      else if tok == Kind.closeBraceToken then
-        nextToken
-        skipBraceExpression (depth - 1)
-      else
-        nextToken
-        skipBraceExpression depth
+      match (← currentToken) with
+      | .endOfFile => pure ()
+      | .openBraceToken => nextToken; skipBraceExpression (depth + 1)
+      | .closeBraceToken => nextToken; skipBraceExpression (depth - 1)
+      | _ => nextToken; skipBraceExpression depth
 
   let rec consume (depth : Nat) (inTag : Bool) (pendingOpen : Bool) (pendingClose : Bool)
       (seenTag : Bool) (steps : Nat) : ParserM Unit := do
@@ -659,11 +654,12 @@ partial def parseJsxLikeExpression : ParserM Node := do
       consume depth inTag pendingOpen pendingClose seenTag (steps + 1)
     else
       let (depth', inTag', pendingOpen', pendingClose', seenTag', advanceNow) :=
-        if tok == Kind.lessThanToken then
+        match tok with
+        | .lessThanToken =>
           (depth, true, true, false, true, true)
-        else if tok == Kind.lessThanSlashToken then
+        | .lessThanSlashToken =>
           (depth, true, false, true, true, true)
-        else if tok == Kind.greaterThanToken then
+        | .greaterThanToken =>
           if inTag then
             if pendingClose then
               let depth' := if depth > 0 then depth - 1 else 0
@@ -674,10 +670,13 @@ partial def parseJsxLikeExpression : ParserM Node := do
               (depth, false, false, false, seenTag, true)
           else
             (depth, inTag, pendingOpen, pendingClose, seenTag, true)
-        else if tok == Kind.slashToken && inTag && pendingOpen then
-          -- Handle self-closing tags: <Tag />
-          (depth, inTag, false, false, seenTag, true)
-        else
+        | .slashToken =>
+          if inTag && pendingOpen then
+            -- Handle self-closing tags: <Tag />
+            (depth, inTag, false, false, seenTag, true)
+          else
+            (depth, inTag, pendingOpen, pendingClose, seenTag, true)
+        | _ =>
           (depth, inTag, pendingOpen, pendingClose, seenTag, true)
       if advanceNow then
         nextToken
@@ -699,63 +698,70 @@ partial def parseMemberExpressionOrHigher : ParserM Node :=
     Based on Go: parser.go:5162 -/
 partial def parseMemberExpressionRest (pos : Nat) (current : Node) : ParserM Node := do
       let tok ← currentToken
-      if tok == Kind.dotToken then
+      match tok with
+      | .dotToken =>
         nextToken
         let name ← parseIdentifierName
         let node ← finishNode (Node.propertyAccessExpression {} current name) pos
         parseMemberExpressionRest pos node
       -- Optional chaining: ?.prop or ?.[idx]
       -- Based on Go: parser.go:5198 (parsePropertyOrElementAccessChain)
-      else if tok == Kind.questionDotToken then
+      | .questionDotToken =>
         nextToken
-        let tok2 ← currentToken
-        if tok2 == Kind.openBracketToken then
+        match (← currentToken) with
+        | .openBracketToken =>
           nextToken
           let argExpr ← parseExpressionAllowIn
           let _ ← parseExpected Kind.closeBracketToken
           let node ← finishNode (Node.elementAccessExpression {} current argExpr) pos
           parseMemberExpressionRest pos node
-        else
+        | _ =>
           let name ← parseIdentifierName
           let node ← finishNode (Node.propertyAccessExpression {} current name) pos
           parseMemberExpressionRest pos node
-      else if tok == Kind.exclamationToken && !(← get).scanner.hasPrecedingLineBreak then
-        nextToken
-        let node ← finishNode (Node.nonNullExpression {} current) pos
-        parseMemberExpressionRest pos node
-      else if tok == Kind.openBracketToken then
+      | .exclamationToken =>
+        if !(← get).scanner.hasPrecedingLineBreak then
+          nextToken
+          let node ← finishNode (Node.nonNullExpression {} current) pos
+          parseMemberExpressionRest pos node
+        else return current
+      | .openBracketToken =>
         nextToken
         let argExpr ← parseExpressionAllowIn
         let _ ← parseExpected Kind.closeBracketToken
         let node ← finishNode (Node.elementAccessExpression {} current argExpr) pos
         parseMemberExpressionRest pos node
-      else return current
+      | _ => return current
 
 /-- Based on Go: parser.go:5312 (parseCallExpressionRest) -/
 partial def parseCallExpressionRest (pos : Nat) (current : Node) : ParserM Node := do
 
       let tok ← currentToken
-      if tok == Kind.openParenToken then
+      match tok with
+      | .openParenToken =>
         let _ ← parseExpected Kind.openParenToken
         let args ← parseDelimitedList .argumentExpressions isStartOfExpression
           (parseSpreadOrAssignmentExpression)
         let _ ← parseExpected Kind.closeParenToken
         let node ← finishNode (Node.callExpression {} current args) pos
         parseCallExpressionRest pos node
-      else if tok == Kind.lessThanToken || tok == Kind.lessThanLessThanToken then
+      | .lessThanToken | .lessThanLessThanToken =>
         -- Generic call: expr<T>(args)
         let isTypeArgCall ← lookAhead do
-          if (← currentToken) == Kind.lessThanLessThanToken then
-            let _ ← reScanLessThanToken
-          if (← currentToken) != Kind.lessThanToken then
-            return false
+          match (← currentToken) with
+          | .lessThanLessThanToken => let _ ← reScanLessThanToken
+          | _ => pure ()
+          match (← currentToken) with
+          | .lessThanToken => pure ()
+          | _ => return false
           let _ ← parseExpected Kind.lessThanToken
           let _ ← parseDelimitedList .typeArguments isStartOfType (parseType')
           let _ ← parseExpected Kind.greaterThanToken
           return (← currentToken) == Kind.openParenToken
         if isTypeArgCall then
-          if (← currentToken) == Kind.lessThanLessThanToken then
-            let _ ← reScanLessThanToken
+          match (← currentToken) with
+          | .lessThanLessThanToken => let _ ← reScanLessThanToken
+          | _ => pure ()
           let _ ← parseExpected Kind.lessThanToken
           let _ ← parseDelimitedList .typeArguments isStartOfType (parseType')
           let _ ← parseExpected Kind.greaterThanToken
@@ -767,7 +773,7 @@ partial def parseCallExpressionRest (pos : Nat) (current : Node) : ParserM Node 
           parseCallExpressionRest pos node
         else
           return current
-      else if tok == Kind.questionDotToken then
+      | .questionDotToken =>
         -- Optional chaining: foo?.(), foo?.prop, foo?.[idx]
         let isCall ← lookAhead do nextToken; return (← currentToken) == Kind.openParenToken
         if isCall then
@@ -781,18 +787,23 @@ partial def parseCallExpressionRest (pos : Nat) (current : Node) : ParserM Node 
         else
           let expr' ← parseMemberExpressionRest pos current
           parseCallExpressionRest pos expr'
-      else if tok == Kind.dotToken || tok == Kind.openBracketToken ||
-              (tok == Kind.exclamationToken && !(← get).scanner.hasPrecedingLineBreak) then
+      | .dotToken | .openBracketToken =>
         let expr' ← parseMemberExpressionRest pos current
         parseCallExpressionRest pos expr'
-      else if tok == Kind.noSubstitutionTemplateLiteral || tok == Kind.templateHead then
-        let tmpl ← if tok == Kind.noSubstitutionTemplateLiteral then
-          let _ ← reScanTemplateToken true
-          parseLiteralExpression
-          else parseTemplateExpression
+      | .exclamationToken =>
+        if !(← get).scanner.hasPrecedingLineBreak then
+          let expr' ← parseMemberExpressionRest pos current
+          parseCallExpressionRest pos expr'
+        else return current
+      | .noSubstitutionTemplateLiteral | .templateHead =>
+        let tmpl ← match tok with
+          | .noSubstitutionTemplateLiteral =>
+            let _ ← reScanTemplateToken true
+            parseLiteralExpression
+          | _ => parseTemplateExpression
         let node ← finishNode (Node.taggedTemplateExpression {} current tmpl) pos
         parseCallExpressionRest pos node
-      else return current
+      | _ => return current
 
 /-- Based on Go: parser.go:5002 (parseLeftHandSideExpressionOrHigher) -/
 partial def parseLeftHandSideExpressionOrHigher : ParserM Node :=
@@ -856,32 +867,37 @@ partial def parseUnaryExpressionOrHigher : ParserM Node :=
 partial def parseBinaryExpressionRest (precedence : OperatorPrecedence)
     (left : Node) (pos : Nat) : ParserM Node := do
       -- Rescan > tokens (for >=, >>=, >>>=)
-      if (← currentToken) == Kind.greaterThanToken then
-        let _ ← reScanGreaterThanToken
+      match (← currentToken) with
+      | .greaterThanToken => let _ ← reScanGreaterThanToken
+      | _ => pure ()
       let tok ← currentToken
       -- Handle 'as' type assertion and 'satisfies' expression
       -- Based on Go: parser.go:4492
-      if tok == Kind.asKeyword || tok == Kind.satisfiesKeyword then
+      match tok with
+      | .asKeyword | .satisfiesKeyword =>
         if precedence.toInt >= OperatorPrecedence.relational.toInt then return left
         if (← get).scanner.hasPrecedingLineBreak then return left
-        let keywordKind := tok
         nextToken
         let typeNode ← parseType'
-        let expr ← if keywordKind == Kind.satisfiesKeyword then
-          finishNode (Node.satisfiesExpression {} left typeNode) pos
-        else
-          finishNode (Node.asExpression {} left typeNode) pos
+        let expr ← match tok with
+          | .satisfiesKeyword =>
+            finishNode (Node.satisfiesExpression {} left typeNode) pos
+          | _ =>
+            finishNode (Node.asExpression {} left typeNode) pos
         parseBinaryExpressionRest precedence expr pos
-      else
+      | _ =>
       let newPrecedence := getBinaryOperatorPrecedence tok
-      let consume := if tok == Kind.asteriskAsteriskToken then
-        newPrecedence.toInt >= precedence.toInt  -- right-associative
-      else
-        newPrecedence.toInt > precedence.toInt   -- left-associative
+      let consume := match tok with
+        | .asteriskAsteriskToken =>
+          newPrecedence.toInt >= precedence.toInt  -- right-associative
+        | _ =>
+          newPrecedence.toInt > precedence.toInt   -- left-associative
       if !consume then return left
-      if tok == Kind.inKeyword &&
-         (← get).contextFlags.hasFlag NodeFlags.disallowInContext then
-        return left
+      match tok with
+      | .inKeyword =>
+        if (← get).contextFlags.hasFlag NodeFlags.disallowInContext then
+          return left
+      | _ => pure ()
       let opNode ← parseTokenNode
       let rightOperand ← parseBinaryExpressionOrHigher newPrecedence
       let binExpr ← finishNode (Node.binaryExpression {} left opNode rightOperand) pos
@@ -897,7 +913,8 @@ partial def parseBinaryExpressionOrHigher (precedence : OperatorPrecedence) : Pa
 /-- Based on Go: parser.go:4424 (parseConditionalExpressionRest) -/
 partial def parseConditionalExpressionRest (expr : Node) (pos : Nat) : ParserM Node :=
   do
-    if (← currentToken) == Kind.questionToken then
+    match (← currentToken) with
+    | .questionToken =>
       nextToken
       let saved := (← get).contextFlags
       setContextFlag NodeFlags.disallowInContext false
@@ -906,80 +923,79 @@ partial def parseConditionalExpressionRest (expr : Node) (pos : Nat) : ParserM N
       let _ ← parseExpected Kind.colonToken
       let whenFalse ← parseAssignmentExpressionOrHigher
       finishNode (Node.conditionalExpression {} expr whenTrue whenFalse) pos
-    else return expr
+    | _ => return expr
 
 /-- Try to detect if current position is an arrow function.
     Simple heuristic: look for `() =>`, `(id) =>`, `id =>`. -/
 partial def isArrowFunctionStart : ParserM Bool := do
-  let tok ← currentToken
-  if tok == Kind.openParenToken then
+  match (← currentToken) with
+  | .openParenToken =>
     lookAhead do
       let rec scanToArrow (parenDepth bracketDepth braceDepth : Nat) : ParserM Bool := do
-        let tok' ← currentToken
-        if tok' == Kind.endOfFile then
-          return false
-        else if tok' == Kind.openParenToken then
+        match (← currentToken) with
+        | .endOfFile => return false
+        | .openParenToken =>
           nextToken
           scanToArrow (parenDepth + 1) bracketDepth braceDepth
-        else if tok' == Kind.closeParenToken then
+        | .closeParenToken =>
           if parenDepth == 1 && bracketDepth == 0 && braceDepth == 0 then
             nextToken
-            if (← currentToken) == Kind.equalsGreaterThanToken then
-              return true
-            else if (← currentToken) == Kind.colonToken then
+            match (← currentToken) with
+            | .equalsGreaterThanToken => return true
+            | .colonToken =>
               let _ ← parseReturnType
               return (← currentToken) == Kind.equalsGreaterThanToken
-            else
-              return false
+            | _ => return false
           else
             nextToken
             scanToArrow (parenDepth - 1) bracketDepth braceDepth
-        else if tok' == Kind.openBracketToken then
+        | .openBracketToken =>
           nextToken
           scanToArrow parenDepth (bracketDepth + 1) braceDepth
-        else if tok' == Kind.closeBracketToken then
+        | .closeBracketToken =>
           if bracketDepth == 0 then return false
           nextToken
           scanToArrow parenDepth (bracketDepth - 1) braceDepth
-        else if tok' == Kind.openBraceToken then
+        | .openBraceToken =>
           nextToken
           scanToArrow parenDepth bracketDepth (braceDepth + 1)
-        else if tok' == Kind.closeBraceToken then
+        | .closeBraceToken =>
           if braceDepth == 0 then return false
           nextToken
           scanToArrow parenDepth bracketDepth (braceDepth - 1)
-        else
+        | _ =>
           nextToken
           scanToArrow parenDepth bracketDepth braceDepth
       scanToArrow 0 0 0
-  else if ← isBindingIdentifierToken then
-    lookAhead do
-      nextToken
-      return (← currentToken) == Kind.equalsGreaterThanToken
-  else return false
+  | _ =>
+    if ← isBindingIdentifierToken then
+      lookAhead do
+        nextToken
+        return (← currentToken) == Kind.equalsGreaterThanToken
+    else return false
 
 /-- Parse arrow function expression. -/
 partial def parseArrowFunction : ParserM Node :=
   do
     let pos ← nodePos
-    let tok ← currentToken
-    if tok == Kind.openParenToken then
+    match (← currentToken) with
+    | .openParenToken =>
       let typeParams ← parseTypeParameters
       let params ← parseParameters
       let returnType ← parseReturnType
       let _ ← parseExpected Kind.equalsGreaterThanToken
-      let body ← if (← currentToken) == Kind.openBraceToken then
-        parseBlock
-      else parseAssignmentExpressionOrHigher
+      let body ← match (← currentToken) with
+        | .openBraceToken => parseBlock
+        | _ => parseAssignmentExpressionOrHigher
       finishNode (Node.arrowFunction {} typeParams params returnType body) pos
-    else
+    | _ =>
       -- Single parameter arrow: x => expr
       let param ← parseBindingIdentifier
       let paramNode ← finishNode (Node.parameterDeclaration {} none param none none none) pos
       let _ ← parseExpected Kind.equalsGreaterThanToken
-      let body ← if (← currentToken) == Kind.openBraceToken then
-        parseBlock
-      else parseAssignmentExpressionOrHigher
+      let body ← match (← currentToken) with
+        | .openBraceToken => parseBlock
+        | _ => parseAssignmentExpressionOrHigher
       finishNode (Node.arrowFunction {} none #[paramNode] none body) pos
 
 /-- Based on Go: parser.go:3952 (parseAssignmentExpressionOrHigher) -/
@@ -993,18 +1009,21 @@ partial def parseAssignmentExpressionOrHigher : ParserM Node :=
     if ← isArrowFunctionStart then
       return ← parseArrowFunction
     -- Check for yield
-    if (← currentToken) == Kind.yieldKeyword then
+    match (← currentToken) with
+    | .yieldKeyword =>
       let pos ← nodePos
       nextToken
       let expr ← if !(← canParseSemicolon) then
         pure (some (← parseAssignmentExpressionOrHigher))
       else pure none
       return ← finishNode (Node.yieldExpression {} expr) pos
+    | _ => pure ()
     let pos ← nodePos
     let expr ← parseBinaryExpressionOrHigher OperatorPrecedence.lowest
     -- Check for conditional
-    if (← currentToken) == Kind.questionToken then
-      return ← parseConditionalExpressionRest expr pos
+    match (← currentToken) with
+    | .questionToken => return ← parseConditionalExpressionRest expr pos
+    | _ => pure ()
     if isLeftHandSideExpression expr && Kind.isAssignment (← currentToken) then
       let opNode ← parseTokenNode
       let right ← parseAssignmentExpressionOrHigher
@@ -1013,12 +1032,13 @@ partial def parseAssignmentExpressionOrHigher : ParserM Node :=
 
 /-- Helper: parse comma expression rest. -/
 partial def parseExpressionCommaRest (current : Node) (pos : Nat) : ParserM Node := do
-      if (← currentToken) == Kind.commaToken then
+      match (← currentToken) with
+      | .commaToken =>
         let opNode ← parseTokenNode
         let right ← parseAssignmentExpressionOrHigher
         let binExpr ← finishNode (Node.binaryExpression {} current opNode right) pos
         parseExpressionCommaRest binExpr pos
-      else return current
+      | _ => return current
 
 /-- Based on Go: parser.go:3927 (parseExpression) — comma expressions -/
 partial def parseExpression : ParserM Node :=
@@ -1042,8 +1062,9 @@ partial def parseExpressionAllowIn : ParserM Node :=
 partial def parseType' : ParserM Node :=
   do
     let tok ← currentToken
+    match tok with
     -- Generic function type: <T>(params) => ReturnType
-    if tok == Kind.lessThanToken then
+    | .lessThanToken =>
       let pos ← nodePos
       let typeParams ← parseTypeParameters
       let params ← parseParameters
@@ -1051,38 +1072,37 @@ partial def parseType' : ParserM Node :=
       let retType ← parseType'
       return ← finishNode (Node.functionType {} typeParams params (some retType)) pos
     -- Function type: (params) => ReturnType
-    else if tok == Kind.openParenToken then
+    | .openParenToken =>
       -- Try to detect function type vs parenthesized type
       let isFuncType ← lookAhead do
         let rec scanToArrow (parenDepth bracketDepth braceDepth : Nat) : ParserM Bool := do
-          let tok' ← currentToken
-          if tok' == Kind.endOfFile then
-            return false
-          else if tok' == Kind.openParenToken then
+          match (← currentToken) with
+          | .endOfFile => return false
+          | .openParenToken =>
             nextToken
             scanToArrow (parenDepth + 1) bracketDepth braceDepth
-          else if tok' == Kind.closeParenToken then
+          | .closeParenToken =>
             if parenDepth == 1 && bracketDepth == 0 && braceDepth == 0 then
               nextToken
               return (← currentToken) == Kind.equalsGreaterThanToken
             else
               nextToken
               scanToArrow (parenDepth - 1) bracketDepth braceDepth
-          else if tok' == Kind.openBracketToken then
+          | .openBracketToken =>
             nextToken
             scanToArrow parenDepth (bracketDepth + 1) braceDepth
-          else if tok' == Kind.closeBracketToken then
+          | .closeBracketToken =>
             if bracketDepth == 0 then return false
             nextToken
             scanToArrow parenDepth (bracketDepth - 1) braceDepth
-          else if tok' == Kind.openBraceToken then
+          | .openBraceToken =>
             nextToken
             scanToArrow parenDepth bracketDepth (braceDepth + 1)
-          else if tok' == Kind.closeBraceToken then
+          | .closeBraceToken =>
             if braceDepth == 0 then return false
             nextToken
             scanToArrow parenDepth bracketDepth (braceDepth - 1)
-          else
+          | _ =>
             nextToken
             scanToArrow parenDepth bracketDepth braceDepth
         scanToArrow 0 0 0
@@ -1102,7 +1122,7 @@ partial def parseType' : ParserM Node :=
         let pType ← parseArrayTypePostfix pType
         parseUnionOrIntersectionPostfix pType
     -- Constructor type: new (params) => ReturnType
-    else if tok == Kind.newKeyword then
+    | .newKeyword =>
       let pos ← nodePos
       nextToken
       let params ← parseParameters
@@ -1110,14 +1130,14 @@ partial def parseType' : ParserM Node :=
       let retType ← parseType'
       finishNode (Node.constructorType {} none params (some retType)) pos
     -- keyof, unique, readonly type operators
-    else if tok == Kind.keyOfKeyword || tok == Kind.uniqueKeyword || tok == Kind.readonlyKeyword then
+    | .keyOfKeyword | .uniqueKeyword | .readonlyKeyword =>
       let pos ← nodePos
       let op ← currentToken
       nextToken
       let inner ← parseType'
       finishNode (Node.typeOperator {} op inner) pos
     -- infer T — Based on Go: parser.go:2445
-    else if tok == Kind.inferKeyword then
+    | .inferKeyword =>
       let pos ← nodePos
       nextToken
       let tpPos ← nodePos
@@ -1125,7 +1145,7 @@ partial def parseType' : ParserM Node :=
       -- infer T creates a typeParameter node for the name
       let tp ← finishNode (Node.typeReference {} name none) tpPos
       finishNode (Node.inferType {} tp) pos
-    else
+    | _ =>
       -- Union prefix: | Type
       let hasLeadingBar := tok == Kind.barToken
       if hasLeadingBar then nextToken
@@ -1134,81 +1154,85 @@ partial def parseType' : ParserM Node :=
       let typeNode ← parseUnionOrIntersectionPostfix primaryType
       -- Conditional type postfix: T extends U ? X : Y
       -- Based on Go: parser.go:2493-2507
-      if (← currentToken) == Kind.extendsKeyword &&
-         !(← get).scanner.hasPrecedingLineBreak then
-        let cPos := typeNode.base.loc.pos.toInt.toNat
-        nextToken  -- skip 'extends'
-        let extendsType ← parseType'
-        let _ ← parseExpected Kind.questionToken
-        let trueType ← parseType'
-        let _ ← parseExpected Kind.colonToken
-        let falseType ← parseType'
-        finishNode (Node.conditionalType {} typeNode extendsType trueType falseType) cPos
-      else return typeNode
+      match (← currentToken) with
+      | .extendsKeyword =>
+        if !(← get).scanner.hasPrecedingLineBreak then
+          let cPos := typeNode.base.loc.pos.toInt.toNat
+          nextToken  -- skip 'extends'
+          let extendsType ← parseType'
+          let _ ← parseExpected Kind.questionToken
+          let trueType ← parseType'
+          let _ ← parseExpected Kind.colonToken
+          let falseType ← parseType'
+          finishNode (Node.conditionalType {} typeNode extendsType trueType falseType) cPos
+        else return typeNode
+      | _ => return typeNode
 
 /-- Parse a primary (non-union, non-intersection) type. -/
 partial def parsePrimaryType : ParserM Node :=
   do
     let tok ← currentToken
     let baseType ←
+      match tok with
       -- Type literal: { members }
-      if tok == Kind.openBraceToken then
+      | .openBraceToken =>
         let pos ← nodePos
         let _ ← parseExpected Kind.openBraceToken
         let members ← parseList .typeMembers (isTypeMemberStart) (parseTypeMember)
         let _ ← parseExpected Kind.closeBraceToken
         finishNode (Node.typeLiteral {} members) pos
       -- Tuple type: [Type, Type]
-      else if tok == Kind.openBracketToken then
+      | .openBracketToken =>
         let pos ← nodePos
         let _ ← parseExpected Kind.openBracketToken
         let elements ← parseDelimitedList .tupleElementTypes isStartOfType (parseType')
         let _ ← parseExpected Kind.closeBracketToken
         finishNode (Node.tupleType {} elements) pos
       -- typeof type: typeof expr
-      else if tok == Kind.typeOfKeyword then
+      | .typeOfKeyword =>
         let pos ← nodePos
         nextToken
         let name ← parseIdentifier
         let qname ← parseQualifiedNameRest name pos
         finishNode (Node.typeQuery {} qname) pos
-      else if isKeywordType tok then parseTokenNode
-      else if tok == Kind.voidKeyword || tok == Kind.undefinedKeyword ||
-              tok == Kind.nullKeyword then parseTokenNode
-      else if tok == Kind.stringLiteral || tok == Kind.numericLiteral ||
-              tok == Kind.trueKeyword || tok == Kind.falseKeyword then
+      | .voidKeyword | .undefinedKeyword | .nullKeyword => parseTokenNode
+      | .stringLiteral | .numericLiteral | .trueKeyword | .falseKeyword =>
         let pos ← nodePos
         let lit ← parseLiteralExpression
         finishNode (Node.literalType {} lit) pos
-      else if tok == Kind.minusToken then
+      | .minusToken =>
         let pos ← nodePos
         nextToken
         let lit ← parseLiteralExpression
         let neg ← finishNode (Node.prefixUnaryExpression {} Kind.minusToken lit) pos
         finishNode (Node.literalType {} neg) pos
-      else if tok == Kind.thisKeyword then parseTokenNode
-      else if ← isIdentifierToken then
-        let pos ← nodePos
-        let name ← parseIdentifier
-        -- Check for qualified name: A.B.C
-        let qname ← parseQualifiedNameRest name pos
-        -- Check for type arguments: Name<T, U>
-        let typeArgs ← if (← currentToken) == Kind.lessThanToken then do
-          let _ ← parseExpected Kind.lessThanToken
-          let args ← parseDelimitedList .typeArguments isStartOfType (parseType')
-          let _ ← parseExpected Kind.greaterThanToken
-          pure (some args)
-        else pure none
-        finishNode (Node.typeReference {} qname typeArgs) pos
-      else
-        parseTokenNode  -- fallback
+      | .thisKeyword => parseTokenNode
+      | _ =>
+        if isKeywordType tok then parseTokenNode
+        else if ← isIdentifierToken then
+          let pos ← nodePos
+          let name ← parseIdentifier
+          -- Check for qualified name: A.B.C
+          let qname ← parseQualifiedNameRest name pos
+          -- Check for type arguments: Name<T, U>
+          let typeArgs ← match (← currentToken) with
+            | .lessThanToken => do
+              let _ ← parseExpected Kind.lessThanToken
+              let args ← parseDelimitedList .typeArguments isStartOfType (parseType')
+              let _ ← parseExpected Kind.greaterThanToken
+              pure (some args)
+            | _ => pure none
+          finishNode (Node.typeReference {} qname typeArgs) pos
+        else
+          parseTokenNode  -- fallback
     -- Array type postfix: Type[], Type[][]
     parseArrayTypePostfix baseType
 
 /-- Parse array type postfix: Type[], Type[][], Type[Key]
     Based on Go: parser.go:2427 (parseArrayTypeOrHigher) -/
 partial def parseArrayTypePostfix (current : Node) : ParserM Node := do
-      if (← currentToken) == Kind.openBracketToken then
+      match (← currentToken) with
+      | .openBracketToken =>
         let isArrayType ← lookAhead do nextToken; return (← currentToken) == Kind.closeBracketToken
         if isArrayType then
           let pos := current.base.loc.pos.toInt.toNat
@@ -1224,69 +1248,89 @@ partial def parseArrayTypePostfix (current : Node) : ParserM Node := do
           let _ ← parseExpected Kind.closeBracketToken
           let node ← finishNode (Node.indexedAccessType {} current indexType) pos
           parseArrayTypePostfix node
-      else return current
+      | _ => return current
 
 /-- Parse intersection type: Type & Type & Type
     Based on Go: parser.go:2379 (parseIntersectionTypeOrHigher)
     Each intersection member is a primary type with array/indexed-access postfix. -/
 partial def collectIntersectionTypes (acc : Array Node) : ParserM (Array Node) := do
-    if (← currentToken) == Kind.ampersandToken then
+    match (← currentToken) with
+    | .ampersandToken =>
       nextToken
       let nextType ← parsePrimaryType
       collectIntersectionTypes (acc.push nextType)
-    else return acc
+    | _ => return acc
 
 partial def parseIntersectionPostfix (firstType : Node) : ParserM Node := do
-    if (← currentToken) == Kind.ampersandToken then
+    match (← currentToken) with
+    | .ampersandToken =>
       let pos := firstType.base.loc.pos.toInt.toNat
       let types ← collectIntersectionTypes #[firstType]
       finishNode (Node.intersectionType {} types) pos
-    else return firstType
+    | _ => return firstType
 
 partial def collectUnionTypes (acc : Array Node) : ParserM (Array Node) := do
-    if (← currentToken) == Kind.barToken then
+    match (← currentToken) with
+    | .barToken =>
       nextToken
       let primary ← parsePrimaryType
       let member ← parseIntersectionPostfix primary
       collectUnionTypes (acc.push member)
-    else return acc
+    | _ => return acc
 
 /-- Parse union/intersection postfix: Type | Type, Type & Type
     Based on Go: parser.go:2358 (parseUnionTypeOrHigher)
     Each union member is parsed as intersection-or-higher. -/
 partial def parseUnionOrIntersectionPostfix (firstType : Node) : ParserM Node := do
     let firstOrIntersection ← parseIntersectionPostfix firstType
-    if (← currentToken) == Kind.barToken then
+    match (← currentToken) with
+    | .barToken =>
       let pos := firstOrIntersection.base.loc.pos.toInt.toNat
       let types ← collectUnionTypes #[firstOrIntersection]
       finishNode (Node.unionType {} types) pos
-    else return firstOrIntersection
+    | _ => return firstOrIntersection
 
 /-- Check if current token can start a type member. -/
 partial def isTypeMemberStart : ParserM Bool := do
   let tok ← currentToken
-  if tok == Kind.openParenToken || tok == Kind.lessThanToken then return true  -- call sig
-  if tok == Kind.openBracketToken then return true  -- index sig
-  if tok == Kind.newKeyword then return true  -- construct sig
-  if tok == Kind.identifier || tok == Kind.stringLiteral || tok == Kind.numericLiteral then
-    return true
-  if Kind.isKeywordKind tok then return true
-  return false
+  match tok with
+  | .openParenToken | .lessThanToken => return true  -- call sig
+  | .openBracketToken => return true  -- index sig
+  | .newKeyword => return true  -- construct sig
+  | .identifier | .stringLiteral | .numericLiteral => return true
+  | _ => return Kind.isKeywordKind tok
+
+/-- Helper: after parsing a type member's name and question token, dispatch
+    on whether this is a method signature or property signature. -/
+partial def parseTypeMemberPropertyOrMethod (name : Node) (questionToken : Option Node)
+    (pos : Nat) : ParserM Node := do
+  match (← currentToken) with
+  | .openParenToken | .lessThanToken =>
+    let typeParams ← parseTypeParameters
+    let params ← parseParameters
+    let returnType ← parseReturnType
+    parseTypeMemberSemicolon
+    finishNode (Node.methodSignature {} name questionToken typeParams params returnType) pos
+  | _ =>
+    let typeNode ← parseTypeAnnotation
+    parseTypeMemberSemicolon
+    finishNode (Node.propertySignature {} name questionToken typeNode) pos
 
 /-- Parse a single type member (property signature, method signature, index signature, etc.) -/
 partial def parseTypeMember : ParserM Node :=
   do
     let pos ← nodePos
     let tok ← currentToken
+    match tok with
     -- Call signature: (params): Type
-    if tok == Kind.openParenToken || tok == Kind.lessThanToken then
+    | .openParenToken | .lessThanToken =>
       let typeParams ← parseTypeParameters
       let params ← parseParameters
       let returnType ← parseReturnType
       parseTypeMemberSemicolon
       finishNode (Node.callSignature {} typeParams params returnType) pos
     -- Construct signature: new (params): Type
-    else if tok == Kind.newKeyword then
+    | .newKeyword =>
       nextToken
       let typeParams ← parseTypeParameters
       let params ← parseParameters
@@ -1294,7 +1338,7 @@ partial def parseTypeMember : ParserM Node :=
       parseTypeMemberSemicolon
       finishNode (Node.constructSignature {} typeParams params returnType) pos
     -- Index signature or computed property name
-    else if tok == Kind.openBracketToken then
+    | .openBracketToken =>
       if ← isIndexSignature then
         -- Index signature: [key: Type]: Type
         let _ ← parseExpected Kind.openBracketToken
@@ -1311,30 +1355,12 @@ partial def parseTypeMember : ParserM Node :=
         -- Computed property name: [expr]?: Type or [expr](params): Type
         let name ← parsePropertyName
         let questionToken ← parseOptionalToken Kind.questionToken
-        if (← currentToken) == Kind.openParenToken || (← currentToken) == Kind.lessThanToken then
-          let typeParams ← parseTypeParameters
-          let params ← parseParameters
-          let returnType ← parseReturnType
-          parseTypeMemberSemicolon
-          finishNode (Node.methodSignature {} name questionToken typeParams params returnType) pos
-        else
-          let typeNode ← parseTypeAnnotation
-          parseTypeMemberSemicolon
-          finishNode (Node.propertySignature {} name questionToken typeNode) pos
-    else
+        parseTypeMemberPropertyOrMethod name questionToken pos
+    | _ =>
       -- Property or method signature
       let name ← parsePropertyName
       let questionToken ← parseOptionalToken Kind.questionToken
-      if (← currentToken) == Kind.openParenToken || (← currentToken) == Kind.lessThanToken then
-        let typeParams ← parseTypeParameters
-        let params ← parseParameters
-        let returnType ← parseReturnType
-        parseTypeMemberSemicolon
-        finishNode (Node.methodSignature {} name questionToken typeParams params returnType) pos
-      else
-        let typeNode ← parseTypeAnnotation
-        parseTypeMemberSemicolon
-        finishNode (Node.propertySignature {} name questionToken typeNode) pos
+      parseTypeMemberPropertyOrMethod name questionToken pos
 
 /-- Based on Go: parser.go:1588 (parseTypeAnnotation) -/
 partial def parseTypeAnnotation : ParserM (Option Node) :=
@@ -1349,8 +1375,9 @@ partial def parseReturnType : ParserM (Option Node) :=
     if ← parseOptional Kind.colonToken then
       let tok ← currentToken
       -- Based on Go: parser.go:2316 (parseReturnType)
-      -- Handle 'asserts' type predicate
-      if tok == Kind.assertsKeyword then
+      match tok with
+      | .assertsKeyword =>
+        -- Handle 'asserts' type predicate
         let isAsserts ← lookAhead do
           nextToken
           let t ← currentToken
@@ -1360,13 +1387,14 @@ partial def parseReturnType : ParserM (Option Node) :=
           nextToken  -- skip 'asserts'
           let paramName ← parseIdentifier
           -- asserts x is Type
-          let typeNode ← if (← currentToken) == Kind.isKeyword then
-            nextToken; pure (some (← parseType'))
-          else pure none
+          let typeNode ← match (← currentToken) with
+            | .isKeyword => nextToken; pure (some (← parseType'))
+            | _ => pure none
           let tp ← finishNode (Node.typePredicate {} paramName typeNode) pos
           return some tp
-      -- Handle 'x is Type' type predicate
-      if tok == Kind.identifier then
+        pure (some (← parseType'))
+      | .identifier =>
+        -- Handle 'x is Type' type predicate
         let isTypePred ← lookAhead do
           nextToken; return (← currentToken) == Kind.isKeyword
         if isTypePred then
@@ -1376,34 +1404,41 @@ partial def parseReturnType : ParserM (Option Node) :=
           let typeNode ← parseType'
           let tp ← finishNode (Node.typePredicate {} paramName (some typeNode)) pos
           return some tp
-      pure (some (← parseType'))
+        pure (some (← parseType'))
+      | _ => pure (some (← parseType'))
     else return none
 
 /-- Based on Go: parser.go:3096 (parseTypeParameters) -/
 partial def parseTypeParameters : ParserM (Option (Array Node)) :=
   do
-    if (← currentToken) == Kind.lessThanLessThanToken then
-      let _ ← reScanLessThanToken
-    if (← currentToken) == Kind.lessThanToken then
+    match (← currentToken) with
+    | .lessThanLessThanToken => let _ ← reScanLessThanToken
+    | _ => pure ()
+    match (← currentToken) with
+    | .lessThanToken =>
       let _ ← parseExpected Kind.lessThanToken
       let isTP : ParserM Bool := isIdentifierToken
       let params ← parseDelimitedList .typeParameters isTP do
         let pos ← nodePos
         let name ← parseIdentifier
         -- Parse optional constraint: extends Type
-        if (← currentToken) == Kind.extendsKeyword then
+        match (← currentToken) with
+        | .extendsKeyword =>
           nextToken
           let _constraint ← parseType'
           pure ()
+        | _ => pure ()
         -- Parse optional default: = Type
-        if (← currentToken) == Kind.equalsToken then
+        match (← currentToken) with
+        | .equalsToken =>
           nextToken
           let _defaultType ← parseType'
           pure ()
+        | _ => pure ()
         finishNode name pos
       let _ ← parseExpected Kind.greaterThanToken
       pure (some params)
-    else return none
+    | _ => return none
 
 /-- Based on Go: parser.go:3191 (parseParameter) -/
 partial def parseParameter : ParserM Node :=
@@ -1411,18 +1446,18 @@ partial def parseParameter : ParserM Node :=
     let pos ← nodePos
     skipDecorators
     -- Skip modifiers (public, private, protected, readonly)
-    let tok ← currentToken
-    if tok == Kind.publicKeyword || tok == Kind.privateKeyword ||
-       tok == Kind.protectedKeyword || tok == Kind.readonlyKeyword then
-      nextToken
+    match (← currentToken) with
+    | .publicKeyword | .privateKeyword | .protectedKeyword | .readonlyKeyword => nextToken
+    | _ => pure ()
     let dotDotDot ← parseOptionalToken Kind.dotDotDotToken
     let name ← parseIdentifierOrPattern
     let questionToken ←
-      if (← currentToken) == Kind.questionToken then
+      match (← currentToken) with
+      | .questionToken =>
         if dotDotDot.isSome then
           parseErrorAtCurrentToken Diagnostics.rest_parameter_cannot_be_optional
         parseOptionalToken Kind.questionToken
-      else pure none
+      | _ => pure none
     let typeNode ← parseTypeAnnotation
     let initializer ← parseInitializer
     finishNode (Node.parameterDeclaration {} dotDotDot name questionToken typeNode initializer) pos
@@ -1496,13 +1531,15 @@ partial def parseExpressionOrLabeledStatement : ParserM Node :=
     let pos ← nodePos
     let expr ← parseExpression
     -- Check for labeled statement: identifier followed by ':'
-    if (← currentToken) == Kind.colonToken then
+    match (← currentToken) with
+    | .colonToken =>
       match expr with
       | .identifier _ _ =>
         nextToken
         let stmt ← parseStatement
         return ← finishNode (Node.labeledStatement {} expr stmt) pos
       | _ => pure ()
+    | _ => pure ()
     let _ ← parseSemicolon
     finishNode (Node.expressionStatement {} expr) pos
 
@@ -1572,31 +1609,34 @@ partial def parseForStatement : ParserM Node :=
     let pos ← nodePos
     let _ ← parseExpected Kind.forKeyword
     let _ ← parseExpected Kind.openParenToken
-    let initializer ← if (← currentToken) == Kind.semicolonToken then pure none
-      else if (← currentToken) == Kind.varKeyword || (← currentToken) == Kind.letKeyword ||
-              (← currentToken) == Kind.constKeyword then
+    let initializer ← match (← currentToken) with
+      | .semicolonToken => pure none
+      | .varKeyword | .letKeyword | .constKeyword =>
         pure (some (← parseVariableDeclarationList))
-      else pure (some (← parseExpressionAllowIn))
+      | _ => pure (some (← parseExpressionAllowIn))
     let tok ← currentToken
-    if tok == Kind.inKeyword then
+    match tok with
+    | .inKeyword =>
       let _ ← parseExpected Kind.inKeyword
       let expr ← parseExpressionAllowIn
       let _ ← parseExpected Kind.closeParenToken
       let stmt ← parseStatement
       finishNode (Node.forInStatement {} initializer expr stmt) pos
-    else if tok == Kind.ofKeyword then
+    | .ofKeyword =>
       nextToken
       let expr ← parseExpressionAllowIn
       let _ ← parseExpected Kind.closeParenToken
       let stmt ← parseStatement
       finishNode (Node.forOfStatement {} initializer expr stmt) pos
-    else
+    | _ =>
       let _ ← parseExpected Kind.semicolonToken
-      let condition ← if (← currentToken) == Kind.semicolonToken then pure none
-        else pure (some (← parseExpressionAllowIn))
+      let condition ← match (← currentToken) with
+        | .semicolonToken => pure none
+        | _ => pure (some (← parseExpressionAllowIn))
       let _ ← parseExpected Kind.semicolonToken
-      let incrementor ← if (← currentToken) == Kind.closeParenToken then pure none
-        else pure (some (← parseExpressionAllowIn))
+      let incrementor ← match (← currentToken) with
+        | .closeParenToken => pure none
+        | _ => pure (some (← parseExpressionAllowIn))
       let _ ← parseExpected Kind.closeParenToken
       let stmt ← parseStatement
       finishNode (Node.forStatement {} initializer condition incrementor stmt) pos
@@ -1616,9 +1656,9 @@ partial def parseSwitchStatement : ParserM Node :=
 
 /-- Helper: parse switch case/default clauses. -/
 partial def parseSwitchClauses (acc : Array Node := #[]) : ParserM (Array Node) := do
-      let tok ← currentToken
-      if tok == Kind.closeBraceToken || tok == Kind.endOfFile then return acc
-      else if tok == Kind.caseKeyword then
+      match (← currentToken) with
+      | .closeBraceToken | .endOfFile => return acc
+      | .caseKeyword =>
         let pos ← nodePos
         let _ ← parseExpected Kind.caseKeyword
         let expr ← parseExpressionAllowIn
@@ -1626,14 +1666,14 @@ partial def parseSwitchClauses (acc : Array Node := #[]) : ParserM (Array Node) 
         let stmts ← parseList .switchClauseStatements isStartOfStatement (parseStatement)
         let node ← finishNode (Node.caseClause {} expr stmts) pos
         parseSwitchClauses (acc.push node)
-      else if tok == Kind.defaultKeyword then
+      | .defaultKeyword =>
         let pos ← nodePos
         let _ ← parseExpected Kind.defaultKeyword
         let _ ← parseExpected Kind.colonToken
         let stmts ← parseList .switchClauseStatements isStartOfStatement (parseStatement)
         let node ← finishNode (Node.defaultClause {} stmts) pos
         parseSwitchClauses (acc.push node)
-      else
+      | _ =>
         nextToken
         parseSwitchClauses acc
 
@@ -1643,26 +1683,30 @@ partial def parseTryStatement : ParserM Node :=
     let pos ← nodePos
     let _ ← parseExpected Kind.tryKeyword
     let tryBlock ← parseBlock
-    let catchClause ← if (← currentToken) == Kind.catchKeyword then do
-      let cPos ← nodePos
-      let _ ← parseExpected Kind.catchKeyword
-      let decl ← if (← currentToken) == Kind.openParenToken then do
-        let _ ← parseExpected Kind.openParenToken
-        let name ← parseBindingIdentifier
-        if (← currentToken) == Kind.lessThanLessThanToken then
-          let _ ← reScanLessThanToken
-        let typeNode ← parseTypeAnnotation
-        let _ ← parseExpected Kind.closeParenToken
-        pure (some (Node.variableDeclaration {} name typeNode none))
-      else pure none
-      let block ← parseBlock
-      let node ← finishNode (Node.catchClause {} decl block) cPos
-      pure (some node)
-    else pure none
-    let finallyBlock ← if (← currentToken) == Kind.finallyKeyword then do
-      let _ ← parseExpected Kind.finallyKeyword
-      pure (some (← parseBlock))
-    else pure none
+    let catchClause ← match (← currentToken) with
+      | .catchKeyword => do
+        let cPos ← nodePos
+        let _ ← parseExpected Kind.catchKeyword
+        let decl ← match (← currentToken) with
+          | .openParenToken => do
+            let _ ← parseExpected Kind.openParenToken
+            let name ← parseBindingIdentifier
+            match (← currentToken) with
+            | .lessThanLessThanToken => let _ ← reScanLessThanToken
+            | _ => pure ()
+            let typeNode ← parseTypeAnnotation
+            let _ ← parseExpected Kind.closeParenToken
+            pure (some (Node.variableDeclaration {} name typeNode none))
+          | _ => pure none
+        let block ← parseBlock
+        let node ← finishNode (Node.catchClause {} decl block) cPos
+        pure (some node)
+      | _ => pure none
+    let finallyBlock ← match (← currentToken) with
+      | .finallyKeyword => do
+        let _ ← parseExpected Kind.finallyKeyword
+        pure (some (← parseBlock))
+      | _ => pure none
     finishNode (Node.tryStatement {} tryBlock catchClause finallyBlock) pos
 
 /-- Based on Go: parser.go:1131 (parseWithStatement) -/
@@ -1686,13 +1730,10 @@ partial def parseInitializer : ParserM (Option Node) :=
 /-- Based on Go: parser.go:1514 (parseIdentifierOrPattern) -/
 partial def parseIdentifierOrPattern : ParserM Node :=
   do
-    let tok ← currentToken
-    if tok == Kind.openBracketToken then
-      parseArrayBindingPattern
-    else if tok == Kind.openBraceToken then
-      parseObjectBindingPattern
-    else
-      parseBindingIdentifier
+    match (← currentToken) with
+    | .openBracketToken => parseArrayBindingPattern
+    | .openBraceToken => parseObjectBindingPattern
+    | _ => parseBindingIdentifier
 
 /-- Based on Go: parser.go:1528 (parseArrayBindingPattern) -/
 partial def parseArrayBindingPattern : ParserM Node :=
@@ -1710,15 +1751,16 @@ partial def parseArrayBindingPattern : ParserM Node :=
 /-- Based on Go: parser.go:1539 (parseArrayBindingElement) -/
 partial def parseArrayBindingElement : ParserM Node :=
   do
-    if (← currentToken) == Kind.commaToken then
+    match (← currentToken) with
+    | .commaToken =>
       -- Elision (omitted element)
       let pos ← nodePos
       finishNode (Node.omittedExpression {}) pos
-    else
+    | _ =>
       let pos ← nodePos
-      let dotDotDot ← if (← currentToken) == Kind.dotDotDotToken then
-        let n ← parseTokenNode; pure (some n)
-      else pure none
+      let dotDotDot ← match (← currentToken) with
+        | .dotDotDotToken => let n ← parseTokenNode; pure (some n)
+        | _ => pure none
       let name ← parseIdentifierOrPattern
       let initializer ← parseInitializer
       finishNode (Node.bindingElement {} dotDotDot none name initializer) pos
@@ -1740,17 +1782,18 @@ partial def parseObjectBindingPattern : ParserM Node :=
 partial def parseObjectBindingElement : ParserM Node :=
   do
     let pos ← nodePos
-    let dotDotDot ← if (← currentToken) == Kind.dotDotDotToken then
-      let n ← parseTokenNode; pure (some n)
-    else pure none
+    let dotDotDot ← match (← currentToken) with
+      | .dotDotDotToken => let n ← parseTokenNode; pure (some n)
+      | _ => pure none
     -- Check if this is propertyName: bindingElement
     let nameOrPropName ← parseIdentifierOrPattern
-    let (propName, name) ← if (← currentToken) == Kind.colonToken then do
-      nextToken
-      let binding ← parseIdentifierOrPattern
-      pure (some nameOrPropName, binding)
-    else
-      pure (none, nameOrPropName)
+    let (propName, name) ← match (← currentToken) with
+      | .colonToken => do
+        nextToken
+        let binding ← parseIdentifierOrPattern
+        pure (some nameOrPropName, binding)
+      | _ =>
+        pure (none, nameOrPropName)
     let initializer ← parseInitializer
     finishNode (Node.bindingElement {} dotDotDot propName name initializer) pos
 
@@ -1768,10 +1811,11 @@ partial def parseVariableDeclarationList : ParserM Node :=
   do
     let pos ← nodePos
     let tok ← currentToken
-    let flags := if tok == Kind.letKeyword then NodeFlags.let_
-      else if tok == Kind.constKeyword then NodeFlags.const_
-      else if tok == Kind.usingKeyword then NodeFlags.using_
-      else NodeFlags.none
+    let flags := match tok with
+      | .letKeyword => NodeFlags.let_
+      | .constKeyword => NodeFlags.const_
+      | .usingKeyword => NodeFlags.using_
+      | _ => NodeFlags.none
     nextToken
     let isDecl : ParserM Bool := do
       let bindId ← isBindingIdentifierToken
@@ -1919,7 +1963,7 @@ partial def parsePropertyOrMethodDeclaration : ParserM Node :=
     | _ =>
       let name ← parsePropertyName
       let questionToken ← parseOptionalToken Kind.questionToken
-      let exclamation ← parseOptionalToken Kind.exclamationToken
+      let _ ← parseOptionalToken Kind.exclamationToken
       let tok ← currentToken
       match tok with
       | .openParenToken
@@ -1929,7 +1973,6 @@ partial def parsePropertyOrMethodDeclaration : ParserM Node :=
         let typeNode ← parseTypeAnnotation
         let initializer ← parseInitializer
         let _ ← parseSemicolon
-        let _ := exclamation  -- suppress unused warning
         finishNode (Node.propertyDeclaration {} name questionToken typeNode initializer) pos
 
 /-- Based on Go: parser.go:1728 (parseClassElement) -/
@@ -1958,12 +2001,13 @@ partial def parseHeritageClauses (acc : Array Node := #[]) : ParserM (Option (Ar
       let types ← parseDelimitedList .heritageClauseElement isElem do
         let ePos ← nodePos
         let expr ← parseLeftHandSideExpressionOrHigher
-        let typeArgs ← if (← currentToken) == Kind.lessThanToken then do
-          let _ ← parseExpected Kind.lessThanToken
-          let args ← parseDelimitedList .typeArguments isStartOfType (parseType')
-          let _ ← parseExpected Kind.greaterThanToken
-          pure (some args)
-        else pure none
+        let typeArgs ← match (← currentToken) with
+          | .lessThanToken => do
+            let _ ← parseExpected Kind.lessThanToken
+            let args ← parseDelimitedList .typeArguments isStartOfType (parseType')
+            let _ ← parseExpected Kind.greaterThanToken
+            pure (some args)
+          | _ => pure none
         finishNode (Node.expressionWithTypeArguments {} expr typeArgs) ePos
       let clause ← finishNode (Node.heritageClause {} clauseToken types) pos
       parseHeritageClauses (acc.push clause)
@@ -1977,10 +2021,9 @@ partial def parseClassDeclaration : ParserM Node :=
     let pos ← nodePos
     let _ ← parseExpected Kind.classKeyword
     let name ← if ← isBindingIdentifierToken then do
-      let tok ← currentToken
-      if tok == Kind.extendsKeyword || tok == Kind.implementsKeyword || tok == Kind.openBraceToken then
-        pure none
-      else
+      match (← currentToken) with
+      | .extendsKeyword | .implementsKeyword | .openBraceToken => pure none
+      | _ =>
         let n ← parseBindingIdentifier
         pure (some n)
     else pure none
@@ -2049,47 +2092,49 @@ partial def parseModuleDeclaration : ParserM Node :=
     let pos ← nodePos
     let tok ← currentToken
     -- Based on Go: parser.go:2036-2074
-    -- global augmentation: `declare global { }`
-    if tok == Kind.globalKeyword then
-      -- 'global' is used as the identifier name
+    match tok with
+    | .globalKeyword =>
+      -- global augmentation: `declare global { }`
       let name ← parseIdentifier
-      let body ← if (← currentToken) == Kind.openBraceToken then do
+      let body ← match (← currentToken) with
+        | .openBraceToken => do
+          let bPos ← nodePos
+          let _ ← parseExpected Kind.openBraceToken
+          let stmts ← parseList .blockStatements isStartOfStatement (parseStatement)
+          let _ ← parseExpected Kind.closeBraceToken
+          let mb ← finishNode (Node.moduleBlock {} stmts) bPos
+          pure (some mb)
+        | _ =>
+          let _ ← parseSemicolon
+          pure none
+      return ← finishNode (Node.moduleDeclaration {} name body) pos
+    -- module or namespace keyword
+    | .moduleKeyword | .namespaceKeyword => nextToken
+    | _ => pure ()
+    -- Parse name (identifier or string literal for ambient module)
+    let name ← match (← currentToken) with
+      | .stringLiteral => parseLiteralExpression
+      | _ =>
+        let first ← parseIdentifier
+        -- Handle dotted names: A.B.C
+        parseQualifiedNameRest first pos
+    -- Parse body
+    let body ← match (← currentToken) with
+      | .openBraceToken => do
         let bPos ← nodePos
         let _ ← parseExpected Kind.openBraceToken
         let stmts ← parseList .blockStatements isStartOfStatement (parseStatement)
         let _ ← parseExpected Kind.closeBraceToken
         let mb ← finishNode (Node.moduleBlock {} stmts) bPos
         pure (some mb)
-      else
+      | .dotToken =>
+        -- Nested: namespace A.B { } — inner module
+        nextToken
+        let inner ← parseModuleDeclaration
+        pure (some inner)
+      | _ =>
         let _ ← parseSemicolon
         pure none
-      return ← finishNode (Node.moduleDeclaration {} name body) pos
-    -- module or namespace keyword
-    if tok == Kind.moduleKeyword || tok == Kind.namespaceKeyword then
-      nextToken
-    -- Parse name (identifier or string literal for ambient module)
-    let name ← if (← currentToken) == Kind.stringLiteral then
-      parseLiteralExpression
-    else
-      let first ← parseIdentifier
-      -- Handle dotted names: A.B.C
-      parseQualifiedNameRest first pos
-    -- Parse body
-    let body ← if (← currentToken) == Kind.openBraceToken then do
-      let bPos ← nodePos
-      let _ ← parseExpected Kind.openBraceToken
-      let stmts ← parseList .blockStatements isStartOfStatement (parseStatement)
-      let _ ← parseExpected Kind.closeBraceToken
-      let mb ← finishNode (Node.moduleBlock {} stmts) bPos
-      pure (some mb)
-    else if (← currentToken) == Kind.dotToken then
-      -- Nested: namespace A.B { } — inner module
-      nextToken
-      let inner ← parseModuleDeclaration
-      pure (some inner)
-    else
-      let _ ← parseSemicolon
-      pure none
     finishNode (Node.moduleDeclaration {} name body) pos
 
 -- ---- Import/Export Parsing ----
@@ -2097,8 +2142,9 @@ partial def parseModuleDeclaration : ParserM Node :=
 /-- Based on Go: parser.go:2943 (parseImportAttribute) -/
 partial def parseImportAttribute : ParserM Node := do
   let pos ← nodePos
-  let name ← if (← currentToken) == Kind.stringLiteral then parseLiteralExpression
-    else parseIdentifierName
+  let name ← match (← currentToken) with
+    | .stringLiteral => parseLiteralExpression
+    | _ => parseIdentifierName
   let _ ← parseExpected Kind.colonToken
   let value ← parseAssignmentExpressionOrHigher
   finishNode (Node.importAttribute {} name value) pos
@@ -2106,9 +2152,8 @@ partial def parseImportAttribute : ParserM Node := do
 /-- Based on Go: parser.go:2380 (tryParseImportAttributes)
     Skip optional `with { ... }` or `assert { ... }` after module specifier. -/
 partial def tryParseImportAttributes : ParserM Unit := do
-  let tok ← currentToken
-  if tok == Kind.withKeyword ||
-     (tok == Kind.assertKeyword && !(← get).scanner.hasPrecedingLineBreak) then
+  match (← currentToken) with
+  | .withKeyword =>
     nextToken
     let _ ← parseExpected Kind.openBraceToken
     let isAttr : ParserM Bool := do
@@ -2116,16 +2161,27 @@ partial def tryParseImportAttributes : ParserM Unit := do
       return t == Kind.identifier || t == Kind.stringLiteral || Kind.isKeywordKind t
     let _ ← parseDelimitedList .importAttributes isAttr parseImportAttribute
     let _ ← parseExpected Kind.closeBraceToken
+  | .assertKeyword =>
+    if !(← get).scanner.hasPrecedingLineBreak then
+      nextToken
+      let _ ← parseExpected Kind.openBraceToken
+      let isAttr : ParserM Bool := do
+        let t ← currentToken
+        return t == Kind.identifier || t == Kind.stringLiteral || Kind.isKeywordKind t
+      let _ ← parseDelimitedList .importAttributes isAttr parseImportAttribute
+      let _ ← parseExpected Kind.closeBraceToken
+  | _ => pure ()
 
 /-- Based on Go: parser.go:2292 (parseImportOrExportSpecifier) -/
 partial def parseImportOrExportSpecifier : ParserM Node := do
   let pos ← nodePos
   let first ← parseIdentifierName
-  if (← currentToken) == Kind.asKeyword then
+  match (← currentToken) with
+  | .asKeyword =>
     nextToken
     let second ← parseIdentifierName
     finishNode (Node.importSpecifier {} (some first) second) pos
-  else
+  | _ =>
     finishNode (Node.importSpecifier {} none first) pos
 
 /-- Based on Go: parser.go:2228 (parseNamedImports) -/
@@ -2199,17 +2255,18 @@ partial def parseImportDeclaration : ParserM Node :=
           let name ← parseBindingIdentifier
           let _ ← parseExpected Kind.equalsToken
           -- require("module") or entity name
-          let moduleRef ← if (← currentToken) == Kind.requireKeyword then do
-            let rPos ← nodePos
-            nextToken
-            let _ ← parseExpected Kind.openParenToken
-            let expr ← parseLiteralExpression
-            let _ ← parseExpected Kind.closeParenToken
-            finishNode (Node.externalModuleReference {} expr) rPos
-          else
-            let qPos ← nodePos
-            let first ← parseIdentifier
-            parseQualifiedNameRest first qPos
+          let moduleRef ← match (← currentToken) with
+            | .requireKeyword => do
+              let rPos ← nodePos
+              nextToken
+              let _ ← parseExpected Kind.openParenToken
+              let expr ← parseLiteralExpression
+              let _ ← parseExpected Kind.closeParenToken
+              finishNode (Node.externalModuleReference {} expr) rPos
+            | _ =>
+              let qPos ← nodePos
+              let first ← parseIdentifier
+              parseQualifiedNameRest first qPos
           let _ ← parseSemicolon
           finishNode (Node.importEqualsDeclaration {} name moduleRef) pos
         else
@@ -2230,19 +2287,20 @@ partial def parseImportClause : ParserM Node :=
   do
     let pos ← nodePos
     let defaultImport ← parseBindingIdentifier
-    let namedBindings ← if (← currentToken) == Kind.commaToken then
-      nextToken
-      let tok ← currentToken
-      if tok == Kind.openBraceToken then
-        pure (some (← parseNamedImportsOrExports true))
-      else if tok == Kind.asteriskToken then
+    let namedBindings ← match (← currentToken) with
+      | .commaToken =>
         nextToken
-        let _ ← parseExpected Kind.asKeyword
-        let name ← parseBindingIdentifier
-        let nsImport ← finishNode (Node.namespaceImport {} name) pos
-        pure (some nsImport)
-      else pure none
-    else pure none
+        match (← currentToken) with
+        | .openBraceToken =>
+          pure (some (← parseNamedImportsOrExports true))
+        | .asteriskToken =>
+          nextToken
+          let _ ← parseExpected Kind.asKeyword
+          let name ← parseBindingIdentifier
+          let nsImport ← finishNode (Node.namespaceImport {} name) pos
+          pure (some nsImport)
+        | _ => pure none
+      | _ => pure none
     finishNode (Node.importClause {} (some defaultImport) namedBindings) pos
 
 /-- Based on Go: parser.go:2420 (parseExportDeclaration) -/
@@ -2252,14 +2310,15 @@ partial def parseExportDeclarationOrAssignment : ParserM Node :=
     let _ ← parseExpected Kind.exportKeyword
     let tok ← currentToken
     -- Skip 'type' modifier if present
-    let tok ← if tok == Kind.typeKeyword then do
-      let isTypeOnly ← lookAhead do
-        nextToken
-        let t ← currentToken
-        return t == Kind.openBraceToken || t == Kind.asteriskToken
-      if isTypeOnly then nextToken; currentToken
-      else pure tok
-    else pure tok
+    let tok ← match tok with
+      | .typeKeyword => do
+        let isTypeOnly ← lookAhead do
+          nextToken
+          let t ← currentToken
+          return t == Kind.openBraceToken || t == Kind.asteriskToken
+        if isTypeOnly then nextToken; currentToken
+        else pure tok
+      | _ => pure tok
     match tok with
     -- export default
     | .defaultKeyword =>
@@ -2286,7 +2345,8 @@ partial def parseExportDeclarationOrAssignment : ParserM Node :=
     | .asteriskToken =>
       nextToken
       -- export * as ns from "module"
-      if (← currentToken) == Kind.asKeyword then
+      match (← currentToken) with
+      | .asKeyword =>
         nextToken
         let name ← parseIdentifierName
         let nsExport ← finishNode (Node.namespaceExport {} name) pos
@@ -2295,7 +2355,7 @@ partial def parseExportDeclarationOrAssignment : ParserM Node :=
         tryParseImportAttributes
         let _ ← parseSemicolon
         finishNode (Node.exportDeclaration {} (some nsExport) (some moduleSpec)) pos
-      else
+      | _ =>
         let _ ← parseExpected Kind.fromKeyword
         let moduleSpec ← parseLiteralExpression
         tryParseImportAttributes
@@ -2304,10 +2364,11 @@ partial def parseExportDeclarationOrAssignment : ParserM Node :=
     -- export { named } or export { named } from "module"
     | .openBraceToken =>
       let namedExports ← parseNamedImportsOrExports false
-      let moduleSpec ← if (← currentToken) == Kind.fromKeyword then do
-        nextToken
-        pure (some (← parseLiteralExpression))
-      else pure none
+      let moduleSpec ← match (← currentToken) with
+        | .fromKeyword => do
+          nextToken
+          pure (some (← parseLiteralExpression))
+        | _ => pure none
       if moduleSpec.isSome then tryParseImportAttributes
       let _ ← parseSemicolon
       finishNode (Node.exportDeclaration {} (some namedExports) moduleSpec) pos
@@ -2413,8 +2474,9 @@ partial def parseStatement : ParserM Node :=
       else parseExpressionOrLabeledStatement
     | .abstractKeyword =>
       nextToken
-      if (← currentToken) == Kind.classKeyword then parseClassDeclaration
-      else parseExpressionOrLabeledStatement
+      match (← currentToken) with
+      | .classKeyword => parseClassDeclaration
+      | _ => parseExpressionOrLabeledStatement
     | .declareKeyword =>
       nextToken
       parseDeclarationAfterModifiers
@@ -2454,8 +2516,9 @@ partial def parseSourceFileWorker : ParserM Node :=
   do
     let pos ← nodePos
     let isStmtNotEof : ParserM Bool := do
-      if (← currentToken) == Kind.endOfFile then return false
-      else isStartOfStatement
+      match (← currentToken) with
+      | .endOfFile => return false
+      | _ => isStartOfStatement
     let stmts ← parseList .sourceElements isStmtNotEof (parseStatement)
     let eof ← parseTokenNode
     finishNode (Node.sourceFile {} stmts eof) pos
