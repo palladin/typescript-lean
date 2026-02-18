@@ -19,8 +19,9 @@ def unicodeESNextIdentifierPart : Array UInt32 := #[48, 57, 65, 90, 95, 95, 97, 
 partial def lookupInUnicodeMap (cp : UInt32) (ranges : Array UInt32) : Bool :=
   -- Bail out quickly if it couldn't possibly be in the map
   if ranges.size == 0 then false
-  else if cp < ranges[0]! then false
   else
+    if cp < ranges[0]! then false
+    else
     let rec go (lo hi : Nat) : Bool :=
       if lo + 1 < hi then
         let mid := lo + (hi - lo) / 2
@@ -29,8 +30,9 @@ partial def lookupInUnicodeMap (cp : UInt32) (ranges : Array UInt32) : Bool :=
         let rangeStart := ranges[mid]!
         let rangeEnd := ranges[mid + 1]!
         if rangeStart <= cp && cp <= rangeEnd then true
-        else if cp < rangeStart then go lo mid
-        else go (mid + 2) hi
+        else
+          if cp < rangeStart then go lo mid
+          else go (mid + 2) hi
       else false
     go 0 ranges.size
 

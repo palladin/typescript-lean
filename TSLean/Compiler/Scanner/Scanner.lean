@@ -155,13 +155,17 @@ private partial def scanStr (s : Scanner) : Scanner × String :=
   let rec go (s : Scanner) (acc : String) : Scanner × String :=
     let c := ch s
     if c == 0xFFFFFFFF then (addFlg (err s "Unterminated string literal") TokenFlags.unterminated, acc)
-    else if c == quote then (adv s 1, acc)
-    else if c == 0x5C then -- '\\'
-      let s := adv s 1; let nc := ch s
-      if nc == 0xFFFFFFFF then (addFlg s TokenFlags.unterminated, acc ++ "\\")
-      else go (adv s 1) (acc.push '\\' |>.push (Char.ofNat nc.toNat))
-    else if c == 0x0A || c == 0x0D then (addFlg (err s "Unterminated string literal") TokenFlags.unterminated, acc)
-    else go (adv s 1) (acc.push (Char.ofNat c.toNat))
+    else
+      if c == quote then (adv s 1, acc)
+      else
+        if c == 0x5C then -- '\\'
+          let s := adv s 1
+          let nc := ch s
+          if nc == 0xFFFFFFFF then (addFlg s TokenFlags.unterminated, acc ++ "\\")
+          else go (adv s 1) (acc.push '\\' |>.push (Char.ofNat nc.toNat))
+        else
+          if c == 0x0A || c == 0x0D then (addFlg (err s "Unterminated string literal") TokenFlags.unterminated, acc)
+          else go (adv s 1) (acc.push (Char.ofNat c.toNat))
   go s ""
 
 -- ============================================================
@@ -209,12 +213,16 @@ private partial def scanTmpl (s : Scanner) : Scanner :=
   let rec go (s : Scanner) (acc : String) : Scanner × String × Kind :=
     let c := ch s
     if c == 0xFFFFFFFF then (addFlg (err s "Unterminated template") TokenFlags.unterminated, acc, Kind.noSubstitutionTemplateLiteral)
-    else if c == 0x60 then (adv s 1, acc, Kind.noSubstitutionTemplateLiteral)
-    else if c == 0x24 && chAt s 1 == 0x7B then (adv s 2, acc, Kind.templateHead)
-    else if c == 0x5C then let s := adv s 1; let nc := ch s;
-      if nc == 0xFFFFFFFF then (s, acc ++ "\\", Kind.noSubstitutionTemplateLiteral)
-      else go (adv s 1) (acc.push '\\' |>.push (Char.ofNat nc.toNat))
-    else go (adv s 1) (acc.push (Char.ofNat c.toNat))
+    else
+      if c == 0x60 then (adv s 1, acc, Kind.noSubstitutionTemplateLiteral)
+      else
+        if c == 0x24 && chAt s 1 == 0x7B then (adv s 2, acc, Kind.templateHead)
+        else
+          if c == 0x5C then
+            let s := adv s 1; let nc := ch s
+            if nc == 0xFFFFFFFF then (s, acc ++ "\\", Kind.noSubstitutionTemplateLiteral)
+            else go (adv s 1) (acc.push '\\' |>.push (Char.ofNat nc.toNat))
+          else go (adv s 1) (acc.push (Char.ofNat c.toNat))
   let (s, v, k) := go s ""
   setTok (setVal s v) k
 
@@ -234,8 +242,9 @@ private partial def scanMLComment (s : Scanner) : Scanner × Bool :=
   let rec go (s : Scanner) : Scanner × Bool :=
     let c := ch s
     if c == 0xFFFFFFFF then (s, false)
-    else if c == 0x2A && chAt s 1 == 0x2F then (adv s 2, true)
-    else go (if isLB c then addFlg (adv s 1) TokenFlags.precedingLineBreak else adv s 1)
+    else
+      if c == 0x2A && chAt s 1 == 0x2F then (adv s 2, true)
+      else go (if isLB c then addFlg (adv s 1) TokenFlags.precedingLineBreak else adv s 1)
   let (s, closed) := go s
   let s := if isJSDoc then addFlg s TokenFlags.precedingJSDocComment else s
   let s := if !closed then addFlg (err s "Expected '*/'") TokenFlags.unterminated else s
@@ -316,8 +325,9 @@ partial def scan (s : Scanner) : Scanner :=
       -- '.' (Go: 559)
       | 0x2E =>
         if isDig (chAt s 1) then let (s, k) := scanNum s; setTok s k
-        else if chAt s 1 == 0x2E && chAt s 2 == 0x2E then setTok (adv s 3) Kind.dotDotDotToken
-        else setTok (adv s 1) Kind.dotToken
+        else
+          if chAt s 1 == 0x2E && chAt s 2 == 0x2E then setTok (adv s 3) Kind.dotDotDotToken
+          else setTok (adv s 1) Kind.dotToken
       -- '/' (Go: 569)
       | 0x2F =>
         match chAt s 1 with
@@ -454,10 +464,12 @@ def reScanGreaterThanToken (s : Scanner) : Scanner :=
       if chAt s 1 == 0x3E then
         if chAt s 2 == 0x3D then setTok (adv s 3) Kind.greaterThanGreaterThanGreaterThanEqualsToken
         else setTok (adv s 2) Kind.greaterThanGreaterThanGreaterThanToken
-      else if chAt s 1 == 0x3D then setTok (adv s 2) Kind.greaterThanGreaterThanEqualsToken
-      else setTok (adv s 1) Kind.greaterThanGreaterThanToken
-    else if c == 0x3D then setTok (adv s 1) Kind.greaterThanEqualsToken
-    else s
+      else
+        if chAt s 1 == 0x3D then setTok (adv s 2) Kind.greaterThanGreaterThanEqualsToken
+        else setTok (adv s 1) Kind.greaterThanGreaterThanToken
+    else
+      if c == 0x3D then setTok (adv s 1) Kind.greaterThanEqualsToken
+      else s
   else s
 
 /-- Based on Go: scanner.go:995 (ReScanTemplateToken) -/
@@ -480,11 +492,15 @@ partial def reScanSlashToken (s : Scanner) : Scanner :=
     let rec body (s : Scanner) (inCC : Bool) : Scanner :=
       let c := ch s
       if c == 0xFFFFFFFF || isLB c then addFlg (err s "Unterminated regex") TokenFlags.unterminated
-      else if c == 0x5C then body (adv s 2) inCC
-      else if c == 0x5B then body (adv s 1) true
-      else if c == 0x5D && inCC then body (adv s 1) false
-      else if c == 0x2F && !inCC then adv s 1
-      else body (adv s 1) inCC
+      else
+        if c == 0x5C then body (adv s 2) inCC
+        else
+          if c == 0x5B then body (adv s 1) true
+          else
+            if c == 0x5D && inCC then body (adv s 1) false
+            else
+              if c == 0x2F && !inCC then adv s 1
+              else body (adv s 1) inCC
     let s := body s false
     let rec flg (s : Scanner) : Scanner :=
       if isAsciiLet (ch s) then flg (adv s 1) else s
@@ -510,23 +526,26 @@ partial def scanJsxTokenEx (s : Scanner) (allowMultilineJsxText : Bool) : Scanne
   let c := ch s
   if c == 0xFFFFFFFF then
     setTok s Kind.endOfFile
-  else if c == 0x3C then
-    if chAt s 1 == 0x2F then setTok (adv s 2) Kind.lessThanSlashToken
-    else setTok (adv s 1) Kind.lessThanToken
-  else if c == 0x7B then
-    setTok (adv s 1) Kind.openBraceToken
   else
-    let rec go (s : Scanner) (allWs : Bool) : Scanner × Bool :=
-      let c := ch s
-      if c == 0xFFFFFFFF || c == 0x7B || c == 0x3C then (s, allWs)
-      else if !allowMultilineJsxText && isLB c then (s, allWs)
+    if c == 0x3C then
+      if chAt s 1 == 0x2F then setTok (adv s 2) Kind.lessThanSlashToken
+      else setTok (adv s 1) Kind.lessThanToken
+    else
+      if c == 0x7B then
+        setTok (adv s 1) Kind.openBraceToken
       else
-        let allWs := allWs && (isWsSingle c || isLB c)
-        go (adv s 1) allWs
-    let (s, allWs) := go s true
-    let v := extract s s.state.fullStartPos s.state.pos
-    let s := setVal s v
-    if allWs then setTok s Kind.jsxTextAllWhiteSpaces else setTok s Kind.jsxText
+        let rec go (s : Scanner) (allWs : Bool) : Scanner × Bool :=
+          let c := ch s
+          if c == 0xFFFFFFFF || c == 0x7B || c == 0x3C then (s, allWs)
+          else
+            if !allowMultilineJsxText && isLB c then (s, allWs)
+            else
+              let allWs := allWs && (isWsSingle c || isLB c)
+              go (adv s 1) allWs
+        let (s, allWs) := go s true
+        let v := extract s s.state.fullStartPos s.state.pos
+        let s := setVal s v
+        if allWs then setTok s Kind.jsxTextAllWhiteSpaces else setTok s Kind.jsxText
 
 /-- Based on Go: scanner.go:1131 (ScanJsxToken) -/
 def scanJsxToken (s : Scanner) : Scanner :=

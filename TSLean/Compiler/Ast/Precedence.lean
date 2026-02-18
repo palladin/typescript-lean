@@ -83,27 +83,33 @@ open Kind in
 /-- Based on Go: internal/ast/precedence.go:337-368 (GetBinaryOperatorPrecedence) -/
 def getBinaryOperatorPrecedence (kind : Kind) : OperatorPrecedence :=
   match kind with
-  | k => if k == questionQuestionToken then OperatorPrecedence.coalesce
-    else if k == barBarToken then OperatorPrecedence.logicalOR
-    else if k == ampersandAmpersandToken then OperatorPrecedence.logicalAND
-    else if k == barToken then OperatorPrecedence.bitwiseOR
-    else if k == caretToken then OperatorPrecedence.bitwiseXOR
-    else if k == ampersandToken then OperatorPrecedence.bitwiseAND
-    else if k == equalsEqualsToken || k == exclamationEqualsToken ||
-            k == equalsEqualsEqualsToken || k == exclamationEqualsEqualsToken
-      then OperatorPrecedence.equality
-    else if k == lessThanToken || k == greaterThanToken ||
-            k == lessThanEqualsToken || k == greaterThanEqualsToken ||
-            k == instanceOfKeyword || k == inKeyword ||
-            k == asKeyword || k == satisfiesKeyword
-      then OperatorPrecedence.relational
-    else if k == lessThanLessThanToken || k == greaterThanGreaterThanToken ||
-            k == greaterThanGreaterThanGreaterThanToken
-      then OperatorPrecedence.shift
-    else if k == plusToken || k == minusToken then OperatorPrecedence.additive
-    else if k == asteriskToken || k == slashToken || k == percentToken
-      then OperatorPrecedence.multiplicative
-    else if k == asteriskAsteriskToken then OperatorPrecedence.exponentiation
-    else OperatorPrecedence.invalid
+  | .questionQuestionToken => OperatorPrecedence.coalesce
+  | .barBarToken => OperatorPrecedence.logicalOR
+  | .ampersandAmpersandToken => OperatorPrecedence.logicalAND
+  | .barToken => OperatorPrecedence.bitwiseOR
+  | .caretToken => OperatorPrecedence.bitwiseXOR
+  | .ampersandToken => OperatorPrecedence.bitwiseAND
+  | .equalsEqualsToken
+  | .exclamationEqualsToken
+  | .equalsEqualsEqualsToken
+  | .exclamationEqualsEqualsToken => OperatorPrecedence.equality
+  | .lessThanToken
+  | .greaterThanToken
+  | .lessThanEqualsToken
+  | .greaterThanEqualsToken
+  | .instanceOfKeyword
+  | .inKeyword
+  | .asKeyword
+  | .satisfiesKeyword => OperatorPrecedence.relational
+  | .lessThanLessThanToken
+  | .greaterThanGreaterThanToken
+  | .greaterThanGreaterThanGreaterThanToken => OperatorPrecedence.shift
+  | .plusToken
+  | .minusToken => OperatorPrecedence.additive
+  | .asteriskToken
+  | .slashToken
+  | .percentToken => OperatorPrecedence.multiplicative
+  | .asteriskAsteriskToken => OperatorPrecedence.exponentiation
+  | _ => OperatorPrecedence.invalid
 
 end TSLean.Compiler

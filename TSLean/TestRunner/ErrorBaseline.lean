@@ -24,13 +24,14 @@ def computeLineStarts (text : String) : Array Nat :=
       let b := bytes[i]!
       if b == 10 then -- '\n'
         go (i + 1) (acc.push (i + 1))
-      else if b == 13 then -- '\r'
-        if i + 1 < bytes.size && bytes[i + 1]! == 10 then
-          go (i + 2) (acc.push (i + 2))
-        else
-          go (i + 1) (acc.push (i + 1))
       else
-        go (i + 1) acc
+        if b == 13 then -- '\r'
+          if i + 1 < bytes.size && bytes[i + 1]! == 10 then
+            go (i + 2) (acc.push (i + 2))
+          else
+            go (i + 1) (acc.push (i + 1))
+        else
+          go (i + 1) acc
   go 0 #[0]
 
 /-- Convert a byte offset to (line, col), both 0-based.
@@ -78,8 +79,9 @@ private def annotateLine (lineStart lineEnd : Nat) (diags : Array Diagnostic) : 
     if diagStart >= lineStart && diagStart < lineEnd then
       let col := diagStart - lineStart
       let width := if diagEnd <= diagStart then 1
-                   else if diagEnd <= lineEnd then diagEnd - diagStart
-                   else lineEnd - diagStart
+                   else
+                     if diagEnd <= lineEnd then diagEnd - diagStart
+                     else lineEnd - diagStart
       let spaces := String.ofList (List.replicate (4 + col) ' ')
       let squiggles := String.ofList (List.replicate width '~')
       let msg := formatDiagnosticMessage diag.message.message diag.args

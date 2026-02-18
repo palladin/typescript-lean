@@ -200,37 +200,38 @@ def main (args : List String) : IO UInt32 := do
       IO.println s!"No test files found in {testCasesDir}"
       return 1
 
-    let mut passCount : Nat := 0
-    let mut failCount : Nat := 0
-    let mut spuriousCount : Nat := 0  -- we emit errors, Go doesn't
-    let mut missingCount : Nat := 0   -- Go emits errors, we don't
-    let mut mismatchCount : Nat := 0  -- both emit but different
-    let mut failures : Array String := #[]
-
     let total := testFiles.size
-    for testFile in testFiles do
-      let idx := passCount + failCount + 1
-      let name := testNameFromPath testFile
-      let stdout ← IO.getStdout
-      IO.print s!"[{idx}/{total}] {name}... "
-      stdout.flush
-      let (name, result) ← runTest testFile
-      match result with
-      | .pass =>
-        IO.println "PASS"
-        passCount := passCount + 1
-      | .fail goErrs ourErrs =>
-        if goErrs.size == 0 && ourErrs.size > 0 then
-          IO.println s!"FAIL (spurious: {ourErrs.size} false parse errors)"
-          spuriousCount := spuriousCount + 1
-        else if goErrs.size > 0 && ourErrs.size == 0 then
-          IO.println s!"FAIL (missing: {goErrs.size} parse errors not reported)"
-          missingCount := missingCount + 1
-        else
-          IO.println s!"FAIL (mismatch: go={goErrs.size} ours={ourErrs.size})"
-          mismatchCount := mismatchCount + 1
-        failCount := failCount + 1
-        failures := failures.push name
+    let rec runAll
+        (remaining : List String)
+        (idx passCount failCount spuriousCount missingCount mismatchCount : Nat)
+        (failures : Array String)
+        : IO (Nat × Nat × Nat × Nat × Nat × Array String) := do
+      match remaining with
+      | [] =>
+        return (passCount, failCount, spuriousCount, missingCount, mismatchCount, failures)
+      | testFile :: rest =>
+        let name := testNameFromPath testFile
+        let stdout ← IO.getStdout
+        IO.print s!"[{idx}/{total}] {name}... "
+        stdout.flush
+        let (name, result) ← runTest testFile
+        match result with
+        | .pass =>
+          IO.println "PASS"
+          runAll rest (idx + 1) (passCount + 1) failCount spuriousCount missingCount mismatchCount failures
+        | .fail goErrs ourErrs =>
+          if goErrs.size == 0 && ourErrs.size > 0 then
+            IO.println s!"FAIL (spurious: {ourErrs.size} false parse errors)"
+            runAll rest (idx + 1) passCount (failCount + 1) (spuriousCount + 1) missingCount mismatchCount (failures.push name)
+          else if goErrs.size > 0 && ourErrs.size == 0 then
+            IO.println s!"FAIL (missing: {goErrs.size} parse errors not reported)"
+            runAll rest (idx + 1) passCount (failCount + 1) spuriousCount (missingCount + 1) mismatchCount (failures.push name)
+          else
+            IO.println s!"FAIL (mismatch: go={goErrs.size} ours={ourErrs.size})"
+            runAll rest (idx + 1) passCount (failCount + 1) spuriousCount missingCount (mismatchCount + 1) (failures.push name)
+
+    let (passCount, failCount, spuriousCount, missingCount, mismatchCount, failures) ←
+      runAll testFiles.toList 1 0 0 0 0 0 #[]
 
     -- Print summary
     IO.println ""
