@@ -56,6 +56,7 @@ inductive Node where
   | typeOfExpression (base : NodeBase) (expression : Node)
   | voidExpression (base : NodeBase) (expression : Node)
   | awaitExpression (base : NodeBase) (expression : Node)
+  | typeAssertionExpression (base : NodeBase) (typeNode : Node) (expression : Node)
   | yieldExpression (base : NodeBase) (expression : Option Node)
   | asExpression (base : NodeBase) (expression : Node) (typeNode : Node)
   | nonNullExpression (base : NodeBase) (expression : Node)
@@ -181,6 +182,7 @@ inductive Node where
   | mappedType (base : NodeBase) (typeParameter : Node) (nameType : Option Node)
       (typeNode : Option Node)
   | typePredicate (base : NodeBase) (parameterName : Node) (typeNode : Option Node)
+  | restType (base : NodeBase) (typeNode : Node)
   -- Top-level
   | sourceFile (base : NodeBase) (statements : Array Node) (endOfFileToken : Node)
   -- Error recovery
@@ -221,6 +223,7 @@ def kind : Node → Kind
   | typeOfExpression .. => Kind.typeOfExpression
   | voidExpression .. => Kind.voidExpression
   | awaitExpression .. => Kind.awaitExpression
+  | typeAssertionExpression .. => Kind.typeAssertionExpression
   | yieldExpression .. => Kind.yieldExpression
   | asExpression .. => Kind.asExpression
   | nonNullExpression .. => Kind.nonNullExpression
@@ -307,6 +310,7 @@ def kind : Node → Kind
   | indexedAccessType .. => Kind.indexedAccessType
   | mappedType .. => Kind.mappedType
   | typePredicate .. => Kind.typePredicate
+  | restType .. => Kind.restType
   | sourceFile .. => Kind.sourceFile
   | missing _ k => k
 
@@ -322,7 +326,8 @@ def base : Node → NodeBase
   | objectLiteralExpression b .. | functionExpression b .. | arrowFunction b ..
   | conditionalExpression b .. | templateExpression b .. | templateSpan b ..
   | spreadElement b .. | deleteExpression b .. | typeOfExpression b ..
-  | voidExpression b .. | awaitExpression b .. | yieldExpression b ..
+  | voidExpression b .. | awaitExpression b .. | typeAssertionExpression b ..
+  | yieldExpression b ..
   | asExpression b .. | nonNullExpression b .. | satisfiesExpression b ..
   | expressionWithTypeArguments b ..
   | propertyAssignment b .. | shorthandPropertyAssignment b .. | spreadAssignment b ..
@@ -348,7 +353,7 @@ def base : Node → NodeBase
   | tupleType b .. | functionType b .. | constructorType b .. | typeLiteral b ..
   | parenthesizedType b .. | typeQuery b .. | typeOperator b .. | literalType b ..
   | conditionalType b .. | inferType b .. | indexedAccessType b ..
-  | mappedType b .. | typePredicate b ..
+  | mappedType b .. | typePredicate b .. | restType b ..
   | sourceFile b .. => b
 
 /-- Update the base data for a node. -/
@@ -381,6 +386,7 @@ def withBase : Node → NodeBase → Node
   | typeOfExpression _ e, b => typeOfExpression b e
   | voidExpression _ e, b => voidExpression b e
   | awaitExpression _ e, b => awaitExpression b e
+  | typeAssertionExpression _ t e, b => typeAssertionExpression b t e
   | yieldExpression _ e, b => yieldExpression b e
   | asExpression _ e t, b => asExpression b e t
   | nonNullExpression _ e, b => nonNullExpression b e
@@ -467,6 +473,7 @@ def withBase : Node → NodeBase → Node
   | indexedAccessType _ o i, b => indexedAccessType b o i
   | mappedType _ tp nt t, b => mappedType b tp nt t
   | typePredicate _ pn t, b => typePredicate b pn t
+  | restType _ t, b => restType b t
   | sourceFile _ s e, b => sourceFile b s e
   | missing _ k, b => missing b k
 

@@ -61,6 +61,35 @@ namespace Scanner
   if p < s.bytes.size then s.bytes[p]!.toUInt32
   else 0xFFFFFFFF
 
+/-- Decode a full UTF-8 rune at position, returning (codepoint, byteSize).
+    Returns (0xFFFFFFFF, 0) for EOF.
+    Based on Go: scanner.go:397-399 (charAndSize) -/
+private def runeAt (s : Scanner) : UInt32 × Nat :=
+  let pos := s.state.pos
+  if pos >= s.bytes.size then (0xFFFFFFFF, 0)
+  else
+    let b0 := s.bytes[pos]!.toUInt32
+    if b0 < 0x80 then (b0, 1)  -- ASCII
+    else if b0 < 0xC0 then (0xFFFD, 1)  -- invalid continuation byte
+    else if b0 < 0xE0 then
+      if pos + 1 < s.bytes.size then
+        let b1 := s.bytes[pos + 1]!.toUInt32
+        ((b0 &&& 0x1F) <<< 6 ||| (b1 &&& 0x3F), 2)
+      else (0xFFFD, 1)
+    else if b0 < 0xF0 then
+      if pos + 2 < s.bytes.size then
+        let b1 := s.bytes[pos + 1]!.toUInt32
+        let b2 := s.bytes[pos + 2]!.toUInt32
+        ((b0 &&& 0x0F) <<< 12 ||| (b1 &&& 0x3F) <<< 6 ||| (b2 &&& 0x3F), 3)
+      else (0xFFFD, 1)
+    else
+      if pos + 3 < s.bytes.size then
+        let b1 := s.bytes[pos + 1]!.toUInt32
+        let b2 := s.bytes[pos + 2]!.toUInt32
+        let b3 := s.bytes[pos + 3]!.toUInt32
+        ((b0 &&& 0x07) <<< 18 ||| (b1 &&& 0x3F) <<< 12 ||| (b2 &&& 0x3F) <<< 6 ||| (b3 &&& 0x3F), 4)
+      else (0xFFFD, 1)
+
 @[inline] private def isWsSingle (c : UInt32) : Bool :=
   c == 0x09 || c == 0x0B || c == 0x0C || c == 0x20 || c == 0xA0 || c == 0xFEFF
 
@@ -110,6 +139,135 @@ private partial def scanOctDigits (s : Scanner) : Scanner :=
   if (c >= 0x30 && c <= 0x37) || c == 0x5F then scanOctDigits (adv s 1) else s
 
 -- ============================================================
+-- Character classification helpers for escape sequences
+-- ============================================================
+
+@[inline] private def isHexDigit (c : UInt32) : Bool :=
+  isDig c || (c >= 0x41 && c <= 0x46) || (c >= 0x61 && c <= 0x66)
+
+@[inline] private def isOctalDigit (c : UInt32) : Bool :=
+  c >= 0x30 && c <= 0x37
+
+/-- Convert a hex digit character to its numeric value. -/
+@[inline] private def hexVal (c : UInt32) : UInt32 :=
+  if c >= 0x30 && c <= 0x39 then c - 0x30
+  else if c >= 0x41 && c <= 0x46 then c - 0x41 + 10
+  else if c >= 0x61 && c <= 0x66 then c - 0x61 + 10
+  else 0
+
+/-- Scan a unicode escape sequence. Assumes position is at `\u`.
+    Returns (scanner, codePoint) where codePoint = 0xFFFFFFFF on failure.
+    Based on Go: scanner.go:1676-1715 (scanUnicodeEscape) -/
+private partial def scanUnicodeEscape (s : Scanner) (reportErrors : Bool) : Scanner × UInt32 :=
+  let s := adv s 2  -- skip \u
+  if ch s == 0x7B then  -- extended: \u{HHHHH}
+    let s := adv s 1
+    let s := addFlg s TokenFlags.extendedUnicodeEscape
+    let rec scanExtHex (s : Scanner) (value : UInt32) (count : Nat) : Scanner × UInt32 :=
+      let c := ch s
+      if isHexDigit c then scanExtHex (adv s 1) (value * 16 + hexVal c) (count + 1)
+      else (s, if count == 0 then 0xFFFFFFFF else value)
+    let (s, value) := scanExtHex s 0 0
+    if value == 0xFFFFFFFF then
+      let s := addFlg s TokenFlags.containsInvalidEscape
+      let s := if reportErrors then err s "Hexadecimal digit expected" else s
+      (s, 0xFFFFFFFF)
+    else if value > 0x10FFFF then
+      let s := addFlg s TokenFlags.containsInvalidEscape
+      let s := if reportErrors then err s "An extended Unicode escape value must be between 0x0 and 0x10FFFF inclusive" else s
+      (s, 0xFFFFFFFF)
+    else if ch s != 0x7D then  -- missing closing }
+      let s := addFlg s TokenFlags.containsInvalidEscape
+      let s := if reportErrors then err s "Unterminated Unicode escape sequence" else s
+      (s, 0xFFFFFFFF)
+    else
+      (adv s 1, value)  -- skip }
+  else  -- fixed: \uHHHH
+    let s := addFlg s TokenFlags.unicodeEscape
+    let rec scan4Hex (s : Scanner) (value : UInt32) (remaining : Nat) : Scanner × UInt32 :=
+      match remaining with
+      | 0 => (s, value)
+      | n + 1 =>
+        let c := ch s
+        if isHexDigit c then scan4Hex (adv s 1) (value * 16 + hexVal c) n
+        else
+          let s := addFlg s TokenFlags.containsInvalidEscape
+          let s := if reportErrors then err s "Hexadecimal digit expected" else s
+          (s, 0xFFFFFFFF)
+    scan4Hex s 0 4
+
+/-- Peek at a unicode escape without consuming it.
+    Based on Go: scanner.go:1719-1729 (peekUnicodeEscape) -/
+private def peekUnicodeEscape (s : Scanner) : Scanner × UInt32 :=
+  if chAt s 1 == 0x75 then  -- 'u'
+    let savedPos := s.state.pos
+    let savedFlags := s.state.tokenFlags
+    let (s, cp) := scanUnicodeEscape s false
+    let s := { s with state := { s.state with pos := savedPos, tokenFlags := savedFlags } }
+    (s, cp)
+  else
+    (s, 0xFFFFFFFF)
+
+/-- Scan an escape sequence after the backslash. Returns (scanner, escapedString).
+    Based on Go: scanner.go:1557-1673 (scanEscapeSequence) -/
+private partial def scanEscapeSequence (s : Scanner) : Scanner × String :=
+  let start := s.state.pos
+  let s := adv s 1  -- skip backslash
+  let c := ch s
+  if c == 0xFFFFFFFF then (err s "Unexpected end of text", "")
+  else
+    let s := adv s 1  -- skip the escape character
+    match c with
+    | 0x30 =>  -- '0'
+      if !isDig (ch s) then (s, "\x00")
+      else  -- legacy octal \0N, \0NN
+        let s := if isOctalDigit (ch s) then adv s 1 else s
+        let s := if isOctalDigit (ch s) then adv s 1 else s
+        let s := addFlg s TokenFlags.containsInvalidEscape
+        (s, extract s (start + 1) s.state.pos)
+    | 0x31 | 0x32 | 0x33 =>  -- '1'-'3': octal with up to 2 more digits
+      let s := if isOctalDigit (ch s) then adv s 1 else s
+      let s := if isOctalDigit (ch s) then adv s 1 else s
+      let s := addFlg s TokenFlags.containsInvalidEscape
+      (s, extract s (start + 1) s.state.pos)
+    | 0x34 | 0x35 | 0x36 | 0x37 =>  -- '4'-'7': octal with up to 1 more digit
+      let s := if isOctalDigit (ch s) then adv s 1 else s
+      let s := addFlg s TokenFlags.containsInvalidEscape
+      (s, extract s (start + 1) s.state.pos)
+    | 0x38 | 0x39 =>  -- '8', '9': invalid escape
+      let s := addFlg s TokenFlags.containsInvalidEscape
+      (s, String.singleton (Char.ofNat c.toNat))
+    | 0x62 => (s, "\x08")  -- \b backspace
+    | 0x74 => (s, "\t")    -- \t tab
+    | 0x6E => (s, "\n")    -- \n newline
+    | 0x76 => (s, "\x0B")  -- \v vertical tab
+    | 0x66 => (s, "\x0C")  -- \f form feed
+    | 0x72 => (s, "\r")    -- \r carriage return
+    | 0x27 => (s, "'")     -- \'
+    | 0x22 => (s, "\"")    -- \"
+    | 0x75 =>  -- \u: unicode escape
+      let s := { s with state := { s.state with pos := start } }  -- back to backslash
+      let (s, cp) := scanUnicodeEscape s true
+      if cp == 0xFFFFFFFF then (s, extract s start s.state.pos)
+      else (s, String.singleton (Char.ofNat cp.toNat))
+    | 0x78 =>  -- \x: hex escape
+      let c1 := ch s
+      let c2 := chAt s 1
+      if isHexDigit c1 && isHexDigit c2 then
+        let s := adv s 2
+        let s := addFlg s TokenFlags.hexEscape
+        let value := hexVal c1 * 16 + hexVal c2
+        (s, String.singleton (Char.ofNat value.toNat))
+      else
+        let s := addFlg s TokenFlags.containsInvalidEscape
+        (err s "Hexadecimal digit expected", extract s start s.state.pos)
+    | 0x0D =>  -- \r: line continuation
+      let s := if ch s == 0x0A then adv s 1 else s  -- skip \n after \r
+      (s, "")
+    | 0x0A => (s, "")  -- \n: line continuation
+    | _ => (s, String.singleton (Char.ofNat c.toNat))  -- default: literal char
+
+-- ============================================================
 -- Construction and Setup
 -- ============================================================
 
@@ -148,7 +306,7 @@ def hasPrecedingLineBreak (s : Scanner) : Bool :=
 -- String scanning (Go: scanner.go:1457)
 -- ============================================================
 
-private partial def scanStr (s : Scanner) : Scanner × String :=
+private partial def scanStr (s : Scanner) (jsxAttributeString : Bool := false) : Scanner × String :=
   let quote := ch s
   let s := if quote == 0x27 then addFlg s TokenFlags.singleQuote else s
   let s := adv s 1
@@ -158,13 +316,12 @@ private partial def scanStr (s : Scanner) : Scanner × String :=
     else
       if c == quote then (adv s 1, acc)
       else
-        if c == 0x5C then -- '\\'
-          let s := adv s 1
-          let nc := ch s
-          if nc == 0xFFFFFFFF then (addFlg s TokenFlags.unterminated, acc ++ "\\")
-          else go (adv s 1) (acc.push '\\' |>.push (Char.ofNat nc.toNat))
+        if c == 0x5C && !jsxAttributeString then
+          let (s, escaped) := scanEscapeSequence s
+          go s (acc ++ escaped)
         else
-          if c == 0x0A || c == 0x0D then (addFlg (err s "Unterminated string literal") TokenFlags.unterminated, acc)
+          if (c == 0x0A || c == 0x0D) && !jsxAttributeString then
+            (addFlg (err s "Unterminated string literal") TokenFlags.unterminated, acc)
           else go (adv s 1) (acc.push (Char.ofNat c.toNat))
   go s ""
 
@@ -192,37 +349,61 @@ private partial def scanNum (s : Scanner) : Scanner × Kind :=
 -- Identifier scanning (Go: scanner.go:1396)
 -- ============================================================
 
+private partial def scanIdentParts (s : Scanner) : Scanner :=
+  let c := ch s
+  if isWord c || c == 0x24 then scanIdentParts (adv s 1)
+  else
+    let (cp, size) := runeAt s
+    if size > 1 && isIdentifierPart (Char.ofNat cp.toNat) then scanIdentParts (adv s size)
+    else s
+
 private partial def scanIdent (s : Scanner) (prefixLen : Nat) : Scanner × Bool :=
   let start := s.state.pos
   let s := adv s prefixLen
   let c := ch s
+  -- Fast ASCII path
   if isAsciiLet c || c == 0x5F || c == 0x24 then
-    let rec go (s : Scanner) : Scanner :=
-      let s := adv s 1; let c := ch s; if isWord c || c == 0x24 then go s else s
-    let s := go s
+    let s := scanIdentParts (adv s 1)
     (setVal s (extract s start s.state.pos), true)
   else
-    ({ s with state := { s.state with pos := start + prefixLen } }, false)
+    -- Slow path: check for Unicode identifier start
+    let (cp, size) := runeAt s
+    if size > 1 && isIdentifierStart (Char.ofNat cp.toNat) then
+      let s := scanIdentParts (adv s size)
+      (setVal s (extract s start s.state.pos), true)
+    else
+      ({ s with state := { s.state with pos := start + prefixLen } }, false)
 
 -- ============================================================
 -- Template scanning (Go: scanner.go:1508)
 -- ============================================================
 
-private partial def scanTmpl (s : Scanner) : Scanner :=
+private partial def scanTmpl (s : Scanner) (startedWithBacktick : Bool) : Scanner :=
   let s := adv s 1
   let rec go (s : Scanner) (acc : String) : Scanner × String × Kind :=
     let c := ch s
-    if c == 0xFFFFFFFF then (addFlg (err s "Unterminated template") TokenFlags.unterminated, acc, Kind.noSubstitutionTemplateLiteral)
+    if c == 0xFFFFFFFF then
+      let endKind := if startedWithBacktick then Kind.noSubstitutionTemplateLiteral else Kind.templateTail
+      (addFlg (err s "Unterminated template") TokenFlags.unterminated, acc, endKind)
     else
-      if c == 0x60 then (adv s 1, acc, Kind.noSubstitutionTemplateLiteral)
+      if c == 0x60 then
+        let endKind := if startedWithBacktick then Kind.noSubstitutionTemplateLiteral else Kind.templateTail
+        (adv s 1, acc, endKind)
       else
-        if c == 0x24 && chAt s 1 == 0x7B then (adv s 2, acc, Kind.templateHead)
+        if c == 0x24 && chAt s 1 == 0x7B then
+          let midKind := if startedWithBacktick then Kind.templateHead else Kind.templateMiddle
+          (adv s 2, acc, midKind)
         else
           if c == 0x5C then
-            let s := adv s 1; let nc := ch s
-            if nc == 0xFFFFFFFF then (s, acc ++ "\\", Kind.noSubstitutionTemplateLiteral)
-            else go (adv s 1) (acc.push '\\' |>.push (Char.ofNat nc.toNat))
-          else go (adv s 1) (acc.push (Char.ofNat c.toNat))
+            let (s, escaped) := scanEscapeSequence s
+            go s (acc ++ escaped)
+          else
+            -- CR/CRLF normalization per ECMAScript spec 11.8.6.1
+            if c == 0x0D then
+              let s := adv s 1
+              let s := if ch s == 0x0A then adv s 1 else s
+              go s (acc.push '\n')
+            else go (adv s 1) (acc.push (Char.ofNat c.toNat))
   let (s, v, k) := go s ""
   setTok (setVal s v) k
 
@@ -249,6 +430,23 @@ private partial def scanMLComment (s : Scanner) : Scanner × Bool :=
   let s := if isJSDoc then addFlg s TokenFlags.precedingJSDocComment else s
   let s := if !closed then addFlg (err s "Expected '*/'") TokenFlags.unterminated else s
   (s, closed)
+
+-- ============================================================
+-- Non-ASCII whitespace detection (Go: stringutil.IsWhiteSpaceSingleLine)
+-- ============================================================
+
+/-- Check if a rune is a non-ASCII whitespace character.
+    Matches Go's stringutil.IsWhiteSpaceSingleLine for codepoints > 0x7F.
+    ASCII whitespace (0x09, 0x0B, 0x0C, 0x20) is handled by explicit match arms. -/
+@[inline] def isNonAsciiWhiteSpace (c : UInt32) : Bool :=
+  c == 0x00A0 ||  -- nonBreakingSpace
+  c == 0x0085 ||  -- nextLine
+  c == 0x1680 ||  -- ogham
+  (c >= 0x2000 && c <= 0x200B) ||  -- enQuad..zeroWidthSpace
+  c == 0x202F ||  -- narrowNoBreakSpace
+  c == 0x205F ||  -- mathematicalSpace
+  c == 0x3000 ||  -- ideographicSpace
+  c == 0xFEFF     -- byteOrderMark
 
 -- ============================================================
 -- Main scan (Go: scanner.go:431-917)
@@ -361,7 +559,44 @@ partial def scan (s : Scanner) : Scanner :=
           let s := scanOctDigits s
           let s := setVal s (extract s start s.state.pos)
           if ch s == 0x6E then setTok (adv s 1) Kind.bigIntLiteral else setTok s Kind.numericLiteral
-        | _ => let (s, k) := scanNum s; setTok s k
+        | _ =>
+          -- Check for legacy octal (0 followed by digits) or leading-zero decimal
+          let nx2 := chAt s 1
+          if isDig nx2 then
+            -- 0 followed by digits — scan all digits, detect octal vs decimal
+            let start := s.state.pos
+            let s := adv s 1  -- skip the '0'
+            let rec scanDigitsOctal (s : Scanner) (allOctal : Bool) : Scanner × Bool :=
+              let c := ch s
+              if isDig c then scanDigitsOctal (adv s 1) (allOctal && c <= 0x37)
+              else (s, allOctal)
+            let (s, allOctal) := scanDigitsOctal s true
+            if allOctal then
+              -- Legacy octal: emit error
+              let s := addFlg s TokenFlags.octal
+              let s := err s "Octal literals are not allowed. Use the syntax '0o...'"
+              setTok (setVal s (extract s start s.state.pos)) Kind.numericLiteral
+            else
+              -- Decimal with leading zero: emit error then continue with decimals/exponent
+              let s := addFlg s TokenFlags.containsLeadingZero
+              let s := if ch s == 0x2E then
+                let rec scanFrac (s : Scanner) : Scanner :=
+                  let c := ch s; if isDig c then scanFrac (adv s 1) else s
+                scanFrac (adv s 1)
+              else s
+              let c := ch s
+              let s := if c == 0x65 || c == 0x45 then
+                let s := addFlg (adv s 1) TokenFlags.scientific
+                let s := let c2 := ch s; if c2 == 0x2B || c2 == 0x2D then adv s 1 else s
+                let rec scanExp (s : Scanner) : Scanner :=
+                  let c := ch s; if isDig c then scanExp (adv s 1) else s
+                scanExp s
+              else s
+              let s := err s "Decimals with leading zeros are not allowed"
+              let c := ch s
+              let (s, k) := if c == 0x6E then (adv s 1, Kind.bigIntLiteral) else (s, Kind.numericLiteral)
+              setTok (setVal s (extract s start s.state.pos)) k
+          else let (s, k) := scanNum s; setTok s k
       -- '1'-'9' (Go: 696)
       | 0x31 | 0x32 | 0x33 | 0x34 | 0x35 | 0x36 | 0x37 | 0x38 | 0x39 =>
         let (s, k) := scanNum s; setTok s k
@@ -410,13 +645,38 @@ partial def scan (s : Scanner) : Scanner :=
       | 0x5B => setTok (adv s 1) Kind.openBracketToken
       -- ']' (Go: 788)
       | 0x5D => setTok (adv s 1) Kind.closeBracketToken
+      -- '\' (Go: 836) — unicode escape identifier start
+      | 0x5C =>
+        let (_, cp) := peekUnicodeEscape s
+        if cp != 0xFFFFFFFF && isIdentifierStart (Char.ofNat cp.toNat) then
+          let (s, cp) := scanUnicodeEscape s true
+          let startChar := String.singleton (Char.ofNat cp.toNat)
+          -- Scan rest of identifier (may contain more escapes or normal chars)
+          let rec scanParts (s : Scanner) (acc : String) : Scanner × String :=
+            let c := ch s
+            if isWord c || c == 0x24 then scanParts (adv s 1) (acc.push (Char.ofNat c.toNat))
+            else if c == 0x5C then  -- another unicode escape
+              let (_, cp) := peekUnicodeEscape s
+              if cp != 0xFFFFFFFF && isIdentifierPart (Char.ofNat cp.toNat) then
+                let (s, cp) := scanUnicodeEscape s true
+                scanParts s (acc ++ String.singleton (Char.ofNat cp.toNat))
+              else (s, acc)
+            else
+              let (cp, size) := runeAt s
+              if size > 1 && isIdentifierPart (Char.ofNat cp.toNat) then scanParts (adv s size) (acc ++ String.singleton (Char.ofNat cp.toNat))
+              else (s, acc)
+          let (s, rest) := scanParts s ""
+          let value := startChar ++ rest
+          setTok (setVal s value) (getIdentifierToken value)
+        else
+          setTok (err (adv s 1) "Invalid character") Kind.unknown
       -- '^' (Go: 791)
       | 0x5E =>
         match chAt s 1 with
         | 0x3D => setTok (adv s 2) Kind.caretEqualsToken                 -- ^=
         | _    => setTok (adv s 1) Kind.caretToken                        -- ^
       -- '`' (Go: 480)
-      | 0x60 => scanTmpl s
+      | 0x60 => scanTmpl s true
       -- '{' (Go: 799)
       | 0x7B => setTok (adv s 1) Kind.openBraceToken
       -- '|' (Go: 802)
@@ -434,16 +694,43 @@ partial def scan (s : Scanner) : Scanner :=
       | 0x7E => setTok (adv s 1) Kind.tildeToken
       -- '#' (Go: 844)
       | 0x23 =>
-        let (s, ok) := scanIdent s 1
-        if ok then setTok s Kind.privateIdentifier
-        else setTok (setVal (err s "Invalid character") "#") Kind.privateIdentifier
+        if chAt s 1 == 0x21 then  -- #! shebang
+          if s.state.pos == 0 then
+            -- Skip shebang line at start of file
+            let rec skipLine (s : Scanner) : Scanner :=
+              let c := ch s; if c == 0xFFFFFFFF || isLB c then s else skipLine (adv s 1)
+            let s := skipLine (adv s 2)
+            go s
+          else
+            setTok (err (adv s 1) "'#!' can only be used at the start of a file") Kind.unknown
+        else
+          let (s, ok) := scanIdent s 1
+          if ok then setTok s Kind.privateIdentifier
+          else setTok (setVal (err s "Invalid character") "#") Kind.privateIdentifier
       -- EOF (Go: 874)
       | 0xFFFFFFFF => setTok s Kind.endOfFile
-      -- Default: identifier or unknown (Go: 878)
+      -- Default: identifier, non-ASCII whitespace, or unknown (Go: 878)
       | _ =>
-        let (s, ok) := scanIdent s 0
-        if ok then setTok s (getIdentifierToken s.state.tokenValue)
-        else setTok (err (adv s 1) "Invalid character") Kind.unknown
+        -- Check for non-ASCII whitespace first (Go: scanner.go:889)
+        let (rune, runeSize) := runeAt s
+        if isNonAsciiWhiteSpace rune then
+          let s := if rune == 0x0085 then addFlg s TokenFlags.precedingLineBreak else s
+          let s := adv s (if runeSize == 0 then 1 else runeSize)
+          if s.skipTrivia then go s
+          else
+            -- Collect remaining non-ASCII whitespace (rare path)
+            let rec skipNonAsciiWs (s : Scanner) : Scanner :=
+              let (r2, sz2) := runeAt s
+              if isNonAsciiWhiteSpace r2 then skipNonAsciiWs (adv s (if sz2 == 0 then 1 else sz2))
+              else s
+            setTok (skipNonAsciiWs s) Kind.whitespaceTrivia
+        else
+          let (s, ok) := scanIdent s 0
+          if ok then setTok s (getIdentifierToken s.state.tokenValue)
+          else
+            -- Advance by full rune size to avoid corrupting multi-byte UTF-8
+            let advSize := if runeSize == 0 then 1 else runeSize
+            setTok (err (adv s advSize) "Invalid character") Kind.unknown
   go s
 
 -- ============================================================
@@ -476,7 +763,7 @@ def reScanGreaterThanToken (s : Scanner) : Scanner :=
 def reScanTemplateToken (s : Scanner) (_isTaggedTemplate : Bool) : Scanner :=
   let start := s.state.tokenStart
   let s := { s with state := { s.state with pos := start, tokenStart := start, tokenFlags := TokenFlags.none } }
-  scanTmpl s
+  scanTmpl s false
 
 /-- Based on Go: scanner.go:1001 (ReScanAsteriskEqualsToken) -/
 def reScanAsteriskEqualsToken (s : Scanner) : Scanner :=
@@ -576,7 +863,7 @@ def scanJsxAttributeValue (s : Scanner) : Scanner :=
   let s := { s with state := { s.state with fullStartPos := s.state.pos, tokenStart := s.state.pos, tokenFlags := TokenFlags.none } }
   let c := ch s
   if c == 0x22 || c == 0x27 then
-    let (s, v) := scanStr s
+    let (s, v) := scanStr s (jsxAttributeString := true)
     setTok (setVal s v) Kind.stringLiteral
   else
     scan s
