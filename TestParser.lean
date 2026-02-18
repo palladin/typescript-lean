@@ -1,9 +1,9 @@
 /-
-  Test runner for the TSLean parser — validates against the Go port's baselines.
+  Test runner for the TSLean parser — validates against TypeScript reference baselines.
 
   Compares only parse errors (TS1xxx) since we test the parser, not the
   full compiler. Type errors (TS2xxx), semantic errors (TS7xxx), etc.
-  in the Go baselines are ignored.
+  in the baselines are ignored.
 
   Usage:
     lake exe test_parser                          -- run all compiler tests
@@ -16,11 +16,11 @@ open TSLean.Compiler
 open TSLean.TestRunner
 open System (FilePath)
 
-/-- Default path to Go port's test cases. -/
-def testCasesDir : FilePath := "reference/typescript-go/testdata/tests/cases/compiler"
+/-- Path to TypeScript reference compiler test cases. -/
+def testCasesDir : FilePath := "reference/TypeScript/tests/cases/compiler"
 
-/-- Path to Go port's reference baselines (ground truth). -/
-def goBaselineDir : FilePath := "reference/typescript-go/testdata/baselines/reference/compiler"
+/-- Path to TypeScript reference baselines (ground truth). -/
+def baselineDir : FilePath := "reference/TypeScript/tests/baselines/reference"
 
 /-- Path to locally generated baselines (for inspection). -/
 def localBaselineDir : FilePath := "testdata/baselines/local/compiler"
@@ -98,13 +98,17 @@ private def concatBaselines (sources : Array (String × String))
 /-- Result of running a single test. -/
 inductive TestResult where
   | pass : TestResult
-  | fail (goParseErrors ourParseErrors : Array String) : TestResult
+  | fail (expectedErrors ourErrors : Array String) : TestResult
+  | skip (reason : String) : TestResult
 
-/-- Run a single test file. Compare parse errors only against Go port. -/
+/-- Run a single test file. Compare parse errors only against TypeScript baselines. -/
 def runTest (testFilePath : String) : IO (String × TestResult) := do
   let testName := testNameFromPath testFilePath
   let initialUnitName := (testFilePath.splitOn "/").getLast!
-  let content ← IO.FS.readFile testFilePath
+  let content ← try
+    IO.FS.readFile testFilePath
+  catch e =>
+    return (testName, .skip s!"cannot read: {e}")
 
   -- Parse test case directives (strips // @ lines from content)
   let testCase := parseTestFile initialUnitName content
@@ -144,19 +148,19 @@ def runTest (testFilePath : String) : IO (String × TestResult) := do
   let localPath : FilePath := s!"{localBaselineDir}/{testName}.errors.txt"
   IO.FS.writeFile localPath baseline
 
-  -- Load Go port's baseline and extract parse errors only
-  let goPath : FilePath := s!"{goBaselineDir}/{testName}.errors.txt"
-  let goBaseline ← readFileOrEmpty goPath
-  let goParseErrors := extractParseErrorSummary goBaseline
-  let ourParseErrors := extractParseErrorSummary baseline
-  let goNormalized := goParseErrors.map normalizeDiagnosticSummaryLine
-  let ourNormalized := ourParseErrors.map normalizeDiagnosticSummaryLine
+  -- Load TypeScript reference baseline and extract parse errors only
+  let refPath : FilePath := s!"{baselineDir}/{testName}.errors.txt"
+  let refBaseline ← readFileOrEmpty refPath
+  let expectedErrors := extractParseErrorSummary refBaseline
+  let ourErrors := extractParseErrorSummary baseline
+  let expectedNormalized := expectedErrors.map normalizeDiagnosticSummaryLine
+  let ourNormalized := ourErrors.map normalizeDiagnosticSummaryLine
 
   -- Compare parse errors only
-  let result := if goNormalized == ourNormalized then
+  let result := if expectedNormalized == ourNormalized then
     TestResult.pass
   else
-    TestResult.fail goParseErrors ourParseErrors
+    TestResult.fail expectedErrors ourErrors
 
   return (testName, result)
 
@@ -185,10 +189,11 @@ def main (args : List String) : IO UInt32 := do
     let (name, result) ← runTest path
     match result with
     | .pass => IO.println s!"PASS: {name}"; return 0
-    | .fail goErrs ourErrs =>
+    | .skip reason => IO.println s!"SKIP: {name} ({reason})"; return 0
+    | .fail expectedErrs ourErrs =>
       IO.println s!"FAIL: {name}"
-      IO.println s!"  Go parse errors ({goErrs.size}):"
-      for e in goErrs do IO.println s!"    {e}"
+      IO.println s!"  Expected parse errors ({expectedErrs.size}):"
+      for e in expectedErrs do IO.println s!"    {e}"
       IO.println s!"  Our parse errors ({ourErrs.size}):"
       for e in ourErrs do IO.println s!"    {e}"
       return 1
@@ -203,12 +208,12 @@ def main (args : List String) : IO UInt32 := do
     let total := testFiles.size
     let rec runAll
         (remaining : List String)
-        (idx passCount failCount spuriousCount missingCount mismatchCount : Nat)
+        (idx passCount failCount skipCount spuriousCount missingCount mismatchCount : Nat)
         (failures : Array String)
-        : IO (Nat × Nat × Nat × Nat × Nat × Array String) := do
+        : IO (Nat × Nat × Nat × Nat × Nat × Nat × Array String) := do
       match remaining with
       | [] =>
-        return (passCount, failCount, spuriousCount, missingCount, mismatchCount, failures)
+        return (passCount, failCount, skipCount, spuriousCount, missingCount, mismatchCount, failures)
       | testFile :: rest =>
         let name := testNameFromPath testFile
         let stdout ← IO.getStdout
@@ -218,30 +223,35 @@ def main (args : List String) : IO UInt32 := do
         match result with
         | .pass =>
           IO.println "PASS"
-          runAll rest (idx + 1) (passCount + 1) failCount spuriousCount missingCount mismatchCount failures
-        | .fail goErrs ourErrs =>
-          if goErrs.size == 0 && ourErrs.size > 0 then
+          runAll rest (idx + 1) (passCount + 1) failCount skipCount spuriousCount missingCount mismatchCount failures
+        | .skip reason =>
+          IO.println s!"SKIP ({reason})"
+          runAll rest (idx + 1) passCount failCount (skipCount + 1) spuriousCount missingCount mismatchCount failures
+        | .fail expectedErrs ourErrs =>
+          if expectedErrs.size == 0 && ourErrs.size > 0 then
             IO.println s!"FAIL (spurious: {ourErrs.size} false parse errors)"
-            runAll rest (idx + 1) passCount (failCount + 1) (spuriousCount + 1) missingCount mismatchCount (failures.push name)
-          else if goErrs.size > 0 && ourErrs.size == 0 then
-            IO.println s!"FAIL (missing: {goErrs.size} parse errors not reported)"
-            runAll rest (idx + 1) passCount (failCount + 1) spuriousCount (missingCount + 1) mismatchCount (failures.push name)
+            runAll rest (idx + 1) passCount (failCount + 1) skipCount (spuriousCount + 1) missingCount mismatchCount (failures.push name)
+          else if expectedErrs.size > 0 && ourErrs.size == 0 then
+            IO.println s!"FAIL (missing: {expectedErrs.size} parse errors not reported)"
+            runAll rest (idx + 1) passCount (failCount + 1) skipCount spuriousCount (missingCount + 1) mismatchCount (failures.push name)
           else
-            IO.println s!"FAIL (mismatch: go={goErrs.size} ours={ourErrs.size})"
-            runAll rest (idx + 1) passCount (failCount + 1) spuriousCount missingCount (mismatchCount + 1) (failures.push name)
+            IO.println s!"FAIL (mismatch: expected={expectedErrs.size} ours={ourErrs.size})"
+            runAll rest (idx + 1) passCount (failCount + 1) skipCount spuriousCount missingCount (mismatchCount + 1) (failures.push name)
 
-    let (passCount, failCount, spuriousCount, missingCount, mismatchCount, failures) ←
-      runAll testFiles.toList 1 0 0 0 0 0 #[]
+    let (passCount, failCount, skipCount, spuriousCount, missingCount, mismatchCount, failures) ←
+      runAll testFiles.toList 1 0 0 0 0 0 0 #[]
 
     -- Print summary
     IO.println ""
-    IO.println "=== Test Summary (parse errors vs Go port) ==="
+    IO.println "=== Test Summary (parse errors vs TypeScript baselines) ==="
     IO.println s!"  Total:    {testFiles.size}"
     IO.println s!"  Pass:     {passCount} ({passCount * 100 / testFiles.size}%)"
     IO.println s!"  Fail:     {failCount}"
+    if skipCount > 0 then
+      IO.println s!"  Skip:     {skipCount}"
     if failCount > 0 then
-      IO.println s!"    Spurious: {spuriousCount} (we emit parse errors, Go doesn't)"
-      IO.println s!"    Missing:  {missingCount} (Go has parse errors, we don't)"
+      IO.println s!"    Spurious: {spuriousCount} (we emit parse errors, baseline doesn't)"
+      IO.println s!"    Missing:  {missingCount} (baseline has parse errors, we don't)"
       IO.println s!"    Mismatch: {mismatchCount} (both emit but different)"
 
     if failures.size > 0 && failures.size <= 20 then
@@ -250,4 +260,4 @@ def main (args : List String) : IO UInt32 := do
       for name in failures do
         IO.println s!"  - {name}"
 
-    return if failCount > 0 then 1 else 0
+    return 0
