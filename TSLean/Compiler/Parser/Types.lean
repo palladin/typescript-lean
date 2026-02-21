@@ -109,7 +109,7 @@ abbrev ParserM (α : Type) := StateM Parser α
 /-- Result of parsing a source file.
     Based on Go: parser.go — ParseSourceFile returns (SourceFile, diagnostics) -/
 structure ParseResult where
-  sourceFile : Node
+  result : Node
   diagnostics : Array Diagnostic
 
 end TSLean.Compiler

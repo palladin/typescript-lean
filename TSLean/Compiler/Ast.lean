@@ -8,3 +8,4 @@ import TSLean.Compiler.Ast.NodeFlags
 import TSLean.Compiler.Ast.Node
 import TSLean.Compiler.Ast.Precedence
 import TSLean.Compiler.Ast.Utilities
+import TSLean.Compiler.Ast.PrettyPrint

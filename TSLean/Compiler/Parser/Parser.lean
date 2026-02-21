@@ -3027,7 +3027,7 @@ def parseSourceFile (_fileName : String) (sourceText : String)
   let p := Parser.initializeState sourceText scriptKind
   let action : ParserM Node := do nextToken; parseSourceFileWorker
   let (result, p) := action |>.run p
-  { sourceFile := result
+  { result := result
   , diagnostics := p.diagnostics ++ collectJsDocTypeDiagnostics sourceText }
 
 end TSLean.Compiler
