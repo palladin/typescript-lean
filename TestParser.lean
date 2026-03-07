@@ -64,7 +64,9 @@ def extractParseErrorSummary (baseline : String) : Array String :=
       | some code =>
         code >= 1000 && code < 1200 &&
         -- TS1118/TS1119 are non-parser duplicate member checks.
-        code != 1118 && code != 1119
+        -- TS1062 is a checker-side Awaited cycle diagnostic.
+        -- TS1192 is a module/export semantic diagnostic.
+        code != 1062 && code != 1118 && code != 1119 && code != 1192
       | none => false
     | _ => false
   let lines := baseline.splitOn "\n"
@@ -89,11 +91,34 @@ def normalizeDiagnosticSummaryLine (line : String) : String :=
     | _ => line
   normalized.trimAscii.toString
 
-/-- Concatenate baselines for multi-file tests. -/
-private def concatBaselines (sources : Array (String × String))
-    (diagnostics : Array Diagnostic) : String :=
-  sources.foldl (init := "") fun acc (name, src) =>
-    acc ++ generateErrorBaseline name src diagnostics
+/-- Split a generated baseline into summary lines and the detailed section that
+    begins at the first `====` block header. -/
+private def splitBaselineSummaryAndBody (baseline : String) : String × String :=
+  let lines := baseline.splitOn "\n"
+  let (summaryRev, bodyRev, _) :=
+    lines.foldl
+      (init := (([] : List String), ([] : List String), false))
+      fun (summaryRev, bodyRev, inBody) line =>
+        if inBody || line.startsWith "====" then
+          (summaryRev, line :: bodyRev, true)
+        else
+          (line :: summaryRev, bodyRev, false)
+  ("\n".intercalate summaryRev.reverse, "\n".intercalate bodyRev.reverse)
+
+/-- Concatenate per-unit baselines while keeping all summary lines ahead of the
+    first detailed `====` section, matching the TypeScript reference layout. -/
+private def concatBaselines (unitBaselines : Array String) : String :=
+  let (summaries, bodies) :=
+    unitBaselines.foldl (init := (#[], #[])) fun (summaries, bodies) baseline =>
+      let (summary, body) := splitBaselineSummaryAndBody baseline
+      let summaries := if summary.trimAscii.toString == "" then summaries else summaries.push summary
+      let bodies := if body.trimAscii.toString == "" then bodies else bodies.push body
+      (summaries, bodies)
+  let summaryText := "\n".intercalate summaries.toList
+  let bodyText := "\n".intercalate bodies.toList
+  if summaryText == "" then bodyText
+  else if bodyText == "" then summaryText
+  else summaryText ++ "\n" ++ bodyText
 
 /-- Result of running a single test. -/
 inductive TestResult where
@@ -125,24 +150,24 @@ def runTest (testFilePath : String) : IO (String × TestResult) := do
     (!hasNamedUnits && !hasSubstr unit.name "."))
     && !(hasMultipleUnits && unit.name == initialUnitName)
     && unit.content.trimAscii.toString != "content not parsed"
+    && unit.content.trimAscii.toString != "This file is not processed."
 
   -- Parse each unit and collect results
   let parsed := tsUnits.map fun unit =>
     let scriptKind := scriptKindFromFileName unit.name
-    let result := parseSourceFile unit.name unit.content scriptKind
+    let alwaysStrict := testCase.options.any fun (name, value) =>
+      name == "alwaysstrict" && value.toLower == "true"
+    let result := parseSourceFile unit.name unit.content scriptKind alwaysStrict
     (unit.name, unit.content, result)
 
-  let allDiagnostics := parsed.foldl (init := #[]) fun acc (_, _, result) =>
-    acc ++ result.diagnostics
-
-  let allSources := parsed.map fun (name, content, _) => (name, content)
-
   -- Generate our error baseline
-  let baseline := if allSources.size == 1 then
-    let (name, src) := allSources[0]!
-    generateErrorBaseline name src allDiagnostics
+  let baseline := if parsed.size == 1 then
+    match parsed[0]? with
+    | some (name, src, result) => generateErrorBaseline name src result.diagnostics
+    | none => ""
   else
-    concatBaselines allSources allDiagnostics
+    concatBaselines <| parsed.map fun (name, src, result) =>
+      generateErrorBaseline name src result.diagnostics
 
   -- Write local baseline for inspection
   let localPath : FilePath := s!"{localBaselineDir}/{testName}.errors.txt"

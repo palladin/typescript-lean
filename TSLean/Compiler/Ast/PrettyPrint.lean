@@ -255,7 +255,10 @@ private def nodeChildren : Node → Array Node
   | .indexedAccessType _ o i => #[o, i]
   | .mappedType _ tp nt t => #[tp] ++ nt.toArray ++ t.toArray
   | .typePredicate _ pn t => #[pn] ++ t.toArray
+  | .optionalType _ t => #[t]
   | .restType _ t => #[t]
+  | .namedTupleMember _ d n q t => d.toArray ++ #[n] ++ q.toArray ++ #[t]
+  | .importType _ _ a attrs q ta => #[a] ++ attrs.toArray ++ q.toArray ++ (ta.getD #[])
   | .sourceFile _ stmts eof => stmts ++ #[eof]
 
 -- ============================================================

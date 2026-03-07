@@ -25,6 +25,7 @@ structure TestCaseContent where
 /-- Check if a line is a `// @option: value` directive.
     Based on Go: test_case_parser.go (optionRegex) -/
 private def parseDirectiveLine (line : String) : Option (String × String) :=
+  let line := if line.startsWith "\uFEFF" then line.drop 1 else line
   let trimmed := line.trimAsciiStart.toString
   if trimmed.startsWith "//" then
     let afterSlash := (trimmed.drop 2).trimAsciiStart.toString
@@ -37,7 +38,8 @@ private def parseDirectiveLine (line : String) : Option (String × String) :=
       | name :: rest =>
         let optName := name.trimAscii.toString.toLower
         let optValue := (String.intercalate ":" rest).trimAscii.toString
-        if optName == "" then none
+        if optName == "" || optName == "ts-ignore" || optName == "ts-expect-error" ||
+           optName == "ts-nocheck" || optName == "ts-check" then none
         else some (optName, optValue)
     else none
   else none

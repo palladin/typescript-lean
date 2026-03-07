@@ -112,6 +112,9 @@ private def runeAt (s : Scanner) : UInt32 × Nat :=
 @[inline] private def addFlg (s : Scanner) (f : TokenFlags) : Scanner :=
   { s with state := { s.state with tokenFlags := s.state.tokenFlags ||| f } }
 
+@[inline] private def addCommentDirective (s : Scanner) (directive : CommentDirective) : Scanner :=
+  { s with state := { s.state with commentDirectives := s.state.commentDirectives.push directive } }
+
 private def err (s : Scanner) (msg : String) : Scanner :=
   { s with diagnostics := s.diagnostics.push { message := msg, start := s.state.pos, length := 0 } }
 
@@ -121,6 +124,64 @@ private def extract (s : Scanner) (startByte endByte : Nat) : String :=
 /-- Skip contiguous single-line whitespace. -/
 private partial def skipWs (s : Scanner) : Scanner :=
   if isWsSingle (ch s) then skipWs (adv s 1) else s
+
+@[inline] private def isSpaceOrTabByte (b : UInt8) : Bool :=
+  b == 0x20 || b == 0x09
+
+@[inline] private def byteAt (s : Scanner) (pos : Nat) : UInt8 :=
+  if pos < s.bytes.size then s.bytes[pos]! else 0
+
+private partial def hasAsciiPrefixAtAux
+    (s : Scanner) (pos : Nat) (needle : ByteArray) (idx : Nat) : Bool :=
+  if idx >= needle.size then true
+  else if pos + idx >= s.bytes.size then false
+  else if s.bytes[pos + idx]! == needle[idx]! then hasAsciiPrefixAtAux s pos needle (idx + 1)
+  else false
+
+private def hasAsciiPrefixAt (s : Scanner) (pos : Nat) (needle : String) : Bool :=
+  hasAsciiPrefixAtAux s pos needle.toUTF8 0
+
+private partial def skipSpaceOrTabsUntil (s : Scanner) (pos endPos : Nat) : Nat :=
+  if pos < endPos && isSpaceOrTabByte (byteAt s pos) then
+    skipSpaceOrTabsUntil s (pos + 1) endPos
+  else
+    pos
+
+private partial def skipSlashStarRunUntil (s : Scanner) (pos endPos : Nat) : Nat :=
+  if pos < endPos then
+    let b := byteAt s pos
+    if b == 0x2F || b == 0x2A then
+      skipSlashStarRunUntil s (pos + 1) endPos
+    else
+      pos
+  else
+    pos
+
+private partial def skipSlashRunUntil (s : Scanner) (pos endPos : Nat) : Nat :=
+  if pos < endPos && byteAt s pos == 0x2F then
+    skipSlashRunUntil s (pos + 1) endPos
+  else
+    pos
+
+/-- Based on Go: scanner.go:946-984 (processCommentDirective) -/
+private def processCommentDirective (s : Scanner) (start endPos : Nat) (multiline : Bool) : Scanner :=
+  let pos :=
+    if multiline then
+      skipSlashStarRunUntil s (skipSpaceOrTabsUntil s start endPos) endPos
+    else
+      skipSlashRunUntil s (start + 2) endPos
+  let pos := skipSpaceOrTabsUntil s pos endPos
+  if !(pos < endPos && byteAt s pos == 0x40) then
+    s
+  else
+    let pos := pos + 1
+    let kind? :=
+      if hasAsciiPrefixAt s pos "ts-expect-error" then some CommentDirectiveKind.expectError
+      else if hasAsciiPrefixAt s pos "ts-ignore" then some CommentDirectiveKind.ignore
+      else none
+    match kind? with
+    | some kind => addCommentDirective s { loc := TextRange.mk' start endPos, kind := kind }
+    | none => s
 
 /-- Scan hex digits [0-9A-Fa-f_]. -/
 private partial def scanHexDigits (s : Scanner) : Scanner :=
@@ -154,6 +215,15 @@ private partial def scanOctDigits (s : Scanner) : Scanner :=
   else if c >= 0x41 && c <= 0x46 then c - 0x41 + 10
   else if c >= 0x61 && c <= 0x66 then c - 0x61 + 10
   else 0
+
+@[inline] private def codePointIsHighSurrogate (cp : UInt32) : Bool :=
+  cp >= 0xD800 && cp < 0xDC00
+
+@[inline] private def codePointIsLowSurrogate (cp : UInt32) : Bool :=
+  cp >= 0xDC00 && cp < 0xE000
+
+@[inline] private def surrogatePairToCodepoint (high low : UInt32) : UInt32 :=
+  ((high - 0xD800) <<< 10) + (low - 0xDC00) + 0x10000
 
 /-- Scan a unicode escape sequence. Assumes position is at `\u`.
     Returns (scanner, codePoint) where codePoint = 0xFFFFFFFF on failure.
@@ -194,7 +264,17 @@ private partial def scanUnicodeEscape (s : Scanner) (reportErrors : Bool) : Scan
           let s := addFlg s TokenFlags.containsInvalidEscape
           let s := if reportErrors then err s "Hexadecimal digit expected" else s
           (s, 0xFFFFFFFF)
-    scan4Hex s 0 4
+    let (s, value) := scan4Hex s 0 4
+    if value != 0xFFFFFFFF && codePointIsHighSurrogate value && ch s == 0x5C && chAt s 1 == 0x75 then
+      let savedPos := s.state.pos
+      let savedFlags := s.state.tokenFlags
+      let (s2, value2) := scanUnicodeEscape s reportErrors
+      if value2 != 0xFFFFFFFF && codePointIsLowSurrogate value2 then
+        (s2, surrogatePairToCodepoint value value2)
+      else
+        ({ s with state := { s.state with pos := savedPos, tokenFlags := savedFlags } }, value)
+    else
+      (s, value)
 
 /-- Peek at a unicode escape without consuming it.
     Based on Go: scanner.go:1719-1729 (peekUnicodeEscape) -/
@@ -312,16 +392,25 @@ private partial def scanStr (s : Scanner) (jsxAttributeString : Bool := false) :
   let s := adv s 1
   let rec go (s : Scanner) (acc : String) : Scanner × String :=
     let c := ch s
-    if c == 0xFFFFFFFF then (addFlg (err s "Unterminated string literal") TokenFlags.unterminated, acc)
+    if c == 0xFFFFFFFF then (addFlg (err s "Unterminated string literal.") TokenFlags.unterminated, acc)
     else
       if c == quote then (adv s 1, acc)
       else
         if c == 0x5C && !jsxAttributeString then
           let (s, escaped) := scanEscapeSequence s
-          go s (acc ++ escaped)
+          if s.state.pos >= s.bytes.size then
+            match s.diagnostics.back? with
+            | some diag =>
+              if diag.message == "Unexpected end of text" then
+                (addFlg s TokenFlags.unterminated, acc ++ escaped)
+              else
+                go s (acc ++ escaped)
+            | none => go s (acc ++ escaped)
+          else
+            go s (acc ++ escaped)
         else
           if (c == 0x0A || c == 0x0D) && !jsxAttributeString then
-            (addFlg (err s "Unterminated string literal") TokenFlags.unterminated, acc)
+            (addFlg (err s "Unterminated string literal.") TokenFlags.unterminated, acc)
           else go (adv s 1) (acc.push (Char.ofNat c.toNat))
   go s ""
 
@@ -352,6 +441,12 @@ private partial def scanNum (s : Scanner) : Scanner × Kind :=
 private partial def scanIdentParts (s : Scanner) : Scanner :=
   let c := ch s
   if isWord c || c == 0x24 then scanIdentParts (adv s 1)
+  else if c == 0x5C then
+    let (_, cp) := peekUnicodeEscape s
+    if cp != 0xFFFFFFFF && isIdentifierPart (Char.ofNat cp.toNat) then
+      let (s, _) := scanUnicodeEscape s true
+      scanIdentParts s
+    else s
   else
     let (cp, size) := runeAt s
     if size > 1 && isIdentifierPart (Char.ofNat cp.toNat) then scanIdentParts (adv s size)
@@ -366,13 +461,22 @@ private partial def scanIdent (s : Scanner) (prefixLen : Nat) : Scanner × Bool 
     let s := scanIdentParts (adv s 1)
     (setVal s (extract s start s.state.pos), true)
   else
-    -- Slow path: check for Unicode identifier start
-    let (cp, size) := runeAt s
-    if size > 1 && isIdentifierStart (Char.ofNat cp.toNat) then
-      let s := scanIdentParts (adv s size)
-      (setVal s (extract s start s.state.pos), true)
+    if c == 0x5C then
+      let (_, cp) := peekUnicodeEscape s
+      if cp != 0xFFFFFFFF && isIdentifierStart (Char.ofNat cp.toNat) then
+        let (s, _) := scanUnicodeEscape s true
+        let s := scanIdentParts s
+        (setVal s (extract s start s.state.pos), true)
+      else
+        ({ s with state := { s.state with pos := start + prefixLen } }, false)
     else
-      ({ s with state := { s.state with pos := start + prefixLen } }, false)
+    -- Slow path: check for Unicode identifier start
+      let (cp, size) := runeAt s
+      if size > 1 && isIdentifierStart (Char.ofNat cp.toNat) then
+        let s := scanIdentParts (adv s size)
+        (setVal s (extract s start s.state.pos), true)
+      else
+        ({ s with state := { s.state with pos := start + prefixLen } }, false)
 
 -- ============================================================
 -- Template scanning (Go: scanner.go:1508)
@@ -384,7 +488,7 @@ private partial def scanTmpl (s : Scanner) (startedWithBacktick : Bool) : Scanne
     let c := ch s
     if c == 0xFFFFFFFF then
       let endKind := if startedWithBacktick then Kind.noSubstitutionTemplateLiteral else Kind.templateTail
-      (addFlg (err s "Unterminated template") TokenFlags.unterminated, acc, endKind)
+      (addFlg (err s "Unterminated template literal.") TokenFlags.unterminated, acc, endKind)
     else
       if c == 0x60 then
         let endKind := if startedWithBacktick then Kind.noSubstitutionTemplateLiteral else Kind.templateTail
@@ -415,19 +519,24 @@ private partial def scanSLComment (s : Scanner) : Scanner :=
   let s := adv s 2
   let rec go (s : Scanner) : Scanner :=
     let c := ch s; if c == 0xFFFFFFFF || isLB c then s else go (adv s 1)
-  go s
+  let s := go s
+  processCommentDirective s s.state.tokenStart s.state.pos false
 
 private partial def scanMLComment (s : Scanner) : Scanner × Bool :=
   let s := adv s 2
   let isJSDoc := ch s == 0x2A && chAt s 1 != 0x2F
-  let rec go (s : Scanner) : Scanner × Bool :=
+  let rec go (s : Scanner) (lastLineStart : Nat) : Scanner × Bool × Nat :=
     let c := ch s
-    if c == 0xFFFFFFFF then (s, false)
+    if c == 0xFFFFFFFF then (s, false, lastLineStart)
     else
-      if c == 0x2A && chAt s 1 == 0x2F then (adv s 2, true)
-      else go (if isLB c then addFlg (adv s 1) TokenFlags.precedingLineBreak else adv s 1)
-  let (s, closed) := go s
+      if c == 0x2A && chAt s 1 == 0x2F then (adv s 2, true, lastLineStart)
+      else
+        let s := if isLB c then addFlg (adv s 1) TokenFlags.precedingLineBreak else adv s 1
+        let lastLineStart := if isLB c then s.state.pos else lastLineStart
+        go s lastLineStart
+  let (s, closed, lastLineStart) := go s s.state.tokenStart
   let s := if isJSDoc then addFlg s TokenFlags.precedingJSDocComment else s
+  let s := processCommentDirective s lastLineStart s.state.pos true
   let s := if !closed then addFlg (err s "Expected '*/'") TokenFlags.unterminated else s
   (s, closed)
 
@@ -778,7 +887,11 @@ partial def reScanSlashToken (s : Scanner) : Scanner :=
     let s := { s with state := { s.state with pos := start + 1 } }
     let rec body (s : Scanner) (inCC : Bool) : Scanner :=
       let c := ch s
-      if c == 0xFFFFFFFF || isLB c then addFlg (err s "Unterminated regex") TokenFlags.unterminated
+      if c == 0xFFFFFFFF || isLB c then
+        let s := addFlg s TokenFlags.unterminated
+        let diag : ScannerDiagnostic :=
+          { message := "Unterminated regular expression literal.", start := start, length := 1 }
+        { s with diagnostics := s.diagnostics.push diag }
       else
         if c == 0x5C then body (adv s 2) inCC
         else

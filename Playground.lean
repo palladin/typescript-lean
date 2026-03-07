@@ -9,7 +9,7 @@ import TSLean.Compiler
 open TSLean.Compiler
 
 -- ============================================================
--- Change this string to test different TypeScript code
+-- Change this string to test different TypeScript snippets
 -- ============================================================
 
 def code := "const x: number = 42;"

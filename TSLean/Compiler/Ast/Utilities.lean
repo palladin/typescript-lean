@@ -69,6 +69,7 @@ def isLeftHandSideExpressionKind (kind : Kind) : Bool :=
   kind == Kind.objectLiteralExpression || kind == Kind.functionExpression ||
   kind == Kind.classExpression || kind == Kind.newExpression ||
   kind == Kind.taggedTemplateExpression || kind == Kind.templateExpression ||
+  kind == Kind.expressionWithTypeArguments ||
   kind == Kind.noSubstitutionTemplateLiteral || kind == Kind.bigIntLiteral
 
 /-- Based on Go: internal/ast/utilities.go (IsLeftHandSideExpression) -/

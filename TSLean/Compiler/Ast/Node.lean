@@ -182,7 +182,12 @@ inductive Node where
   | mappedType (base : NodeBase) (typeParameter : Node) (nameType : Option Node)
       (typeNode : Option Node)
   | typePredicate (base : NodeBase) (parameterName : Node) (typeNode : Option Node)
+  | optionalType (base : NodeBase) (typeNode : Node)
   | restType (base : NodeBase) (typeNode : Node)
+  | namedTupleMember (base : NodeBase) (dotDotDotToken : Option Node) (name : Node)
+      (questionToken : Option Node) (typeNode : Node)
+  | importType (base : NodeBase) (isTypeOf : Bool) (argument : Node)
+      (attributes : Option Node) (qualifier : Option Node) (typeArguments : Option (Array Node))
   -- Top-level
   | sourceFile (base : NodeBase) (statements : Array Node) (endOfFileToken : Node)
   -- Error recovery
@@ -310,7 +315,10 @@ def kind : Node → Kind
   | indexedAccessType .. => Kind.indexedAccessType
   | mappedType .. => Kind.mappedType
   | typePredicate .. => Kind.typePredicate
+    | optionalType .. => Kind.optionalType
   | restType .. => Kind.restType
+    | namedTupleMember .. => Kind.namedTupleMember
+    | importType .. => Kind.importType
   | sourceFile .. => Kind.sourceFile
   | missing _ k => k
 
@@ -353,7 +361,8 @@ def base : Node → NodeBase
   | tupleType b .. | functionType b .. | constructorType b .. | typeLiteral b ..
   | parenthesizedType b .. | typeQuery b .. | typeOperator b .. | literalType b ..
   | conditionalType b .. | inferType b .. | indexedAccessType b ..
-  | mappedType b .. | typePredicate b .. | restType b ..
+    | mappedType b .. | typePredicate b .. | optionalType b .. | restType b ..
+    | namedTupleMember b .. | importType b ..
   | sourceFile b .. => b
 
 /-- Update the base data for a node. -/
@@ -473,7 +482,10 @@ def withBase : Node → NodeBase → Node
   | indexedAccessType _ o i, b => indexedAccessType b o i
   | mappedType _ tp nt t, b => mappedType b tp nt t
   | typePredicate _ pn t, b => typePredicate b pn t
+    | optionalType _ t, b => optionalType b t
   | restType _ t, b => restType b t
+    | namedTupleMember _ d n q t, b => namedTupleMember b d n q t
+    | importType _ ito a attrs q ta, b => importType b ito a attrs q ta
   | sourceFile _ s e, b => sourceFile b s e
   | missing _ k, b => missing b k
 
